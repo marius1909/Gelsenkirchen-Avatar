@@ -1,2 +1,2 @@
 # Gelsenkirchen-Avatar
-Smartphone App for  interactive learning with gamification
+Smartphone App for interactive learning with gamification!
