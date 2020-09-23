@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text('Karte'),
+        //Hier wird später die Karte eingefügt
       ),
     );
   }
