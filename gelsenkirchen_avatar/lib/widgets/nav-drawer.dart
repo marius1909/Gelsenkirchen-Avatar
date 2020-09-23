@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/einstellungenscreen.dart';
+import 'package:gelsenkirchen_avatar/homescreen.dart';
 import 'package:gelsenkirchen_avatar/lernortscreen.dart';
+import 'package:gelsenkirchen_avatar/profilscreen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -20,15 +23,23 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/lernendestadt.png'))),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            onTap: () => {},
-          ),
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => HomeScreen()));
+              }),
           ListTile(
-            leading: Icon(Icons.face),
-            title: Text('Profil'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+              leading: Icon(Icons.face),
+              title: Text('Profil'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ProfilScreen()));
+              }),
           ListTile(
               leading: Icon(Icons.account_balance),
               title: Text('Lernorte'),
@@ -37,19 +48,22 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => LernortScreen()));
-              }
-
-              //=> {Navigator.of(context).pop()},
-              ),
+              }),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Einstellungen'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+              leading: Icon(Icons.settings),
+              title: Text('Einstellungen'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            EinstellungenScreen()));
+              }),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () => {Navigator.of(context).pop()},
+            //Funktionalität zum Ausloggen fehlt noch
           ),
         ],
       ),
