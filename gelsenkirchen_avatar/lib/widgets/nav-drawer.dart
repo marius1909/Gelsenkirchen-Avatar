@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/lernortscreen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -29,10 +30,17 @@ class NavDrawer extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.account_balance),
-            title: Text('Lernorte'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+              leading: Icon(Icons.account_balance),
+              title: Text('Lernorte'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LernortScreen()));
+              }
+
+              //=> {Navigator.of(context).pop()},
+              ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Einstellungen'),
