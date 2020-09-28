@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
 import 'package:gelsenkirchen_avatar/home_screen.dart';
-import 'package:gelsenkirchen_avatar/lernorte_screen.dart';
+import 'package:gelsenkirchen_avatar/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/impressum_screen.dart';
@@ -49,7 +49,8 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LernorteScreen()));
+                        builder: (BuildContext context) =>
+                            LernortListeScreen()));
               }),
 
           /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.

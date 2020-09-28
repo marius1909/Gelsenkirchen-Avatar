@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 class LernortScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
+      //drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('Beispiel-Lernort'),
       ),
@@ -29,6 +28,7 @@ class LernortScreen extends StatelessWidget {
         RaisedButton.icon(
           textColor: Colors.white,
           color: Colors.blue,
+
           /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
           entsprechender Screen fertig ist. Codestück zum Springen in nächsten
           Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
@@ -40,7 +40,7 @@ class LernortScreen extends StatelessWidget {
           },
           icon: Icon(Icons.videogame_asset),
           label: Text('Spielen'),
-        )
+        ),
       ])),
     );
   }
