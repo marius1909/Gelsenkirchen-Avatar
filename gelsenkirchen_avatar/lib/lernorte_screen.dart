@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LernortScreen extends StatelessWidget {
+class LernorteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/einstellungenscreen.dart';
-import 'package:gelsenkirchen_avatar/homescreen.dart';
-import 'package:gelsenkirchen_avatar/lernortscreen.dart';
-import 'package:gelsenkirchen_avatar/profilscreen.dart';
+import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
+import 'package:gelsenkirchen_avatar/home_screen.dart';
+import 'package:gelsenkirchen_avatar/lernorte_screen.dart';
+import 'package:gelsenkirchen_avatar/profil_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -47,11 +47,53 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                        builder: (BuildContext context) => LernorteScreen()));
+              }),
+
+          /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.
+          später implementiert werden"*/
+          /* ListTile(
+              leading: Icon(Icons.people),
+              title: Text('Freunde'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
                         builder: (BuildContext context) => LernortScreen()));
               }),
           ListTile(
+              leading: Icon(Icons.score),
+              title: Text('Scorebeard'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LernortScreen()));
+              }), */
+
+          ListTile(
               leading: Icon(Icons.settings),
               title: Text('Einstellungen'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            EinstellungenScreen()));
+              }),
+          ListTile(
+              leading: Icon(Icons.help),
+              title: Text('Hilfe'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            EinstellungenScreen()));
+              }),
+          ListTile(
+              leading: Icon(Icons.description),
+              title: Text('Impressum'),
               onTap: () {
                 Navigator.push(
                     context,
