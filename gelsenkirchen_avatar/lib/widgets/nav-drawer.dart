@@ -3,6 +3,8 @@ import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
 import 'package:gelsenkirchen_avatar/home_screen.dart';
 import 'package:gelsenkirchen_avatar/lernorte_screen.dart';
 import 'package:gelsenkirchen_avatar/profil_screen.dart';
+import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
+import 'package:gelsenkirchen_avatar/impressum_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -88,8 +90,7 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            EinstellungenScreen()));
+                        builder: (BuildContext context) => HilfeScreen()));
               }),
           ListTile(
               leading: Icon(Icons.description),
@@ -98,8 +99,7 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            EinstellungenScreen()));
+                        builder: (BuildContext context) => ImpressumScreen()));
               }),
           ListTile(
             leading: Icon(Icons.exit_to_app),
