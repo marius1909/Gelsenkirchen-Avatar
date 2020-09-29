@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernort.dart';
 import 'package:gelsenkirchen_avatar/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class LernortListeScreen extends StatelessWidget {
   List data = [];
