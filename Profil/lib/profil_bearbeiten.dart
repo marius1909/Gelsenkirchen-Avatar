@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-  home: NinjaCard(),
+  home: ProfilBearbeiten(),
 ));
 
-class  NinjaCard extends StatelessWidget {
+class  ProfilBearbeiten extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

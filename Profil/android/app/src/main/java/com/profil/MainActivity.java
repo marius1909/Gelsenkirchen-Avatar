@@ -1,4 +1,4 @@
-package com.example.ninja_idd;
+package com.profil;
 
 import io.flutter.embedding.android.FlutterActivity;
 
