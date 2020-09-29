@@ -34,6 +34,8 @@ class MyHomePage extends StatelessWidget {
 }
 
 class Map extends StatelessWidget {
+  
+
   @override
   Widget build(BuildContext context) {
     var userLocation = Provider.of<UserLocation>(context);
@@ -56,10 +58,15 @@ class Map extends StatelessWidget {
               builder: (ctx) => Container(
                 child: FlutterLogo(),
               ),
-            ), 
-            for(Standort standort in Lernorte.lernorte()) Marker(width: 80, height: 80, point: standort.position, builder: (ctx) => Container(
-                child: standort.symbol,
-              )),
+            ),
+            for (Standort standort in Lernorte.lernorte())
+              Marker(
+                  width: 80,
+                  height: 80,
+                  point: standort.position,
+                  builder: (ctx) => Container(
+                        child: standort.symbol,
+                      )),
           ],
         ),
       ],

@@ -26,6 +26,10 @@ class LocationService {
   Stream<UserLocation> get locationStream => _locationController.stream;
   
   LocationService() {
+    _locationController.add(UserLocation(
+              latitude: 51.5177,
+              longitude: 7.0857,
+            ));
     // Request permission to use location
     location.requestPermission().then((granted) {
       if (granted != null) {
