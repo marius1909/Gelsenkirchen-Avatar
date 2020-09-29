@@ -9,6 +9,7 @@ class LernortScreen extends StatelessWidget {
       ),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text("In Bearbeitung"),
         RaisedButton.icon(
           textColor: Colors.white,
           color: Colors.blue,
