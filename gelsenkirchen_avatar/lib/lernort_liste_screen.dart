@@ -6,7 +6,12 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
 
-class LernortListeScreen extends StatelessWidget {
+class LernortListeScreen extends StatefulWidget {
+  @override
+  _LernortListeScreenState createState() => _LernortListeScreenState();
+}
+
+class _LernortListeScreenState extends State<LernortListeScreen> {
   List data = [];
 
   Widget build(BuildContext context) {
