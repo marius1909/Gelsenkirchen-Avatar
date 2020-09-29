@@ -75,7 +75,7 @@ class  Profil extends StatelessWidget {
                   color: Colors.grey[800],
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/profilbild.jpg'),
+                  backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
 
                 ),
