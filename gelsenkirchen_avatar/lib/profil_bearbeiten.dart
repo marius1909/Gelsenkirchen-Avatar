@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-  home: ProfilBearbeiten(),
-));
+      home: ProfilBearbeiten(),
+    ));
 
-class  ProfilBearbeiten extends StatelessWidget {
+class ProfilBearbeiten extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,6 @@ class  ProfilBearbeiten extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.grey[850],
           elevation: 0.0,
-
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
@@ -25,13 +24,12 @@ class  ProfilBearbeiten extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[ Text(
-                        'NAME',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.8
+                      children: <Widget>[
+                        Text(
+                          'NAME',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
-                      ),
                         SizedBox(height: 10.0),
                         Text(
                           'Spielername',
@@ -44,42 +42,36 @@ class  ProfilBearbeiten extends StatelessWidget {
                         ),
                       ],
                     ),
-
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
                       child: IconButton(
-                          icon: Icon(Icons.edit,
-                              color: Colors.white),
-                       ),
+                        icon: Icon(Icons.edit, color: Colors.white),
+                      ),
                     )
-
                   ],
                 ),
-
                 Divider(
                   height: 50.0,
                   color: Colors.grey[800],
                 ),
-                Row(crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/profilbild.jpg'),
+                      backgroundImage:
+                          AssetImage('assets/images/profilbild.jpg'),
                       radius: 50,
-
                     ),
-
                     IconButton(
-                      icon: Icon(Icons.edit,
-                          color: Colors.white),
-                    ) ],
+                      icon: Icon(Icons.edit, color: Colors.white),
+                    )
+                  ],
                 ),
                 SizedBox(height: 250),
                 Divider(
                   height: 40.0,
                   color: Colors.grey[800],
                 ),
-
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -94,10 +86,8 @@ class  ProfilBearbeiten extends StatelessWidget {
                     "Speichern",
                     style: TextStyle(fontSize: 25.0),
                   ),
-                )  ],
-
-            )
-        )
-    );
+                )
+              ],
+            )));
   }
 }
