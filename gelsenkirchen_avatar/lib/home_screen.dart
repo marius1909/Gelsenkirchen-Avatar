@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         title: Text('Gelsenkirchen Avatar'),
       ),
       body: Center(
-        child: Text('Karte'),
+        child: Text('Platzhalter: Karte'),
         //Hier wird später die Karte eingefügt
       ),
     );

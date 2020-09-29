@@ -22,6 +22,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
       ),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Platzhalter: ListView mit Lernorten'),
         FlatButton(
           textColor: Colors.white,
           color: Colors.blue,
@@ -58,7 +59,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
                 MaterialPageRoute(
                     builder: (BuildContext context) => ScreenName()));*/
           },
-          child: Text('PHP-Skript testen'),
+          child: Text('Debug-Button: PHP-Skript testen'),
         )
       ])),
     );
