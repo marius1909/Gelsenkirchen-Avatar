@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/lernort.dart';
 import 'package:gelsenkirchen_avatar/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 class LernortListeScreen extends StatelessWidget {
+  List data = [];
+
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(),
@@ -56,6 +64,7 @@ class LernortListeScreen extends StatelessWidget {
   }
 }
 
+//Diese Methode ist in Bearbeitung
 void testquery() async {
   var url = "http://zukunft.sportsocke522.de/getLernorte.php";
   var res = await http.get(url);
@@ -70,6 +79,9 @@ void testquery() async {
 
   print(jsonDecode(res.body));
 
+  var splitbody = res.body.split(",");
+
+  print(splitbody[0]);
   /* if (jsonDecode(res.body) == "Account existiert bereits") {
     Fluttertoast.showToast(
         msg: "Der Benutzer existiert bereits", toastLength: Toast.LENGTH_SHORT);
@@ -81,4 +93,20 @@ void testquery() async {
       Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
     }
   } */
+}
+
+//Diese Methode ist in Bearbeitung
+void ladeLernorte() async {
+  var url = "http://zukunft.sportsocke522.de/getLernorte.php";
+  var res = await http.get(url);
+
+  if (jsonDecode(res.body) == null) {
+    print("Laden der Lernorte fehlgeschlagen.");
+  } else {
+    print("Laden der Lernorte erfolgreich.");
+
+    /* setState(() {
+      data = jsonDecode(res.body);
+    }); */
+  }
 }
