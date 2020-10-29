@@ -46,6 +46,7 @@ class ProfilBearbeiten extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
                       child: IconButton(
                         icon: Icon(Icons.edit, color: Colors.white),
+                        onPressed: () {},
                       ),
                     )
                   ],
@@ -64,6 +65,7 @@ class ProfilBearbeiten extends StatelessWidget {
                     ),
                     IconButton(
                       icon: Icon(Icons.edit, color: Colors.white),
+                      onPressed: () {},
                     )
                   ],
                 ),
