@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernort_screen.dart';
+import 'package:gelsenkirchen_avatar/lernort.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -50,7 +51,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
                 return AlertDialog(
                   title: Text('Testmeldung'),
                   content: Text(
-                      "Testmethode testinsert() wurde aufgerufen. Datensatz wurde aus der Datenbank gelesen und in der Konsole ausgegeben."),
+                      "Testmethode testquery() wurde aufgerufen. Datensatz wurde aus der Datenbank gelesen und in der Konsole ausgegeben."),
                 );
               },
             );
@@ -66,12 +67,27 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
   }
 }
 
+List<Lernort> lernortList = new List();
+
+/*Diese Methode erstellt die ListView mit Lernorten*/
+ListView erstelleLernortListView(BuildContext context) {
+  return ListView.builder(
+    itemCount: lernortList.length,
+    itemBuilder: _getItemUI,
+    padding: EdgeInsets.all(0.0),
+  );
+}
+
+Widget _getItemUI(BuildContext context, int index) {
+  return new Text(lernortList[index].name);
+}
+
 //Diese Methode ist in Bearbeitung
 void testquery() async {
   var url = "http://zukunft.sportsocke522.de/getLernorte.php";
   var res = await http.get(url);
 
-  //folgender Block wäre nötig um was in DBzu schreiben
+  //folgender Block wäre nötig um was in DB zu schreiben
   /* var data = {
     "email": "testemail",
     "benutzername": "testname",
@@ -79,11 +95,12 @@ void testquery() async {
   };
   var res = await http.post(url, body: data); */
 
-  print(jsonDecode(res.body));
+  /*List, die Maps enthält, in denen jeweils ein Datensatz steckt.
+  Zuordnung: Spaltenname -> Inhalt*/
+  var lernortDatensaetze = new List();
+  lernortDatensaetze = jsonDecode(res.body);
+  print(lernortDatensaetze);
 
-  var splitbody = res.body.split(",");
-
-  print(splitbody[0]);
   /* if (jsonDecode(res.body) == "Account existiert bereits") {
     Fluttertoast.showToast(
         msg: "Der Benutzer existiert bereits", toastLength: Toast.LENGTH_SHORT);
@@ -106,7 +123,6 @@ void ladeLernorte() async {
     print("Laden der Lernorte fehlgeschlagen.");
   } else {
     print("Laden der Lernorte erfolgreich.");
-
     /* setState(() {
       data = jsonDecode(res.body);
     }); */

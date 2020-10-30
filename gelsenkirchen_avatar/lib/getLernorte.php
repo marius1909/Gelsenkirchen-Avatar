@@ -4,7 +4,8 @@
 require_once("dbconfig.php");
 
 //Zu Demonstrationszwecken des Lernortscreens wird hier nur ein Datensatz zurückgegeben
-$query = "SELECT * FROM Lernort WHERE id = 1";
+//$query = "SELECT 'Name', 'Kategorie' FROM Lernort";
+$query = "SELECT Lernort.Name AS Lernort, LernKategorie.Name AS Kategorie FROM LernKategorie INNER JOIN Lernort ON LernKategorie.id=Lernort.KategorieID";
 
 $res = mysqli_query($con, $query);
 
