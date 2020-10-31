@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
-import 'LernQuiz.dart';
+import 'package:quiz/start_quiz.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: LearnQuiz(),
-  ));
+  runApp(MyApp());
 }
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: StartQuiz(1),
+    );
+  }
+}
+
