@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
@@ -13,22 +15,35 @@ class LernortListeScreen extends StatefulWidget {
 }
 
 class _LernortListeScreenState extends State<LernortListeScreen> {
-  List data = [];
+  @override
+  void initState() {
+    super.initState();
+    /*Hier kann man alles mögliche aufrufen, was beim Laden des Screens
+    geschehen soll*/
 
+    testquery();
+    //befuelleLernortList(testquery(daten));
+  }
+
+  List data = [];
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        title: Text('Lernorte'),
-      ),
-      body: Center(
+        drawer: NavDrawer(),
+        appBar: AppBar(
+          title: Text('Lernorte'),
+        ),
+        body: new Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: getHomePageBody(context)));
+
+    /*Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Platzhalter: ListView mit Lernorten'),
         FlatButton(
           textColor: Colors.white,
           color: Colors.blue,
           onPressed: () {
-            testquery();
+            //testquery();
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -43,7 +58,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
           entsprechender Screen fertig ist. Codestück zum Springen in nächsten
           Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
           onPressed: () {
-            testquery();
+            //testquery();
             //Folgende Meldung dient nur zum Testen
             showDialog(
               context: context,
@@ -62,15 +77,11 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
           },
           child: Text('Debug-Button: PHP-Skript testen'),
         )
-      ])),
-    );
+      ])),*/
   }
 }
 
-List<Lernort> lernortList = new List();
-
-/*Diese Methode erstellt die ListView mit Lernorten*/
-ListView erstelleLernortListView(BuildContext context) {
+getHomePageBody(BuildContext context) {
   return ListView.builder(
     itemCount: lernortList.length,
     itemBuilder: _getItemUI,
@@ -82,8 +93,45 @@ Widget _getItemUI(BuildContext context, int index) {
   return new Text(lernortList[index].name);
 }
 
-//Diese Methode ist in Bearbeitung
-void testquery() async {
+List<Lernort> lernortList = new List();
+
+void fuelleListView(List datenquelle) {
+  /*Iteriert über den Inhalt der List, die wir aus der DB bekommen, also über
+  Map-Objekte, die die Datensätze enthalten*/
+  var it = datenquelle.iterator;
+  int resultID;
+  String resultText;
+  while (it.moveNext()) {
+    Lernort datensatz = new Lernort();
+    var valuesListe = it.current.values.toList();
+
+    resultID = int.parse(valuesListe[0]);
+    resultText = valuesListe[4];
+    //datensatz.id = int.parse(valuesListe[0]);
+    //datensatz.setName(resultText);
+
+    datensatz.setId(resultID);
+    datensatz.setName(resultText);
+    lernortList.add(datensatz);
+  }
+}
+
+/*Diese Methode erstellt die ListView mit Lernorten*/
+/*ListView erstelleLernortListView(BuildContext context) {
+  return ListView.builder(
+    itemCount: lernortList.length,
+    itemBuilder: _getItemUI,
+    padding: EdgeInsets.all(0.0),
+  );
+}*/
+
+/*Diese Methode wird für die Methode erstelleLernortListview() benötigt*/
+/*Widget _getItemUI(BuildContext context, int index) {
+  return new Text(lernortList[index].name);
+}*/
+
+/*Diese Methode holt die Daten aus der DB*/
+testquery() async {
   var url = "http://zukunft.sportsocke522.de/getLernorte.php";
   var res = await http.get(url);
 
@@ -100,6 +148,9 @@ void testquery() async {
   var lernortDatensaetze = new List();
   lernortDatensaetze = jsonDecode(res.body);
   print(lernortDatensaetze);
+
+  //Fülle ListView
+  fuelleListView(lernortDatensaetze);
 
   /* if (jsonDecode(res.body) == "Account existiert bereits") {
     Fluttertoast.showToast(
