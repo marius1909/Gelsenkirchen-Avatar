@@ -17,19 +17,20 @@ class _QuizPageState extends State<QuizPage> {
   final List<Widget> punkteBehalten = [];
 
   Timer _timer;
-  int _start = 30;
+  //Erst testen mit 10sec
+  int _start = 10;
 
   int sumPunkte = 0;
   int positionFragen = 0;
   int punkteProFragen = 1;
-
   List data = [];
   List fragenList;
 
+  //prüfen ob Antwort richtig oder falsch
   void checkAnswer(String value) {
     if (data[positionFragen]['antwort'][4] == value) {
       punkteBehalten.add(Icon(Icons.check, color: Colors.green));
-      sumPunkte = sumPunkte + positionFragen * 2 + punkteProFragen;
+      sumPunkte += sumPunkte + positionFragen * 2 + punkteProFragen;
     } else {
       punkteBehalten.add(Icon(Icons.close, color: Colors.red));
     }
@@ -79,7 +80,6 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  //Time
   void displayDialog(String title) {
     showDialog(
       context: context,
@@ -89,7 +89,7 @@ class _QuizPageState extends State<QuizPage> {
         content: new Text(title),
         actions: [
           CupertinoDialogAction(
-            //yes -> play continue -> answer wrong(because they didn't answer)
+            //yes -> spielen weiter mit nächsten Frage -> Antwort von aktuellen Fragen ist automatisch falsch(keine Antwort bekommen)
             child: new Text("Yes"),
             onPressed: () {
               Navigator.of(context).pop(true);
@@ -97,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
             },
           ),
           CupertinoDialogAction(
-            //no -> cancel game -> back to menu
+            //no -> nicht weiter spielen -> zurück zur vorherigen Seite
             child: new Text("No"),
             onPressed: () =>
                 {Navigator.of(context).pop(true), Navigator.of(context).pop()},
@@ -107,6 +107,7 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
+  //set Time
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -133,7 +134,7 @@ class _QuizPageState extends State<QuizPage> {
 
   void timerCancel() {
     _timer.cancel();
-    _start = 30;
+    _start = 10;
   }
 
   @override
@@ -153,13 +154,13 @@ class _QuizPageState extends State<QuizPage> {
     if (data == [] || data.length == 0 || data == null) {
       return Scaffold(
           body: new Container(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(5.0),
               alignment: Alignment.topCenter,
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
         body: new Container(
-          margin: const EdgeInsets.all(5.0),
+          margin: const EdgeInsets.all(1.0),
           alignment: Alignment.topCenter,
           child: new Column(
             children: <Widget>[
@@ -187,7 +188,6 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
               ),
-
               //Zeit
               new Padding(padding: EdgeInsets.all(5.0)),
               Expanded(
@@ -209,7 +209,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               //Frage
-              new Padding(padding: EdgeInsets.all(1.0)),
+              new Padding(padding: EdgeInsets.all(5.0)),
               Expanded(
                 flex: 2,
                 child: Padding(
@@ -218,7 +218,7 @@ class _QuizPageState extends State<QuizPage> {
                       height: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        color: Colors.blueAccent[400],
+                        color: Colors.blue[400],
                       ),
                       child: Center(
                         child: Text(
@@ -353,7 +353,7 @@ class _QuizPageState extends State<QuizPage> {
                       height: 30.0,
                       color: Colors.red[300],
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/');
+                        Navigator.of(context).pop();
                       },
                       child: new Text(
                         "Quit",
