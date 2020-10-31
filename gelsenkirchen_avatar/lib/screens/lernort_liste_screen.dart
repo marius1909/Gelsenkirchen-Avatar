@@ -90,8 +90,45 @@ getHomePageBody(BuildContext context) {
 }
 
 Widget _getItemUI(BuildContext context, int index) {
-  return new Text(lernortList[index].name);
+  return new Card( 
+    child: new Column(
+      children: <Widget>[
+        new ListTile(
+        title: new Text(
+          lernortList[index].name,
+          style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+        ),
+        subtitle: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Text(lernortList[index].kurzbeschreibung,
+                  style: new TextStyle(
+                      fontSize: 13.0, fontWeight: FontWeight.normal)),
+              /*new Text('Kategorie: ${lernortList[index].beschreibung}',
+                  style: new TextStyle(
+                      fontSize: 11.0, fontWeight: FontWeight.normal)),*/
+            ]),
+        //trailing: ,
+        onTap: () {
+          /*Aus Beispiel*/
+          //_showSnackBar(context, lernortList[index]);
+
+          /*Hier kommt Aktion beim Klick auf Lernort hin*/
+        },
+      )
+    ],
+  ));
+  //return new Text(lernortList[index].name);
 }
+/*Aus Beispiel*/
+/*_showSnackBar(BuildContext context, Lernort item) {
+  final SnackBar objSnackbar = new SnackBar(
+    content: new Text("${item.name} is a city in ${item.beschreibung}"),
+    backgroundColor: Colors.amber,
+  );
+  Scaffold.of(context).showSnackBar(objSnackbar);
+}*/
 
 List<Lernort> lernortList = new List();
 
@@ -99,36 +136,27 @@ void fuelleListView(List datenquelle) {
   /*Iteriert über den Inhalt der List, die wir aus der DB bekommen, also über
   Map-Objekte, die die Datensätze enthalten*/
   var it = datenquelle.iterator;
-  int resultID;
-  String resultText;
+
   while (it.moveNext()) {
     Lernort datensatz = new Lernort();
     var valuesListe = it.current.values.toList();
 
-    resultID = int.parse(valuesListe[0]);
-    resultText = valuesListe[4];
-    //datensatz.id = int.parse(valuesListe[0]);
-    //datensatz.setName(resultText);
-
-    datensatz.setId(resultID);
-    datensatz.setName(resultText);
+    datensatz.setId(int.parse(valuesListe[0]));
+    datensatz.setNord(int.parse(valuesListe[1]));
+    datensatz.setOst(int.parse(valuesListe[2]));
+    datensatz.setKategorieId(int.parse(valuesListe[3]));
+    datensatz.setName(valuesListe[4]);
+    datensatz.setKurzbeschreibung(valuesListe[5]);
+    datensatz.setBeschreibung(valuesListe[6]);
+    datensatz.setTitelbild(valuesListe[7]);
+    /*FEHLER: Findet Methode setMinispielArtId() nicht*/
+    //datensatz.setMinispielArtId(int.parse(valuesListe[8]));
+    datensatz.setBelohnungenId(int.parse(valuesListe[9]));
+    datensatz.setWeitereBilder(valuesListe[10]);
+    
     lernortList.add(datensatz);
   }
 }
-
-/*Diese Methode erstellt die ListView mit Lernorten*/
-/*ListView erstelleLernortListView(BuildContext context) {
-  return ListView.builder(
-    itemCount: lernortList.length,
-    itemBuilder: _getItemUI,
-    padding: EdgeInsets.all(0.0),
-  );
-}*/
-
-/*Diese Methode wird für die Methode erstelleLernortListview() benötigt*/
-/*Widget _getItemUI(BuildContext context, int index) {
-  return new Text(lernortList[index].name);
-}*/
 
 /*Diese Methode holt die Daten aus der DB*/
 testquery() async {
