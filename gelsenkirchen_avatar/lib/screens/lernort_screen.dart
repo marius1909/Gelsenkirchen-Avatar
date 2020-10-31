@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/lernort.dart';
+import 'package:gelsenkirchen_avatar/data.dart';
 
 class LernortScreen extends StatelessWidget {
+  final Lernort l;
+
+  LernortScreen({Key key, @required this.l}) : super(key: key);
+
   Widget build(BuildContext context) {
     return Scaffold(
       //drawer: NavDrawer(),
@@ -9,7 +15,7 @@ class LernortScreen extends StatelessWidget {
       ),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text("In Bearbeitung"),
+        Text(l.name),
         RaisedButton.icon(
           textColor: Colors.white,
           color: Colors.blue,

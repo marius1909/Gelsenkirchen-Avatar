@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
+import 'package:gelsenkirchen_avatar/data.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -35,49 +36,6 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
         body: new Padding(
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
             child: getHomePageBody(context)));
-
-    /*Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Platzhalter: ListView mit Lernorten'),
-        FlatButton(
-          textColor: Colors.white,
-          color: Colors.blue,
-          onPressed: () {
-            //testquery();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => LernortScreen()));
-          },
-          child: Text('Beispiel-Lernort'),
-        ),
-        FlatButton(
-          textColor: Colors.white,
-          color: Colors.grey,
-          /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
-          entsprechender Screen fertig ist. Codestück zum Springen in nächsten
-          Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-          onPressed: () {
-            //testquery();
-            //Folgende Meldung dient nur zum Testen
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Testmeldung'),
-                  content: Text(
-                      "Testmethode testquery() wurde aufgerufen. Datensatz wurde aus der Datenbank gelesen und in der Konsole ausgegeben."),
-                );
-              },
-            );
-            /*Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ScreenName()));*/
-          },
-          child: Text('Debug-Button: PHP-Skript testen'),
-        )
-      ])),*/
   }
 }
 
@@ -93,6 +51,13 @@ Widget _getItemUI(BuildContext context, int index) {
   return new Card( 
     child: new Column(
       children: <Widget>[
+        /*Bild in ListViewItem anzeigen*/
+        /*new ListTile(
+        leading: new Image.asset(
+          "assets/" + _allCities[index].image,
+          fit: BoxFit.cover,
+          width: 100.0,
+        ),*/
         new ListTile(
         title: new Text(
           lernortList[index].name,
@@ -112,9 +77,17 @@ Widget _getItemUI(BuildContext context, int index) {
         //trailing: ,
         onTap: () {
           /*Aus Beispiel*/
-          //_showSnackBar(context, lernortList[index]);
+          _showSnackBar(context, lernortList[index]);
+
+          /*Lernort l = lernortList[index];
+          print(l);*/
+          //final data = Data(l);
 
           /*Hier kommt Aktion beim Klick auf Lernort hin*/
+          Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LernortScreen(l: lernortList[index])));
         },
       )
     ],
@@ -122,13 +95,13 @@ Widget _getItemUI(BuildContext context, int index) {
   //return new Text(lernortList[index].name);
 }
 /*Aus Beispiel*/
-/*_showSnackBar(BuildContext context, Lernort item) {
+_showSnackBar(BuildContext context, Lernort item) {
   final SnackBar objSnackbar = new SnackBar(
-    content: new Text("${item.name} is a city in ${item.beschreibung}"),
+    content: new Text("${item.name} hat die ID: ${item.id}"),
     backgroundColor: Colors.amber,
   );
   Scaffold.of(context).showSnackBar(objSnackbar);
-}*/
+}
 
 List<Lernort> lernortList = new List();
 

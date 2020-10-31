@@ -3,7 +3,7 @@ import 'package:gelsenkirchen_avatar/lernort.dart';
 class Data {
   Lernort lernortData;
 
-  Data({
+  Data(
     this.lernortData
-  });
+  );
 }
