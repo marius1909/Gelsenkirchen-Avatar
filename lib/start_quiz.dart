@@ -51,36 +51,24 @@ class _StartQuizState extends State<StartQuiz> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Quizmasters"),
+          title: Text(
+            //Name von aktuellen Lernort
+            data['name'],
+          ),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: Column(
             children: [
-              //Name von aktuellen Lernort
-              Center(
-                  child: Container(
-                child: Text(
-                  data['name'],
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              )),
               //Bilder
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Image.network(
-                    'https://img.republicworld.com/republic-prod/stories/promolarge/xxhdpi/wp6ojoyuh6fwdidy_1598513829.jpeg?tr=w-812,h-464',
+                    'https://storage.needpix.com/rsynced_images/quiz-2074324_1280.png',
                   ),
-                  height: 170,
+                  height: 100,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: Colors.black, spreadRadius: 1),
-                    ],
-                  ),
                 ),
               ),
               Expanded(
@@ -88,11 +76,12 @@ class _StartQuizState extends State<StartQuiz> {
                   child: Column(
                     children: [
                       Text(
-                        "Beschreibung des Minispiels bla bla",
+                        "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
+                        textAlign: TextAlign.justify,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.red),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                     ],
                   ),
@@ -101,55 +90,73 @@ class _StartQuizState extends State<StartQuiz> {
               //Belohnungen-Button
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: MaterialButton(
-                      color: Colors.orangeAccent,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) =>
-                              new CupertinoAlertDialog(
-                            title: new Text("Anzeigen der Belohnungen"),
-                            content: new Text("Loading....."),
-                            actions: [
-                              CupertinoDialogAction(
-                                child: new Text("Yes"),
-                                onPressed: () {
-                                  Navigator.of(context).pop(true);
-                                },
+                child: Container(
+                    width: double.infinity,
+                    child: Material(
+                      //Wrap with Material
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0)),
+                      clipBehavior: Clip.antiAlias,
+                      child: MaterialButton(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          color: Colors.green[400],
+                          /*minWidth: 10.0,
+                          height: 35,*/
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) =>
+                                  new CupertinoAlertDialog(
+                                title: new Text("Anzeigen der Belohnungen"),
+                                content: new Text("Loading....."),
+                                actions: [
+                                  CupertinoDialogAction(
+                                    child: new Text("Yes"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop(true);
+                                    },
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Belohnungen",
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
-                      )),
-                ),
+                            );
+                          },
+                          child: Text(
+                            "Belohnungen",
+                            style:
+                                TextStyle(fontSize: 18.0, color: Colors.white),
+                          )),
+                    )),
               ),
               //Starten-Button
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: MaterialButton(
-                      color: Colors.orangeAccent,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                QuizPage(int.parse(data['quizID']))));
-                      },
-                      child: Text(
-                        "Starten",
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
-                      )),
-                ),
+                child: Container(
+                    width: double.infinity,
+                    child: Material(
+                      //Wrap with Material
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0)),
+                      clipBehavior: Clip.antiAlias,
+                      child: MaterialButton(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          color: Colors.green[400],
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    QuizPage(int.parse(data['quizID']))));
+                          },
+                          child: Text(
+                            "Starten",
+                            style:
+                                TextStyle(fontSize: 18.0, color: Colors.white),
+                          )),
+                    )),
               ),
               //Zurück-Button
-              Padding(
+              /*Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: SizedBox(
                   width: double.infinity,
@@ -163,7 +170,7 @@ class _StartQuizState extends State<StartQuiz> {
                         style: TextStyle(fontSize: 18.0, color: Colors.white),
                       )),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),
