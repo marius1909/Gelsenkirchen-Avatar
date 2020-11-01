@@ -30,7 +30,7 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(String value) {
     if (data[positionFragen]['antwort'][4] == value) {
       punkteBehalten.add(Icon(Icons.check, color: Colors.green));
-      sumPunkte += sumPunkte + positionFragen * 2 + punkteProFragen;
+      sumPunkte = sumPunkte + positionFragen * 2 + punkteProFragen;
     } else {
       punkteBehalten.add(Icon(Icons.close, color: Colors.red));
     }
