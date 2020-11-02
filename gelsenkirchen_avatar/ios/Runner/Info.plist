@@ -22,6 +22,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,11 +47,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Der Standort wird verwendet, um die eigene Position auf der Karte zu sehen</string>
 </dict>
 </plist>

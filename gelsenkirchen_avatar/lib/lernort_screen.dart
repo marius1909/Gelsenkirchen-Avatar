@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernortAlt.dart';
+import 'package:gelsenkirchen_avatar/lernort.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 
 class LernortScreen extends StatelessWidget {
-  final LernortAlt l;
+  final Lernort l;
 
   LernortScreen({Key key, @required this.l}) : super(key: key);
 
@@ -38,7 +38,7 @@ class LernortScreen extends StatelessWidget {
                   - linksbündig*/
           Container(
             child: Text(
-              "Kategorie: " + l.kategorieId.toString(),
+              "Kategorie: " + l.kategorieID.toString(),
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 17),
             ),
