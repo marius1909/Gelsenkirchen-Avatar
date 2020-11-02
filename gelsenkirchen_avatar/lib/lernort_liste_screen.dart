@@ -32,19 +32,22 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
         ),
         body: new Padding(
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: getHomePageBody(context)));
+            child: erstelleListView(context)));
   }
 }
 
-getHomePageBody(BuildContext context) {
+/*Diese Methode erstellt die ListView mit Hilfe der Methode erstelleListViewItem
+und der List lernortList*/
+erstelleListView(BuildContext context) {
   return ListView.builder(
     itemCount: lernortList.length,
-    itemBuilder: _getItemUI,
+    itemBuilder: erstelleListViewitem,
     padding: EdgeInsets.all(0.0),
   );
 }
 
-Widget _getItemUI(BuildContext context, int index) {
+/*Diese Methode erstellt die ListViewItems*/
+Widget erstelleListViewitem(BuildContext context, int index) {
   return new Card(
       child: new Column(
     children: <Widget>[
@@ -101,7 +104,6 @@ void ladeLernorte() async {
   Zuordnung: Spaltenname -> Inhalt*/
   var lernortDatensaetze = new List();
   lernortDatensaetze = jsonDecode(res.body);
-  print(lernortDatensaetze);
 
   fuelleLernortList(lernortDatensaetze);
 
@@ -112,7 +114,6 @@ void ladeLernorte() async {
   } else {
     Fluttertoast.showToast(
         msg: "Daten wurden geladen.", toastLength: Toast.LENGTH_SHORT);
-    print("Laden der Lernorte erfolgreich.");
   }
 
   /*Alternative Fehlerabfrage*/

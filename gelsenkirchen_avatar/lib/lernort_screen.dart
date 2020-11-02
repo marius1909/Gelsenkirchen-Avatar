@@ -36,37 +36,43 @@ class LernortScreen extends StatelessWidget {
           /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
                   - linksbündig*/
           Container(
-              child: Text(
-                "Kategorie: " + l.kategorieId.toString(),
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 17),
-              ),
-              margin: EdgeInsets.only(
-                  left: 30.0, top: 20.0, right: 30.0, bottom: 10.0)),
+            child: Text(
+              "Kategorie: " + l.kategorieId.toString(),
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 17),
+            ),
+            margin: EdgeInsets.only(
+                left: 30.0, top: 20.0, right: 30.0, bottom: 10.0),
+            alignment: Alignment(-1.0, 0.0),
+          ),
 
           /*ADRESSE*/
           /*Todo: - Hier muss noch die Adresse angegeben werden
                   - linksbündig*/
           Container(
-              child: Text(
-                "Adresse: ",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 17),
-              ),
-              margin: EdgeInsets.only(
-                  left: 30.0, top: 20.0, right: 30.0, bottom: 20.0)),
+            child: Text(
+              "Adresse: ",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 17),
+            ),
+            margin: EdgeInsets.only(
+                left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
+            alignment: Alignment(-1.0, 0.0),
+          ),
 
           /*ÖFFNUNGSZEITEN*/
           /*Todo: - Hier müssen noch die Öffnungszeiten angegeben werden
                   - linksbündig*/
           Container(
-              child: Text(
-                "Öffnungszeiten: ",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 17),
-              ),
-              margin: EdgeInsets.only(
-                  left: 30.0, top: 20.0, right: 30.0, bottom: 20.0)),
+            child: Text(
+              "Öffnungszeiten: ",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 17),
+            ),
+            margin: EdgeInsets.only(
+                left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
+            alignment: Alignment(-1.0, 0.0),
+          ),
 
           /*Todo: Abstand zwischen den Buttons einfügen*/
           ListTile(
@@ -88,6 +94,11 @@ class LernortScreen extends StatelessWidget {
                 icon: Icon(Icons.book),
                 label: Text('Lernen'),
               ),
+            ),
+            Container(
+              //color: Colors.white,
+              height: 50,
+              width: 20,
             ),
             Expanded(
               child: RaisedButton.icon(
