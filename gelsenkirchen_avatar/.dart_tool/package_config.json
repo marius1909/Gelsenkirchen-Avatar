@@ -116,6 +116,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "flutter_icons",
+      "rootUri": "file:///C:/_Daten/Programme/Flutter%20SDK/flutter_windows_1.20.2-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_icons-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "flutter_image",
       "rootUri": "file:///C:/_Daten/Programme/Flutter%20SDK/flutter_windows_1.20.2-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image-3.0.0",
       "packageUri": "lib/",
@@ -464,7 +470,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-11-02T16:39:12.694343Z",
+  "generated": "2020-11-02T17:33:32.307970Z",
   "generator": "pub",
   "generatorVersion": "2.10.3"
 }
