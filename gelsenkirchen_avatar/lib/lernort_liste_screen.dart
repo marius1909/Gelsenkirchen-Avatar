@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/lernortAlt.dart';
 import 'package:gelsenkirchen_avatar/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LernortListeScreen extends StatefulWidget {
   @override
@@ -12,78 +13,111 @@ class LernortListeScreen extends StatefulWidget {
 }
 
 class _LernortListeScreenState extends State<LernortListeScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    /*Hier kann man alles mögliche aufrufen, was beim Laden des Screens
+    geschehen soll*/
+    ladeLernorte();
+  }
+
   List data = [];
 
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        title: Text('Lernorte'),
-      ),
-      body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Platzhalter: ListView mit Lernorten'),
-        FlatButton(
-          textColor: Colors.white,
-          color: Colors.blue,
-          onPressed: () {
-            testquery();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => LernortScreen()));
-          },
-          child: Text('Beispiel-Lernort'),
+        drawer: NavDrawer(),
+        appBar: AppBar(
+          title: Text('Lernorte'),
         ),
-        FlatButton(
-          textColor: Colors.white,
-          color: Colors.grey,
-          /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
-          entsprechender Screen fertig ist. Codestück zum Springen in nächsten
-          Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-          onPressed: () {
-            testquery();
-            //Folgende Meldung dient nur zum Testen
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Testmeldung'),
-                  content: Text(
-                      "Testmethode testinsert() wurde aufgerufen. Datensatz wurde aus der Datenbank gelesen und in der Konsole ausgegeben."),
-                );
-              },
-            );
-            /*Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ScreenName()));*/
-          },
-          child: Text('Debug-Button: PHP-Skript testen'),
-        )
-      ])),
-    );
+        body: new Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: erstelleListView(context)));
   }
 }
 
-//Diese Methode ist in Bearbeitung
-void testquery() async {
+/*Diese Methode erstellt die ListView mit Hilfe der Methode erstelleListViewItem
+und der List lernortList*/
+erstelleListView(BuildContext context) {
+  return ListView.builder(
+    itemCount: lernortList.length,
+    itemBuilder: erstelleListViewitem,
+    padding: EdgeInsets.all(0.0),
+  );
+}
+
+/*Diese Methode erstellt die ListViewItems*/
+Widget erstelleListViewitem(BuildContext context, int index) {
+  return new Card(
+      child: new Column(
+    children: <Widget>[
+      /*BILD*/
+      /*new ListTile(
+        leading: new Image.asset(
+          "assets/" + _allCities[index].image,
+          fit: BoxFit.cover,
+          width: 100.0,
+        ),*/
+      new ListTile(
+        title: new Text(
+          /*NAME*/
+          lernortList[index].name != null ? lernortList[index].name : 'empty',
+          style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+        ),
+        subtitle: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              /*KURZBESCHREIBUNG*/
+              new Text(
+                  lernortList[index].kurzbeschreibung != null
+                      ? lernortList[index].kurzbeschreibung
+                      : '',
+                  style: new TextStyle(
+                      fontSize: 13.0, fontWeight: FontWeight.normal)),
+              /*KATEGORIE*/
+              /*new Text('Kategorie: ${lernortList[index].kategorieId}',
+                  style: new TextStyle(
+                      fontSize: 11.0, fontWeight: FontWeight.normal)),*/
+            ]),
+        onTap: () {
+          /*Hier kommt Aktion beim Klick auf Lernort hin*/
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LernortScreen(l: lernortList[index])));
+        },
+      )
+    ],
+  ));
+}
+
+List<LernortAlt> lernortList = new List();
+
+/*Diese Methode holt die Lernortdaten aus der Datenbank und ruft die Methode
+fuelleListView() auf*/
+void ladeLernorte() async {
   var url = "http://zukunft.sportsocke522.de/getLernorte.php";
   var res = await http.get(url);
 
-  //folgender Block wäre nötig um was in DBzu schreiben
-  /* var data = {
-    "email": "testemail",
-    "benutzername": "testname",
-    "passwort": "testpasswort",
-  };
-  var res = await http.post(url, body: data); */
+  /*List, die Maps enthält, in denen jeweils ein Datensatz steckt.
+  Zuordnung: Spaltenname -> Inhalt*/
+  var lernortDatensaetze = new List();
+  lernortDatensaetze = jsonDecode(res.body);
 
-  print(jsonDecode(res.body));
+  fuelleLernortList(lernortDatensaetze);
 
-  var splitbody = res.body.split(",");
+  if (jsonDecode(res.body) == null) {
+    Fluttertoast.showToast(
+        msg: "Laden der Lernorte fehlgeschlagen.",
+        toastLength: Toast.LENGTH_SHORT);
+  } else {
+    Fluttertoast.showToast(
+        msg: "Daten wurden erfolgreich geladen.",
+        toastLength: Toast.LENGTH_SHORT);
+  }
 
-  print(splitbody[0]);
+  /*Alternative Fehlerabfrage*/
   /* if (jsonDecode(res.body) == "Account existiert bereits") {
     Fluttertoast.showToast(
         msg: "Der Benutzer existiert bereits", toastLength: Toast.LENGTH_SHORT);
@@ -97,18 +131,30 @@ void testquery() async {
   } */
 }
 
-//Diese Methode ist in Bearbeitung
-void ladeLernorte() async {
-  var url = "http://zukunft.sportsocke522.de/getLernorte.php";
-  var res = await http.get(url);
+/*Diese Methode füllt eine List mit Lernortobjekten aus der DB, die der
+  ListView übergeben wird*/
+void fuelleLernortList(List datenquelle) {
+  lernortList.clear();
+  /*Iteriert über den Inhalt der List, die wir aus der DB bekommen, also über
+    Map-Objekte, die die Datensätze enthalten*/
+  var it = datenquelle.iterator;
 
-  if (jsonDecode(res.body) == null) {
-    print("Laden der Lernorte fehlgeschlagen.");
-  } else {
-    print("Laden der Lernorte erfolgreich.");
+  while (it.moveNext()) {
+    LernortAlt datensatz = new LernortAlt();
+    var valuesListe = it.current.values.toList();
 
-    /* setState(() {
-      data = jsonDecode(res.body);
-    }); */
+    datensatz.setId(int.parse(valuesListe[0]));
+    datensatz.setNord(int.parse(valuesListe[1]));
+    datensatz.setOst(int.parse(valuesListe[2]));
+    datensatz.setKategorieId(int.parse(valuesListe[3]));
+    datensatz.setName(valuesListe[4]);
+    datensatz.setKurzbeschreibung(valuesListe[5]);
+    datensatz.setBeschreibung(valuesListe[6]);
+    datensatz.setTitelbild(valuesListe[7]);
+    datensatz.setMinispielArtId(int.parse(valuesListe[8]));
+    datensatz.setBelohnungenId(int.parse(valuesListe[9]));
+    datensatz.setWeitereBilder(valuesListe[10]);
+
+    lernortList.add(datensatz);
   }
 }
