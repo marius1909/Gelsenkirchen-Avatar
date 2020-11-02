@@ -142,7 +142,7 @@ void fuelleLernortList(List datenquelle) {
   while (it.moveNext()) {
     LernortAlt datensatz = new LernortAlt();
     var valuesListe = it.current.values.toList();
-
+    // Test
     datensatz.setId(int.parse(valuesListe[0]));
     datensatz.setNord(int.parse(valuesListe[1]));
     datensatz.setOst(int.parse(valuesListe[2]));
