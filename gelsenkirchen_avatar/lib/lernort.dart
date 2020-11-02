@@ -1,5 +1,3 @@
-import 'package:gelsenkirchen_avatar/lernort_klein.dart';
-
 class Lernort {
   int id;
   int nord;
@@ -69,5 +67,4 @@ class Lernort {
   void setWeitereBilder(String weitereBilder) {
     this.weitereBilder = weitereBilder;
   }
-
 }
