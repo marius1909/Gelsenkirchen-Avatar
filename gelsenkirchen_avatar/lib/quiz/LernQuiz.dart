@@ -3,7 +3,6 @@ import 'package:gelsenkirchen_avatar/quiz/quizpage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class LearnQuiz extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -13,7 +12,7 @@ class LearnQuiz extends StatefulWidget {
 
 class LearnQuizState extends State<LearnQuiz> {
   List data = [];
-  void LoadLernort() async {
+  void loadLernort() async {
     var url = "http://zukunft.sportsocke522.de/list_lernort.php";
 
     var res = await http.get(url);
@@ -30,7 +29,7 @@ class LearnQuizState extends State<LearnQuiz> {
   void initState() {
     //TODO: implement initState
     super.initState();
-    LoadLernort();
+    loadLernort();
   }
 
   @override
@@ -58,8 +57,7 @@ class LearnQuizState extends State<LearnQuiz> {
                         color: Colors.blueGrey,
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  QuizPage(1)));
+                              builder: (context) => QuizPage(1)));
                         },
                         child: new Text(
                           data[index]["name"],
