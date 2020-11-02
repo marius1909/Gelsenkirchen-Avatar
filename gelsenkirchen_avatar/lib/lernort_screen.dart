@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 
 class LernortScreen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -33,11 +34,11 @@ class LernortScreen extends StatelessWidget {
           /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
           entsprechender Screen fertig ist. Codestück zum Springen in nächsten
           Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-          onPressed: () {
-            /*Navigator.push(
+          onPressed: () {           
+            Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => ScreenName()));*/
+                    builder: (BuildContext context) => StartQuiz(1)));
           },
           icon: Icon(Icons.videogame_asset),
           label: Text('Spielen'),
