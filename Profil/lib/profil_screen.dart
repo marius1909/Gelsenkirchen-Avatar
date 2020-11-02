@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(MaterialApp(
-  home: Profil(),
-));
+import 'package:profil/profil_bearbeiten.dart';
 
 class  Profil extends StatelessWidget {
+
+
+   Text spielername = new Text(
+    "Spielername",
+    style: TextStyle(
+      color: Colors.amberAccent[200],
+      letterSpacing: 1.8,
+      fontSize: 28.0,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,15 +41,7 @@ class  Profil extends StatelessWidget {
                         ),
                       ),
                         SizedBox(height: 10.0),
-                        Text(
-                          'Spielername',
-                          style: TextStyle(
-                            color: Colors.amberAccent[200],
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        spielername,
                       ],
                     ),
                     SizedBox(width: 40.0),
@@ -75,7 +76,7 @@ class  Profil extends StatelessWidget {
                   color: Colors.grey[800],
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/profilbild.jpg'),
+                  backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
 
                 ),
@@ -89,7 +90,10 @@ class  Profil extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   splashColor: Colors.blueAccent,
                   onPressed: () {
-                    /*...*/
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilBearbeiten()),
+                    );
                   },
                   child: Text(
                     "Profil bearbeiten",
@@ -102,4 +106,8 @@ class  Profil extends StatelessWidget {
         )
     );
   }
+
+  String getText(){
+    return spielername.data;
+   }
 }

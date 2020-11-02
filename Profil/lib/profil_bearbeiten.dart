@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:profil/profil.dart';
 
 void main() => runApp(MaterialApp(
   home: ProfilBearbeiten(),
 ));
 
-class  ProfilBearbeiten extends StatelessWidget {
+
+
+
+class  ProfilBearbeiten extends StatefulWidget {
+
+
+
+  @override
+  _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
+}
+
+class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
+  final _controller = TextEditingController(text: "Spielername");  //get name from datenbank
+
+  String nameString = ""; //get from Datenbank
+  // bild von datenbank
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,22 +43,27 @@ class  ProfilBearbeiten extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[ Text(
-                        'NAME',
+                        "Spielername",
                         style: TextStyle(
                             color: Colors.grey,
                             letterSpacing: 1.8
                         ),
                       ),
                         SizedBox(height: 10.0),
-                        Text(
-                          'Spielername',
-                          style: TextStyle(
-                            color: Colors.amberAccent[200],
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
+                        Container(width:100,
+                          child:
+                          TextField(
+                            style: TextStyle(
+                              color: Colors.amberAccent[200],
+                              letterSpacing: 1.8,
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            controller: _controller,
                           ),
-                        ),
+
+
+                       )
                       ],
                     ),
 
@@ -51,6 +73,14 @@ class  ProfilBearbeiten extends StatelessWidget {
                       child: IconButton(
                           icon: Icon(Icons.edit,
                               color: Colors.white),
+                        onPressed: (){
+
+                            setState(() {
+
+                              nameString = _controller.text;
+                            });
+
+                        },
                        ),
                     )
 
@@ -64,7 +94,7 @@ class  ProfilBearbeiten extends StatelessWidget {
                 Row(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/profilbild.jpg'),
+                      backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                       radius: 50,
 
                     ),
@@ -88,7 +118,7 @@ class  ProfilBearbeiten extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   splashColor: Colors.black,
                   onPressed: () {
-                    /*...*/
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Speichern",
