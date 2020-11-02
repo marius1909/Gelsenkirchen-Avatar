@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profil/profil.dart';
 
-class ProfilBearbeiten extends StatefulWidget {
-  @override
-  _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
-}
-
-class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
-  final _controller =
-      TextEditingController(text: "Spielername"); //get name from datenbank
-
-  String nameString = ""; //get from Datenbank
-  // bild von datenbank
-
+class ProfilBearbeiten extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,34 +22,27 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Spielername",
+                          'NAME',
                           style:
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        Container(
-                          width: 100,
-                          child: TextField(
-                            style: TextStyle(
-                              color: Colors.amberAccent[200],
-                              letterSpacing: 1.8,
-                              fontSize: 28.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            controller: _controller,
+                        Text(
+                          'Spielername',
+                          style: TextStyle(
+                            color: Colors.amberAccent[200],
+                            letterSpacing: 1.8,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
                       child: IconButton(
                         icon: Icon(Icons.edit, color: Colors.white),
-                        onPressed: () {
-                          setState(() {
-                            nameString = _controller.text;
-                          });
-                        },
+                        onPressed: () {},
                       ),
                     )
                   ],
@@ -80,6 +61,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                     ),
                     IconButton(
                       icon: Icon(Icons.edit, color: Colors.white),
+                      onPressed: () {},
                     )
                   ],
                 ),
@@ -96,7 +78,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                   padding: EdgeInsets.all(8.0),
                   splashColor: Colors.black,
                   onPressed: () {
-                    Navigator.pop(context);
+                    /*...*/
                   },
                   child: Text(
                     "Speichern",
