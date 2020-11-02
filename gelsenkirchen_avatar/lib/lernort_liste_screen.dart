@@ -133,6 +133,7 @@ void ladeLernorte() async {
 /*Diese Methode füllt eine List mit Lernortobjekten aus der DB, die der
   ListView übergeben wird*/
 void fuelleLernortList(List datenquelle) {
+  lernortList.clear();
   /*Iteriert über den Inhalt der List, die wir aus der DB bekommen, also über
     Map-Objekte, die die Datensätze enthalten*/
   var it = datenquelle.iterator;
