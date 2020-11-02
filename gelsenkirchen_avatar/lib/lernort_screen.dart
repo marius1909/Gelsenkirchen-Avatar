@@ -109,11 +109,11 @@ class LernortScreen extends StatelessWidget {
                 /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
                   entsprechender Screen fertig ist. Codestück zum Springen in nächsten
                   Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-                onPressed: () {
-                  /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ScreenName()));*/
+                onPressed: () {            
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(                           
+                        builder: (BuildContext context) => StartQuiz(1)));
                 },
                 icon: Icon(Icons.videogame_asset),
                 label: Text('Spielen'),
