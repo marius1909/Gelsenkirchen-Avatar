@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernort.dart';
+import 'package:gelsenkirchen_avatar/lernortAlt.dart';
 import 'package:gelsenkirchen_avatar/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'dart:convert';
@@ -92,7 +92,7 @@ Widget erstelleListViewitem(BuildContext context, int index) {
   ));
 }
 
-List<Lernort> lernortList = new List();
+List<LernortAlt> lernortList = new List();
 
 /*Diese Methode holt die Lernortdaten aus der Datenbank und ruft die Methode
 fuelleListView() auf*/
@@ -140,7 +140,7 @@ void fuelleLernortList(List datenquelle) {
   var it = datenquelle.iterator;
 
   while (it.moveNext()) {
-    Lernort datensatz = new Lernort();
+    LernortAlt datensatz = new LernortAlt();
     var valuesListe = it.current.values.toList();
 
     datensatz.setId(int.parse(valuesListe[0]));

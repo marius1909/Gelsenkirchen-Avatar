@@ -1,70 +1,91 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+
 class Lernort {
   int id;
-  int nord;
-  int ost;
-  int kategorieId;
+  double nord;
+  double ost;
+  int kategorieID;
   String name;
   String kurzbeschreibung;
   String beschreibung;
   String titelbild;
-  int minispielArtId;
-  int belohnungenId;
+  int minispielArt;
+  int belohnungenID;
   String weitereBilder;
 
   Lernort(
       {this.id,
       this.nord,
       this.ost,
-      this.kategorieId,
+      this.kategorieID,
       this.name,
       this.kurzbeschreibung,
       this.beschreibung,
       this.titelbild,
-      this.minispielArtId,
-      this.belohnungenId,
+      this.minispielArt,
+      this.belohnungenID,
       this.weitereBilder});
 
-  void setId(int id) {
-    this.id = id;
+  static List<Lernort> _lernorteVonJson(dynamic json) {
+    List<Lernort> lernorte = List();
+    for (var ort in json) {
+      final lernort = Lernort(
+          id: int.parse(ort["id"]),
+          nord: double.parse(ort["nord"]),
+          ost: double.parse(ort["ost"]),
+          kategorieID: int.parse(ort["kategorieID"]),
+          name: ort["name"] as String,
+          kurzbeschreibung: ort["kurzbeschreibung"] as String,
+          beschreibung: ort["beschreibung"] as String,
+          titelbild: ort["titelbild"] as String,
+          minispielArt: int.parse(ort["minispielArtID"]),
+          belohnungenID: int.parse(ort["belohnungenID"]),
+          weitereBilder: ort["weitereBilder"] as String);
+      lernorte.add(lernort);
+    }
+    return lernorte;
   }
 
-  void setNord(int nord) {
-    this.nord = nord;
+  static Future<List<Lernort>> gibLernorte() async {
+    final url = "http://zukunft.sportsocke522.de/getLernorte.php";
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    return Lernort._lernorteVonJson(jsonData);
   }
 
-  void setOst(int ost) {
-    this.ost = ost;
+  Future<Response> insertToDatabase() async {
+    final response = await http.post(
+        "http://zukunft.sportsocke522.de/insertIntoLernort.php",
+        body: _requestBody());
+    return response;
   }
 
-  void setKategorieId(int kategorieId) {
-    this.kategorieId = kategorieId;
+  Map<String, String> _requestBody() {
+    var map = toMap();
+    map.remove("id");
+    return map;
   }
 
-  void setName(String name) {
-    this.name = name;
+  Map<String, String> toMap() {
+    return {
+      "id": "$id",
+      "nord": "$nord",
+      "ost": "$ost",
+      "kategorieID": "$kategorieID",
+      "name": "$name",
+      "kurzbeschreibung": "$kurzbeschreibung",
+      "beschreibung": "$beschreibung",
+      "titelbild": "$belohnungenID",
+      "minispielArtID": "$minispielArt",
+      "belohnungenID": "$belohnungenID",
+      "weitereBilder": "$weitereBilder"
+    };
   }
 
-  void setKurzbeschreibung(String kurzbeschreibung) {
-    this.kurzbeschreibung = kurzbeschreibung;
-  }
-
-  void setBeschreibung(String beschreibung) {
-    this.beschreibung = beschreibung;
-  }
-
-  void setTitelbild(String titelbild) {
-    this.titelbild = titelbild;
-  }
-
-  void setMinispielArtId(int minispielArtId) {
-    this.minispielArtId = minispielArtId;
-  }
-
-  void setBelohnungenId(int belohnungenId) {
-    this.belohnungenId = belohnungenId;
-  }
-
-  void setWeitereBilder(String weitereBilder) {
-    this.weitereBilder = weitereBilder;
+  @override
+  String toString() {
+    return toMap().toString();
   }
 }

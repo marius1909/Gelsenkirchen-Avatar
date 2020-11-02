@@ -13,6 +13,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="gelsenkirchen_avatar"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCw8_FsCnu0iXlY6FLJVhZuVKYrUHsYf-g" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
