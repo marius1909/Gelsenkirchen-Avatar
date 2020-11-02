@@ -134,8 +134,7 @@ class _StartQuizState extends State<StartQuiz> {
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: Container(
                     width: double.infinity,
-                    child: Material(
-                      //Wrap with Material
+                    child: Material(                      
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0)),
                       clipBehavior: Clip.antiAlias,
