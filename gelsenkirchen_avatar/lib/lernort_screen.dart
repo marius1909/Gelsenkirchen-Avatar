@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/lernort.dart';
+import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 
 class LernortScreen extends StatelessWidget {
   final Lernort l;
