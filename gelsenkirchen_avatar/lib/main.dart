@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/home_screen.dart';
 
-//Moin
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
