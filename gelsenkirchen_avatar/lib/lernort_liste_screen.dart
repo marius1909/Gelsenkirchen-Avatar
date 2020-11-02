@@ -113,7 +113,8 @@ void ladeLernorte() async {
         toastLength: Toast.LENGTH_SHORT);
   } else {
     Fluttertoast.showToast(
-        msg: "Daten wurden geladen.", toastLength: Toast.LENGTH_SHORT);
+        msg: "Daten wurden erfolgreich geladen.",
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   /*Alternative Fehlerabfrage*/
