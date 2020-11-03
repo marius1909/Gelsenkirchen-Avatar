@@ -49,20 +49,33 @@ class Lernort {
     return lernorte;
   }
 
+  // Wird genutzt, zur konsitenten Anzeige aller Lernorte
+  // und um die Abrufe aus der Datenbank zu minimieren.
+  // Beispiel: Lernort.shared().gibLernorte();
   static Lernort shared() {
     return Lernort();
   }
 
+  // Gibt alle Lernorte zurück, die sich in der Datenbank befinden.
+  // Die Daten werden allerdings nur einmal geladen.
   Future<List<Lernort>> gibLernorte() async {
     if (_lernortList.isEmpty) {
-    final url = "http://zukunft.sportsocke522.de/getLernorte.php";
-    final response = await http.get(url);
-    final jsonData = jsonDecode(response.body);
-    _lernortList = Lernort._lernorteVonJson(jsonData);
+      await ladeLernorte();
     }
     return _lernortList;
   }
 
+  // Lädt alle Lernorte aus der Datenbank und fügt sie der _lernortList hinzu.
+  // Kann genutzt werden, um die Liste der Lernorte zu aktualisieren.
+  ladeLernorte() async {
+    final url = "http://zukunft.sportsocke522.de/getLernorte.php";
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    _lernortList = Lernort._lernorteVonJson(jsonData);
+  }
+  
+  // Um einen Lernort in die Datenbank zu schreiben kann man einen Lernort
+  // erzeugen und ruft danach diese Methode auf.
   Future<Response> insertToDatabase() async {
     final response = await http.post(
         "http://zukunft.sportsocke522.de/insertIntoLernort.php",
@@ -92,6 +105,7 @@ class Lernort {
     };
   }
 
+  // Darstellung der Klasse, z.B. mit 'print(Lernort(id: 42))'.
   @override
   String toString() {
     return toMap().toString();
