@@ -1,5 +1,5 @@
 version: "Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
 options: "cb265f7dd5ebb08eb795956d4686c87e"
-build_time: [1604342419, 691489000]
+build_time: [1604408138, 419839000]
 inputs:
   "/Users/Simon/Git/Gelsenkirchen-Avatar/gelsenkirchen_avatar/ios/Runner/AppDelegate.swift": [1604337042, 762508881]
