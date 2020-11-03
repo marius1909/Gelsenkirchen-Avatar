@@ -104,7 +104,7 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
           ListTile(
-              leading: Icon(Icons.description),
+              leading: Icon(Icons.menu_book),
               title: Text('Registrierung'),
               onTap: () {
                 Navigator.push(
