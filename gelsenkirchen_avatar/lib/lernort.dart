@@ -14,6 +14,7 @@ class Lernort {
   int minispielArt;
   int belohnungenID;
   String weitereBilder;
+  List<Lernort> _lernortList = List();
 
   Lernort(
       {this.id,
@@ -48,11 +49,18 @@ class Lernort {
     return lernorte;
   }
 
-  static Future<List<Lernort>> gibLernorte() async {
+  static Lernort shared() {
+    return Lernort();
+  }
+
+  Future<List<Lernort>> gibLernorte() async {
+    if (_lernortList.isEmpty) {
     final url = "http://zukunft.sportsocke522.de/getLernorte.php";
     final response = await http.get(url);
     final jsonData = jsonDecode(response.body);
-    return Lernort._lernorteVonJson(jsonData);
+    _lernortList = Lernort._lernorteVonJson(jsonData);
+    }
+    return _lernortList;
   }
 
   Future<Response> insertToDatabase() async {
