@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/impressum_screen.dart';
+import 'package:gelsenkirchen_avatar/registrierung.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -101,6 +102,15 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => ImpressumScreen()));
+              }),
+          ListTile(
+              leading: Icon(Icons.description),
+              title: Text('Registrierung'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Registrierung()));
               }),
           ListTile(
             leading: Icon(Icons.exit_to_app),
