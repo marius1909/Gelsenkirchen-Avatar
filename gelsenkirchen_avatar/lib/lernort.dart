@@ -83,6 +83,14 @@ class Lernort {
     return response;
   }
 
+  static Future<Response> removeFromDatabaseWithID(int lerordID) async {
+    final response = await http.post(
+        "http://zukunft.sportsocke522.de/removeFromLernort.php",
+        body: {"id": "$lerordID"});
+    print(response.body);
+    return response;
+  }
+
   Map<String, String> _requestBody() {
     var map = toMap();
     map.remove("id");
