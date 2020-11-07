@@ -25,21 +25,7 @@ class MapSampleState extends State<Map> {
   void initState() {
     super.initState();
 
-    print(this._markers);
-
-    // var lernorte = Lernort.shared.gibLernorte();
-    // lernorte.then((value) {
-    //   value.forEach((element) {
-    //     var marker = Marker(
-    //         markerId: MarkerId(element.id.toString()),
-    //         position: LatLng(element.nord, element.ost),
-    //         infoWindow: InfoWindow(
-    //             title: element.name, snippet: element.kurzbeschreibung));
-    //     setState(() {
-    //       _markers.add(marker);
-    //     });
-    //   });
-    // });
+    addMarkersForLernorte();
   }
 
   @override
@@ -58,5 +44,22 @@ class MapSampleState extends State<Map> {
         minMaxZoomPreference: MinMaxZoomPreference(5, 20),
       ),
     );
+  }
+
+  void addMarkersForLernorte() {
+    var lernorte = Lernort.shared.gibLernorte();
+    lernorte.then((value) {
+      value.forEach((element) {
+        final marker = Marker(
+          markerId: MarkerId(element.id.toString()),
+          position: LatLng(element.nord, element.ost),
+          infoWindow: InfoWindow(
+              title: element.name, snippet: element.kurzbeschreibung),
+        );
+        setState(() {
+          _markers.add(marker);
+        });
+      });
+    });
   }
 }
