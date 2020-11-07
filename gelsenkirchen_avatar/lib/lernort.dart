@@ -86,6 +86,7 @@ class Lernort {
     return map;
   }
 
+  /// Map Representation des Lernortes.
   Map<String, String> get map {
     return {
       "id": "$id",
