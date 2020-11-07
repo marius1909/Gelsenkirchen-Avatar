@@ -30,7 +30,7 @@ class LernortListState extends State<LernortListView> {
   @override
   void initState() {
     super.initState();
-    var lernorteFuture = Lernort.shared().gibLernorte();
+    var lernorteFuture = Lernort.shared.gibLernorte();
     lernorteFuture.then((lernorte) {
       setState(() {
         _listLength = lernorte.length;
