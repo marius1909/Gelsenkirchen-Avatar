@@ -1,5 +1,6 @@
 enum DatabaseURL {
-  dbconfig, getLernorte, insertIntoLernort, registrierung, lernortVorschau, anmeldung, quiz
+  dbconfig, getLernorte, insertIntoLernort, registrierung, lernortVorschau, 
+  anmeldung, quiz, removeFromLernort
 }
 
 extension DatabaseURLExtension on DatabaseURL {
@@ -22,6 +23,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "anmeldung.php";
       case DatabaseURL.quiz:
         return _baseURL + "quiz.php";
+      case DatabaseURL.removeFromLernort:
+        return _baseURL + "removeFromLernort.php";
       default:
         return null;
     }
