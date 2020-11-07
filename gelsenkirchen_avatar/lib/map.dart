@@ -25,7 +25,7 @@ class MapSampleState extends State<Map> {
   void initState() {
     super.initState();
 
-    var lernorte = Lernort.shared().gibLernorte();
+    var lernorte = Lernort.shared.gibLernorte();
     lernorte.then((value) {
       value.forEach((element) {
         var marker = Marker(

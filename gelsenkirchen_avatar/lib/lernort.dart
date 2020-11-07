@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:gelsenkirchen_avatar/database_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -15,6 +16,11 @@ class Lernort {
   int belohnungenID;
   String weitereBilder;
   List<Lernort> _lernortList = List();
+
+  /// Wird genutzt zur konsitenten Anzeige aller Lernorte
+  /// und um die Abrufe aus der Datenbank zu minimieren.
+  /// Beispiel: Lernort.shared.gibLernorte();
+  static Lernort shared = Lernort();
 
   Lernort(
       {this.id,
@@ -49,15 +55,8 @@ class Lernort {
     return lernorte;
   }
 
-  // Wird genutzt, zur konsitenten Anzeige aller Lernorte
-  // und um die Abrufe aus der Datenbank zu minimieren.
-  // Beispiel: Lernort.shared().gibLernorte();
-  static Lernort shared() {
-    return Lernort();
-  }
-
-  // Gibt alle Lernorte zurück, die sich in der Datenbank befinden.
-  // Die Daten werden allerdings nur einmal geladen.
+  /// Gibt alle Lernorte zurück, die sich in der Datenbank befinden.
+  /// Die Daten werden allerdings nur einmal geladen.
   Future<List<Lernort>> gibLernorte() async {
     if (_lernortList.isEmpty) {
       await ladeLernorte();
@@ -65,20 +64,17 @@ class Lernort {
     return _lernortList;
   }
 
-  // Lädt alle Lernorte aus der Datenbank und fügt sie der _lernortList hinzu.
-  // Kann genutzt werden, um die Liste der Lernorte zu aktualisieren.
+  /// Lädt alle Lernorte aus der Datenbank.
   ladeLernorte() async {
-    final url = "http://zukunft.sportsocke522.de/getLernorte.php";
-    final response = await http.get(url);
+    final response = await http.get(DatabaseURL.getLernorte.value);
     final jsonData = jsonDecode(response.body);
     _lernortList = Lernort._lernorteVonJson(jsonData);
   }
   
-  // Um einen Lernort in die Datenbank zu schreiben kann man einen Lernort
-  // erzeugen und ruft danach diese Methode auf.
+  /// Schreibt den Lernort in die Datenbank.
   Future<Response> insertToDatabase() async {
     final response = await http.post(
-        "http://zukunft.sportsocke522.de/insertIntoLernort.php",
+        DatabaseURL.insertIntoLernort.value,
         body: _requestBody());
     return response;
   }
@@ -91,13 +87,15 @@ class Lernort {
     return response;
   }
 
+  /// Helfermethode der Methode insertToDatabase.
   Map<String, String> _requestBody() {
-    var map = toMap();
+    var map = this.map;
     map.remove("id");
     return map;
   }
 
-  Map<String, String> toMap() {
+  /// Map Representation des Lernortes.
+  Map<String, String> get map {
     return {
       "id": "$id",
       "nord": "$nord",
@@ -113,9 +111,8 @@ class Lernort {
     };
   }
 
-  // Darstellung der Klasse, z.B. mit 'print(Lernort(id: 42))'.
   @override
   String toString() {
-    return toMap().toString();
+    return map.toString();
   }
 }
