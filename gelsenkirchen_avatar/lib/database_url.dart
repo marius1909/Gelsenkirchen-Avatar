@@ -5,7 +5,6 @@ enum DatabaseURL {
 
 extension DatabaseURLExtension on DatabaseURL {
   static String _baseURL = "http://zukunft.sportsocke522.de/";
-
   /// Assoziierte URL
   String get value {
     switch (this) {

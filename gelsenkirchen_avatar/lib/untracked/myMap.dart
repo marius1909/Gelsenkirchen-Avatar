@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:gelsenkirchen_avatar/standort.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
 import 'locationService.dart';
+import 'standort.dart';
 
 class MyMap extends StatelessWidget {
   // This widget is the root of your application.

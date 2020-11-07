@@ -84,7 +84,6 @@ class Lernort {
     final response = await http.post(
         DatabaseURL.removeFromLernort.value,
         body: {"id": "$lernortID"});
-    print(response.body);
     return response;
   }
 
