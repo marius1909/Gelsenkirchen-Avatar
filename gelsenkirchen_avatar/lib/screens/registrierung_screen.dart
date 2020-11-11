@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
-import 'package:gelsenkirchen_avatar/anmeldung.dart';
+import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:email_validator/email_validator.dart';

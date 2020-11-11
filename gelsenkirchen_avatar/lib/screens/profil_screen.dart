@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'profil_bearbeiten.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
-class  Profil extends StatelessWidget {
-
-
-   Text spielername = new Text(
+class Profil extends StatelessWidget {
+  Text spielername = new Text(
     "Spielername",
     style: TextStyle(
       color: Colors.amberAccent[200],
@@ -23,7 +21,6 @@ class  Profil extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.grey[850],
           elevation: 0.0,
-
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
@@ -33,13 +30,12 @@ class  Profil extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[ Text(
-                        'NAME',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.8
+                      children: <Widget>[
+                        Text(
+                          'NAME',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
-                      ),
                         SizedBox(height: 10.0),
                         spielername,
                       ],
@@ -47,13 +43,12 @@ class  Profil extends StatelessWidget {
                     SizedBox(width: 40.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[  Text(
-                        'Level',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.8
+                      children: <Widget>[
+                        Text(
+                          'Level',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
-                      ),
                         SizedBox(height: 10.0),
                         Text(
                           '8',
@@ -66,11 +61,8 @@ class  Profil extends StatelessWidget {
                         ),
                       ],
                     ),
-
-
                   ],
                 ),
-
                 Divider(
                   height: 50.0,
                   color: Colors.grey[800],
@@ -78,10 +70,8 @@ class  Profil extends StatelessWidget {
                 CircleAvatar(
                   backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
-
                 ),
                 SizedBox(height: 200),
-
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -92,7 +82,8 @@ class  Profil extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilBearbeiten()),
+                      MaterialPageRoute(
+                          builder: (context) => ProfilBearbeiten()),
                     );
                   },
                   child: Text(
@@ -101,13 +92,10 @@ class  Profil extends StatelessWidget {
                   ),
                 )
               ],
-
-            )
-        )
-    );
+            )));
   }
 
-  String getText(){
+  String getText() {
     return spielername.data;
-   }
+  }
 }

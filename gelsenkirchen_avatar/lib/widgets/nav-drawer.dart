@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
-import 'package:gelsenkirchen_avatar/home_screen.dart';
-import 'package:gelsenkirchen_avatar/lernort_liste_screen.dart';
-import 'package:gelsenkirchen_avatar/profil_screen.dart';
-import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
-import 'package:gelsenkirchen_avatar/impressum_screen.dart';
-import 'package:gelsenkirchen_avatar/registrierung.dart';
+import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
