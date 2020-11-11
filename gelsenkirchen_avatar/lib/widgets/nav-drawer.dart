@@ -41,7 +41,7 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => ProfilScreen()));
+                        builder: (BuildContext context) => Profil()));
               }),
           ListTile(
               leading: Icon(Icons.account_balance),
