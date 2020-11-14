@@ -1,12 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\_Daten\Programme\Flutter SDK\flutter_windows_1.20.2-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\_Daten\Schule und Studium\Studium\SPMI\Git\Gelsenkirchen-Avatar\gelsenkirchen_avatar"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_ROOT=/Users/simons./Documents/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/simons./GitLab/Gelsenkirchen-Avatar/gelsenkirchen_avatar"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build\ios"
+export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "OTHER_LDFLAGS=$(inherited) -framework Flutter"
-export "FLUTTER_FRAMEWORK_DIR=C:\_Daten\Programme\Flutter SDK\flutter_windows_1.20.2-stable\flutter\bin\cache\artifacts\engine\ios"
+export "FLUTTER_FRAMEWORK_DIR=/Users/simons./Documents/flutter/bin/cache/artifacts/engine/ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
 export "DART_OBFUSCATION=false"

@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
-class Lernort {
+class Lernort extends DatenbankObjekt {
   int id;
   double nord;
   double ost;
@@ -15,7 +13,6 @@ class Lernort {
   int minispielArt;
   int belohnungenID;
   String weitereBilder;
-  List<Lernort> _lernortList = List();
 
   /// Wird genutzt zur konsitenten Anzeige aller Lernorte
   /// und um die Abrufe aus der Datenbank zu minimieren.
@@ -33,9 +30,13 @@ class Lernort {
       this.titelbild,
       this.minispielArt,
       this.belohnungenID,
-      this.weitereBilder});
+      this.weitereBilder}) : 
+      super(DatabaseURL.getLernorte.value, 
+      DatabaseURL.insertIntoLernort.value, 
+      DatabaseURL.removeFromLernort.value);
 
-  static List<Lernort> _lernorteVonJson(dynamic json) {
+  @override
+  List<Lernort> parseVonJson(dynamic json) {
     List<Lernort> lernorte = List();
     for (var ort in json) {
       final lernort = Lernort(
@@ -55,44 +56,8 @@ class Lernort {
     return lernorte;
   }
 
-  /// Gibt alle Lernorte zurück, die sich in der Datenbank befinden.
-  /// Die Daten werden allerdings nur einmal geladen.
-  Future<List<Lernort>> gibLernorte() async {
-    if (_lernortList.isEmpty) {
-      await ladeLernorte();
-    }
-    return _lernortList;
-  }
-
-  /// Lädt alle Lernorte aus der Datenbank.
-  ladeLernorte() async {
-    final response = await http.get(DatabaseURL.getLernorte.value);
-    final jsonData = jsonDecode(response.body);
-    _lernortList = Lernort._lernorteVonJson(jsonData);
-  }
-
-  /// Schreibt den Lernort in die Datenbank.
-  Future<Response> insertToDatabase() async {
-    final response = await http.post(DatabaseURL.insertIntoLernort.value,
-        body: _requestBody());
-    return response;
-  }
-
-  /// Löscht aus der Datenbank den Lernort mit der übergebenen lernortID
-  static Future<Response> removeFromDatabaseWithID(int lernortID) async {
-    final response = await http
-        .post(DatabaseURL.removeFromLernort.value, body: {"id": "$lernortID"});
-    return response;
-  }
-
-  /// Helfermethode der Methode insertToDatabase.
-  Map<String, String> _requestBody() {
-    var map = this.map;
-    map.remove("id");
-    return map;
-  }
-
   /// Map Representation des Lernortes.
+  @override
   Map<String, String> get map {
     return {
       "id": "$id",
@@ -107,10 +72,5 @@ class Lernort {
       "belohnungenID": "$belohnungenID",
       "weitereBilder": "$weitereBilder"
     };
-  }
-
-  @override
-  String toString() {
-    return map.toString();
   }
 }
