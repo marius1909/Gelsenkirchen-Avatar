@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
-import 'package:gelsenkirchen_avatar/data/map.dart';
+import 'map_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         title: Text('Gelsenkirchen Avatar'),
       ),
       body: Center(
-        child: Map(),
+        child: MapScreen(),
 
         //Hier wird später die Karte eingefügt
       ),

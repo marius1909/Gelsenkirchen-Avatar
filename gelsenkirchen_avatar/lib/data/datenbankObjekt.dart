@@ -7,14 +7,12 @@ abstract class DatenbankObjekt {
   String insertIntoDatabaseURL;
   String removeFromDatabaseURL;
 
-  DatenbankObjekt
-  (this.getFromDatabaseURL, 
-  this.insertIntoDatabaseURL, 
-  this.removeFromDatabaseURL);
+  DatenbankObjekt(this.getFromDatabaseURL, this.insertIntoDatabaseURL,
+      this.removeFromDatabaseURL);
 
   List<DatenbankObjekt> _datenbankObjektList = List();
 
-  List<DatenbankObjekt> parseVonJson(dynamic json);
+  DatenbankObjekt objektVonJasonArray(dynamic objekt);
 
   /// Gibt alle Objekte zurück, die sich in der Datenbank befinden.
   /// Die Daten werden allerdings nur einmal geladen.
@@ -30,26 +28,29 @@ abstract class DatenbankObjekt {
   ladeObjekte() async {
     final response = await http.get(getFromDatabaseURL);
     final jsonData = jsonDecode(response.body);
-    _datenbankObjektList = this.parseVonJson(jsonData);
+    _datenbankObjektList = this._parseVonJson(jsonData);
+  }
+
+  List<DatenbankObjekt> _parseVonJson(dynamic json) {
+    List<DatenbankObjekt> objekte = List();
+    for (var objekt in json) {
+      objekte.add(objektVonJasonArray(objekt));
+    }
+    return objekte;
   }
 
   /// Schreibt das Objekt in die Datenbank.
   Future<Response> insertIntoDatabase() async {
     final response = await http.post(insertIntoDatabaseURL,
-        body: _requestBody());
+        body: insertingIntoDatabaseRequestBody);
     return response;
   }
 
   /// Helfermethode der Methode insertToDatabase.
-  Map<String, String> _requestBody() {
-    var map = this.map;
-    map.remove("id");
-    return map;
-  }
+  Map<String, String> get insertingIntoDatabaseRequestBody => map;
 
   Future<Response> removeFromDatabaseWithID(Map<String, String> id) async {
-    final response = await http
-        .post(removeFromDatabaseURL, body: id);
+    final response = await http.post(removeFromDatabaseURL, body: id);
     return response;
   }
 
@@ -60,5 +61,4 @@ abstract class DatenbankObjekt {
   String toString() {
     return map.toString();
   }
-
 }
