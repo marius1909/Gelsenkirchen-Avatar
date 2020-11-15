@@ -48,7 +48,7 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
     return map;
   }
 
-  /// Map Representation der Rollen.
+  /// Map Representation des Benutzers.
   @override
   Map<String, String> get map {
     return {
