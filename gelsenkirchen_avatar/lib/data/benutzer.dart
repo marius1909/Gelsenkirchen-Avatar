@@ -3,7 +3,7 @@ import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 import 'package:http/http.dart' as http;
 
-class Benutzer extends DatenbankObjekt {
+class Benutzer extends DatenbankObjekt<Benutzer> {
   int id;
   String email;
   String benutzername;

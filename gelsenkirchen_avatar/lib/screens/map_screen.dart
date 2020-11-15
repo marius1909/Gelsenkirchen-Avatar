@@ -25,6 +25,14 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
 
+    // var objekt = Lernort.shared.gibObjekte();
+    // objekt.then((value) {
+    //   for (var lernortobjekt in value) {
+    //     var lernort = lernortobjekt as Lernort;
+    //     print(lernort);
+    //   }
+    // });
+
     addMarkersForLernorte();
   }
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-abstract class DatenbankObjekt {
+abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   String getFromDatabaseURL;
   String insertIntoDatabaseURL;
   String removeFromDatabaseURL;
@@ -10,13 +10,13 @@ abstract class DatenbankObjekt {
   DatenbankObjekt(this.getFromDatabaseURL, this.insertIntoDatabaseURL,
       this.removeFromDatabaseURL);
 
-  List<DatenbankObjekt> _datenbankObjektList = List();
+  List<D> _datenbankObjektList = List();
 
-  DatenbankObjekt objektVonJasonArray(dynamic objekt);
+  D objektVonJasonArray(dynamic objekt);
 
   /// Gibt alle Objekte zurück, die sich in der Datenbank befinden.
   /// Die Daten werden allerdings nur einmal geladen.
-  Future<List<DatenbankObjekt>> gibObjekte() async {
+  Future<List<D>> gibObjekte() async {
     if (_datenbankObjektList.isEmpty) {
       await ladeObjekte();
     }
@@ -31,8 +31,8 @@ abstract class DatenbankObjekt {
     _datenbankObjektList = this._parseVonJson(jsonData);
   }
 
-  List<DatenbankObjekt> _parseVonJson(dynamic json) {
-    List<DatenbankObjekt> objekte = List();
+  List<D> _parseVonJson(dynamic json) {
+    List<D> objekte = List();
     for (var objekt in json) {
       objekte.add(objektVonJasonArray(objekt));
     }

@@ -1,6 +1,6 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
-class Rollen extends DatenbankObjekt {
+class Rollen extends DatenbankObjekt<Rollen> {
   int id;
   String name;
   String beschreibung;

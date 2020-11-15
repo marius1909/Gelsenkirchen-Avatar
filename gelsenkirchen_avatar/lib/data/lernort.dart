@@ -1,7 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
-class Lernort extends DatenbankObjekt {
+class Lernort extends DatenbankObjekt<Lernort> {
   int id;
   double nord;
   double ost;
