@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart';
 import 'package:http/http.dart' as http;
 
 class Benutzer extends DatenbankObjekt<Benutzer> {
@@ -17,10 +18,17 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
       : super('', '', '');
 
   static Future<Benutzer> getBenutzer(String email, String passwort) async {
-    final response = await http.post(DatabaseURL.anmeldung.value,
-        body: shared._requestBody);
-    final jsonArray = jsonDecode(response.body);
-    return shared.objektVonJasonArray(jsonArray);
+    final response =
+        await http.post(DatabaseURL.anmeldung.value, body: shared._requestBody);
+    final responseBody = jsonDecode(response.body);
+    if (responseBody == InvalidLoginExceptionCause.emailNotFound.message) {
+      throw InvalidLoginException(InvalidLoginExceptionCause.emailNotFound);
+    } else if (responseBody ==
+        InvalidLoginExceptionCause.passwordIncorrect.message) {
+      throw InvalidLoginException(InvalidLoginExceptionCause.passwordIncorrect);
+    } else {
+      return shared.objektVonJasonArray(responseBody);
+    }
   }
 
   Map<String, String> get _requestBody {

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
+/// Representation eines Objektes in der Datenbank
 abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   String getFromDatabaseURL;
   String insertIntoDatabaseURL;

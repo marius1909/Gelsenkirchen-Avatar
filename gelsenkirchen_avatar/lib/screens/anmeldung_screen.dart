@@ -43,7 +43,7 @@ class _AnmeldungState extends State<Anmeldung> {
           msg: "Der angegebene Benutzer existiert nicht",
           toastLength: Toast.LENGTH_SHORT);
     } else {
-      if (jsonDecode(res.body) == "false") {
+      if (jsonDecode(res.body) == "Falsches Passwort") {
         Fluttertoast.showToast(
             msg: "Falsches Passwort", toastLength: Toast.LENGTH_SHORT);
       } else {
