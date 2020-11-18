@@ -15,7 +15,7 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
 
   Benutzer(
       {this.id, this.email, this.benutzername, this.passwort, this.rolleID})
-      : super('', '', '');
+      : super('', DatabaseURL.registrierung.value, '');
 
   static Future<Benutzer> getBenutzer(String email, String passwort) async {
     final response =
