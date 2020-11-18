@@ -7,19 +7,18 @@ import 'package:http/http.dart' as http;
 class Benutzer extends DatenbankObjekt<Benutzer> {
   int id;
   String email;
-  String benutzername;
+  String benutzer;
   String passwort;
-  String rolleID;
+  int rolleID;
 
   static Benutzer get shared => Benutzer();
 
-  Benutzer(
-      {this.id, this.email, this.benutzername, this.passwort, this.rolleID})
+  Benutzer({this.id, this.email, this.benutzer, this.passwort, this.rolleID})
       : super('', DatabaseURL.registrierung.value, '');
 
   static Future<Benutzer> getBenutzer(String email, String passwort) async {
-    final response =
-        await http.post(DatabaseURL.anmeldung.value, body: shared._requestBody);
+    final response = await http.post(DatabaseURL.anmeldung.value,
+        body: {"email": "$email", "passwort": "$passwort"});
     final responseBody = jsonDecode(response.body);
     if (responseBody == InvalidLoginExceptionCause.emailNotFound.message) {
       throw InvalidLoginException(InvalidLoginExceptionCause.emailNotFound);
@@ -31,22 +30,14 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
     }
   }
 
-  Map<String, String> get _requestBody {
-    var map = this.map;
-    map.remove("id");
-    map.remove("benutzername");
-    map.remove("rolleID");
-    return map;
-  }
-
   @override
   Benutzer objektVonJasonArray(dynamic objekt) {
     return Benutzer(
         id: int.parse(objekt["id"]),
         email: objekt["email"] as String,
-        benutzername: objekt["benutzername"] as String,
-        passwort: objekt["passwort"],
-        rolleID: objekt["rolleID"]);
+        benutzer: objekt["benutzer"] as String,
+        passwort: objekt["passwort"] as String,
+        rolleID: int.parse(objekt["rolleID"]));
   }
 
   @override
@@ -62,7 +53,7 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
     return {
       "id": "$id",
       "email": "$email",
-      "benutzername": "$benutzername",
+      "benutzer": "$benutzer",
       "passwort": "$passwort",
       "rolleID": "$rolleID"
     };

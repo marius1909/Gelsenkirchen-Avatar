@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
@@ -24,6 +25,10 @@ class MapSampleState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
+
+    // final Benutzer benutzer = Benutzer(
+    //     email: "test2", benutzer: "test2", passwort: "test2", rolleID: 1);
+    // benutzer.insertIntoDatabase();
 
     // var objekt = Lernort.shared.gibObjekte();
     // objekt.then((value) {
