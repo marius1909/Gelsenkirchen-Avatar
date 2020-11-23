@@ -12,7 +12,7 @@ extension InvalidLoginExceptionCauseExtension on InvalidLoginExceptionCause {
         return "Account existiert nicht";
       case InvalidLoginExceptionCause.passwordIncorrect:
         return "Falsches Passwort";
-      default: 
+      default:
         return null;
     }
   }
