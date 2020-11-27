@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
-import 'package:gelsenkirchen_avatar/Map.dart';
+import 'package:gelsenkirchen_avatar/data/map.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

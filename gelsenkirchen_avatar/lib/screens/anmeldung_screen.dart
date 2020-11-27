@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/registrierung.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gelsenkirchen_avatar/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 
 class Anmeldung extends StatefulWidget {
   @override

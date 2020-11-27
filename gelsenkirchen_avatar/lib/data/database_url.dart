@@ -1,10 +1,18 @@
 enum DatabaseURL {
-  dbconfig, getLernorte, insertIntoLernort, registrierung, lernortVorschau, 
-  anmeldung, quiz, removeFromLernort
+  dbconfig,
+  getLernorte,
+  insertIntoLernort,
+  registrierung,
+  lernortVorschau,
+  anmeldung,
+  quiz,
+  removeFromLernort,
+  getQuiz
 }
 
 extension DatabaseURLExtension on DatabaseURL {
   static String _baseURL = "http://zukunft.sportsocke522.de/";
+
   /// Assoziierte URL
   String get value {
     switch (this) {
@@ -22,6 +30,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "anmeldung.php";
       case DatabaseURL.quiz:
         return _baseURL + "quiz.php";
+      case DatabaseURL.getQuiz:
+        return _baseURL + "get_lernortID.php?id=";
       case DatabaseURL.removeFromLernort:
         return _baseURL + "removeFromLernort.php";
       default:

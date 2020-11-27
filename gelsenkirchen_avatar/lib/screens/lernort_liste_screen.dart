@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernort_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class LernortListeScreen extends StatelessWidget {
   @override

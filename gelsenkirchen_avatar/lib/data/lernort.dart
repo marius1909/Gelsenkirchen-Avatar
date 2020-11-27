@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:gelsenkirchen_avatar/database_url.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -70,20 +70,18 @@ class Lernort {
     final jsonData = jsonDecode(response.body);
     _lernortList = Lernort._lernorteVonJson(jsonData);
   }
-  
+
   /// Schreibt den Lernort in die Datenbank.
   Future<Response> insertToDatabase() async {
-    final response = await http.post(
-        DatabaseURL.insertIntoLernort.value,
+    final response = await http.post(DatabaseURL.insertIntoLernort.value,
         body: _requestBody());
     return response;
   }
 
   /// Löscht aus der Datenbank den Lernort mit der übergebenen lernortID
   static Future<Response> removeFromDatabaseWithID(int lernortID) async {
-    final response = await http.post(
-        DatabaseURL.removeFromLernort.value,
-        body: {"id": "$lernortID"});
+    final response = await http
+        .post(DatabaseURL.removeFromLernort.value, body: {"id": "$lernortID"});
     return response;
   }
 
