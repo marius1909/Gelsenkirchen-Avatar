@@ -22,7 +22,7 @@ $position = mysqli_real_escape_string($con, $_POST['position']);
 $loesungsText = mysqli_real_escape_string($con, $_POST['loesungsText']);
 
 // Überprüfen ob die Frage für das Quiz bereits existiert
-$query = "SELECT * FROM QuizFragen Where frage == '$frage' and quizID == '$quizID'";
+$query = "SELECT * FROM QuizFragen Where frage = '$frage' and quizID = '$quizID'";
 $res = mysqli_query($con,$query);
 $data = mysqli_fetch_array($res);
 

@@ -1,4 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class Sammelbares extends DatenbankObjekt<Sammelbares> {
   int id;
@@ -11,8 +12,7 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
 
   Sammelbares(
       {this.id, this.kategorieID, this.name, this.beschreibung, this.bild})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
-            "removeFromDatabaseURL");
+      : super(DatabaseURL.getSammelbares.value, '', '');
 
   @override
   Sammelbares objektVonJasonArray(objekt) {

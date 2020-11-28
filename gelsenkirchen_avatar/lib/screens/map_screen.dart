@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/quiz_fragen.dart';
+import 'package:gelsenkirchen_avatar/data/';
 import 'package:gelsenkirchen_avatar/data/rollen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
@@ -28,11 +29,11 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
 
-    final QuizFragen frage1 = QuizFragen(
-        quizID: 2,
-        frage: "In welchem Jahr ist der Biomassepark Hugo entstanden?");
+    var benutzerFuture = Rollen.shared.gibObjekte();
 
-    frage1.insertIntoDatabase();
+    benutzerFuture.then((benutzer) {
+      print(benutzer);
+    });
 
     // final Benutzer benutzer = Benutzer(
     //     email: "test3", benutzer: "test3", passwort: "test3", rolleID: 1);
