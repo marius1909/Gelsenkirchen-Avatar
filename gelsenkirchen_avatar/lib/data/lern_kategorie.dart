@@ -1,4 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class LernKategorie extends DatenbankObjekt<LernKategorie> {
   int id;
@@ -8,8 +9,7 @@ class LernKategorie extends DatenbankObjekt<LernKategorie> {
   static LernKategorie get shared => LernKategorie();
 
   LernKategorie({this.id, this.name, this.logo})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
-            "removeFromDatabaseURL");
+      : super(DatabaseURL.getLernkategorie.value, '', '');
 
   @override
   LernKategorie objektVonJasonArray(objekt) {

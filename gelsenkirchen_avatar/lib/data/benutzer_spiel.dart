@@ -1,4 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   int benutzerID;
@@ -9,8 +10,7 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
 
   BenutzerSpiel(
       {this.benutzerID, this.spielbenutzerID, this.bewaeltigteAufgaben})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
-            "removeFromDatabaseURL");
+      : super(DatabaseURL.getBenutzerSpiel.value, '', '');
 
   @override
   BenutzerSpiel objektVonJasonArray(objekt) {
