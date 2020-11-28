@@ -1,3 +1,4 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class QuizFragen extends DatenbankObjekt<QuizFragen> {
@@ -23,8 +24,7 @@ class QuizFragen extends DatenbankObjekt<QuizFragen> {
       this.antwort4,
       this.position,
       this.loesungsText})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
-            "removeFromDatabaseURL");
+      : super('', DatabaseURL.insertIntoQuizFragen.value, '');
 
   @override
   QuizFragen objektVonJasonArray(objekt) {

@@ -1,19 +1,20 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
-class Rollen extends DatenbankObjekt<Rollen> {
+class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   int benutzerID;
   int spielbenutzerID;
   int bewaeltigteAufgaben;
 
-  static Rollen get shared => Rollen();
+  static BenutzerSpiel get shared => BenutzerSpiel();
 
-  Rollen({this.benutzerID, this.spielbenutzerID, this.bewaeltigteAufgaben})
+  BenutzerSpiel(
+      {this.benutzerID, this.spielbenutzerID, this.bewaeltigteAufgaben})
       : super("getFromDatabaseURL", "insertIntoDatabaseURL",
             "removeFromDatabaseURL");
 
   @override
-  Rollen objektVonJasonArray(objekt) {
-    return Rollen(
+  BenutzerSpiel objektVonJasonArray(objekt) {
+    return BenutzerSpiel(
         benutzerID: int.parse(objekt["benutzerID"]),
         spielbenutzerID: int.parse(objekt["spielbenutzerID"]),
         bewaeltigteAufgaben: int.parse(objekt["bewaeltigteAufgaben"]));
