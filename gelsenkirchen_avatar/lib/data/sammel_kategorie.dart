@@ -1,5 +1,6 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
   int id;
@@ -8,6 +9,8 @@ class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
 
   static SammelKategorie get shared => SammelKategorie();
 
+  SammelKategorie({this.id, this.name, this.ortDesTragens})
+      : super(DatabaseURL.getSammelKategorie.value, DatabaseURL.insertIntoSammelKategorie.value, '');
   SammelKategorie({this.id, this.beschreibung, this.ortDesTragens})
       : super("getFromDatabaseURL", DatabaseURL.insertIntoSammelKategorie.value,
             "removeFromDatabaseURL");

@@ -1,5 +1,6 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class Rollen extends DatenbankObjekt<Rollen> {
   int id;
@@ -9,9 +10,7 @@ class Rollen extends DatenbankObjekt<Rollen> {
   static Rollen get shared => Rollen();
 
   Rollen({this.id, this.name, this.beschreibung})
-      : super("getFromDatabaseURL", DatabaseURL.insertIntoRollen.value,
-            "removeFromDatabaseURL");
-
+      : super(DatabaseURL.getRollen.value, DatabaseURL.insertIntoRollen.value, '');
   @override
   Rollen objektVonJasonArray(objekt) {
     return Rollen(

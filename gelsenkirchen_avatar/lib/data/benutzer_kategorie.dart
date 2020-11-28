@@ -8,9 +8,9 @@ class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
 
   static BenutzerKategorie get shared => BenutzerKategorie();
 
-  BenutzerKategorie({this.benutzerID, this.lernKategorieID, this.erfahrungspunkte})
-      : super("getFromDatabaseURL", DatabaseURL.insertIntoLernKategorie.value,
-            "removeFromDatabaseURL");
+  BenutzerKategorie(
+      {this.benutzerID, this.lernKategorieID, this.erfahrungspunkte})
+      : super(DatabaseURL.getBenutzerKategorie.value, DatabaseURL.insertIntoLernKategorie.value, '');
 
   @override
   BenutzerKategorie objektVonJasonArray(objekt) {

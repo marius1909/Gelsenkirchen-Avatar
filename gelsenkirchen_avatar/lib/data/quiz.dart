@@ -1,5 +1,6 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class Quiz extends DatenbankObjekt<Quiz> {
   int id;
@@ -10,8 +11,7 @@ class Quiz extends DatenbankObjekt<Quiz> {
   static Quiz get shared => Quiz();
 
   Quiz({this.id, this.lernortID, this.fragenAnzahl, this.punkteProFrage})
-      : super("getFromDatabaseURL", DatabaseURL.insertIntoQuiz.value,
-            "removeFromDatabaseURL");
+      : super(DatabaseURL.getQuiz.value, DatabaseURL.insertIntoQuiz.value, '');
 
   @override
   Quiz objektVonJasonArray(objekt) {

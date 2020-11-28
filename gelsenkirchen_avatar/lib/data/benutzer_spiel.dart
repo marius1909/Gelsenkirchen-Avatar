@@ -1,4 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 import 'database_url.dart';
 
@@ -10,6 +11,8 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   static BenutzerSpiel get shared => BenutzerSpiel();
 
   BenutzerSpiel(
+      {this.benutzerID, this.spielbenutzerID, this.bewaeltigteAufgaben})
+      : super(DatabaseURL.getBenutzerSpiel.value, DatabaseURL.insertIntoBenutzerSpiel.value, '');
       {this.benutzerID, this.spielID, this.bewaeltigteAufgaben})
       : super("getFromDatabaseURL", DatabaseURL.insertIntoBenutzerSpiel.value,
             "removeFromDatabaseURL");

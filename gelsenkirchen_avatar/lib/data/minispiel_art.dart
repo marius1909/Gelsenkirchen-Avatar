@@ -1,5 +1,6 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class MinispielArt extends DatenbankObjekt<MinispielArt> {
   int id;
@@ -9,8 +10,7 @@ class MinispielArt extends DatenbankObjekt<MinispielArt> {
   static MinispielArt get shared => MinispielArt();
 
   MinispielArt({this.id, this.name, this.beschreibung})
-      : super("getFromDatabaseURL", DatabaseURL.insertIntoMinispielArt.value,
-            "removeFromDatabaseURL");
+      : super(DatabaseURL.getMinispielArt.value, DatabaseURL.insertIntoMinispielArt.value, '');
 
   @override
   MinispielArt objektVonJasonArray(objekt) {
