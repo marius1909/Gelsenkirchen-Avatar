@@ -1,3 +1,4 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class MinispielArt extends DatenbankObjekt<MinispielArt> {
@@ -8,7 +9,7 @@ class MinispielArt extends DatenbankObjekt<MinispielArt> {
   static MinispielArt get shared => MinispielArt();
 
   MinispielArt({this.id, this.name, this.beschreibung})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoMinispielArt.value,
             "removeFromDatabaseURL");
 
   @override

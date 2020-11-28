@@ -3,6 +3,15 @@ enum DatabaseURL {
   getLernorte,
   insertIntoLernort,
   insertIntoQuizFragen,
+  insertIntoMinispielArt,
+  insertIntoLernKategorie,
+  insertIntoFreigeschaltet,
+  insertIntoBenutzerSpiel,
+  insertIntoRollen,
+  insertIntoBenutzerKategorie,
+  insertIntoSammelKategorie,
+  insertIntoSammelbares,
+  insertIntoQuiz,
   registrierung,
   lernortVorschau,
   anmeldung,
@@ -34,6 +43,24 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "quiz.php";
       case DatabaseURL.removeFromLernort:
         return _baseURL + "removeFromLernort.php";
+      case DatabaseURL.insertIntoMinispielArt:
+        return _baseURL + "insertIntoMinispielArt.php";
+      case DatabaseURL.insertIntoLernKategorie:
+        return _baseURL + "insertIntoLernKategorie.php";
+      case DatabaseURL.insertIntoFreigeschaltet:
+        return _baseURL + "insertIntoFreigeschaltet.php";
+      case DatabaseURL.insertIntoRollen:
+        return _baseURL + "insertIntoRollen.php";
+      case DatabaseURL.insertIntoBenutzerSpiel:
+        return _baseURL + "insertIntoBenutzerSpiel.php";
+      case DatabaseURL.insertIntoBenutzerKategorie:
+        return _baseURL + "insertIntoBenutzerKategorie.php";
+      case DatabaseURL.insertIntoSammelKategorie:
+        return _baseURL + "insertIntoSammelKategorie.php";
+      case DatabaseURL.insertIntoSammelbares:
+        return _baseURL + "insertIntoSammelbares.php";
+      case DatabaseURL.insertIntoQuiz:
+        return _baseURL + "insertIntoQuiz.php";
       default:
         return null;
     }

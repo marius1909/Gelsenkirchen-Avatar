@@ -1,21 +1,22 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
   int id;
-  String name;
+  String beschreibung;
   String ortDesTragens;
 
   static SammelKategorie get shared => SammelKategorie();
 
-  SammelKategorie({this.id, this.name, this.ortDesTragens})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+  SammelKategorie({this.id, this.beschreibung, this.ortDesTragens})
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoSammelKategorie.value,
             "removeFromDatabaseURL");
 
   @override
   SammelKategorie objektVonJasonArray(objekt) {
     return SammelKategorie(
         id: int.parse(objekt["id"]),
-        name: objekt["name"] as String,
+        beschreibung: objekt["beschreibung"] as String,
         ortDesTragens: objekt["ortDesTragens"] as String);
   }
 
@@ -23,7 +24,7 @@ class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
   Map<String, String> get map {
     return {
       "id": "$id",
-      "name": "$name",
+      "beschreibung": "$beschreibung",
       "ortDesTragens": "$ortDesTragens",
     };
   }

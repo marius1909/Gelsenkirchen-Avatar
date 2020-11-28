@@ -1,22 +1,24 @@
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+import 'database_url.dart';
+
 class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   int benutzerID;
-  int spielbenutzerID;
+  int spielID;
   int bewaeltigteAufgaben;
 
   static BenutzerSpiel get shared => BenutzerSpiel();
 
   BenutzerSpiel(
-      {this.benutzerID, this.spielbenutzerID, this.bewaeltigteAufgaben})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+      {this.benutzerID, this.spielID, this.bewaeltigteAufgaben})
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoBenutzerSpiel.value,
             "removeFromDatabaseURL");
 
   @override
   BenutzerSpiel objektVonJasonArray(objekt) {
     return BenutzerSpiel(
         benutzerID: int.parse(objekt["benutzerID"]),
-        spielbenutzerID: int.parse(objekt["spielbenutzerID"]),
+        spielID: int.parse(objekt["spielID"]),
         bewaeltigteAufgaben: int.parse(objekt["bewaeltigteAufgaben"]));
   }
 
@@ -24,7 +26,7 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   Map<String, String> get map {
     return {
       "benutzerID": "$benutzerID",
-      "spielbenutzerID": "$spielbenutzerID",
+      "spielID": "$spielID",
       "bewaeltigteAufgaben": "$bewaeltigteAufgaben",
     };
   }

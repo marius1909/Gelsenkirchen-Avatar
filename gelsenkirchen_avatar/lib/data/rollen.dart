@@ -1,3 +1,4 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class Rollen extends DatenbankObjekt<Rollen> {
@@ -8,7 +9,7 @@ class Rollen extends DatenbankObjekt<Rollen> {
   static Rollen get shared => Rollen();
 
   Rollen({this.id, this.name, this.beschreibung})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoRollen.value,
             "removeFromDatabaseURL");
 
   @override

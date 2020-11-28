@@ -1,3 +1,4 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
@@ -8,7 +9,7 @@ class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
   static Freigeschaltet get shared => Freigeschaltet();
 
   Freigeschaltet({this.benutzerID, this.sammelID, this.ausgeruestet})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoFreigeschaltet.value,
             "removeFromDatabaseURL");
 
   @override

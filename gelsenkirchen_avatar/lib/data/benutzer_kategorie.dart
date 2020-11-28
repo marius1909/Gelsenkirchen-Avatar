@@ -1,3 +1,4 @@
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
 class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
@@ -8,7 +9,7 @@ class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
   static BenutzerKategorie get shared => BenutzerKategorie();
 
   BenutzerKategorie({this.benutzerID, this.lernKategorieID, this.erfahrungspunkte})
-      : super("getFromDatabaseURL", "insertIntoDatabaseURL",
+      : super("getFromDatabaseURL", DatabaseURL.insertIntoLernKategorie.value,
             "removeFromDatabaseURL");
 
   @override

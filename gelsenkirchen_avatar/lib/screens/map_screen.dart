@@ -27,17 +27,6 @@ class MapSampleState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-
-    final QuizFragen frage1 = QuizFragen(
-        quizID: 2,
-        frage: "In welchem Jahr ist der Biomassepark Hugo entstanden?");
-
-    frage1.insertIntoDatabase();
-
-    // final Benutzer benutzer = Benutzer(
-    //     email: "test3", benutzer: "test3", passwort: "test3", rolleID: 1);
-    // benutzer.insertIntoDatabase();
-
     addMarkersForLernorte();
   }
 
@@ -60,7 +49,7 @@ class MapSampleState extends State<MapScreen> {
   }
 
   void addMarkersForLernorte() {
-    var lernorte = Lernort.shared.ladeObjekte();
+    var lernorte = Lernort.shared.gibObjekte();
     lernorte.then((value) {
       value.forEach((element) {
         final marker = Marker(
