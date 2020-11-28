@@ -1,6 +1,15 @@
 enum DatabaseURL {
   dbconfig,
   getLernorte,
+  getRollen,
+  getFreigeschaltet,
+  getSammelKategorie,
+  getSammelbares,
+  getBenutzerKategorie,
+  getLernkategorie,
+  getBenutzerSpiel,
+  getMinispielArt,
+  getQuiz,
   insertIntoLernort,
   getQuizFragen,
   insertIntoQuizFragen,
@@ -24,6 +33,24 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "getLernorte.php";
       case DatabaseURL.insertIntoLernort:
         return _baseURL + "insertIntoLernort.php";
+      case DatabaseURL.getRollen:
+        return _baseURL + "getRollen.php";
+      case DatabaseURL.getFreigeschaltet:
+        return _baseURL + "getFreigeschaltet.php";  
+      case DatabaseURL.getSammelKategorie:
+        return _baseURL + "getSammelKategorie.php";
+      case DatabaseURL.getSammelbares:
+        return _baseURL + "getSammelbares.php";
+      case DatabaseURL.getBenutzerKategorie:
+        return _baseURL + "getBenutzerKategorie.php";
+      case DatabaseURL.getLernkategorie:
+        return _baseURL + "getLernKategorie.php";
+      case DatabaseURL.getBenutzerSpiel:
+        return _baseURL + "getBenutzerSpiel.php";
+      case DatabaseURL.getMinispielArt:
+        return _baseURL + "getMinispielArt.php";
+      case DatabaseURL.getQuiz:
+        return _baseURL + "getQuiz.php";
       case DatabaseURL.getBenutzer:
         return _baseURL + "getBenutzer.php";
       case DatabaseURL.registrierung:
