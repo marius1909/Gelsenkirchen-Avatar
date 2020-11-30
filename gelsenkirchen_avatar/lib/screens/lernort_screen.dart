@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
+import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 
 class LernortScreen extends StatelessWidget {
   final Lernort l;
@@ -87,10 +88,10 @@ class LernortScreen extends StatelessWidget {
                   entsprechender Screen fertig ist. Codestück zum Springen in nächsten
                   Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
                 onPressed: () {
-                  /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ScreenName()));*/
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Lernen(l: l)));
                 },
                 icon: Icon(Icons.book),
                 label: Text('Lernen'),
