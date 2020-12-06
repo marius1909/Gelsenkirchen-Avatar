@@ -24,8 +24,10 @@ class QuizFragen extends DatenbankObjekt<QuizFragen> {
       this.antwort4,
       this.position,
       this.loesungsText})
-      : super(DatabaseURL.getQuizFragen.value,
-            DatabaseURL.insertIntoQuizFragen.value, '');
+      : super(
+            DatabaseURL.getQuizFragen.value,
+            DatabaseURL.insertIntoQuizFragen.value,
+            DatabaseURL.removeFromQuizFragen.value);
 
   @override
   QuizFragen objektVonJasonArray(objekt) {

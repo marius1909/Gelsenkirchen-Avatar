@@ -13,7 +13,10 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
 
   Sammelbares(
       {this.id, this.kategorieID, this.name, this.beschreibung, this.bild})
-      : super(DatabaseURL.getSammelbares.value, DatabaseURL.insertIntoSammelbares.value, '');
+      : super(
+            DatabaseURL.getSammelbares.value,
+            DatabaseURL.insertIntoSammelbares.value,
+            DatabaseURL.removeFromSammelbares.value);
 
   @override
   Sammelbares objektVonJasonArray(objekt) {

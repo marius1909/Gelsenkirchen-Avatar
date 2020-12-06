@@ -10,7 +10,10 @@ class MinispielArt extends DatenbankObjekt<MinispielArt> {
   static MinispielArt get shared => MinispielArt();
 
   MinispielArt({this.id, this.name, this.beschreibung})
-      : super(DatabaseURL.getMinispielArt.value, DatabaseURL.insertIntoMinispielArt.value, '');
+      : super(
+            DatabaseURL.getMinispielArt.value,
+            DatabaseURL.insertIntoMinispielArt.value,
+            DatabaseURL.removeFromMinispielArt.value);
 
   @override
   MinispielArt objektVonJasonArray(objekt) {

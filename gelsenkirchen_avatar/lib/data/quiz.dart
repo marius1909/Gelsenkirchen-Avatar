@@ -11,7 +11,8 @@ class Quiz extends DatenbankObjekt<Quiz> {
   static Quiz get shared => Quiz();
 
   Quiz({this.id, this.lernortID, this.fragenAnzahl, this.punkteProFrage})
-      : super(DatabaseURL.getQuiz.value, DatabaseURL.insertIntoQuiz.value, '');
+      : super(DatabaseURL.getQuiz.value, DatabaseURL.insertIntoQuiz.value,
+            DatabaseURL.removeFromQuiz.value);
 
   @override
   Quiz objektVonJasonArray(objekt) {

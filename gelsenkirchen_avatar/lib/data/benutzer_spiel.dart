@@ -10,10 +10,11 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
 
   static BenutzerSpiel get shared => BenutzerSpiel();
 
-  BenutzerSpiel(
-      {this.benutzerID, this.spielID, this.bewaeltigteAufgaben})
-      : super(DatabaseURL.getBenutzerSpiel.value, DatabaseURL.insertIntoBenutzerSpiel.value, '');
-  
+  BenutzerSpiel({this.benutzerID, this.spielID, this.bewaeltigteAufgaben})
+      : super(
+            DatabaseURL.getBenutzerSpiel.value,
+            DatabaseURL.insertIntoBenutzerSpiel.value,
+            DatabaseURL.removeFromBenutzerSpiel.value);
 
   @override
   BenutzerSpiel objektVonJasonArray(objekt) {

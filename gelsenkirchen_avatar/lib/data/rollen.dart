@@ -10,8 +10,9 @@ class Rollen extends DatenbankObjekt<Rollen> {
   static Rollen get shared => Rollen();
 
   Rollen({this.id, this.name, this.beschreibung})
-      : super(DatabaseURL.getRollen.value, DatabaseURL.insertIntoRollen.value, '');
-      
+      : super(DatabaseURL.getRollen.value, DatabaseURL.insertIntoRollen.value,
+            DatabaseURL.removeFromRollen.value);
+
   @override
   Rollen objektVonJasonArray(objekt) {
     return Rollen(

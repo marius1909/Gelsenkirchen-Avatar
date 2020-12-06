@@ -10,7 +10,10 @@ class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
   static Freigeschaltet get shared => Freigeschaltet();
 
   Freigeschaltet({this.benutzerID, this.sammelID, this.ausgeruestet})
-      : super(DatabaseURL.getFreigeschaltet.value, DatabaseURL.insertIntoFreigeschaltet.value, '');
+      : super(
+            DatabaseURL.getFreigeschaltet.value,
+            DatabaseURL.insertIntoFreigeschaltet.value,
+            DatabaseURL.removeFromFreigeschaltet.value);
 
   @override
   Freigeschaltet objektVonJasonArray(objekt) {

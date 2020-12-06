@@ -10,7 +10,10 @@ class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
   static SammelKategorie get shared => SammelKategorie();
 
   SammelKategorie({this.id, this.beschreibung, this.ortDesTragens})
-      : super(DatabaseURL.getSammelKategorie.value, DatabaseURL.insertIntoSammelKategorie.value, '');
+      : super(
+            DatabaseURL.getSammelKategorie.value,
+            DatabaseURL.insertIntoSammelKategorie.value,
+            DatabaseURL.removeFromSammelKategorie.value);
 
   @override
   SammelKategorie objektVonJasonArray(objekt) {

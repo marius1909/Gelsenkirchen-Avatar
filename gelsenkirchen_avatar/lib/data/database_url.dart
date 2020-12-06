@@ -27,7 +27,18 @@ enum DatabaseURL {
   lernortVorschau,
   anmeldung,
   quiz,
-  removeFromLernort
+  removeFromLernort,
+  removeFromBenutzerKategorie,
+  removeFromBenutzerSpiel,
+  removeFromBenutzer,
+  removeFromFreigeschaltet,
+  removeFromLernKategorie,
+  removeFromMinispielArt,
+  removeFromQuiz,
+  removeFromQuizFragen,
+  removeFromRollen,
+  removeFromSammelKategorie,
+  removeFromSammelbares
 }
 
 extension DatabaseURLExtension on DatabaseURL {
@@ -94,6 +105,28 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "insertIntoSammelbares.php";
       case DatabaseURL.insertIntoQuiz:
         return _baseURL + "insertIntoQuiz.php";
+      case DatabaseURL.removeFromBenutzerKategorie:
+        return _baseURL + "removeFromBenutzerKategorie.php";
+      case DatabaseURL.removeFromBenutzerSpiel:
+        return _baseURL + "removeFromBenutzerSpiel.php";
+      case DatabaseURL.removeFromBenutzer:
+        return _baseURL + "removeFromBenutzer.php";
+      case DatabaseURL.removeFromFreigeschaltet:
+        return _baseURL + "removeFromFreigeschaltet.php";
+      case DatabaseURL.removeFromLernKategorie:
+        return _baseURL + "removeFromLernKategorie.php";
+      case DatabaseURL.removeFromMinispielArt:
+        return _baseURL + "removeFromMinispielArt.php";
+      case DatabaseURL.removeFromQuiz:
+        return _baseURL + "removeFromQuiz.php";
+      case DatabaseURL.removeFromQuizFragen:
+        return _baseURL + "removeFromQuizFragen.php";
+      case DatabaseURL.removeFromRollen:
+        return _baseURL + "removeFromRollen.php";
+      case DatabaseURL.removeFromSammelKategorie:
+        return _baseURL + "removeFromSammelKategorie.php";
+      case DatabaseURL.removeFromSammelbares:
+        return _baseURL + "removeFromSammelbares.php";
       default:
         return null;
     }

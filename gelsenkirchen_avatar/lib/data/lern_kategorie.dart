@@ -10,7 +10,10 @@ class LernKategorie extends DatenbankObjekt<LernKategorie> {
   static LernKategorie get shared => LernKategorie();
 
   LernKategorie({this.id, this.name, this.logo})
-      : super(DatabaseURL.getLernkategorie.value, DatabaseURL.insertIntoLernKategorie.value, '');
+      : super(
+            DatabaseURL.getLernkategorie.value,
+            DatabaseURL.insertIntoLernKategorie.value,
+            DatabaseURL.removeFromLernKategorie.value);
 
   @override
   LernKategorie objektVonJasonArray(objekt) {
