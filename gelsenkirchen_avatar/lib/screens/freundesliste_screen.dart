@@ -64,13 +64,6 @@ class _FreundeslisteState extends State<Freundesliste> {
                           fontWeight: FontWeight.bold)),
                   FlatButton(
                       onPressed: () {
-                        var alleBenutzerFuture = Benutzer.shared.gibObjekte();
-                        alleBenutzerFuture.then((benutzer) {
-                          var firstBenutzer = benutzer[0];
-                          benutzer.forEach((element) {
-                            print(element.rolleID);
-                          });
-                        });
                         // var neuerBenutzer = Benutzer(
                         //     email: "hans@gmail.com",
                         //     benutzer: "Hans",
@@ -79,6 +72,15 @@ class _FreundeslisteState extends State<Freundesliste> {
                         // neuerBenutzer.insertIntoDatabase();
 
                         // print("Neuer Benutzer hinzugefügt");
+
+                        // Benutzer.shared.removeFromDatabaseWithID({"id": "5"});
+
+                        // var alleBenutzerFuture = Benutzer.shared.gibObjekte();
+                        // alleBenutzerFuture.then((benutzer) {
+                        //   benutzer.forEach((element) {
+                        //     print(element);
+                        //   });
+                        // });
                       },
                       child: Icon(Icons.sort, color: Colors.white))
                 ],
