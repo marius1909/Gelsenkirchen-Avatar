@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/testfreund.dart';
 
 class Freundesliste extends StatefulWidget {
@@ -55,13 +56,31 @@ class _FreundeslisteState extends State<Freundesliste> {
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(width: 140),
+                  SizedBox(width: 10),
                   Text("Sortieren",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
-                  Icon(Icons.sort, color: Colors.white)
+                  FlatButton(
+                      onPressed: () {
+                        var alleBenutzerFuture = Benutzer.shared.gibObjekte();
+                        alleBenutzerFuture.then((benutzer) {
+                          var firstBenutzer = benutzer[0];
+                          benutzer.forEach((element) {
+                            print(element.rolleID);
+                          });
+                        });
+                        // var neuerBenutzer = Benutzer(
+                        //     email: "hans@gmail.com",
+                        //     benutzer: "Hans",
+                        //     passwort: "1234567",
+                        //     rolleID: 1);
+                        // neuerBenutzer.insertIntoDatabase();
+
+                        // print("Neuer Benutzer hinzugefügt");
+                      },
+                      child: Icon(Icons.sort, color: Colors.white))
                 ],
               ),
               SizedBox(height: 2),
