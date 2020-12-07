@@ -113,7 +113,7 @@ class LernortScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => StartQuiz(1)));
+                          builder: (BuildContext context) => StartQuiz(40)));
                 },
                 icon: Icon(Icons.videogame_asset),
                 label: Text('Spielen'),
