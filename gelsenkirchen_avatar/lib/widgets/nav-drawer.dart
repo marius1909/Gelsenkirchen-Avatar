@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
@@ -56,16 +57,16 @@ class NavDrawer extends StatelessWidget {
 
           /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.
           später implementiert werden"*/
-          /* ListTile(
+          ListTile(
               leading: Icon(Icons.people),
               title: Text('Freunde'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LernortScreen()));
+                        builder: (BuildContext context) => Freundesliste()));
               }),
-          ListTile(
+          /* ListTile(
               leading: Icon(Icons.score),
               title: Text('Scorebeard'),
               onTap: () {
