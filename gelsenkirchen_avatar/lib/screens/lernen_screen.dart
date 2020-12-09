@@ -1,133 +1,113 @@
 import 'package:flutter/material.dart';
+//import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
-import 'package:gelsenkirchen_avatar/quiz/quiz.dart';
-import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
+import 'package:photo_view/photo_view.dart';
 
-class LernortScreen extends StatefulWidget {
+class Lernen extends StatelessWidget {
   final Lernort l;
-  LernortScreen({Key key, @required this.l}) : super(key: key);
+  Lernen({Key key, @required this.l}) : super(key: key);
 
-  @override
-  _LernortScreenState createState() => _LernortScreenState();
-}
-
-class _LernortScreenState extends State<LernortScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         //drawer: NavDrawer(),
         appBar: AppBar(
-          /*NAME*/
-          title: Text(widget.l.name),
+          title: Text(l.name),
         ),
-        body: Column(children: [
-          /*TITELBILD*/
-          /*Todo: Bild muss hier noch das Titelbild des entsprechenden Lernortes eingefügt werden.
-          Dieses Bild dient als Platzhalter*/
-          Container(
-              child: Image.asset(
-                  'assets/images/lernortPlaceholderTitelbild.jpg',
-                  fit: BoxFit.fill)),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            /*TITELBILD*/
+            Container(child: getWidgetTitelbild(l)),
 
-          /*BESCHREIBUNG*/
-          Container(
-              child: Text(
-                widget.l.beschreibung,
-                textAlign: TextAlign.justify,
-                style: TextStyle(fontSize: 17),
-              ),
-              margin: EdgeInsets.only(
-                  left: 30.0, top: 40.0, right: 30.0, bottom: 10.0)),
-
-          /*KATEGORIE*/
-          /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
-                  - linksbündig*/
-          /*Container(
-            child: Text(
-              "Kategorie: " + widget.l.kategorieID.toString(),
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 17),
-            ),
-            margin: EdgeInsets.only(
-                left: 30.0, top: 20.0, right: 30.0, bottom: 10.0),
-            alignment: Alignment(-1.0, 0.0),
-          ),
-
-          /*ADRESSE*/
-          /*Todo: - Hier muss noch die Adresse angegeben werden
-                  - linksbündig*/
-          Container(
-            child: Text(
-              "Adresse: ",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 17),
-            ),
-            margin: EdgeInsets.only(
-                left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-            alignment: Alignment(-1.0, 0.0),
-          ),
-
-          /*ÖFFNUNGSZEITEN*/
-          /*Todo: - Hier müssen noch die Öffnungszeiten angegeben werden
-                  - linksbündig*/
-          Container(
-            child: Text(
-              "Öffnungszeiten: ",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 17),
-            ),
-            margin: EdgeInsets.only(
-                left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-            alignment: Alignment(-1.0, 0.0),
-          ),*/
-
-          /*Todo: Abstand zwischen den Buttons einfügen*/
-          ListTile(
-              title: Row(children: <Widget>[
-            Expanded(
-              child: RaisedButton.icon(
-                textColor: Colors.white,
-                color: Colors.blue,
-
-                /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
-                  entsprechender Screen fertig ist. Codestück zum Springen in nächsten
-                  Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-                onPressed: () {
-                  /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ScreenName()));*/
-                },
-                icon: Icon(Icons.book),
-                label: Text('Lernen'),
-              ),
-            ),
+            /*Beschreibung*/
             Container(
-              //color: Colors.white,
-              height: 50,
-              width: 20,
-            ),
-            Expanded(
-              child: RaisedButton.icon(
-                textColor: Colors.white,
-                color: Colors.blue,
+                child: Text(
+                  l.beschreibung.replaceAll('<br>', '\n'),
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontSize: 17),
+                ),
+                margin: EdgeInsets.only(
+                    left: 30.0, top: 40.0, right: 30.0, bottom: 10.0)),
 
-                /*Aktion beim Drücken des Buttons muss noch ergänzt werden, wenn
-                  entsprechender Screen fertig ist. Codestück zum Springen in nächsten
-                  Screen beim Drücken des Button im nächsten Kommentar schon vorhanden.*/
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              StartQuiz(widget.l.id)));
-                },
-                icon: Icon(Icons.videogame_asset),
-                label: Text('Spielen'),
-              ),
+            /*Weitere Bilder*/
+            Container(
+              child: getWidgetWeitereBilder(l, context),
+              height: 400,
             )
-          ]))
-        ]));
+          ]),
+        ));
   }
 }
 
+Widget getWidgetTitelbild(Lernort l) {
+  if (l.titelbild.isEmpty) {
+    return new Image.asset('assets/images/lernortPlaceholderTitelbild.jpg',
+        fit: BoxFit.fill);
+  } else {
+    return new Image.network(l.titelbild, fit: BoxFit.fill);
+  }
+}
+
+Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
+  if (l.weitereBilder.isEmpty) {
+    return new Text(
+      'Leider sind keine Weiteren Bilder Vorhanden',
+      textAlign: TextAlign.justify,
+      style: TextStyle(fontSize: 17),
+    );
+  } else {
+    var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links
+    var i = 0;
+    var ii = 0;
+    return new GridView.builder(
+      itemCount: arr.length,
+      gridDelegate:
+          new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      itemBuilder: (BuildContext context, int index) {
+        return new Card(
+          child: new InkResponse(
+            child: Image.network(
+              arr[i++],
+              fit: BoxFit.scaleDown,
+            ),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) {
+                return DetailScreen(url: arr[index]);
+              }));
+            },
+          ),
+          color: Colors.grey,
+        );
+      },
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  final String url;
+
+  DetailScreen({Key key, @required this.url}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          //title: Text(l.name),
+          ),
+      body: GestureDetector(
+        child: Center(
+            child: Hero(
+                tag: 'imageHero',
+                child: PhotoView(
+                  imageProvider: NetworkImage(url),
+                )
+                /*child: Image.network(
+                  url,
+                  fit: BoxFit.cover,
+                )*/
+                )),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+}
