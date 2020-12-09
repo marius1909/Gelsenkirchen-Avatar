@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
-class Profil extends StatelessWidget {
-  String spielername;
+class Profil extends StatefulWidget {
+  @override
+  _ProfilState createState() => _ProfilState();
+}
+
+class _ProfilState extends State<Profil> {
+  String spielername = "";
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +36,7 @@ class Profil extends StatelessWidget {
                         ),
                         SizedBox(height: 10.0),
                         new Text(
-                          //error with spielername
-                          "name",
+                          spielername,
                           style: TextStyle(
                             letterSpacing: 1.8,
                             fontSize: 28.0,
@@ -91,21 +95,6 @@ class Profil extends StatelessWidget {
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ),
-                FlatButton(
-                  color: Colors.grey[800],
-                  textColor: Colors.white,
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
-                  padding: EdgeInsets.all(8.0),
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    print(spielername);
-                  },
-                  child: Text(
-                    "print name",
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                )
               ],
             )));
   }
@@ -115,8 +104,9 @@ class Profil extends StatelessWidget {
   }
 
   Future<void> loadName() async {
-    print("s");
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-    spielername = alleBenutzerFuture[0].benutzer;
+    setState(() {
+      spielername = alleBenutzerFuture[0].benutzer;
+    });
   }
 }
