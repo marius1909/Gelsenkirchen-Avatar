@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
 class Profil extends StatelessWidget {
-  Text spielername = new Text(
-    "Spielername",
-    style: TextStyle(
-      color: Colors.amberAccent[200],
-      letterSpacing: 1.8,
-      fontSize: 28.0,
-      fontWeight: FontWeight.bold,
-    ),
-  );
+  String spielername;
 
   @override
   Widget build(BuildContext context) {
+    loadName();
+
     return Scaffold(
-       
         appBar: AppBar(
           title: Text('Profil'),
           centerTitle: true,
@@ -36,7 +30,15 @@ class Profil extends StatelessWidget {
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        spielername,
+                        new Text(
+                          //error with spielername
+                          "name",
+                          style: TextStyle(
+                            letterSpacing: 1.8,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(width: 40.0),
@@ -52,7 +54,6 @@ class Profil extends StatelessWidget {
                         Text(
                           '8',
                           style: TextStyle(
-                            color: Colors.amberAccent[200],
                             letterSpacing: 1.8,
                             fontSize: 28.0,
                             fontWeight: FontWeight.bold,
@@ -70,7 +71,7 @@ class Profil extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
                 ),
-                SizedBox(height: 200),
+                SizedBox(height: 10),
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -89,12 +90,33 @@ class Profil extends StatelessWidget {
                     "Profil bearbeiten",
                     style: TextStyle(fontSize: 20.0),
                   ),
+                ),
+                FlatButton(
+                  color: Colors.grey[800],
+                  textColor: Colors.white,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    print(spielername);
+                  },
+                  child: Text(
+                    "print name",
+                    style: TextStyle(fontSize: 20.0),
+                  ),
                 )
               ],
             )));
   }
 
   String getText() {
-    return spielername.data;
+    return spielername;
+  }
+
+  Future<void> loadName() async {
+    print("s");
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    spielername = alleBenutzerFuture[0].benutzer;
   }
 }

@@ -10,7 +10,11 @@ class Freundesliste extends StatefulWidget {
 }
 
 class _FreundeslisteState extends State<Freundesliste> {
+  TextFormField freundHinzufuegenField;
+  TextEditingController freundeHinzufuegenController = TextEditingController();
+
   var showAddFriendTextField = false;
+
   final List<Testfreund> testfreunde = [
     Testfreund("Freund1", "1", "*"),
     Testfreund("Freund2", "23", "*"),
@@ -130,13 +134,15 @@ class _FreundeslisteState extends State<Freundesliste> {
                     children: [
                       Container(
                           width: 200,
-                          child: new TextFormField(
-                            decoration: InputDecoration(hintText: "Name"),
-                          )),
+                          child: freundHinzufuegenField = new TextFormField(
+                              controller: freundeHinzufuegenController,
+                              decoration: InputDecoration(hintText: "Name"))),
                       new FlatButton(
                           onPressed: () {
                             setState(() {
                               showAddFriendTextField = false;
+                              FuegeFreundHinzu(
+                                  freundeHinzufuegenController.text);
                             });
                           },
                           child: Icon(
@@ -149,5 +155,19 @@ class _FreundeslisteState extends State<Freundesliste> {
             ],
           ),
         ));
+  }
+
+//dummy funktion, soll später auf freundesliste datenbank arbeiten
+  void createFreundeNamen() async {
+    List<String> freundeNamen;
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    for (var i = 0; i < alleBenutzerFuture.length; i++) {
+      freundeNamen[i] = alleBenutzerFuture[i].benutzer;
+    }
+  }
+
+//dummy funktion geht später alle user durch und fuegt freund in datenbank ein
+  void FuegeFreundHinzu(String _name) {
+    print(_name);
   }
 }
