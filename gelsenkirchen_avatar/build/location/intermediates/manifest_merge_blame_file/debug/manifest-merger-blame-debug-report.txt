@@ -3,6 +3,7 @@
 3    package="com.lyokone.location" >
 4
 5    <uses-sdk android:minSdkVersion="16" />
+<<<<<<< HEAD
 5-->C:\src\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml
 6
 7    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -11,5 +12,15 @@
 8    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 8-->C:\src\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:4:5-79
 8-->C:\src\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:4:22-76
+=======
+5-->E:\VisualCode\Flutter\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml
+6
+7    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+7-->E:\VisualCode\Flutter\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:3:5-81
+7-->E:\VisualCode\Flutter\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:3:22-78
+8    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+8-->E:\VisualCode\Flutter\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:4:5-79
+8-->E:\VisualCode\Flutter\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\location-2.5.4\android\src\main\AndroidManifest.xml:4:22-76
+>>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
 9
 10</manifest>

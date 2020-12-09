@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #Sun Nov 29 19:18:23 CET 2020
 base.0=D\:\\Alex\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+=======
+#Mon Nov 30 14:07:36 CET 2020
+base.0=F\:\\Zukunftsstadt\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+>>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
 path.0=classes.dex
 renamed.0=classes.dex
