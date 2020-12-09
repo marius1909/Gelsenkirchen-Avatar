@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-<<<<<<< HEAD
 import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
-=======
-import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
-import 'package:http/http.dart' as http;
->>>>>>> scoreboard
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 

@@ -1,17 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 class QuizPage extends StatefulWidget {
-  final int benutzerID;
-  final int lernKategorieID;
-  final int lernortID;
-  final int quizID;
-  QuizPage(
-      {this.benutzerID, this.lernKategorieID, this.lernortID, this.quizID});
+  final int id;
+
+  QuizPage(this.id);
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -21,7 +17,6 @@ class _QuizPageState extends State<QuizPage> {
   final List<Widget> punkteBehalten = [];
 
   Timer _timer;
-
   //Erst testen mit 10sec
   int _start = 10;
 
@@ -30,7 +25,6 @@ class _QuizPageState extends State<QuizPage> {
   int punkteProFragen = 1;
   List data = [];
   List fragenList;
-  int erfahrungspunkte;
 
   //prüfen ob Antwort richtig oder falsch
   void checkAnswer(String value) {
@@ -53,19 +47,10 @@ class _QuizPageState extends State<QuizPage> {
           content: new Text("Final Score: $sumPunkte"),
           actions: [
             CupertinoDialogAction(
-              child: new Text("Exit Game"),
+              child: new Text("End"),
               onPressed: () => {
                 Navigator.of(context).pop(true),
                 Navigator.of(context).pop()
-              },
-            ),
-            CupertinoDialogAction(
-              child: new Text("Save Your Score"),
-              onPressed: () async {
-                erfahrungspunkte = sumPunkte;
-                await savePoint();
-                Navigator.of(context).pop(true);
-                Navigator.of(context).pop();
               },
             ),
           ],
@@ -77,29 +62,8 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  Future<void> savePoint() async {
-    var param = "?benutzerID=" +
-        widget.benutzerID.toString() +
-        "&lernKategorieID=" +
-        widget.lernKategorieID.toString() +
-        "&erfahrungspunkte=" +
-        erfahrungspunkte.toString() +
-        "&lernortID=" +
-        widget.lernortID.toString() +
-        "&quizID=" +
-        widget.quizID.toString();
-    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
-    final response = await http.get(url);
-    final jsonData = jsonDecode(response.body);
-    if (jsonData) {
-      Fluttertoast.showToast(msg: "Success", toastLength: Toast.LENGTH_SHORT);
-    } else {
-      Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
-    }
-  }
-
   void quizFragen() async {
-    var quizid = widget.quizID;
+    var quizid = widget.id;
     var url = "http://zukunft.sportsocke522.de/quiz.php";
     var body = {"quizID": quizid.toString()};
 

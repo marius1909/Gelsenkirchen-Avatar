@@ -56,8 +56,8 @@ class LearnQuizState extends State<LearnQuiz> {
                         height: 50.0,
                         color: Colors.blueGrey,
                         onPressed: () {
-                          //Navigator.of(context).push(MaterialPageRoute(
-                          //  builder: (context) => QuizPage(1)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => QuizPage(1)));
                         },
                         child: new Text(
                           data[index]["name"],

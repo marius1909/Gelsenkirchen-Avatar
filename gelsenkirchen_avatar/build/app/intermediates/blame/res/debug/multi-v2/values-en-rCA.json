@@ -2,7 +2,6 @@
     "logs": [
         {
 <<<<<<< HEAD
-<<<<<<< HEAD
             "outputFile": "D:\\Alex\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rCA\\values-en-rCA.xml",
             "map": [
                 {
@@ -13,12 +12,6 @@
                 {
                     "source": "C:\\Users\\Tobia\\.gradle\\caches\\transforms-2\\files-2.1\\a219aaa53005fa677df3bfd14ede3871\\core-1.1.0\\res\\values-en-rCA\\values-en-rCA.xml",
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-            "outputFile": "/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-en-rCA/values-en-rCA.xml",
-            "map": [
-                {
-                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/res/values-en-rCA/values-en-rCA.xml",
->>>>>>> scoreboard
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

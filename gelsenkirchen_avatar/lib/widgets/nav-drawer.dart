@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
-<<<<<<< HEAD
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
-=======
->>>>>>> scoreboard
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
-<<<<<<< HEAD
-=======
-import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
->>>>>>> scoreboard
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -71,23 +64,18 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-<<<<<<< HEAD
                         builder: (BuildContext context) => Freundesliste()));
               }),
           /* ListTile(
-=======
-                        builder: (BuildContext context) => LernortScreen()));
-              }),*/
-          ListTile(
->>>>>>> scoreboard
               leading: Icon(Icons.score),
-              title: Text('Scoreboard'),
+              title: Text('Scorebeard'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => ScoreBoard(2)));
-              }),
+                        builder: (BuildContext context) => LernortScreen()));
+              }), */
+
           ListTile(
               leading: Icon(Icons.settings),
               title: Text('Einstellungen'),

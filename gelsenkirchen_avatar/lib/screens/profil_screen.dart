@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
@@ -10,20 +9,6 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
   String spielername = "";
-=======
-import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
-
-class Profil extends StatelessWidget {
-  Text spielername = new Text(
-    "Spielername",
-    style: TextStyle(
-      color: Colors.amberAccent[200],
-      letterSpacing: 1.8,
-      fontSize: 28.0,
-      fontWeight: FontWeight.bold,
-    ),
-  );
->>>>>>> scoreboard
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +75,7 @@ class Profil extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
                 ),
-<<<<<<< HEAD
                 SizedBox(height: 10),
-=======
-                SizedBox(height: 200),
->>>>>>> scoreboard
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -116,7 +97,6 @@ class Profil extends StatelessWidget {
                 ),
               ],
             )));
-<<<<<<< HEAD
   }
 
   String getText() {
@@ -128,11 +108,5 @@ class Profil extends StatelessWidget {
     setState(() {
       spielername = alleBenutzerFuture[0].benutzer;
     });
-=======
-  }
-
-  String getText() {
-    return spielername.data;
->>>>>>> scoreboard
   }
 }

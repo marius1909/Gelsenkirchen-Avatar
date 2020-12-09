@@ -85,8 +85,6 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "insertIntoQuizFragen.php";
       case DatabaseURL.quiz:
         return _baseURL + "quiz.php";
-      case DatabaseURL.getQuiz:
-        return _baseURL + "get_lernortID.php?id=";
       case DatabaseURL.removeFromLernort:
         return _baseURL + "removeFromLernort.php";
       case DatabaseURL.insertIntoMinispielArt:

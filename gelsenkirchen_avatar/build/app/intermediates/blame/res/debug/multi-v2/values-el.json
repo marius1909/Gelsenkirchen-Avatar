@@ -2,7 +2,6 @@
     "logs": [
         {
 <<<<<<< HEAD
-<<<<<<< HEAD
             "outputFile": "D:\\Alex\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-el\\values-el.xml",
             "map": [
                 {
@@ -13,29 +12,6 @@
                 {
                     "source": "C:\\Users\\Tobia\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\values-el\\values.xml",
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-            "outputFile": "/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-el/values-el.xml",
-            "map": [
-                {
-                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/res/values-el/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "222",
-                        "endOffsets": "469"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1332",
-                        "endColumns": "222",
-                        "endOffsets": "1550"
-                    }
-                },
-                {
-                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/res/values-el/values.xml",
->>>>>>> scoreboard
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -52,7 +28,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
 <<<<<<< HEAD
                     "source": "C:\\Users\\Alex\\.gradle\\caches\\transforms-2\\files-2.1\\5315adffb2dc905f5b82949fce14e319\\jetified-play-services-basement-17.0.0\\res\\values-el\\values.xml",
 =======
@@ -79,9 +54,6 @@
 =======
                     "source": "C:\\Users\\Tobia\\.gradle\\caches\\transforms-2\\files-2.1\\a219aaa53005fa677df3bfd14ede3871\\core-1.1.0\\res\\values-el\\values-el.xml",
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/res/values-el/values-el.xml",
->>>>>>> scoreboard
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

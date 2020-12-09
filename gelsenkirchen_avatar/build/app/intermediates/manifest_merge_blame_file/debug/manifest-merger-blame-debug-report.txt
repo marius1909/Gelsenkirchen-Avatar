@@ -13,17 +13,12 @@
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
 <<<<<<< HEAD
-<<<<<<< HEAD
 14-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:5-66
 14-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:22-64
 =======
 14-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:5-66
 14-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:22-64
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-14-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/debug/AndroidManifest.xml:6:5-66
-14-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/debug/AndroidManifest.xml:6:22-64
->>>>>>> scoreboard
 15    <!--
 16     io.flutter.app.FlutterApplication is an android.app.Application that
 17         calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -32,7 +27,6 @@
 20         FlutterApplication and put your custom class here.
 21    -->
 22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<<<<<<< HEAD
 <<<<<<< HEAD
 22-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:10-84
 22-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:27-81
@@ -132,56 +126,6 @@
 46            android:windowSoftInputMode="adjustResize" >
 46-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:25:13-55
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-22-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:9:10-84
-22-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:9:27-81
-23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
-23-->[:location] /home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-81
-23-->[:location] /home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-78
-24    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-24-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
-24-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:23:22-76
-25
-26    <uses-feature
-26-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
-27        android:glEsVersion="0x00020000"
-27-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
-28        android:required="true" />
-28-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
-29
-30    <application
-30-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:12:5-53:19
-31        android:name="io.flutter.app.FlutterApplication"
-31-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:13:9-57
-32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-32-->[androidx.core:core:1.1.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/AndroidManifest.xml:24:18-86
-33        android:debuggable="true"
-34        android:icon="@mipmap/ic_launcher"
-34-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:15:9-43
-35        android:label="gelsenkirchen_avatar" >
-35-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:14:9-45
-36        <meta-data
-36-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:16:9-18:71
-37            android:name="com.google.android.geo.API_KEY"
-37-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:17:13-58
-38            android:value="AIzaSyCw8_FsCnu0iXlY6FLJVhZuVKYrUHsYf-g" />
-38-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:18:13-68
-39
-40        <activity
-40-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:19:9-47:20
-41            android:name="com.example.gelsenkirchen_avatar.MainActivity"
-41-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:20:13-41
-42            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-42-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:23:13-163
-43            android:hardwareAccelerated="true"
-43-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:24:13-47
-44            android:launchMode="singleTop"
-44-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:21:13-43
-45            android:theme="@style/LaunchTheme"
-45-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:22:13-47
-46            android:windowSoftInputMode="adjustResize" >
-46-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:25:13-55
->>>>>>> scoreboard
 47
 48            <!--
 49                 Specifies an Android theme to apply to this Activity as soon as
@@ -190,7 +134,6 @@
 52                 to determine the Window background behind the Flutter UI.
 53            -->
 54            <meta-data
-<<<<<<< HEAD
 <<<<<<< HEAD
 54-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:30:13-33:17
 55                android:name="io.flutter.embedding.android.NormalTheme"
@@ -204,13 +147,6 @@
 56                android:resource="@style/NormalTheme" />
 56-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:32:15-52
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-54-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:30:13-33:17
-55                android:name="io.flutter.embedding.android.NormalTheme"
-55-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:31:15-70
-56                android:resource="@style/NormalTheme" />
-56-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:32:15-52
->>>>>>> scoreboard
 57            <!--
 58                 Displays an Android View that continues showing the launch screen
 59                 Drawable until Flutter paints its first frame, then this splash
@@ -219,7 +155,6 @@
 62                 Flutter's first frame.
 63            -->
 64            <meta-data
-<<<<<<< HEAD
 <<<<<<< HEAD
 64-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:39:13-42:17
 65                android:name="io.flutter.embedding.android.SplashScreenDrawable"
@@ -253,23 +188,6 @@
 71-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:45:17-76
 71-->F:\Zukunftsstadt\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:45:27-74
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-64-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:39:13-42:17
-65                android:name="io.flutter.embedding.android.SplashScreenDrawable"
-65-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:40:15-79
-66                android:resource="@drawable/launch_background" />
-66-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:41:15-61
-67
-68            <intent-filter>
-68-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:43:13-46:29
-69                <action android:name="android.intent.action.MAIN" />
-69-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:44:17-68
-69-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:44:25-66
-70
-71                <category android:name="android.intent.category.LAUNCHER" />
-71-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:45:17-76
-71-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:45:27-74
->>>>>>> scoreboard
 72            </intent-filter>
 73        </activity>
 74        <!--
@@ -277,7 +195,6 @@
 76             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 77        -->
 78        <meta-data
-<<<<<<< HEAD
 <<<<<<< HEAD
 78-->D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:50:9-52:33
 79            android:name="flutterEmbedding"
@@ -337,36 +254,6 @@
 93            android:value="@integer/google_play_services_version" />
 93-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Tobia\.gradle\caches\transforms-2\files-2.1\37a3359bc4ceb2f52be157064d48650a\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
-=======
-78-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:50:9-52:33
-79            android:name="flutterEmbedding"
-79-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:51:13-44
-80            android:value="2" />
-80-->/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/android/app/src/main/AndroidManifest.xml:52:13-30
-81        <!-- Needs to be explicitly declared on P+ -->
-82        <uses-library
-82-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
-83            android:name="org.apache.http.legacy"
-83-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
-84            android:required="false" />
-84-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
-85
-86        <activity
-86-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-87            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-87-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-88            android:exported="false"
-88-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-89            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-89-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-90
-91        <meta-data
-91-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-92            android:name="com.google.android.gms.version"
-92-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-93            android:value="@integer/google_play_services_version" />
-93-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
->>>>>>> scoreboard
 94    </application>
 95
 96</manifest>
