@@ -3,7 +3,11 @@ import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
+<<<<<<< HEAD
 import 'map_screen.dart';
+=======
+import 'package:gelsenkirchen_avatar/data/map.dart';
+>>>>>>> scoreboard
 
 class HomeScreen extends StatelessWidget {
   final Benutzer angemeldeterBenutzer;

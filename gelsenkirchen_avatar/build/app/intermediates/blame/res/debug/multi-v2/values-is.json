@@ -2,10 +2,17 @@
     "logs": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "outputFile": "D:\\Alex\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-is\\values-is.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Alex\\.gradle\\caches\\transforms-2\\files-2.1\\a219aaa53005fa677df3bfd14ede3871\\core-1.1.0\\res\\values-is\\values-is.xml",
+=======
+            "outputFile": "/home/phuong/Gelsenkirchen-Avatar/gelsenkirchen_avatar/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-is/values-is.xml",
+            "map": [
+                {
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/res/values-is/values-is.xml",
+>>>>>>> scoreboard
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -22,6 +29,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Alex\\.gradle\\caches\\transforms-2\\files-2.1\\5315adffb2dc905f5b82949fce14e319\\jetified-play-services-basement-17.0.0\\res\\values-is\\values.xml",
 =======
             "outputFile": "F:\\Zukunftsstadt\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-is\\values-is.xml",
@@ -50,6 +58,9 @@
 =======
                     "source": "C:\\Users\\Tobia\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\values-is\\values.xml",
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
+=======
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/res/values-is/values.xml",
+>>>>>>> scoreboard
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -64,6 +75,7 @@
                         "endColumns": "107,185,126,110,199,126,138,133,212,107,187,127,200,183,93,92,107",
                         "endOffsets": "208,394,521,632,832,959,1098,1232,1633,1741,1929,2057,2258,2442,2536,2629,2737"
                     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
                 },
@@ -84,6 +96,25 @@
                         "endOffsets": "2838"
                     }
 >>>>>>> Sprint3_Tobi-(Impressum,-Lernen)
+=======
+                },
+                {
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/res/values-is/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "187",
+                        "endOffsets": "434"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1237",
+                        "endColumns": "187",
+                        "endOffsets": "1420"
+                    }
+>>>>>>> scoreboard
                 }
             ]
         }

@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+<<<<<<< HEAD
+=======
+import 'package:gelsenkirchen_avatar/data/quiz.dart';
+>>>>>>> scoreboard
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 
-class LernortScreen extends StatelessWidget {
+class LernortScreen extends StatefulWidget {
   final Lernort l;
-
   LernortScreen({Key key, @required this.l}) : super(key: key);
 
+  @override
+  _LernortScreenState createState() => _LernortScreenState();
+}
+
+class _LernortScreenState extends State<LernortScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         //drawer: NavDrawer(),
         appBar: AppBar(
           /*NAME*/
-          title: Text(l.name),
+          title: Text(widget.l.name),
         ),
         body: Column(children: [
           /*TITELBILD*/
@@ -27,7 +36,7 @@ class LernortScreen extends StatelessWidget {
           /*BESCHREIBUNG*/
           Container(
               child: Text(
-                l.beschreibung,
+                widget.l.beschreibung,
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 17),
               ),
@@ -39,7 +48,7 @@ class LernortScreen extends StatelessWidget {
                   - linksbündig*/
           Container(
             child: Text(
-              "Kategorie: " + l.kategorieID.toString(),
+              "Kategorie: " + widget.l.kategorieID.toString(),
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 17),
             ),
@@ -114,7 +123,12 @@ class LernortScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
+<<<<<<< HEAD
                           builder: (BuildContext context) => StartQuiz(40)));
+=======
+                          builder: (BuildContext context) =>
+                              StartQuiz(widget.l.id)));
+>>>>>>> scoreboard
                 },
                 icon: Icon(Icons.videogame_asset),
                 label: Text('Spielen'),

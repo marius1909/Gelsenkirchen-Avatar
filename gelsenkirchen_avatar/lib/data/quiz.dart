@@ -1,35 +1,34 @@
+import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
-import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class Quiz extends DatenbankObjekt<Quiz> {
-  int id;
-  int lernortID;
-  int fragenAnzahl;
-  int punkteProFrage;
+class Quiz {
+  int quizID;
+  static Quiz shared = Quiz();
 
-  static Quiz get shared => Quiz();
+  Quiz({
+    this.quizID,
+  });
 
-  Quiz({this.id, this.lernortID, this.fragenAnzahl, this.punkteProFrage})
-      : super(DatabaseURL.getQuiz.value, DatabaseURL.insertIntoQuiz.value,
-            DatabaseURL.removeFromQuiz.value);
+  static Quiz _QuizVonJson(dynamic json) {
+    return new Quiz(quizID: int.parse(json["quizID"]));
+  }
 
-  @override
-  Quiz objektVonJasonArray(objekt) {
-    return Quiz(
-        id: int.parse(objekt["id"]),
-        lernortID: int.parse(objekt["lernortID"]),
-        fragenAnzahl: int.parse(objekt["fragenAnzahl"]),
-        punkteProFrage: int.parse(objekt["punkteProFrage"]));
+  Future<Quiz> getQuiz(int id) async {
+    final response = await http.get(DatabaseURL.getQuiz.value + id.toString());
+    final jsonData = jsonDecode(response.body);
+    return Quiz._QuizVonJson(jsonData);
+  }
+
+  Map<String, String> get map {
+    return {
+      "id": "$quizID",
+    };
   }
 
   @override
-  Map<String, String> get map {
-    return {
-      "id": "$id",
-      "lernortID": "$lernortID",
-      "fragenAnzahl": "$fragenAnzahl",
-      "punkteProFrage": "$punkteProFrage"
-    };
+  String toString() {
+    return map.toString();
   }
 }
