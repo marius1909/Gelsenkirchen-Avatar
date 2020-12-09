@@ -3,35 +3,39 @@ import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
+import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class LernortVorschau extends StatefulWidget {
+  // final Lernort l;
+  int id;
+  Lernort l;
+
+  LernortVorschau({Key key, @required this.l}) : super(key: key);
   @override
   _LernortVorschauState createState() => _LernortVorschauState();
 }
 
 class _LernortVorschauState extends State<LernortVorschau> {
-  int _id = 4;
   Map data;
   Icon kategorienSymbol;
   Image titelbild;
+  Lernort lernort;
 
   void lernortDaten() async {
-    var url = "http://zukunft.sportsocke522.de/lernortVorschau.php";
-    var body = {"id": _id.toString()};
+    lernort = widget.l;
+    // var url = "http://zukunft.sportsocke522.de/lernortVorschau.php";
+    // var body = {"id": lernortID.toString()};
 
-    var res = await http.post(url, body: body);
+    // var res = await http.post(url, body: body);
 
-    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
-      print('Datensatz nicht gefunden');
-    } else {
-      setState(() {
-        print(jsonDecode(res.body));
-        data = jsonDecode(res.body);
-        setKategorienSymbol(data['kategorieID']);
-        setTitelbild(data['titelbild']);
-      });
-    }
+    // if (jsonDecode(res.body) == "Datensatz existiert nicht") {
+    //   print('Datensatz nicht gefunden');
+    // } else {
+    setState(() {
+      setKategorienSymbol(lernort.kategorieID.toString());
+      setTitelbild(lernort.titelbild);
+    });
+    // }
   }
 
   void setTitelbild(String bildUrl) {
@@ -111,7 +115,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
   @override
   Widget build(BuildContext context) {
-    if (data == null) {
+    if (lernort == null) {
       return Scaffold(
           body: new Container(
               margin: const EdgeInsets.all(10.0),
@@ -124,7 +128,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              title: Text(data['name']),
+              title: Text(lernort.name),
               expandedHeight: 250,
               flexibleSpace: FlexibleSpaceBar(
                 background: titelbild,
@@ -169,7 +173,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                           fontWeight: FontWeight.bold, fontSize: 20.0),
                     ),
                     SizedBox(height: 5),
-                    Text(data['beschreibung'],
+                    Text(lernort.beschreibung,
                         style: Theme.of(context).textTheme.subtitle1,
                         textAlign: TextAlign.justify),
                   ],
@@ -187,7 +191,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                LernortScreen()));
+                                LernortScreen(l: lernort)));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),

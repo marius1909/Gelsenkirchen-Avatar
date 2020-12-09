@@ -32,8 +32,11 @@ class _AnmeldungState extends State<Anmeldung> {
     futureBenutzer.catchError(invalidError);
     futureBenutzer.then((benutzer) {
       angemeldeterBenutzer = benutzer;
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  HomeScreen(angemeldeterBenutzer: this.angemeldeterBenutzer)));
     });
 
     setState(() {
