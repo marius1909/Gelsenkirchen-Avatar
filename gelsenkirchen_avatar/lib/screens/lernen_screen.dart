@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:photo_view/photo_view.dart';
 
+//ToDo Weitere Medien einfügen
+
 class Lernen extends StatelessWidget {
   final Lernort l;
   Lernen({Key key, @required this.l}) : super(key: key);
