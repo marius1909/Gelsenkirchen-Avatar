@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/quiz_fragen.dart';
-import 'package:gelsenkirchen_avatar/data/rollen.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer_spiel.dart';
+import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
@@ -55,6 +56,13 @@ class MapSampleState extends State<MapScreen> {
         final marker = Marker(
           markerId: MarkerId(element.id.toString()),
           position: LatLng(element.nord, element.ost),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        LernortVorschau(l: element)));
+          },
           infoWindow: InfoWindow(
               title: element.name, snippet: element.kurzbeschreibung),
         );
