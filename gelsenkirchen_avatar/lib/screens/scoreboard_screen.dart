@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -125,13 +126,15 @@ class _ScoreBoardState extends State<ScoreBoard> {
                           ),
                         ],
                       ),
-
-                      //hier für Ranking
                       onPressed: () {
-                        /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ScreenName()));*/
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    RankKategorieScreen(
+                                        int.parse(data[index]['id']),
+                                        widget.id_user,
+                                        data[index]['name'].toString())));
                       },
                     ),
                   ),
