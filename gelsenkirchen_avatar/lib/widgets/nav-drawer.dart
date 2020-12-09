@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -57,16 +57,16 @@ class NavDrawer extends StatelessWidget {
 
           /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.
           später implementiert werden"*/
-          ListTile(
+          /* ListTile(
               leading: Icon(Icons.people),
               title: Text('Freunde'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => Freundesliste()));
+                        builder: (BuildContext context) => LernortScreen()));
               }),
-          /* ListTile(
+          ListTile(
               leading: Icon(Icons.score),
               title: Text('Scorebeard'),
               onTap: () {
@@ -112,6 +112,15 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Registrierung()));
+              }),
+          ListTile(
+              leading: Icon(Icons.table_view),
+              title: Text('Scoreboard'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ScoreBoard(2)));
               }),
           ListTile(
             leading: Icon(Icons.exit_to_app),
