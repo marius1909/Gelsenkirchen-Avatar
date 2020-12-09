@@ -7,6 +7,7 @@ $lernortID = $_GET['lernortID'];
 $quizID = $_GET['quizID'];
 $query_where = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID";
 $query_where_update = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID and lernortID != $lernortID and quizID != $quizID";
+$query_where_delete = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID and lernortID = $lernortID and quizID = $quizID";
 $query = "select * from BenutzerKategorie $query_where;";
 $res = mysqli_query($con,$query);
 $data = array();
@@ -16,7 +17,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 mysqli_free_result($res);
 if(count($data) > 0){
     if($data['lernortID'] == $lernortID && $data['quizID'] == $quizID){
-        $query = "delete from BenutzerKategorie $query_where_insert ";
+        $query = "delete from BenutzerKategorie $query_where_delete ";
         mysqli_query($con,$query);
         $query ="insert into BenutzerKategorie (benutzerID,lernKategorieID,erfahrungspunkte,lernortID,quizID,created_at) VALUES ($benutzerID,$lernKategorieID,$erfahrungspunkte,$lernortID,$quizID,'".date("Y-m-d H:i:s")."');";
         if(mysqli_query($con, $query)){
@@ -42,11 +43,4 @@ if(count($data) > 0){
             echo "false";
         }
 }
-// if(count($data) > 0){
-//     
-//     
-//     
-// }
-// 
-
 ?>
