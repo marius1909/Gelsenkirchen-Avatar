@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
-import 'package:gelsenkirchen_avatar/data/quiz.dart';
+import 'package:gelsenkirchen_avatar/quiz/quiz.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 
 class LernortScreen extends StatefulWidget {
