@@ -91,7 +91,7 @@ class LernortScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Lernen(l: l)));
+                          builder: (BuildContext context) => LernortScreen(l: l)));
                 },
                 icon: Icon(Icons.book),
                 label: Text('Lernen'),
