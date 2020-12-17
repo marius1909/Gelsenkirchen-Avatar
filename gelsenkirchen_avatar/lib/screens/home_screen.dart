@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-        title: Text('Gelsenkirchen Avatar'),
+        title: Text('GElernt!'),
       ),
       body: Center(
         child: MapScreen(),
