@@ -30,6 +30,9 @@ dependencies:
   fluttertoast: ^4.0.1
   email_validator: '^1.0.0'
   google_maps_flutter: ^1.0.5
+  video_player: "^0.10.11+2"
+  chewie: "0.9.10"
+  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,6 +49,7 @@ dev_dependencies:
   provider: ^3.0.0
   location: ^2.3.5
   photo_view: ^0.5.0
+  #chewie: ^0.10.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
