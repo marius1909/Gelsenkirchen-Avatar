@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class Registrierung extends StatefulWidget {
   @override
@@ -64,90 +65,144 @@ class _RegistrierungState extends State<Registrierung> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text(
-          'Registrieren',
-        ),
-        backgroundColor: Colors.blueGrey[800],
+        title: Text('Registrieren'),
+        /*Farbcode in Hexadezimal*/
+        backgroundColor: Color(0xfff2a03d),
       ),
       body: Form(
           key: _formKey,
           child: ListView(children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 80, 15, 0),
+              padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text("Zuerst brauchen wir ein paar Infos von dir:",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  /*BENUTZERNAME*/
+
                   TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Benutzernamen an';
-                        }
-                        return null;
-                      },
-                      controller: namectrl,
-                      decoration: InputDecoration(
-                          labelText: "Benutzername:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                    decoration: new InputDecoration(
+                      /*Labeltext*/
+                      labelText: "Gib einen Benutzernamen ein",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib einen Benutzernamen an';
+                      }
+                      return null;
+                    },
+                    controller: namectrl,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib eine gültige Email Adresse an';
-                        }
-                        if (EmailValidator.validate(value)) {
-                          return null;
-                        }
 
-                        return 'Keine gültige Email Adresse im Format sample@example.com.';
-                      },
-                      controller: emailctrl,
-                      decoration: InputDecoration(
-                          labelText: "Email:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                  /*EMAIL*/
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      /*Labeltext*/
+                      labelText: "Gib deine Email-Adresse ein",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib eine gültige Email Adresse an';
+                      }
+                      if (EmailValidator.validate(value)) {
+                        return null;
+                      }
+
+                      //Die Textzeile ist zu lang um angezeigt zu werden.*/
+                      return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailctrl,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
+
+                  /*PASSWORT*/
                   TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Passwort an.';
-                        }
+                    decoration: new InputDecoration(
+                      /*Labeltext*/
+                      labelText: "Gib ein Passwort ein",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib ein Passwort an.';
+                      }
 
-                        passwortvalue = value;
+                      passwortvalue = value;
 
-                        return null;
-                      },
-                      controller: passctrl,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: "Passwort:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                      return null;
+                    },
+                    controller: passctrl,
+                    obscureText: true,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                      controller: validatepassctrl,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Passwort an.';
-                        }
-                        if (value != passwortvalue) {
-                          return 'Passwörter stimmen nicht überein';
-                        }
 
-                        return null;
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: "Passwort wiederholen:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                  /*PASSWORT WIEDERHOLEN*/
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      /*Labeltext*/
+                      labelText: "Wiederhole das Passwort",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    controller: validatepassctrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib ein Passwort ein.';
+                      }
+                      if (value != passwortvalue) {
+                        return 'Die Passwörter stimmen nicht überein.';
+                      }
+
+                      return null;
+                    },
+                    obscureText: true,
+                  ),
                   SizedBox(height: 40),
+                  ImageButton(
+                    children: <Widget>[],
+                    width: 302,
+                    height: 91,
+                    paddingTop: 5,
+                    pressedImage: Image.asset(
+                      "assets/buttons/Registrieren_dunkelblau_groß.png",
+                    ),
+                    unpressedImage: Image.asset(
+                        "assets/buttons/Registrieren_dunkelblau_groß.png"),
+                    onTap: () {
+                      print('test');
+                    },
+                  ),
                   ButtonTheme(
                       padding: EdgeInsets.fromLTRB(145, 13, 145, 13),
                       shape: RoundedRectangleBorder(
@@ -171,19 +226,16 @@ class _RegistrierungState extends State<Registrierung> {
                         ),
                       )),
                   FlatButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Anmeldung()));
-                      },
-                      child: Text(
-                        "Bereits registriert? Hier zur Anmeldung",
-                        style: TextStyle(
-                          color: Colors.blueGrey[900],
-                        ),
-                      )),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Anmeldung()));
+                    },
+                    child: Text(
+                      "Du bist schon registriert? Hier geht's zur Anmeldung.",
+                    ),
+                  ),
                   FormField(
                     initialValue: false,
                     builder: (FormFieldState formFieldState) {

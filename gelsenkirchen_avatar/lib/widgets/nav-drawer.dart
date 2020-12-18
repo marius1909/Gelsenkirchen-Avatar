@@ -56,8 +56,6 @@ class NavDrawer extends StatelessWidget {
                             LernortListeScreen()));
               }),
 
-          /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.
-          später implementiert werden"*/
           ListTile(
               leading: Icon(Icons.people),
               title: Text('Freunde'),
@@ -67,6 +65,7 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => Freundesliste()));
               }),
+
           ListTile(
               leading: Icon(Icons.score),
               title: Text('Scoreboard'),
@@ -76,6 +75,7 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => ScoreBoard(2)));
               }),
+
           // ListTile(
           //     leading: Icon(Icons.settings),
           //     title: Text('Einstellungen'),
@@ -86,6 +86,7 @@ class NavDrawer extends StatelessWidget {
           //               builder: (BuildContext context) =>
           //                   EinstellungenScreen()));
           //     }),
+
           // ListTile(
           //     leading: Icon(Icons.help),
           //     title: Text('Hilfe'),
@@ -95,6 +96,7 @@ class NavDrawer extends StatelessWidget {
           //           MaterialPageRoute(
           //               builder: (BuildContext context) => HilfeScreen()));
           //     }),
+
           ListTile(
               leading: Icon(Icons.description),
               title: Text('Impressum'),
@@ -104,15 +106,17 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
-          // ListTile(
-          //     leading: Icon(Icons.menu_book),
-          //     title: Text('Registrierung'),
-          //     onTap: () {
-          //       Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (BuildContext context) => Registrierung()));
-          //     }),
+
+          ListTile(
+              leading: Icon(Icons.menu_book),
+              title: Text('Registrierung'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Registrierung()));
+              }),
+
           // ListTile(
           //   leading: Icon(Icons.exit_to_app),
           //   title: Text('Logout'),

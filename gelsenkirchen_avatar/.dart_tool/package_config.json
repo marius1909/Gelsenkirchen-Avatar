@@ -182,6 +182,12 @@
       "languageVersion": "2.3"
     },
     {
+      "name": "imagebutton",
+      "rootUri": "file:///C:/_Daten/Programme/Flutter%20SDK/flutter_windows_1.20.2-stable/flutter/.pub-cache/hosted/pub.dartlang.org/imagebutton-0.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///C:/_Daten/Programme/Flutter%20SDK/flutter_windows_1.20.2-stable/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.16.1",
       "packageUri": "lib/",
@@ -476,7 +482,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-12-17T16:28:18.664387Z",
+  "generated": "2020-12-18T14:37:54.909979Z",
   "generator": "pub",
   "generatorVersion": "2.10.3"
 }
