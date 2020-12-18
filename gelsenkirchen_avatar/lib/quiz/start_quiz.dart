@@ -17,6 +17,17 @@ class StartQuiz extends StatefulWidget {
 class _StartQuizState extends State<StartQuiz> {
   dynamic data;
 
+//  var quiz = new Quiz();
+//  @override
+//  void initState() {
+//    super.initState();
+//    var future = Quiz.shared.getQuiz(widget.l.id);
+//    future.then((data) {
+//      setState(() {
+//        quiz = data;
+//      });
+//    });
+//  }
   void getLernort() async {
     var id = widget.id;
     var url =
@@ -73,17 +84,21 @@ class _StartQuizState extends State<StartQuiz> {
               ),
               Expanded(
                 child: Container(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 20, right: 20),
+                    child: ListView(
+                      children: [
+                        Text(
+                          "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -92,8 +107,8 @@ class _StartQuizState extends State<StartQuiz> {
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: Container(
                     width: double.infinity,
-                  //Wrap with Material
-                    child: Material(                      
+                    //Wrap with Material
+                    child: Material(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0)),
                       clipBehavior: Clip.antiAlias,
@@ -134,7 +149,7 @@ class _StartQuizState extends State<StartQuiz> {
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: Container(
                     width: double.infinity,
-                    child: Material(                      
+                    child: Material(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0)),
                       clipBehavior: Clip.antiAlias,
@@ -144,8 +159,12 @@ class _StartQuizState extends State<StartQuiz> {
                           color: Colors.green[400],
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    QuizPage(int.parse(data['quizID']))));
+                                builder: (context) => QuizPage(
+                                    quizID: int.parse(data['quizID']),
+                                    benutzerID: 2,
+                                    lernKategorieID:
+                                        int.parse(data['kategorieID']),
+                                    lernortID: int.parse(data['id']))));
                           },
                           child: Text(
                             "Starten",
@@ -177,3 +196,4 @@ class _StartQuizState extends State<StartQuiz> {
     }
   }
 }
+
