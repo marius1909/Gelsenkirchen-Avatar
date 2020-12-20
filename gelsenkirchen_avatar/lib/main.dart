@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 
 void main() => runApp(MyApp());
 

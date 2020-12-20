@@ -104,15 +104,15 @@ class NavDrawer extends StatelessWidget {
           //           MaterialPageRoute(
           //               builder: (BuildContext context) => ImpressumScreen()));
           //     }),
-          // ListTile(
-          //     leading: Icon(Icons.menu_book),
-          //     title: Text('Registrierung'),
-          //     onTap: () {
-          //       Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (BuildContext context) => Registrierung()));
-          //     }),
+          ListTile(
+              leading: Icon(Icons.menu_book),
+              title: Text('Registrierung'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Registrierung()));
+              }),
           // ListTile(
           //   leading: Icon(Icons.exit_to_app),
           //   title: Text('Logout'),
