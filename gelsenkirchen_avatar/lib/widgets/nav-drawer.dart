@@ -27,8 +27,19 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fill,
                     image: AssetImage('assets/images/lernendestadt.png'))),
           ),
+
+          /* HOME */
           ListTile(
-              leading: Icon(Icons.home),
+              //leading: Icon(Icons.home),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Home_dunkelblau_Icon.png"),
+              ),
               title: Text('Home'),
               onTap: () {
                 Navigator.push(
@@ -36,8 +47,19 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => HomeScreen()));
               }),
+
+          /* PROFIL */
           ListTile(
-              leading: Icon(Icons.face),
+              //leading: Icon(Icons.face),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Profil_blau_Icon.png"),
+              ),
               title: Text('Profil'),
               onTap: () {
                 Navigator.push(
@@ -45,8 +67,20 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => Profil()));
               }),
+
+          /* TODO: Lernorteicon fehlt */
+          /* LERNORTE */
           ListTile(
-              leading: Icon(Icons.account_balance),
+              //leading: Icon(Icons.account_balance),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Lernort_rot_Icon.png"),
+              ),
               title: Text('Lernorte'),
               onTap: () {
                 Navigator.push(
@@ -56,6 +90,8 @@ class NavDrawer extends StatelessWidget {
                             LernortListeScreen()));
               }),
 
+          /* TODO: Freundeicon fehlt */
+          /* FREUNDE */
           ListTile(
               leading: Icon(Icons.people),
               title: Text('Freunde'),
@@ -66,6 +102,8 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Freundesliste()));
               }),
 
+          /* TODO: Scoreboardicon fehlt */
+          /* SCOREBOARD */
           ListTile(
               leading: Icon(Icons.score),
               title: Text('Scoreboard'),
@@ -76,27 +114,35 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ScoreBoard(2)));
               }),
 
-          // ListTile(
-          //     leading: Icon(Icons.settings),
-          //     title: Text('Einstellungen'),
-          //     onTap: () {
-          //       Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (BuildContext context) =>
-          //                   EinstellungenScreen()));
-          //     }),
+          /* TODO: Hilfe muss noch implenentiert werden (optional) */
+          /* TODO: Hilfeicon fehlt (optional)*/
+          /* HILFE */
+          /* ListTile(
+              leading: Icon(Icons.help),
+              title: Text('Hilfe'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => HilfeScreen()));
+              }), */
 
-          // ListTile(
-          //     leading: Icon(Icons.help),
-          //     title: Text('Hilfe'),
-          //     onTap: () {
-          //       Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (BuildContext context) => HilfeScreen()));
-          //     }),
+          /* TODO: Einstellungen muss noch implenentiert werden (optional) */
+          /* TODO: Einstellungenicon fehlt (optional) */
+          /* EINSTELLUNGEN */
+          /* ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Einstellungen'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            EinstellungenScreen()));
+              }), */
 
+          /* TODO: Impressumicon fehlt */
+          /* IMPRESSUM */
           ListTile(
               leading: Icon(Icons.description),
               title: Text('Impressum'),
@@ -107,9 +153,10 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
+          /* TODO: Registrieren muss entfernt werden: */
+          /* REGISTRIEREN */
           ListTile(
-              //leading: Icon(Icons.menu_book),
-              leading: Image.asset("Registrieren_dunkelblau_klein.png"),
+              leading: Icon(Icons.menu_book),
               title: Text('Registrierung'),
               onTap: () {
                 Navigator.push(
@@ -118,12 +165,15 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Registrierung()));
               }),
 
-          // ListTile(
-          //   leading: Icon(Icons.exit_to_app),
-          //   title: Text('Logout'),
-          //   onTap: () => {Navigator.of(context).pop()},
-          //   //Funktionalität zum Ausloggen fehlt noch
-          // ),
+          /* TODO: Logout-Funktion muss noch implementiert werden */
+          /* TODO: Logouticon fehlt */
+          /* LOGOUT */
+          /* ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () => {Navigator.of(context).pop()},
+            //Funktionalität zum Ausloggen fehlt noch
+          ), */
         ],
       ),
     );

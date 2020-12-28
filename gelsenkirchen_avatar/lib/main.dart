@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Gelsenkirchen Avatar',
       theme: ThemeData(
-        /*Standardschrift*/
+        /* Standardschrift */
         fontFamily: 'Montserrat',
-        /*Standardfarbe*/
+        /* TODO: Hexadezimalfarbe dunkelblau hier verwenden */
+        /* Standardfarbe */
         primarySwatch: Colors.blue,
       ),
       home: HomeScreen(),
