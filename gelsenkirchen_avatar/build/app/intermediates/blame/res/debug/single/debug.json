@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\drawable-mdpi-v4\\googleg_standard_color_18.png"
-    },
-    {
         "merged": "C:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_googleg_standard_color_18.png.flat",
         "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\drawable-hdpi-v4\\googleg_standard_color_18.png"
+    },
+    {
+        "merged": "C:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_googleg_standard_color_18.png.flat",
+        "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\drawable-mdpi-v4\\googleg_standard_color_18.png"
     },
     {
         "merged": "C:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_normal.9.png.flat",

@@ -25,7 +25,7 @@ class NavDrawer extends StatelessWidget {
                 color: Colors.blue[200],
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('assets/images/lernendestadt.png'))),
+                    image: AssetImage('assets/images/Menubild.png'))),
           ),
 
           /* HOME */
@@ -68,7 +68,6 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Profil()));
               }),
 
-          /* TODO: Lernorteicon fehlt */
           /* LERNORTE */
           ListTile(
               //leading: Icon(Icons.account_balance),
@@ -90,10 +89,18 @@ class NavDrawer extends StatelessWidget {
                             LernortListeScreen()));
               }),
 
-          /* TODO: Freundeicon fehlt */
           /* FREUNDE */
           ListTile(
-              leading: Icon(Icons.people),
+              //leading: Icon(Icons.people),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Freunde_gelb_Icon.png"),
+              ),
               title: Text('Freunde'),
               onTap: () {
                 Navigator.push(
@@ -102,10 +109,18 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Freundesliste()));
               }),
 
-          /* TODO: Scoreboardicon fehlt */
           /* SCOREBOARD */
           ListTile(
-              leading: Icon(Icons.score),
+              //leading: Icon(Icons.score),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
+              ),
               title: Text('Scoreboard'),
               onTap: () {
                 Navigator.push(
@@ -141,10 +156,18 @@ class NavDrawer extends StatelessWidget {
                             EinstellungenScreen()));
               }), */
 
-          /* TODO: Impressumicon fehlt */
           /* IMPRESSUM */
           ListTile(
-              leading: Icon(Icons.description),
+              //leading: Icon(Icons.description),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+              ),
               title: Text('Impressum'),
               onTap: () {
                 Navigator.push(
