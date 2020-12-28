@@ -48,9 +48,11 @@ class _RegistrierungState extends State<Registrierung> {
     } else {
       if (jsonDecode(res.body) == "true") {
         Fluttertoast.showToast(
-            msg: "Benutzer erstellt", toastLength: Toast.LENGTH_SHORT);
+            msg: "Registrierung erfolgreich", toastLength: Toast.LENGTH_SHORT);
       } else {
-        Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
+        Fluttertoast.showToast(
+            msg: "Registrierung fehlgeschlagen",
+            toastLength: Toast.LENGTH_SHORT);
       }
     }
     setState(() {
@@ -66,14 +68,14 @@ class _RegistrierungState extends State<Registrierung> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Registrieren'),
-        /*Farbcode in Hexadezimal*/
-        backgroundColor: Color(0xfff2a03d),
+        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
+        backgroundColor: Color(0xff0B3E99),
       ),
       body: Form(
           key: _formKey,
           child: ListView(children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
+              padding: const EdgeInsets.fromLTRB(15, 50, 15, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -81,15 +83,15 @@ class _RegistrierungState extends State<Registrierung> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
 
                   /*BENUTZERNAME*/
 
                   TextFormField(
                     decoration: new InputDecoration(
-                      /*Labeltext*/
-                      labelText: "Gib einen Benutzernamen ein",
+                      /*Prompt*/
+                      labelText: "Benutzernamen",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
@@ -111,8 +113,8 @@ class _RegistrierungState extends State<Registrierung> {
                   /*EMAIL*/
                   TextFormField(
                     decoration: new InputDecoration(
-                      /*Labeltext*/
-                      labelText: "Gib deine Email-Adresse ein",
+                      /*Prompt*/
+                      labelText: "Email",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
@@ -140,8 +142,8 @@ class _RegistrierungState extends State<Registrierung> {
                   /*PASSWORT*/
                   TextFormField(
                     decoration: new InputDecoration(
-                      /*Labeltext*/
-                      labelText: "Gib ein Passwort ein",
+                      /*Prompt*/
+                      labelText: "Passwort",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
@@ -167,8 +169,8 @@ class _RegistrierungState extends State<Registrierung> {
                   /*PASSWORT WIEDERHOLEN*/
                   TextFormField(
                     decoration: new InputDecoration(
-                      /*Labeltext*/
-                      labelText: "Wiederhole das Passwort",
+                      /*Prompt*/
+                      labelText: "Passwort wiederholen",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
@@ -191,50 +193,26 @@ class _RegistrierungState extends State<Registrierung> {
                   SizedBox(height: 40),
                   ImageButton(
                     children: <Widget>[],
-                    width: 302,
-                    height: 91,
+                    /* 302 x 91 sind die Originalmaße der Buttons */
+                    width: 302 / 1.3,
+                    height: 91 / 1.3,
                     paddingTop: 5,
+                    /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
                     pressedImage: Image.asset(
                       "assets/buttons/Registrieren_dunkelblau_groß.png",
                     ),
                     unpressedImage: Image.asset(
                         "assets/buttons/Registrieren_dunkelblau_groß.png"),
                     onTap: () {
-                      print('test');
-                    },
-                  ),
-                  ButtonTheme(
-                      padding: EdgeInsets.fromLTRB(145, 13, 145, 13),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blueGrey[900])),
-                      child: RaisedButton(
-                        onPressed: () {
-                          var valid = _formKey.currentState.validate();
-                          if (!valid) {
-                            return;
-                          }
+                      var valid = _formKey.currentState.validate();
+                      if (!valid) {
+                        return;
+                      }
 
-                          benutzerRegistrierung();
-                        },
-                        color: Colors.blueGrey[800],
-                        child: Text(
-                          "Registrieren",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[100]),
-                        ),
-                      )),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Anmeldung()));
+                      benutzerRegistrierung();
                     },
-                    child: Text(
-                      "Du bist schon registriert? Hier geht's zur Anmeldung.",
-                    ),
                   ),
                   FormField(
                     initialValue: false,
@@ -259,6 +237,22 @@ class _RegistrierungState extends State<Registrierung> {
               ),
             )
           ])),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        child: FlatButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Anmeldung()));
+          },
+          child: Text(
+            "Du bist schon registriert? \n Hier geht's zur Anmeldung.",
+            textAlign: TextAlign.center,
+          ),
+        ),
+        elevation: 0,
+      ),
     );
   }
 }

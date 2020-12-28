@@ -108,7 +108,8 @@ class NavDrawer extends StatelessWidget {
               }),
 
           ListTile(
-              leading: Icon(Icons.menu_book),
+              //leading: Icon(Icons.menu_book),
+              leading: Image.asset("Registrieren_dunkelblau_klein.png"),
               title: Text('Registrierung'),
               onTap: () {
                 Navigator.push(

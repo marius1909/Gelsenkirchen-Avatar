@@ -1,4 +1,4 @@
-#Fri Dec 18 15:55:14 CET 2020
+#Mon Dec 28 13:56:21 CET 2020
 base.0=C\:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
