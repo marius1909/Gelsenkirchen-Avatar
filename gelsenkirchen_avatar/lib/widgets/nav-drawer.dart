@@ -110,6 +110,7 @@ class NavDrawer extends StatelessWidget {
               }),
 
           /* SCOREBOARD */
+          /* Wurde in Sprint 4 in "Bestelnliste" umbenannt, da verständlicher für User */
           ListTile(
               //leading: Icon(Icons.score),
               leading: ConstrainedBox(
@@ -121,7 +122,7 @@ class NavDrawer extends StatelessWidget {
                 ),
                 child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
               ),
-              title: Text('Scoreboard'),
+              title: Text('Bestenliste'),
               onTap: () {
                 Navigator.push(
                     context,
@@ -166,7 +167,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {

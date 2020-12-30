@@ -10,7 +10,7 @@ class LernortListeScreen extends StatelessWidget {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text('Lernort'),
+          title: Text('Lernorte'),
           actions: [
             IconButton(
                 icon: Icon(Icons.search, color: Colors.white), onPressed: null),
@@ -80,7 +80,7 @@ class LernortListState extends State<LernortListView> {
         ),*/
         new ListTile(
           title: new Text(
-            /*NAME*/
+            /* NAME */
             lernortList[index].name != null ? lernortList[index].name : 'empty',
             style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
           ),
@@ -88,20 +88,19 @@ class LernortListState extends State<LernortListView> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                /*KURZBESCHREIBUNG*/
+                /* KURZBESCHREIBUNG */
                 new Text(
                     lernortList[index].kurzbeschreibung != null
                         ? lernortList[index].kurzbeschreibung
                         : '',
                     style: new TextStyle(
                         fontSize: 13.0, fontWeight: FontWeight.normal)),
-                /*KATEGORIE*/
+                /* KATEGORIE */
                 /*new Text('Kategorie: ${lernortList[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/
               ]),
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
                 MaterialPageRoute(

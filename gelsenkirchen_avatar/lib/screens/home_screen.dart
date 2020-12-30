@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /* drawer für den Menü-Button statt dem Zurück-Button */
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('GElernt!'),

@@ -17,12 +17,15 @@ class _LernortScreenState extends State<LernortScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         //drawer: NavDrawer(),
         appBar: AppBar(
           /*NAME*/
           title: Text(widget.l.name),
         ),
-        body: Column(children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           /*TITELBILD*/
           /*Todo: Bild muss hier noch das Titelbild des entsprechenden Lernortes eingefügt werden.
           Dieses Bild dient als Platzhalter*/
@@ -129,6 +132,6 @@ class _LernortScreenState extends State<LernortScreen> {
               ),
             )
           ]))
-        ]));
+        ])));
   }
 }
