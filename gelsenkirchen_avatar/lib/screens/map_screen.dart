@@ -6,6 +6,8 @@ import 'package:gelsenkirchen_avatar/data/benutzer_spiel.dart';
 import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+// Für Map-Style
+import 'package:flutter/services.dart' show rootBundle;
 
 class MapScreen extends StatefulWidget {
   @override
@@ -15,6 +17,9 @@ class MapScreen extends StatefulWidget {
 class MapSampleState extends State<MapScreen> {
   Completer<GoogleMapController> _controller = Completer();
   final Set<Marker> _markers = {};
+
+  /* Inhalt der map_style.txt */
+  String _mapStyle;
 
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
@@ -29,6 +34,11 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
     addMarkersForLernorte();
+
+    /* Lädt das map_style.txt File als ein String ein */
+    rootBundle.loadString('assets/styles/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
   }
 
   @override
@@ -39,6 +49,9 @@ class MapSampleState extends State<MapScreen> {
         initialCameraPosition: _whsGelsenkrichen,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
+
+          /* Style setzen */
+          controller.setMapStyle(_mapStyle);
         },
         markers: _markers,
         myLocationEnabled: true,
