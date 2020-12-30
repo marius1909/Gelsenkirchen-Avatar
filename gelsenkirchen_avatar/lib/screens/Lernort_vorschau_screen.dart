@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+/* import 'package:http/http.dart' as http;
+import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class LernortVorschau extends StatefulWidget {

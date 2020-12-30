@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 
 class ProfilBearbeiten extends StatelessWidget {
   @override

@@ -96,6 +96,7 @@ class LernortListState extends State<LernortListView> {
                     style: new TextStyle(
                         fontSize: 13.0, fontWeight: FontWeight.normal)),
                 /* KATEGORIE */
+                /* TODO: Kategorie anzeigen */
                 /*new Text('Kategorie: ${lernortList[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/
