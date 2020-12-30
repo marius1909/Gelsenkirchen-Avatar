@@ -66,50 +66,56 @@ class LernortListState extends State<LernortListView> {
     );
   }
 
-  /*Diese Methode erstellt die ListViewItems*/
+  /* Diese Methode erstellt die ListViewItems */
   Widget erstelleListViewitem(BuildContext context, int index) {
     return new Card(
+        color: null,
+        elevation: 0,
         child: new Column(
-      children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
+          children: <Widget>[
+            /* BILD */
+            /* TODO: Lernortbilder aus DB anzeigen */
+            /*new ListTile(
         leading: new Image.asset(
           "assets/" + _allCities[index].image,
           fit: BoxFit.cover,
           width: 100.0,
         ),*/
-        new ListTile(
-          title: new Text(
-            /* NAME */
-            lernortList[index].name != null ? lernortList[index].name : 'empty',
-            style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
-          ),
-          subtitle: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /* KURZBESCHREIBUNG */
-                new Text(
-                    lernortList[index].kurzbeschreibung != null
-                        ? lernortList[index].kurzbeschreibung
-                        : '',
-                    style: new TextStyle(
-                        fontSize: 13.0, fontWeight: FontWeight.normal)),
-                /* KATEGORIE */
-                /* TODO: Kategorie anzeigen */
-                /*new Text('Kategorie: ${lernortList[index].kategorieId}',
+            new ListTile(
+              //dense: true,
+              title: new Text(
+                /* NAME */
+                lernortList[index].name != null
+                    ? lernortList[index].name
+                    : 'empty',
+                style: new TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              subtitle: new Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    /* KURZBESCHREIBUNG */
+                    new Text(
+                      lernortList[index].kurzbeschreibung != null
+                          ? lernortList[index].kurzbeschreibung
+                          : '',
+                    ),
+                    /* KATEGORIE */
+                    /* TODO: Kategoriename aus DB anzeigen */
+                    /*new Text('Kategorie: ${lernortList[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        LernortScreen(l: lernortList[index])));
-          },
-        )
-      ],
-    ));
+                  ]),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            LernortScreen(l: lernortList[index])));
+              },
+            )
+          ],
+        ));
   }
 }
