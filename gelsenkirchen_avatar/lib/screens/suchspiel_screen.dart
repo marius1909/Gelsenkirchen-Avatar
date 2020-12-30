@@ -1,24 +1,83 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class Suchspiel extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:nfc_in_flutter/nfc_in_flutter.dart';
+
+// class Suchspiel extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       type: MaterialType.transparency,
+//       child: Container(
+//         child: SafeArea(
+//           child: FlutterLogo(style: FlutterLogoStyle.horizontal)
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class Suchspiel extends StatefulWidget {
+  @override
+  _NFCReaderState createState() => _NFCReaderState();
+}
+
+class _NFCReaderState extends State {
+  bool _supportsNFC = false;
+  bool _reading = false;
+  StreamSubscription<NDEFMessage> _stream;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if the device supports NFC reading
+    NFC.isNDEFSupported.then((bool isSupported) {
+      setState(() {
+        _supportsNFC = isSupported;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: Container(
-        child: SafeArea(
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'bold',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                TextSpan(text: ' world!'),
-              ],
-            ),
-          ),
-        ),
-      ),
+    if (!_supportsNFC) {
+      return RaisedButton(
+        child: const Text("You device does not support NFC"),
+        onPressed: null,
+      );
+    }
+
+    return RaisedButton(
+      child: Text(_reading ? "Stop reading" : "Start reading"),
+      onPressed: () {
+        if (_reading) {
+          _stream?.cancel();
+          setState(
+            () {
+              _reading = false;
+            },
+          );
+        } else {
+          setState(
+            () {
+              _reading = true;
+              // Start reading using NFC.readNDEF()
+              _stream = NFC
+                  .readNDEF(
+                once: true,
+                throwOnUserCancel: false,
+              ).listen(
+                (NDEFMessage message) {
+                  print("read NDEF message: ${message.payload}");
+                },
+                onError: (e) {
+                  // Check error handling guide below
+                },
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

@@ -47,5 +47,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NFCReaderUsageDescription</key>
+	<string>NFC wird benötigt um auf NFC Tags basierte Spiele spielen zu können</string>
 </dict>
 </plist>
