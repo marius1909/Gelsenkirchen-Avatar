@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/testfreund.dart';
 
+import '../data/benutzer.dart';
+import '../data/benutzer.dart';
+import '../data/benutzer.dart';
+
 class Freundesliste extends StatefulWidget {
   //loadFreunde
 
@@ -10,30 +14,24 @@ class Freundesliste extends StatefulWidget {
 }
 
 class _FreundeslisteState extends State<Freundesliste> {
+  List<Benutzer> freunde;
+
+  int currentSortStyle = 0;
+
   TextFormField freundHinzufuegenField;
   TextEditingController freundeHinzufuegenController = TextEditingController();
 
   var showAddFriendTextField = false;
 
-  final List<Testfreund> testfreunde = [
-    Testfreund("Freund1", "1", "*"),
-    Testfreund("Freund2", "23", "*"),
-    Testfreund("Freund3", "400", "*"),
-    Testfreund("Freund4", "3", "*"),
-    Testfreund("Freund5", "1", "*"),
-    Testfreund("Freund6", "20", "*"),
-    Testfreund("Freund7", "80", "*"),
-    Testfreund("Freund8", "100", "*"),
-    Testfreund("Freund9", "122", "*"),
-    Testfreund("Freund10", "12", "*"),
-    Testfreund("Freund11", "15", "*"),
-    Testfreund("Freund12", "41", "*"),
-    Testfreund("Freund13", "25", "*"),
-    Testfreund("Freund14", "2", "*"),
-  ];
+  bool initComplete = false;
 
   @override
   Widget build(BuildContext context) {
+    if (!initComplete) {
+      loadFriendList();
+      initComplete = true;
+    }
+
     return Scaffold(
         backgroundColor: Colors.lightBlueAccent,
         appBar: AppBar(
@@ -68,6 +66,22 @@ class _FreundeslisteState extends State<Freundesliste> {
                           fontWeight: FontWeight.bold)),
                   FlatButton(
                       onPressed: () {
+                        if (currentSortStyle == 0) {
+                          setState(() {
+                            freunde.sort((a, b) => a.benutzer
+                                .toLowerCase()
+                                .compareTo(b.benutzer.toLowerCase()));
+                            currentSortStyle++;
+                          });
+                        } else if (currentSortStyle == 1) {
+                          setState(() {
+                            freunde.sort((a, b) => a.id.compareTo(b.id));
+                            currentSortStyle = 0;
+                          });
+                        }
+
+                        //print(freunde[0]);
+
                         // var neuerBenutzer = Benutzer(
                         //     email: "hans@gmail.com",
                         //     benutzer: "Hans",
@@ -94,18 +108,18 @@ class _FreundeslisteState extends State<Freundesliste> {
                 child: SizedBox(
                   height: 400.00,
                   child: ListView.builder(
-                      itemCount: testfreunde.length,
+                      itemCount: freunde.length,
                       itemBuilder: (context, index) {
                         return Card(
                             child: ListTile(
                           onTap: () {},
-                          title: Text(testfreunde[index].name,
+                          title: Text(freunde[index].benutzer,
                               style: TextStyle(
                                   color: Colors.black,
                                   letterSpacing: 1.8,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
-                          leading: Text(testfreunde[index].level),
+                          leading: Text(freunde[index].id.toString()),
                         ));
                       }),
                 ),
@@ -157,16 +171,16 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-//dummy funktion, soll später auf freundesliste datenbank arbeiten
-  void createFreundeNamen() async {
-    List<String> freundeNamen;
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-    for (var i = 0; i < alleBenutzerFuture.length; i++) {
-      freundeNamen[i] = alleBenutzerFuture[i].benutzer;
-    }
+  //dummy funktion, soll später auf freundesliste datenbank arbeiten
+  Future<void> loadFriendList() async {
+    List<Benutzer> a = await Benutzer.shared.gibObjekte();
+
+    setState(() {
+      freunde = a;
+    });
   }
 
-//dummy funktion geht später alle user durch und fuegt freund in datenbank ein
+  //dummy funktion geht später alle user durch und fuegt freund in datenbank ein
   void FuegeFreundHinzu(String _name) {
     print(_name);
   }

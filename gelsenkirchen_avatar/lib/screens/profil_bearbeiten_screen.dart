@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
+import 'avatarbearbeiten_screen.dart';
+
 class ProfilBearbeiten extends StatefulWidget {
   @override
   _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
@@ -86,10 +88,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                     )
                   ],
                 ),
-                Divider(
-                  height: 50.0,
-                  color: Colors.grey[800],
-                ),
+                SizedBox(height: 100),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -99,8 +98,14 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                       radius: 50,
                     ),
                     IconButton(
-                      icon: Icon(Icons.edit, color: Colors.white),
-                      onPressed: () {},
+                      icon: Icon(Icons.edit, color: Colors.black),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Avatarbearbeiten()),
+                        );
+                      },
                     )
                   ],
                 ),
@@ -146,12 +151,11 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
         aktuellerName = name;
         nameSchonVergebenTextMessage = "";
         nameSchonVergeben = false;
-        print("neu");
       });
     } else {
       setState(() {
         nameSchonVergebenTextMessage = "Name schon \n vergeben";
-        print("schon vergeben");
+
         nameSchonVergeben = false;
       });
     }

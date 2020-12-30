@@ -14,6 +14,8 @@ class _ProfilState extends State<Profil> {
   Widget build(BuildContext context) {
     loadName();
 
+    //wird immer wieder gecalled warum?
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Profil'),
