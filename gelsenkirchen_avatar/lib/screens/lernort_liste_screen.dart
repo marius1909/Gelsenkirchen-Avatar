@@ -95,11 +95,12 @@ class LernortListState extends State<LernortListView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     /* KURZBESCHREIBUNG */
-                    new Text(
+                    /* new Text(
                       lernortList[index].kurzbeschreibung != null
                           ? lernortList[index].kurzbeschreibung
                           : '',
-                    ),
+                    ), */
+
                     /* KATEGORIE */
                     /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                     /*new Text('Kategorie: ${lernortList[index].kategorieId}',
