@@ -1,7 +1,8 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nfc_in_flutter/nfc_in_flutter.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 // class Suchspiel extends StatelessWidget {
 //   @override
@@ -19,65 +20,77 @@ import 'package:nfc_in_flutter/nfc_in_flutter.dart';
 
 class Suchspiel extends StatefulWidget {
   @override
-  _NFCReaderState createState() => _NFCReaderState();
+  _QRViewState createState() => _QRViewState();
 }
 
-class _NFCReaderState extends State {
-  bool _supportsNFC = false;
-  bool _reading = false;
-  StreamSubscription<NDEFMessage> _stream;
+class _QRViewState extends State<Suchspiel> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  Barcode result;
+  QRViewController controller;
+
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller.resumeCamera();
+    }
+  }
 
   @override
-  void initState() {
-    super.initState();
-    // Check if the device supports NFC reading
-    NFC.isNDEFSupported.then((bool isSupported) {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            // To ensure the Scanner view is properly sizes after rotation
+            // we need to listen for Flutter SizeChanged notification and update controller
+            child: NotificationListener<SizeChangedLayoutNotification>(
+              onNotification: (notification) {
+                Future.microtask(() => controller?.updateDimensions(qrKey));
+                return false;
+              },
+              child: SizeChangedLayoutNotifier(
+                key: const Key('qr-size-notifier'),
+                child: QRView(
+                  key: qrKey,
+                  onQRViewCreated: _onQRViewCreated,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: (result != null)
+                  ? Text(
+                      'Data: ${result.code}')
+                  : Text("Scan a code"),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
       setState(() {
-        _supportsNFC = isSupported;
+        controller.dispose();
+        result = scanData;
+        print(result.code);
       });
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (!_supportsNFC) {
-      return RaisedButton(
-        child: const Text("You device does not support NFC"),
-        onPressed: null,
-      );
-    }
-
-    return RaisedButton(
-      child: Text(_reading ? "Stop reading" : "Start reading"),
-      onPressed: () {
-        if (_reading) {
-          _stream?.cancel();
-          setState(
-            () {
-              _reading = false;
-            },
-          );
-        } else {
-          setState(
-            () {
-              _reading = true;
-              // Start reading using NFC.readNDEF()
-              _stream = NFC
-                  .readNDEF(
-                once: true,
-                throwOnUserCancel: false,
-              ).listen(
-                (NDEFMessage message) {
-                  print("read NDEF message: ${message.payload}");
-                },
-                onError: (e) {
-                  // Check error handling guide below
-                },
-              );
-            },
-          );
-        }
-      },
-    );
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }
