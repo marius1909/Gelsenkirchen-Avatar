@@ -26,7 +26,7 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/Menubild.png'))),
           ),
 
-          /* HOME */
+          /* HOME (heißt in der App jetzt Karte, weil es den Menüpunkt für den Bentuzer treffender bezeichnet) */
           ListTile(
               //leading: Icon(Icons.home),
               leading: ConstrainedBox(
@@ -38,7 +38,7 @@ class NavDrawer extends StatelessWidget {
                 ),
                 child: Image.asset("assets/icons/Home_dunkelblau_Icon.png"),
               ),
-              title: Text('Home'),
+              title: Text('Karte'),
               onTap: () {
                 Navigator.push(
                     context,

@@ -32,16 +32,16 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
             /* Verwendung für Überschriften: Text('custom theme', style: Theme.of(context).textTheme.headline1) */
-            headline1: TextStyle(fontSize: 36),
+            headline1: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
 
             /* Verwendung für Unterüberschriften: Text('custom theme', style: Theme.of(context).textTheme.headline2) */
-            headline2: TextStyle(fontSize: 24),
+            headline2: TextStyle(fontSize: 22),
 
             /* Verwendung für kurze wichtige Infos o. ä.: Text('custom theme', style: Theme.of(context).textTheme.headline3) */
             headline3: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
             /* Verwendung für normalen Fließtext: Text('custom theme', style: Theme.of(context).textTheme.bodyText1) */
-            bodyText1: TextStyle(fontSize: 12),
+            bodyText1: TextStyle(fontSize: 14),
           )),
 
       /* TODO: Wenn Benutzer angemeldet ist, dann HomeScreen anzeigen, wenn nicht angemeldet, dann Anmeldungsscreen anzeigen (Lisa) */

@@ -6,7 +6,7 @@ import 'package:gelsenkirchen_avatar/data/lernort.dart';
 // Für Map-Style
 import 'package:flutter/services.dart' show rootBundle;
 
-/* TODO: mapMarker.png als Marker einbinden */
+/* TODO: Mapmarker_rot.png als Marker einbinden */
 
 class MapScreen extends StatefulWidget {
   @override
