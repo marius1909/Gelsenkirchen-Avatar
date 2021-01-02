@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Gelsenkirchen Avatar',
       theme: ThemeData(
           /* Primäre Farben */
-          primaryColor: Color(0xff2d75f0), //normales blau
+          primaryColor: Color(0xff0b3e99), //normales dunkelblau
           primaryColorLight: Color(0xff4d8af3), //helles blau
           primaryColorDark: Color(0xff105de3), //dunkles blau
 
@@ -27,20 +27,25 @@ class MyApp extends StatelessWidget {
           focusColor: Color(0xff98ce00),
 
           /* Standardschrift */
+          /* Set Theme in Widgets */
+          /* Text('custom theme', style: Theme.of(context).textTheme.headline1) */
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
-            headline1: null,
-            bodyText1: null,
+            /* Verwendung für Überschriften: Text('custom theme', style: Theme.of(context).textTheme.headline1) */
+            headline1: TextStyle(fontSize: 36),
 
-            /* Set Theme in Widgets */
-            /* Container(
-    color: Theme.of(context).primaryColor,    
-    child: Text('custom theme', 
-                 style: Theme.of(context).textTheme.body
-    )
-) */
+            /* Verwendung für Unterüberschriften: Text('custom theme', style: Theme.of(context).textTheme.headline2) */
+            headline2: TextStyle(fontSize: 24),
+
+            /* Verwendung für kurze wichtige Infos o. ä.: Text('custom theme', style: Theme.of(context).textTheme.headline3) */
+            headline3: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+
+            /* Verwendung für normalen Fließtext: Text('custom theme', style: Theme.of(context).textTheme.bodyText1) */
+            bodyText1: TextStyle(fontSize: 12),
           )),
-      home: HomeScreen(),
+
+      /* TODO: Wenn Benutzer angemeldet ist, dann HomeScreen anzeigen, wenn nicht angemeldet, dann Anmeldungsscreen anzeigen (Lisa) */
+      home: Anmeldung(),
     );
   }
 }

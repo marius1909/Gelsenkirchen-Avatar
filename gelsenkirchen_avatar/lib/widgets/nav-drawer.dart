@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
@@ -130,8 +128,8 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ScoreBoard(2)));
               }),
 
-          /* TODO: Hilfe muss noch implenentiert werden (optional) */
-          /* TODO: Hilfeicon fehlt (optional)*/
+          /* TODO: Hilfe muss noch implenentiert werden (optional) (Lisa)*/
+          /* TODO: Hilfeicon fehlt (optional) (Lisa) */
           /* HILFE */
           /* ListTile(
               leading: Icon(Icons.help),
@@ -143,8 +141,8 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => HilfeScreen()));
               }), */
 
-          /* TODO: Einstellungen muss noch implenentiert werden (optional) */
-          /* TODO: Einstellungenicon fehlt (optional) */
+          /* TODO: Einstellungen muss noch implenentiert werden (optional) (Lisa) */
+          /* TODO: Einstellungenicon fehlt (optional) (Lisa) */
           /* EINSTELLUNGEN */
           /* ListTile(
               leading: Icon(Icons.settings),
@@ -178,7 +176,7 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
-          /* TODO: Registrieren muss entfernt werden: */
+          /* TODO: Registrieren muss entfernt werden (Lisa) */
           /* REGISTRIEREN */
           ListTile(
               leading: Icon(Icons.menu_book),
@@ -190,8 +188,8 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Registrierung()));
               }),
 
-          /* TODO: Logout-Funktion muss noch implementiert werden */
-          /* TODO: Logouticon fehlt */
+          /* TODO: Logout-Funktion muss noch implementiert werden (Lisa) */
+          /* TODO: Logouticon fehlt (Lisa) */
           /* LOGOUT */
           /* ListTile(
             leading: Icon(Icons.exit_to_app),

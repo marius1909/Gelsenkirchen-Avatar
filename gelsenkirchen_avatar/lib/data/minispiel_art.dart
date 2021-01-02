@@ -1,6 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class MinispielArt extends DatenbankObjekt<MinispielArt> {
   int id;

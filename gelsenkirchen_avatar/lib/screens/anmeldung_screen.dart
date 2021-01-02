@@ -73,10 +73,10 @@ class _AnmeldungState extends State<Anmeldung> {
       ),
       body: SafeArea(
           child: ListView(children: [
-        Padding(padding: EdgeInsets.fromLTRB(30, 100, 30, 0)),
+        Padding(padding: EdgeInsets.fromLTRB(30, 50, 30, 0)),
         Column(children: [
           Text("Bitte gib deine Anmeldedaten ein:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              style: Theme.of(context).textTheme.headline3),
           /* CircleAvatar(
                 backgroundImage: AssetImage('assets/images/wink.png'),
                 radius: 130), */
@@ -151,6 +151,21 @@ class _AnmeldungState extends State<Anmeldung> {
                   onTap: () {
                     benutzerLogin();
                   },
+                ),
+                SizedBox(height: 40),
+
+                /* Dieser Button dient nur dazu während der Entwicklung den Anmeldescreen zu überspringen */
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => HomeScreen()));
+                  },
+                  child: Text(
+                    "Ich bin Entwickler ;)",
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ]))
         ])

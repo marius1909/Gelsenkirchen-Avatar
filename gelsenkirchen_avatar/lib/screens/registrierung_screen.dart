@@ -80,8 +80,7 @@ class _RegistrierungState extends State<Registrierung> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Zuerst brauchen wir ein paar Infos von dir:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      style: Theme.of(context).textTheme.headline3),
                   SizedBox(
                     height: 50,
                   ),
@@ -91,7 +90,7 @@ class _RegistrierungState extends State<Registrierung> {
                   TextFormField(
                     decoration: new InputDecoration(
                       /*Prompt*/
-                      labelText: "Benutzernamen",
+                      labelText: "Benutzername",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),

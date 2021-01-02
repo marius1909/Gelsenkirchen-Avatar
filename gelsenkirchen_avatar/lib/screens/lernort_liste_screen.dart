@@ -74,7 +74,7 @@ class LernortListState extends State<LernortListView> {
         child: new Column(
           children: <Widget>[
             /* BILD */
-            /* TODO: Lernortbilder aus DB anzeigen */
+            /* TODO: Lernortbilder aus DB anzeigen (Lisa) */
             /*new ListTile(
         leading: new Image.asset(
           "assets/" + _allCities[index].image,
@@ -101,7 +101,7 @@ class LernortListState extends State<LernortListView> {
                           : '',
                     ),
                     /* KATEGORIE */
-                    /* TODO: Kategoriename aus DB anzeigen */
+                    /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                     /*new Text('Kategorie: ${lernortList[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/

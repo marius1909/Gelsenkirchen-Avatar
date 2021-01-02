@@ -57,7 +57,7 @@ class _ProfilState extends State<Profil> {
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        /* TODO: Level des Spielers anzeigen */
+                        /* TODO: Level des Spielers anzeigen (Lisa) */
                         Text(
                           '8',
                           style: TextStyle(

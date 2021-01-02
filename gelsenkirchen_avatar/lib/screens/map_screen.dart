@@ -6,6 +6,8 @@ import 'package:gelsenkirchen_avatar/data/lernort.dart';
 // Für Map-Style
 import 'package:flutter/services.dart' show rootBundle;
 
+/* TODO: mapMarker.png als Marker einbinden */
+
 class MapScreen extends StatefulWidget {
   @override
   State<MapScreen> createState() => MapSampleState();
@@ -18,6 +20,7 @@ class MapSampleState extends State<MapScreen> {
   /* Inhalt der map_style.txt */
   String _mapStyle;
 
+  /* TODO: Kameraposition beim Starten der App sollte auf dem aktuellen Standort des Benutzers liegen (Lisa) */
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
     zoom: 17,
@@ -59,6 +62,7 @@ class MapSampleState extends State<MapScreen> {
     );
   }
 
+  /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
     var lernorte = Lernort.shared.gibObjekte();
     lernorte.then((value) {
@@ -66,6 +70,9 @@ class MapSampleState extends State<MapScreen> {
         final marker = Marker(
           markerId: MarkerId(element.id.toString()),
           position: LatLng(element.nord, element.ost),
+
+          /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
+          Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
           onTap: () {
             Navigator.push(
                 context,
