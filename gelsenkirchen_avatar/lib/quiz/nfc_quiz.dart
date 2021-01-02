@@ -9,15 +9,16 @@ class NFCQuiz extends StatefulWidget {
 }
 
 class _NFCQuizState extends State<NFCQuiz> {
-
-
   String ergebnisText = "";
   String loesungswort = "";
   String frage = "";
   List<String> tipps = new List();
   int anzahlAnGezeigtenTipps;
 
- 
+  //in sekunden
+  int zeitZumLoesen;
+  Timer timer;
+  bool timerStarted = false;
 
   //wird false wenn neue Frage gestellt wird
   bool initComplete = false;
@@ -31,9 +32,14 @@ class _NFCQuizState extends State<NFCQuiz> {
     if (!initComplete) {
       alleTextController = new List();
       buchstabenFelder = buildTextFields();
+      zeitZumLoesen = 10;
 
       initComplete = true;
     } //init end-----------
+
+    if (!timerStarted) {
+      startTimer();
+    }
 
     return Scaffold(
       drawer: NavDrawer(),
@@ -42,7 +48,7 @@ class _NFCQuizState extends State<NFCQuiz> {
       ),
       body: Column(
         children: [
-          Timer
+          Text("" + zeitZumLoesen.toString()),
           FlatButton(
               color: Colors.blue,
               onPressed: () => neueFrage(),
@@ -118,7 +124,8 @@ class _NFCQuizState extends State<NFCQuiz> {
     return wortGleich;
   }
 
-//dummy funktionen für Datenbank implementierung, neueFrage(String Frage, String Loesung, List<String> tipps)?
+  //dummy funktionen für Datenbank implementierung, neueFrage(String Frage, String Loesung, List<String> tipps)?
+  //eventuell sekunden für Timer hier festlegen
   void neueFrage() {
     setState(() {
       tipps.clear();
@@ -132,9 +139,27 @@ class _NFCQuizState extends State<NFCQuiz> {
 
     anzahlAnGezeigtenTipps = tipps.length;
 
-    print(anzahlAnGezeigtenTipps);
-
+    timerStarted = false;
     frageAngezeigt = true;
     initComplete = false;
+  }
+
+  void resetTimer() {}
+
+  void startTimer() {
+    int sekundenCounter = 10;
+
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (sekundenCounter >= 0) {
+          zeitZumLoesen = sekundenCounter;
+          sekundenCounter--;
+        } else {
+          pruefeErgebnis();
+          timer.cancel();
+        }
+      });
+    });
+    timerStarted = true;
   }
 }
