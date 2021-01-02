@@ -8,6 +8,7 @@ import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
+import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -45,6 +46,19 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => Profil()));
               }),
+
+          //ENTFERNEN ----
+          ListTile(
+              leading: Icon(Icons.face),
+              title: Text('NFC Quiz'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => NFCQuiz()));
+              }),
+          //ENTFERNEN ----
+
           ListTile(
               leading: Icon(Icons.account_balance),
               title: Text('Lernorte'),

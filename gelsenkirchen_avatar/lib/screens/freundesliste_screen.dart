@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/screens/testfreund.dart';
+import 'package:gelsenkirchen_avatar/unused/testfreund.dart';
 
 import '../data/benutzer.dart';
 import '../data/benutzer.dart';
