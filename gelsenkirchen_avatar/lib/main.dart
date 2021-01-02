@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           /* Primäre Farben */
           primaryColor: Color(0xff0b3e99), //normales dunkelblau
-          primaryColorLight: Color(0xff4d8af3), //helles blau
-          primaryColorDark: Color(0xff105de3), //dunkles blau
+          primaryColorLight: Color(0xff0e53c9), //helles dunkelblau
+          primaryColorDark: Color(0xff072c6b), //dunkles dunkelblau
 
           /* Sekundäre/ Akzent-Farbe */
           /* Muss ggf. angepasst werden */
-          accentColor: Color(0xffe54bab),
+          accentColor: Color(0xffe54b4b),
 
           /* Hintergrundfarbe des Scaffold-Widgets */
           //scaffoldBackgroundColor: Colors.grey[500],
@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
           /* Set Theme in Widgets */
           /* Text('custom theme', style: Theme.of(context).textTheme.headline1) */
           fontFamily: 'Montserrat',
+
+          /* Standardtextstyles */
           textTheme: TextTheme(
             /* Verwendung für Überschriften: Text('custom theme', style: Theme.of(context).textTheme.headline1) */
             headline1: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),

@@ -74,26 +74,30 @@ class LernortListState extends State<LernortListView> {
         child: new Column(
           children: <Widget>[
             /* BILD */
-            /* TODO: Lernortbilder aus DB anzeigen (Lisa) */
-            /*new ListTile(
-        leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-        ),*/
+
             new ListTile(
               //dense: true,
+              /* TODO: Lernortbilder aus DB anzeigen (Lisa) */
+              /* leading: new Image.asset(
+                "assets/" + lernortList[index].titelbild,
+                fit: BoxFit.cover,
+                width: 100.0,
+              ), */
+              /* Folgende Zeile dient nur zur Anschauung. Kann durch obrigen Absatz "leading" ersetzt werden, wenn Bilder aus DB angezeigt werden können. */
+              leading: Icon(Icons.home),
               title: new Text(
                 /* NAME */
                 lernortList[index].name != null
                     ? lernortList[index].name
                     : 'empty',
-                style: new TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              subtitle: new Column(
+
+              /* "subtitle" muss wieder einkommentiert werden, wenn die Kategorie angezeigt werden soll */
+              /* subtitle: new Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    /* Kurzbeschreibung nimmt doch zu viel Platz ein, deshalb vorerst auskommentiert */
                     /* KURZBESCHREIBUNG */
                     /* new Text(
                       lernortList[index].kurzbeschreibung != null
@@ -103,10 +107,10 @@ class LernortListState extends State<LernortListView> {
 
                     /* KATEGORIE */
                     /* TODO: Kategoriename aus DB anzeigen (Lisa) */
-                    /*new Text('Kategorie: ${lernortList[index].kategorieId}',
+                    /* new Text('Kategorie: ${lernortList[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-                  ]),
+                  ]), */
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 Navigator.push(
