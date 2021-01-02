@@ -47,11 +47,6 @@ class _NFCQuizState extends State<NFCQuiz> {
       initComplete = true;
     } //init end-----------
 
-    if (!timerStarted) {
-      startTimer();
-      anzahlAnGezeigtenTipps = 0;
-    }
-
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -139,7 +134,9 @@ class _NFCQuizState extends State<NFCQuiz> {
 
 //Timer
   void startTimer() {
-    timer.cancel();
+    if (!(timer == null)) {
+      timer.cancel();
+    }
 
     int sekundenCounter = 20;
 
@@ -183,5 +180,8 @@ class _NFCQuizState extends State<NFCQuiz> {
     timerStarted = false;
     frageAngezeigt = true;
     initComplete = false;
+
+    startTimer();
+    anzahlAnGezeigtenTipps = 0;
   }
 }
