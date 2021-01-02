@@ -8,22 +8,34 @@ class NFCQuiz extends StatefulWidget {
   _NFCQuizState createState() => _NFCQuizState();
 }
 
+/*
+toDo: 
+1.Zurzeit 3 bool werte um die Korrekten daten anzuzeigen bzw. keine errors beim initialisieren zu haben, sollte einfacher/mit weniger gehen
+2. Timer korrekt im erstem Frame starten, zurzeit hängt er ne sekunde hinterher
+3. Punktestand
+4. Löse einzelne buchstaben nach Zeit
+5. Tipps nach Prozentsatz der abgelaufenen Zeit anzeigen und egal für welche Anzahl an Tipps
+
+*/
+
 class _NFCQuizState extends State<NFCQuiz> {
+  //anzeige
   String ergebnisText = "";
   String loesungswort = "";
   String frage = "";
-  List<String> tipps = new List();
+
   int anzahlAnGezeigtenTipps;
 
-  //in sekunden
-  int zeitZumLoesen;
+  //timer
+  int zeitZumLoesen; //in sekunden
   Timer timer;
-  bool timerStarted = false;
 
-  //wird false wenn neue Frage gestellt wird
+  //bools zum korrekten anzeigen
+  bool timerStarted = false;
   bool initComplete = false;
   bool frageAngezeigt = false;
 
+  List<String> tipps = new List();
   List<Flexible> buchstabenFelder;
   List<TextEditingController> alleTextController;
 
@@ -32,13 +44,12 @@ class _NFCQuizState extends State<NFCQuiz> {
     if (!initComplete) {
       alleTextController = new List();
       buchstabenFelder = buildTextFields();
-      zeitZumLoesen = 10;
-
       initComplete = true;
     } //init end-----------
 
     if (!timerStarted) {
       startTimer();
+      anzahlAnGezeigtenTipps = 0;
     }
 
     return Scaffold(
@@ -76,6 +87,7 @@ class _NFCQuizState extends State<NFCQuiz> {
     );
   }
 
+//Erstellt beim aufrufen einer neuen Frage dynamisch die richtige anzahl an Textfelder
   List<Flexible> buildTextFields() {
     List<Flexible> temp = new List();
 
@@ -100,6 +112,7 @@ class _NFCQuizState extends State<NFCQuiz> {
     return temp;
   }
 
+//gleicht nacheinander alle TextFelder mit dem Buchstaben des Lösungsworts ab
   bool pruefeErgebnis() {
     bool wortGleich = true;
 
@@ -124,6 +137,34 @@ class _NFCQuizState extends State<NFCQuiz> {
     return wortGleich;
   }
 
+//Timer
+  void startTimer() {
+    timer.cancel();
+
+    int sekundenCounter = 20;
+
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (sekundenCounter >= 0) {
+          zeitZumLoesen = sekundenCounter;
+          sekundenCounter--;
+
+          if (sekundenCounter >= 15) {
+            anzahlAnGezeigtenTipps = 0;
+          } else if (sekundenCounter >= 10) {
+            anzahlAnGezeigtenTipps = 1;
+          } else if (sekundenCounter >= 5) {
+            anzahlAnGezeigtenTipps = tipps.length;
+          }
+        } else {
+          pruefeErgebnis();
+          timer.cancel();
+        }
+      });
+    });
+    timerStarted = true;
+  }
+
   //dummy funktionen für Datenbank implementierung, neueFrage(String Frage, String Loesung, List<String> tipps)?
   //eventuell sekunden für Timer hier festlegen
   void neueFrage() {
@@ -142,24 +183,5 @@ class _NFCQuizState extends State<NFCQuiz> {
     timerStarted = false;
     frageAngezeigt = true;
     initComplete = false;
-  }
-
-  void resetTimer() {}
-
-  void startTimer() {
-    int sekundenCounter = 10;
-
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (sekundenCounter >= 0) {
-          zeitZumLoesen = sekundenCounter;
-          sekundenCounter--;
-        } else {
-          pruefeErgebnis();
-          timer.cancel();
-        }
-      });
-    });
-    timerStarted = true;
   }
 }
