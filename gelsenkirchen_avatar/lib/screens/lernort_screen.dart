@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 
+/* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatelessWidget {
   final Lernort l;
 
@@ -26,61 +27,57 @@ class LernortScreen extends StatelessWidget {
               child: Image.asset(
                   'assets/images/lernortPlaceholderTitelbild.jpg',
                   fit: BoxFit.fill)),
-          SizedBox(height: 30),
 
           /*KATEGORIE*/
           /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
                   - linksbündig*/
+
           Container(
-            child: Text("Kategorie: " + l.kategorieID.toString(),
+            decoration: BoxDecoration(
+                //color: Color(0xffe54b4b),
+                //color: Color(0xffe54b4b).withOpacity(0.5),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            margin: EdgeInsets.only(
+                left: 10.0, top: 10.0, right: 10.0, bottom: 0.0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            alignment: Alignment(-1.0, 0.0),
+            child: Text(
+                /* KATEGORIE */
+                /* TODO: "Kategorie" fett schreiben (Lisa) */
+                "Kategorie: " +
+                    l.kategorieID.toString() +
+                    "\n\n" +
+                    /*ADRESSE*/
+                    /* TODO: - Hier muss noch die Adresse angegeben werden. Zuvor in DB einfügen (Lisa) */
+                    /* TODO: "Adresse" fett schreiben (Lisa) */
+                    "Adresse: " +
+                    "\n\n" +
+                    /*ÖFFNUNGSZEITEN*/
+                    /* TODO: - Hier müssen noch die Öffnungszeiten angegeben werden. Zuvor in DB einfügen (Lisa) */
+                    /* TODO: "Öffnungszeiten" fett schreiben (Lisa) */
+                    "Öffnungszeiten: ",
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headline3),
-            margin:
-                EdgeInsets.only(left: 30.0, top: 0.0, right: 30.0, bottom: 0.0),
-            alignment: Alignment(-1.0, 0.0),
+                style: Theme.of(context).textTheme.bodyText1),
           ),
-          SizedBox(height: 10),
-
-          /*ADRESSE*/
-          /*Todo: - Hier muss noch die Adresse angegeben werden
-                  - linksbündig*/
-          Container(
-            child: Text(
-              "Adresse: ",
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            margin:
-                EdgeInsets.only(left: 30.0, top: 0.0, right: 30.0, bottom: 0.0),
-            alignment: Alignment(-1.0, 0.0),
-          ),
-          SizedBox(height: 10),
-
-          /*ÖFFNUNGSZEITEN*/
-          /*Todo: - Hier müssen noch die Öffnungszeiten angegeben werden
-                  - linksbündig*/
-          Container(
-            child: Text(
-              "Öffnungszeiten: ",
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            margin:
-                EdgeInsets.only(left: 30.0, top: 0.0, right: 30.0, bottom: 0.0),
-            alignment: Alignment(-1.0, 0.0),
-          ),
-          SizedBox(height: 20),
 
           /*BESCHREIBUNG*/
+          /* TODO: "Beschreibung" fett schreiben (Lisa) */
           Container(
-              child: Text(
-                l.beschreibung,
-                textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.bodyText1,
-                //style: TextStyle(fontSize: 17),
-              ),
-              margin: EdgeInsets.only(
-                  left: 30.0, top: 0.0, right: 30.0, bottom: 0.0)),
+            decoration: BoxDecoration(
+                //color: Color(0xffe54b4b),
+                color: Color(0xffe54b4b).withOpacity(0.5),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            margin: EdgeInsets.only(
+                left: 10.0, top: 10.0, right: 10.0, bottom: 0.0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Text(
+              "Beschreibung:\n" + l.beschreibung,
+              textAlign: TextAlign.justify,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            /* margin: EdgeInsets.only(
+                      left: 30.0, top: 0.0, right: 30.0, bottom: 0.0)) */
+          ),
           SizedBox(height: 40),
           ImageButton(
             children: <Widget>[],
@@ -92,9 +89,9 @@ class LernortScreen extends StatelessWidget {
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
             pressedImage: Image.asset(
-              "assets/buttons/Lernen_gelb_groß.png",
+              "assets/buttons/Lernen_blau_groß.png",
             ),
-            unpressedImage: Image.asset("assets/buttons/Lernen_gelb_groß.png"),
+            unpressedImage: Image.asset("assets/buttons/Lernen_blau_groß.png"),
             onTap: () {
               Navigator.push(
                   context,
@@ -113,10 +110,10 @@ class LernortScreen extends StatelessWidget {
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
             pressedImage: Image.asset(
-              "assets/buttons/Spielen_gruen_groß.png",
+              "assets/buttons/Spielen_dunkelblau_groß.png",
             ),
             unpressedImage:
-                Image.asset("assets/buttons/Spielen_gruen_groß.png"),
+                Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
             onTap: () {
               Navigator.push(
                   context,

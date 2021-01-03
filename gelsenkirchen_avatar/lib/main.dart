@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             headline3: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
             /* Verwendung für normalen Fließtext: Text('custom theme', style: Theme.of(context).textTheme.bodyText1) */
-            bodyText1: TextStyle(fontSize: 14),
+            bodyText1: TextStyle(fontSize: 16),
           )),
 
       /* TODO: Wenn Benutzer angemeldet ist, dann HomeScreen anzeigen, wenn nicht angemeldet, dann Anmeldungsscreen anzeigen (Lisa) */

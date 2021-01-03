@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 class ScoreBoard extends StatefulWidget {
   int id_user;
@@ -51,10 +50,9 @@ class _ScoreBoardState extends State<ScoreBoard> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
-        drawer: NavDrawer(),
         appBar: AppBar(
           /*NAME*/
-          title: Text("Bestenliste"),
+          title: Text("Scoreboard for QUIZ"),
         ),
         body: Column(
           children: [

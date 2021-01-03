@@ -19,9 +19,7 @@ class LernortListeScreen extends StatelessWidget {
                 onPressed: null)
           ],
         ),
-        body: new Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: LernortListView()));
+        body: LernortListView());
   }
 }
 
@@ -61,13 +59,13 @@ class LernortListState extends State<LernortListView> {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: _listLength,
-      itemBuilder: erstelleListViewitem,
+      itemBuilder: erstelleListViewItem,
       padding: EdgeInsets.all(0.0),
     );
   }
 
   /* Diese Methode erstellt die ListViewItems */
-  Widget erstelleListViewitem(BuildContext context, int index) {
+  Widget erstelleListViewItem(BuildContext context, int index) {
     return new Card(
         color: null,
         elevation: 0,
