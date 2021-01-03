@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
-import 'package:gelsenkirchen_avatar/home_screen.dart';
-import 'package:gelsenkirchen_avatar/lernort_liste_screen.dart';
-import 'package:gelsenkirchen_avatar/profil_screen.dart';
-import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
-import 'package:gelsenkirchen_avatar/impressum_screen.dart';
-import 'package:gelsenkirchen_avatar/registrierung.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
+import 'package:gelsenkirchen_avatar/data/global.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -111,6 +115,21 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Registrierung()));
+              }),
+          ListTile(
+              leading: Icon(Icons.table_view),
+              title: Text('Scoreboard'),
+              onTap: () {
+                if (global.user?.id != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ScoreBoard(global.user.id)));
+                } else {
+                  Fluttertoast.showToast(
+                      msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
+                }
               }),
           ListTile(
             leading: Icon(Icons.exit_to_app),

@@ -1,10 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/registrierung.dart';
-import 'package:http/http.dart' as http;
+import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gelsenkirchen_avatar/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
+import 'package:gelsenkirchen_avatar/data/global.dart';
 
 class Anmeldung extends StatefulWidget {
   @override
@@ -29,40 +30,37 @@ class _AnmeldungState extends State<Anmeldung> {
       processing = true;
     });
 
-    var url = "http://zukunft.sportsocke522.de/anmeldung.php";
-    var data = {
-      "email": emailctrl.text,
-      "passwort": passctrl.text,
-    };
-
-    var res = await http.post(url, body: data);
-
-    if (jsonDecode(res.body) == "Account existiert nicht") {
-      print("Hallo das existiert nicht");
-      Fluttertoast.showToast(
-          msg: "Der angegebene Benutzer existiert nicht",
-          toastLength: Toast.LENGTH_SHORT);
-    } else {
-      if (jsonDecode(res.body) == "false") {
-        Fluttertoast.showToast(
-            msg: "Falsches Passwort", toastLength: Toast.LENGTH_SHORT);
-      } else {
-        print(jsonDecode(res.body));
-        Map data = jsonDecode(res.body);
-        angemeldeterBenutzer = Benutzer(
-            id: data['result'][0]['id'],
-            benutzername: data['result'][0]['benutzername']);
-
-        // Navigator.pushReplacementNamed(context, '/home',
-        //     arguments: angemeldeterBenutzer);
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
-      }
-    }
+    var futureBenutzer = Benutzer.getBenutzer(emailctrl.text, passctrl.text);
+    futureBenutzer.catchError(invalidError);
+    futureBenutzer.then((benutzer) {
+      angemeldeterBenutzer = benutzer;
+      global.user = benutzer;
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  HomeScreen(angemeldeterBenutzer: this.angemeldeterBenutzer)));
+    });
 
     setState(() {
       processing = false;
     });
+  }
+
+  bool invalidError(Object error) {
+    final invalidErrorCause = (error as InvalidLoginException).cause;
+    switch (invalidErrorCause) {
+      case InvalidLoginExceptionCause.emailNotFound:
+        Fluttertoast.showToast(
+            msg: "Der angegebene Benutzer existiert nicht",
+            toastLength: Toast.LENGTH_SHORT);
+        break;
+      case InvalidLoginExceptionCause.passwordIncorrect:
+        Fluttertoast.showToast(
+            msg: "Falsches Passwort", toastLength: Toast.LENGTH_SHORT);
+        break;
+    }
+    return false;
   }
 
   @override
