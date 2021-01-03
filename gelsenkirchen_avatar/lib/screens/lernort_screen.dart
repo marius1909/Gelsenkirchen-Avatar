@@ -31,7 +31,6 @@ class LernortScreen extends StatelessWidget {
           /*KATEGORIE*/
           /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
                   - linksbündig*/
-
           Container(
             decoration: BoxDecoration(
                 //color: Color(0xffe54b4b),
