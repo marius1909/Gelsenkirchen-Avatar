@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 
 class LernortListeScreen extends StatelessWidget {
   @override
@@ -33,15 +34,26 @@ class LernortListState extends State<LernortListView> {
   List<Lernort> lernortList = List();
   List<Lernort> lernortListGefiltert = List();
 
+  List<LernKategorie> lernKatolist = List();
+  List<LernKategorie> lernKatoListGefiltert = List();
+
   @override
   void initState() {
     super.initState();
     var lernorteFuture = Lernort.shared.gibObjekte();
+    var lernKatoFuture = LernKategorie.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
         _listLength = lernorte.length;
         lernortList = lernorte;
         print(lernortList);
+      });
+    });
+    lernKatoFuture.then((lernKato) {
+      setState(() {
+        _listLength = lernKato.length;
+        lernKatolist = lernKato;
+        print(lernKatolist);
       });
     });
   }
@@ -51,6 +63,15 @@ class LernortListState extends State<LernortListView> {
       lernortListGefiltert = lernortList
           .where((lernort) =>
               lernort.name.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
+  void filterLernKatoList(value) {
+    setState(() {
+      lernKatoListGefiltert = lernKatolist
+          .where((lernkato) =>
+              lernkato.name.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
   }
@@ -75,14 +96,13 @@ class LernortListState extends State<LernortListView> {
 
             new ListTile(
               //dense: true,
-              /* TODO: Lernortbilder aus DB anzeigen (Lisa) */
-              /* leading: new Image.asset(
-                "assets/" + lernortList[index].titelbild,
+
+              leading: new Image.network(
+                lernortList[index].titelbild,
                 fit: BoxFit.cover,
                 width: 100.0,
-              ), */
-              /* Folgende Zeile dient nur zur Anschauung. Kann durch obrigen Absatz "leading" ersetzt werden, wenn Bilder aus DB angezeigt werden können. */
-              leading: Icon(Icons.home),
+              ),
+
               title: new Text(
                 /* NAME */
                 lernortList[index].name != null
@@ -114,8 +134,9 @@ class LernortListState extends State<LernortListView> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            LernortScreen(l: lernortList[index])));
+                        builder: (context) => LernortScreen(
+                            l: lernortList[index],
+                            k: lernKatolist[index].name)));
               },
             )
           ],

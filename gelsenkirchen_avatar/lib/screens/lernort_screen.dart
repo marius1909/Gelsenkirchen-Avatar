@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
@@ -7,8 +8,11 @@ import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 /* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatelessWidget {
   final Lernort l;
+  final String k;
 
-  LernortScreen({Key key, @required this.l}) : super(key: key);
+  LernortScreen({Key key, @required this.l, @required this.k})
+      : super(key: key);
+  List<LernKategorie> lernKato = List();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +25,8 @@ class LernortScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(children: [
           /*TITELBILD*/
-          /*TODO: Bild muss hier noch das Titelbild des entsprechenden Lernortes eingefügt werden.
-          Dieses Bild dient als Platzhalter*/
-          Container(
-              child: Image.asset(
-                  'assets/images/lernortPlaceholderTitelbild.jpg',
-                  fit: BoxFit.fill)),
+
+          Container(child: getWidgetTitelbild(l)),
 
           /*KATEGORIE*/
           /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
@@ -44,7 +44,7 @@ class LernortScreen extends StatelessWidget {
                 /* KATEGORIE */
                 /* TODO: "Kategorie" fett schreiben (Lisa) */
                 "Kategorie: " +
-                    l.kategorieID.toString() +
+                    k +
                     "\n\n" +
                     /*ADRESSE*/
                     /* TODO: - Hier muss noch die Adresse angegeben werden. Zuvor in DB einfügen (Lisa) */
@@ -121,5 +121,14 @@ class LernortScreen extends StatelessWidget {
             },
           ),
         ])));
+  }
+}
+
+Widget getWidgetTitelbild(Lernort l) {
+  if (l.titelbild.isEmpty) {
+    return new Image.asset('assets/images/lernortPlaceholderTitelbild.jpg',
+        fit: BoxFit.fill);
+  } else {
+    return new Image.network(l.titelbild, fit: BoxFit.fill);
   }
 }

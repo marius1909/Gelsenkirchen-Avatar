@@ -191,7 +191,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                LernortScreen(l: lernort)));
+                                LernortScreen(l: lernort, k: "TODO")));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
