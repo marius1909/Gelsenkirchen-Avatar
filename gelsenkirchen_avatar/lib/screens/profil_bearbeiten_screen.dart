@@ -67,7 +67,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                             new IconButton(
                                 icon: Icon(Icons.check_box),
                                 onPressed: () =>
-                                    pruefeName(neuerNameController.text)),
+                                    aendereName(neuerNameController.text)),
                             Text(
                               nameSchonVergebenTextMessage,
                               style: TextStyle(
@@ -127,6 +127,9 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
             )));
   }
 
+/* Lädt namen aus der Datenbank um ihn im Screen anzuzeigen
+*/
+
   Future<void> loadName() async {
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
     setState(() {
@@ -134,7 +137,15 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
     });
   }
 
-  Future<void> pruefeName(String name) async {
+/*Funktion zum ändern des Benutzernamens
+TODO: Neuen Namen in Datenbank speichern
+
+Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
+Wenn nicht speichert neuen Namen (TODO!)
+
+*/
+
+  Future<void> aendereName(String name) async {
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
     for (int i = 0; i < alleBenutzerFuture.length; i++) {
       if (name == alleBenutzerFuture[i].benutzer) {

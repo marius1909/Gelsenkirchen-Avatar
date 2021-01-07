@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
+
+/*TODO: Benutzerlevel laden
+*/
 
 class Profil extends StatefulWidget {
   @override
@@ -9,12 +13,16 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
   String spielername = "";
+  int level = 0;
+  int anzahlErrungenschaften = 0;
 
   @override
   Widget build(BuildContext context) {
-    loadName();
-
     //wird immer wieder gecalled warum?
+    //loadName();
+    // loadErrungenschaften();
+
+    print("s");
 
     return Scaffold(
         appBar: AppBar(
@@ -58,7 +66,7 @@ class _ProfilState extends State<Profil> {
                         ),
                         SizedBox(height: 10.0),
                         Text(
-                          '8',
+                          level.toString(),
                           style: TextStyle(
                             letterSpacing: 1.8,
                             fontSize: 28.0,
@@ -67,6 +75,26 @@ class _ProfilState extends State<Profil> {
                         ),
                       ],
                     ),
+                    SizedBox(width: 40.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Errungenschaften',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
+                        ),
+                        SizedBox(height: 10.0),
+                        new Text(
+                          anzahlErrungenschaften.toString(),
+                          style: TextStyle(
+                            letterSpacing: 1.8,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 Divider(
@@ -105,10 +133,46 @@ class _ProfilState extends State<Profil> {
     return spielername;
   }
 
+/*
+Lädt den Namen aus der DB um ihm im Screen anzuzeigen. 
+
+TODO: Zeigt derzeit BENUTZER 0!
+*/
   Future<void> loadName() async {
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+
     setState(() {
       spielername = alleBenutzerFuture[0].benutzer;
+      //DUMMY
+      level = 12;
+    });
+  }
+
+/* TODO: Placeholderfunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
+
+  Future<void> loadAvatar() async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+
+    setState(() {
+      //Avatar
+    });
+  }
+
+/*
+
+TODO: Level laden
+Lädt die Errungenschaften 
+*/
+  Future<void> loadErrungenschaften() async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    var freigeschalteteErrungenschaften =
+        await Freigeschaltet.shared.gibObjekte();
+
+    for (int i = 0; i < freigeschalteteErrungenschaften.length; i++) {}
+
+    setState(() {
+      //DUMMY
+      anzahlErrungenschaften = 12;
     });
   }
 }
