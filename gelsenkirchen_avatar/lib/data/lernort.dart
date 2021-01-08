@@ -13,6 +13,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
   int minispielArt;
   int belohnungenID;
   String weitereBilder;
+  String videos;
+  String sounds;
 
   /// Wird genutzt zur konsitenten Anzeige aller Lernorte
   /// und um die Abrufe aus der Datenbank zu minimieren.
@@ -30,7 +32,9 @@ class Lernort extends DatenbankObjekt<Lernort> {
       this.titelbild,
       this.minispielArt,
       this.belohnungenID,
-      this.weitereBilder})
+      this.weitereBilder,
+      this.videos,
+      this.sounds})
       : super(
             DatabaseURL.getLernorte.value,
             DatabaseURL.insertIntoLernort.value,
@@ -49,7 +53,9 @@ class Lernort extends DatenbankObjekt<Lernort> {
         titelbild: objekt["titelbild"] as String,
         minispielArt: int.parse(objekt["minispielArtID"]),
         belohnungenID: int.parse(objekt["belohnungenID"]),
-        weitereBilder: objekt["weitereBilder"] as String);
+        weitereBilder: objekt["weitereBilder"] as String,
+        videos: objekt["Videos"] as String,
+        sounds: objekt["Sounds"] as String);
   }
 
   @override
