@@ -11,30 +11,24 @@ class Freundesliste extends StatefulWidget {
 }
 
 class _FreundeslisteState extends State<Freundesliste> {
+  List<Benutzer> freunde;
+
+  int currentSortStyle = 0;
+
   TextFormField freundHinzufuegenField;
   TextEditingController freundeHinzufuegenController = TextEditingController();
 
   var showAddFriendTextField = false;
 
-  final List<Testfreund> testfreunde = [
-    Testfreund("Freund1", "1", "*"),
-    Testfreund("Freund2", "23", "*"),
-    Testfreund("Freund3", "400", "*"),
-    Testfreund("Freund4", "3", "*"),
-    Testfreund("Freund5", "1", "*"),
-    Testfreund("Freund6", "20", "*"),
-    Testfreund("Freund7", "80", "*"),
-    Testfreund("Freund8", "100", "*"),
-    Testfreund("Freund9", "122", "*"),
-    Testfreund("Freund10", "12", "*"),
-    Testfreund("Freund11", "15", "*"),
-    Testfreund("Freund12", "41", "*"),
-    Testfreund("Freund13", "25", "*"),
-    Testfreund("Freund14", "2", "*"),
-  ];
+  bool initComplete = false;
 
   @override
   Widget build(BuildContext context) {
+    if (!initComplete) {
+      loadFriendList();
+      initComplete = true;
+    }
+
     return Scaffold(
         drawer: NavDrawer(),
         backgroundColor: Colors.lightBlueAccent,
@@ -70,23 +64,19 @@ class _FreundeslisteState extends State<Freundesliste> {
                           fontWeight: FontWeight.bold)),
                   FlatButton(
                       onPressed: () {
-                        // var neuerBenutzer = Benutzer(
-                        //     email: "hans@gmail.com",
-                        //     benutzer: "Hans",
-                        //     passwort: "1234567",
-                        //     rolleID: 1);
-                        // neuerBenutzer.insertIntoDatabase();
-
-                        // print("Neuer Benutzer hinzugefügt");
-
-                        // Benutzer.shared.removeFromDatabaseWithID({"id": "5"});
-
-                        // var alleBenutzerFuture = Benutzer.shared.gibObjekte();
-                        // alleBenutzerFuture.then((benutzer) {
-                        //   benutzer.forEach((element) {
-                        //     print(element);
-                        //   });
-                        // });
+                        if (currentSortStyle == 0) {
+                          setState(() {
+                            freunde.sort((a, b) => a.benutzer
+                                .toLowerCase()
+                                .compareTo(b.benutzer.toLowerCase()));
+                            currentSortStyle++;
+                          });
+                        } else if (currentSortStyle == 1) {
+                          setState(() {
+                            freunde.sort((a, b) => a.id.compareTo(b.id));
+                            currentSortStyle = 0;
+                          });
+                        }
                       },
                       child: Icon(Icons.sort, color: Colors.white))
                 ],
@@ -96,18 +86,18 @@ class _FreundeslisteState extends State<Freundesliste> {
                 child: SizedBox(
                   height: 400.00,
                   child: ListView.builder(
-                      itemCount: testfreunde.length,
+                      itemCount: freunde.length,
                       itemBuilder: (context, index) {
                         return Card(
                             child: ListTile(
                           onTap: () {},
-                          title: Text(testfreunde[index].name,
+                          title: Text(freunde[index].benutzer,
                               style: TextStyle(
                                   color: Colors.black,
                                   letterSpacing: 1.8,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
-                          leading: Text(testfreunde[index].level),
+                          leading: Text(freunde[index].id.toString()),
                         ));
                       }),
                 ),
@@ -159,16 +149,16 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-//dummy funktion, soll später auf freundesliste datenbank arbeiten
-  void createFreundeNamen() async {
-    List<String> freundeNamen;
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-    for (var i = 0; i < alleBenutzerFuture.length; i++) {
-      freundeNamen[i] = alleBenutzerFuture[i].benutzer;
-    }
+  //TODO: Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
+  Future<void> loadFriendList() async {
+    List<Benutzer> a = await Benutzer.shared.gibObjekte();
+
+    setState(() {
+      freunde = a;
+    });
   }
 
-//dummy funktion geht später alle user durch und fuegt freund in datenbank ein
+  // TODO: Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
   void FuegeFreundHinzu(String _name) {
     print(_name);
   }

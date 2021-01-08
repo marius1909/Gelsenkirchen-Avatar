@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
-class ProfilBearbeiten extends StatelessWidget {
+import 'avatarbearbeiten_screen.dart';
+
+class ProfilBearbeiten extends StatefulWidget {
+  @override
+  _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
+}
+
+class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
+  String aktuellerName = "";
+  String nameSchonVergebenTextMessage = "";
+  bool nameSchonVergeben = false;
+  TextEditingController neuerNameController = new TextEditingController();
+  bool initComplete = false;
+
   @override
   Widget build(BuildContext context) {
+    if (!initComplete) {
+      loadName();
+      initComplete = true;
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Profil bearbeiten'),
@@ -11,7 +30,7 @@ class ProfilBearbeiten extends StatelessWidget {
           elevation: 0.0,
         ),
         body: Padding(
-            padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+            padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -28,7 +47,7 @@ class ProfilBearbeiten extends StatelessWidget {
                               letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        Text('Profilname1'),
+                        Text(aktuellerName),
                         SizedBox(height: 15.0),
                         Text(
                           'Neuer Name',
@@ -37,9 +56,26 @@ class ProfilBearbeiten extends StatelessWidget {
                               color: Colors.black,
                               letterSpacing: 1.8),
                         ),
-                        Container(
-                          width: 200,
-                          child: TextFormField(),
+                        Row(
+                          children: [
+                            Container(
+                              width: 200,
+                              child: TextFormField(
+                                controller: neuerNameController,
+                              ),
+                            ),
+                            new IconButton(
+                                icon: Icon(Icons.check_box),
+                                onPressed: () =>
+                                    aendereName(neuerNameController.text)),
+                            Text(
+                              nameSchonVergebenTextMessage,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.red,
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
@@ -52,10 +88,7 @@ class ProfilBearbeiten extends StatelessWidget {
                     )
                   ],
                 ),
-                Divider(
-                  height: 50.0,
-                  color: Colors.grey[800],
-                ),
+                SizedBox(height: 100),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -65,8 +98,14 @@ class ProfilBearbeiten extends StatelessWidget {
                       radius: 50,
                     ),
                     IconButton(
-                      icon: Icon(Icons.edit, color: Colors.white),
-                      onPressed: () {},
+                      icon: Icon(Icons.edit, color: Colors.black),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Avatarbearbeiten()),
+                        );
+                      },
                     )
                   ],
                 ),
@@ -86,5 +125,50 @@ class ProfilBearbeiten extends StatelessWidget {
                 )
               ],
             )));
+  }
+
+/* Lädt namen aus der Datenbank um ihn im Screen anzuzeigen
+*/
+
+  Future<void> loadName() async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    setState(() {
+      aktuellerName = alleBenutzerFuture[0].benutzer;
+    });
+  }
+
+/*Funktion zum ändern des Benutzernamens
+TODO: Neuen Namen in Datenbank speichern
+
+Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
+Wenn nicht speichert neuen Namen (TODO!)
+
+*/
+
+  Future<void> aendereName(String name) async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    for (int i = 0; i < alleBenutzerFuture.length; i++) {
+      if (name == alleBenutzerFuture[i].benutzer) {
+        setState(() {
+          nameSchonVergeben = true;
+        });
+      }
+    }
+
+    if (!nameSchonVergeben) {
+      //Speicher neuen Namen in Datenbank TODO!
+
+      setState(() {
+        aktuellerName = name;
+        nameSchonVergebenTextMessage = "";
+        nameSchonVergeben = false;
+      });
+    } else {
+      setState(() {
+        nameSchonVergebenTextMessage = "Name schon \n vergeben";
+
+        nameSchonVergeben = false;
+      });
+    }
   }
 }
