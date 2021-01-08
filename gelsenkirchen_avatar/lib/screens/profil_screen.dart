@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'profil_bearbeiten.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
-class  Profil extends StatelessWidget {
+class Profil extends StatefulWidget {
+  @override
+  _ProfilState createState() => _ProfilState();
+}
 
-
-   Text spielername = new Text(
-    "Spielername",
-    style: TextStyle(
-      color: Colors.amberAccent[200],
-      letterSpacing: 1.8,
-      fontSize: 28.0,
-      fontWeight: FontWeight.bold,
-    ),
-  );
+class _ProfilState extends State<Profil> {
+  String spielername = "";
 
   @override
   Widget build(BuildContext context) {
+    loadName();
+
     return Scaffold(
-        backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text('Profil'),
           centerTitle: true,
-          backgroundColor: Colors.grey[850],
           elevation: 0.0,
-
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
@@ -33,32 +28,16 @@ class  Profil extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[ Text(
-                        'NAME',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.8
-                        ),
-                      ),
-                        SizedBox(height: 10.0),
-                        spielername,
-                      ],
-                    ),
-                    SizedBox(width: 40.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[  Text(
-                        'Level',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 1.8
-                        ),
-                      ),
-                        SizedBox(height: 10.0),
+                      children: <Widget>[
                         Text(
-                          '8',
+                          'NAME',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
+                        ),
+                        SizedBox(height: 10.0),
+                        new Text(
+                          spielername,
                           style: TextStyle(
-                            color: Colors.amberAccent[200],
                             letterSpacing: 1.8,
                             fontSize: 28.0,
                             fontWeight: FontWeight.bold,
@@ -66,11 +45,28 @@ class  Profil extends StatelessWidget {
                         ),
                       ],
                     ),
-
-
+                    SizedBox(width: 40.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Level',
+                          style:
+                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          '8',
+                          style: TextStyle(
+                            letterSpacing: 1.8,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-
                 Divider(
                   height: 50.0,
                   color: Colors.grey[800],
@@ -78,10 +74,8 @@ class  Profil extends StatelessWidget {
                 CircleAvatar(
                   backgroundImage: AssetImage('assets/images/profilbild.jpg'),
                   radius: 100,
-
                 ),
-                SizedBox(height: 200),
-
+                SizedBox(height: 10),
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -92,22 +86,27 @@ class  Profil extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilBearbeiten()),
+                      MaterialPageRoute(
+                          builder: (context) => ProfilBearbeiten()),
                     );
                   },
                   child: Text(
                     "Profil bearbeiten",
                     style: TextStyle(fontSize: 20.0),
                   ),
-                )
+                ),
               ],
-
-            )
-        )
-    );
+            )));
   }
 
-  String getText(){
-    return spielername.data;
-   }
+  String getText() {
+    return spielername;
+  }
+
+  Future<void> loadName() async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+    setState(() {
+      spielername = alleBenutzerFuture[0].benutzer;
+    });
+  }
 }

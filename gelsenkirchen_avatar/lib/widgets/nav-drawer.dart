@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/einstellungen_screen.dart';
-import 'package:gelsenkirchen_avatar/home_screen.dart';
-import 'package:gelsenkirchen_avatar/lernort_liste_screen.dart';
-import 'package:gelsenkirchen_avatar/profil_screen.dart';
-import 'package:gelsenkirchen_avatar/hilfe_screen.dart';
-import 'package:gelsenkirchen_avatar/impressum_screen.dart';
-import 'package:gelsenkirchen_avatar/registrierung.dart';
+import 'package:gelsenkirchen_avatar/screens/einstellungen_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -56,68 +58,67 @@ class NavDrawer extends StatelessWidget {
 
           /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.
           später implementiert werden"*/
-          /* ListTile(
+          ListTile(
               leading: Icon(Icons.people),
               title: Text('Freunde'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LernortScreen()));
+                        builder: (BuildContext context) => Freundesliste()));
               }),
           ListTile(
               leading: Icon(Icons.score),
-              title: Text('Scorebeard'),
+              title: Text('Scoreboard'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LernortScreen()));
-              }), */
-
-          ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Einstellungen'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            EinstellungenScreen()));
+                        builder: (BuildContext context) => ScoreBoard(2)));
               }),
-          ListTile(
-              leading: Icon(Icons.help),
-              title: Text('Hilfe'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => HilfeScreen()));
-              }),
-          ListTile(
-              leading: Icon(Icons.description),
-              title: Text('Impressum'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => ImpressumScreen()));
-              }),
-          ListTile(
-              leading: Icon(Icons.menu_book),
-              title: Text('Registrierung'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Registrierung()));
-              }),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
-            //Funktionalität zum Ausloggen fehlt noch
-          ),
+          // ListTile(
+          //     leading: Icon(Icons.settings),
+          //     title: Text('Einstellungen'),
+          //     onTap: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) =>
+          //                   EinstellungenScreen()));
+          //     }),
+          // ListTile(
+          //     leading: Icon(Icons.help),
+          //     title: Text('Hilfe'),
+          //     onTap: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) => HilfeScreen()));
+          //     }),
+          // ListTile(
+          //     leading: Icon(Icons.description),
+          //     title: Text('Impressum'),
+          //     onTap: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) => ImpressumScreen()));
+          //     }),
+          // ListTile(
+          //     leading: Icon(Icons.menu_book),
+          //     title: Text('Registrierung'),
+          //     onTap: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) => Registrierung()));
+          //     }),
+          // ListTile(
+          //   leading: Icon(Icons.exit_to_app),
+          //   title: Text('Logout'),
+          //   onTap: () => {Navigator.of(context).pop()},
+          //   //Funktionalität zum Ausloggen fehlt noch
+          // ),
         ],
       ),
     );

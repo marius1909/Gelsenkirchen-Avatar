@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/lernort_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class LernortListeScreen extends StatelessWidget {
   @override
@@ -10,7 +10,14 @@ class LernortListeScreen extends StatelessWidget {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text('Lernorte'),
+          title: Text('Lernort'),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.search, color: Colors.white), onPressed: null),
+            IconButton(
+                icon: Icon(Icons.filter_alt, color: Colors.white),
+                onPressed: null)
+          ],
         ),
         body: new Padding(
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
@@ -26,16 +33,27 @@ class LernortListView extends StatefulWidget {
 class LernortListState extends State<LernortListView> {
   int _listLength = 0;
   List<Lernort> lernortList = List();
+  List<Lernort> lernortListGefiltert = List();
 
   @override
   void initState() {
     super.initState();
-    var lernorteFuture = Lernort.shared.gibLernorte();
+    var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
         _listLength = lernorte.length;
         lernortList = lernorte;
+        print(lernortList);
       });
+    });
+  }
+
+  void filterLernortList(value) {
+    setState(() {
+      lernortListGefiltert = lernortList
+          .where((lernort) =>
+              lernort.name.toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
 

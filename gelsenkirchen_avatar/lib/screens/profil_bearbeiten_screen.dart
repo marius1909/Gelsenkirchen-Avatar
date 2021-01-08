@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 
 class ProfilBearbeiten extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text('Profil bearbeiten'),
           centerTitle: true,
-          backgroundColor: Colors.grey[850],
           elevation: 0.0,
         ),
         body: Padding(
@@ -22,19 +21,25 @@ class ProfilBearbeiten extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'NAME',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
+                          'Aktueller Name',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.black,
+                              letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
+                        Text('Profilname1'),
+                        SizedBox(height: 15.0),
                         Text(
-                          'Spielername',
+                          'Neuer Name',
                           style: TextStyle(
-                            color: Colors.amberAccent[200],
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 25,
+                              color: Colors.black,
+                              letterSpacing: 1.8),
+                        ),
+                        Container(
+                          width: 200,
+                          child: TextFormField(),
                         ),
                       ],
                     ),
@@ -65,11 +70,7 @@ class ProfilBearbeiten extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(height: 250),
-                Divider(
-                  height: 40.0,
-                  color: Colors.grey[800],
-                ),
+                SizedBox(height: 100),
                 FlatButton(
                   color: Colors.grey[800],
                   textColor: Colors.white,
@@ -77,9 +78,7 @@ class ProfilBearbeiten extends StatelessWidget {
                   disabledTextColor: Colors.black,
                   padding: EdgeInsets.all(8.0),
                   splashColor: Colors.black,
-                  onPressed: () {
-                    /*...*/
-                  },
+                  onPressed: () {},
                   child: Text(
                     "Speichern",
                     style: TextStyle(fontSize: 25.0),
