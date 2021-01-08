@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               /* TODO: Unter dem Name soll ein Balken für das Level angezeigt werden (Lisa) */
               /* TODO: Name soll aus der DB geholt und angezeigt werden. */
               Text(
-                "MissFrionta",
+                "Name",
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.headline1,
               ),
