@@ -6,6 +6,11 @@ class ErrungenschaftenScreen extends StatefulWidget {
   _ErrungenschaftenScreen createState() => _ErrungenschaftenScreen();
 }
 
+/* 
+TODO: Bilder hinzufügen für Errungenschaften und Anzeigen
+TODO: Datum wann erreicht?
+*/
+
 class _ErrungenschaftenScreen extends State<ErrungenschaftenScreen> {
   List<Sammelbares> sammelbaresList;
 
@@ -15,7 +20,7 @@ class _ErrungenschaftenScreen extends State<ErrungenschaftenScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Profil'),
+          title: Text('Meine Errungenschaften'),
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -30,9 +35,19 @@ class _ErrungenschaftenScreen extends State<ErrungenschaftenScreen> {
                       itemBuilder: (context, index) {
                         return Row(
                           children: <Widget>[
-                            Text(sammelbaresList[index].beschreibung),
-                            //Text(sammelbaresList[index].id.toString()),
-                            // Text(sammelbaresList[index].name.toString())
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(sammelbaresList[index].id.toString()),
+                            ),
+                            /*SizedBox(
+                                width: 100,
+                                height: 80,
+                                child: Image.asset(sammelbaresList[index].bild))*/
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+                                  Text(sammelbaresList[index].name.toString()),
+                            )
                           ],
                         );
                       }),
