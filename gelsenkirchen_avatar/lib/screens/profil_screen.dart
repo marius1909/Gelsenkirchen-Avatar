@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
+import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 
-/*TODO: Benutzerlevel laden
+/*TODO: Richtiges Benutzerlevel laden
+  TODO: Anzahl an Errungenschaften laden
 */
 
 class Profil extends StatefulWidget {
@@ -22,7 +24,7 @@ class _ProfilState extends State<Profil> {
     //loadName();
     // loadErrungenschaften();
 
-    print("s");
+    print("Reload warum?");
 
     return Scaffold(
         appBar: AppBar(
@@ -107,7 +109,7 @@ class _ProfilState extends State<Profil> {
                 ),
                 SizedBox(height: 10),
                 FlatButton(
-                  color: Colors.grey[800],
+                  color: Colors.blue,
                   textColor: Colors.white,
                   disabledColor: Colors.grey,
                   disabledTextColor: Colors.black,
@@ -125,6 +127,25 @@ class _ProfilState extends State<Profil> {
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ),
+                FlatButton(
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ErrungenschaftenScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Errungenschaften",
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                )
               ],
             )));
   }

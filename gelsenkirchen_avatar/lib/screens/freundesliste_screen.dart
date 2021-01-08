@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/unused/testfreund.dart';
-
-import '../data/benutzer.dart';
-import '../data/benutzer.dart';
-import '../data/benutzer.dart';
 
 class Freundesliste extends StatefulWidget {
   //loadFreunde
@@ -79,26 +74,6 @@ class _FreundeslisteState extends State<Freundesliste> {
                             currentSortStyle = 0;
                           });
                         }
-
-                        //print(freunde[0]);
-
-                        // var neuerBenutzer = Benutzer(
-                        //     email: "hans@gmail.com",
-                        //     benutzer: "Hans",
-                        //     passwort: "1234567",
-                        //     rolleID: 1);
-                        // neuerBenutzer.insertIntoDatabase();
-
-                        // print("Neuer Benutzer hinzugefügt");
-
-                        // Benutzer.shared.removeFromDatabaseWithID({"id": "5"});
-
-                        // var alleBenutzerFuture = Benutzer.shared.gibObjekte();
-                        // alleBenutzerFuture.then((benutzer) {
-                        //   benutzer.forEach((element) {
-                        //     print(element);
-                        //   });
-                        // });
                       },
                       child: Icon(Icons.sort, color: Colors.white))
                 ],
@@ -171,7 +146,7 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-  //dummy funktion, soll später auf freundesliste datenbank arbeiten
+  //TODO: Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
   Future<void> loadFriendList() async {
     List<Benutzer> a = await Benutzer.shared.gibObjekte();
 
@@ -180,7 +155,7 @@ class _FreundeslisteState extends State<Freundesliste> {
     });
   }
 
-  //dummy funktion geht später alle user durch und fuegt freund in datenbank ein
+  // TODO: Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
   void FuegeFreundHinzu(String _name) {
     print(_name);
   }

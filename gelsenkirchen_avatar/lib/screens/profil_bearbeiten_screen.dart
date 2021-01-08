@@ -156,7 +156,7 @@ Wenn nicht speichert neuen Namen (TODO!)
     }
 
     if (!nameSchonVergeben) {
-      //Speicher neuen Namen in Datenbank
+      //Speicher neuen Namen in Datenbank TODO!
 
       setState(() {
         aktuellerName = name;
