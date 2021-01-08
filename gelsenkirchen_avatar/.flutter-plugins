@@ -1,22 +1,13 @@
 # This is a generated file; do not edit or check into version control.
-<<<<<<< HEAD
-flutter_plugin_android_lifecycle=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.11\\
-fluttertoast=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\fluttertoast-4.0.1\\
-google_maps_flutter=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\google_maps_flutter-1.0.6\\
-location=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\location-2.5.4\\
-path_provider=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.24\\
-path_provider_linux=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
-path_provider_macos=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+6\\
-path_provider_windows=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-0.0.4+3\\
-sqflite=C:\\_Daten\\Programme\\Flutter SDK\\flutter_windows_1.20.2-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\sqflite-1.3.2+1\\
-=======
-flutter_plugin_android_lifecycle=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
-fluttertoast=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/
-google_maps_flutter=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-1.0.5/
-location=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/location-2.5.4/
-path_provider=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.22/
-path_provider_linux=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
-path_provider_macos=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+4/
-path_provider_windows=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+1/
-sqflite=/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.3.1+2/
->>>>>>> levelup
+flutter_plugin_android_lifecycle=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
+fluttertoast=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/
+google_maps_flutter=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-1.0.6/
+location=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/location-2.5.4/
+path_provider=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.24/
+path_provider_linux=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
+path_provider_macos=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+6/
+path_provider_windows=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+3/
+sqflite=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.3.2+1/
+video_player=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/video_player-0.10.12+5/
+video_player_web=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/video_player_web-0.1.4+1/
+wakelock=/Users/Simon/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.1.4+2/

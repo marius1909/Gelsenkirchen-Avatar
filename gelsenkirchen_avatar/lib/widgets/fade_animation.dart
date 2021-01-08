@@ -19,7 +19,7 @@ class _FadeAnimationState extends State<FadeAnimation>
   void initState() {
     super.initState();
     animationController =
-        AnimationController(duration: widget.duration, vsync: this);
+        AnimationController(duration: widget.duration);
     animationController.addListener(() {
       if (mounted) {
         setState(() {});

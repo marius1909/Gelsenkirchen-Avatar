@@ -98,10 +98,10 @@ flutter:
        fonts:
           - asset: assets/fonts/ccapshad.ttf
           
-    - family: Langar
-      fonts:
-        - asset: fonts/Langar-Regular.ttf
-          weight: 500
+     - family: Langar
+       fonts:
+          - asset: fonts/Langar-Regular.ttf
+            weight: 500
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -67,7 +67,7 @@ class _AlleTopTabState extends State<AlleTopTab> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        LernortScreen(l: lernortList[index])));
+                        LernortScreen(l: lernortList[index], k: "TODO")));
           },
         )
       ],
