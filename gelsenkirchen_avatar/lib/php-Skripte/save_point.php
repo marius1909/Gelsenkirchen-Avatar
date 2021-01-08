@@ -5,42 +5,38 @@ $lernKategorieID = $_GET['lernKategorieID'];
 $erfahrungspunkte = $_GET['erfahrungspunkte'];
 $lernortID = $_GET['lernortID'];
 $quizID = $_GET['quizID'];
-$query_where = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID";
-$query_where_update = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID and lernortID != $lernortID and quizID != $quizID";
-$query_where_delete = "where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID and lernortID = $lernortID and quizID = $quizID";
-$query = "select * from BenutzerKategorie $query_where;";
+$query = "select SUM(erfahrungspunkte) as erfahrungspunkte from BenutzerKategorie where benutzerID = $benutzerID";
 $res = mysqli_query($con,$query);
-$data = array();
+$pointOld = 0;
 while ($row = mysqli_fetch_assoc($res)) {
-    $data = $row;
+    $pointOld = $row['erfahrungspunkte'] != null ? intval($row['erfahrungspunkte']) : 0;
+}
+
+$query = "delete from BenutzerKategorie where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID and lernortID = $lernortID and quizID = $quizID ";
+mysqli_query($con,$query);
+$query ="insert into BenutzerKategorie (benutzerID,lernKategorieID,erfahrungspunkte,lernortID,quizID,created_at) VALUES ($benutzerID,$lernKategorieID,$erfahrungspunkte,$lernortID,$quizID,'".date("Y-m-d H:i:s")."');";
+mysqli_query($con, $query);
+$query = "select SUM(erfahrungspunkte) as erfahrungspunkte from BenutzerKategorie where benutzerID = $benutzerID AND lernKategorieID = $lernKategorieID;";
+$res = mysqli_query($con,$query);
+$point = 0;
+while ($row = mysqli_fetch_assoc($res)) {
+    $point = $row['erfahrungspunkte'] != null ? intval($row['erfahrungspunkte']) : 0;
+}
+$query = "select SUM(erfahrungspunkte) as erfahrungspunkte from BenutzerKategorie where benutzerID = $benutzerID";
+$res = mysqli_query($con,$query);
+$pointNew = 0;
+while ($row = mysqli_fetch_assoc($res)) {
+    $pointNew = $row['erfahrungspunkte'] != null ? intval($row['erfahrungspunkte']) : 0;
 }
 mysqli_free_result($res);
-if(count($data) > 0){
-    if($data['lernortID'] == $lernortID && $data['quizID'] == $quizID){
-        $query = "delete from BenutzerKategorie $query_where_delete ";
-        mysqli_query($con,$query);
-        $query ="insert into BenutzerKategorie (benutzerID,lernKategorieID,erfahrungspunkte,lernortID,quizID,created_at) VALUES ($benutzerID,$lernKategorieID,$erfahrungspunkte,$lernortID,$quizID,'".date("Y-m-d H:i:s")."');";
-        if(mysqli_query($con, $query)){
-            echo "true";
-        }else{
-            echo "false";
-        }
-    }
-    else if($data['lernortID'] != $lernortID && $data['quizID'] != $quizID){
-        $point_current = $data['erfahrungspunkte'] + $erfahrungspunkte;
-        $query = "update BenutzerKategorie set erfahrungspunkte = $point_current, created_at = '".date("Y-m-d H:i:s")."' $query_where_update";
-        if(mysqli_query($con, $query)){
-            echo "true";
-        }else{
-            echo "false";
-        }
-    }
-}else{
-    $query ="insert into BenutzerKategorie (benutzerID,lernKategorieID,erfahrungspunkte,lernortID,quizID,created_at) VALUES ($benutzerID,$lernKategorieID,$erfahrungspunkte,$lernortID,$quizID,'".date("Y-m-d H:i:s")."');";
-        if(mysqli_query($con, $query)){
-            echo "true";
-        }else{
-            echo "false";
-        }
-}
+$query = "delete from RankKategorie where lernKategorieID = $lernKategorieID and benutzerID = $benutzerID";
+mysqli_query($con,$query);
+$query ="insert into RankKategorie (benutzerID,lernKategorieID,sum_erfahrungspunkte,created_at) VALUES ($benutzerID,$lernKategorieID,$point,'".date("Y-m-d H:i:s")."');";
+mysqli_query($con, $query);
+
+$data = [];
+$data['total_point_new'] = $pointNew;
+$data['total_point_old'] = $pointOld;
+$data['status'] = true;
+echo json_encode($data);
 ?>

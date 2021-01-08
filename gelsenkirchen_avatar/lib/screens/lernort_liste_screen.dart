@@ -1,115 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
+import 'package:gelsenkirchen_avatar/screens/alle_top_tab.dart';
+import 'package:gelsenkirchen_avatar/screens/kategorie_top_tab.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/suchen_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 
-class LernortListeScreen extends StatelessWidget {
+class LernortListeScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          title: Text('Lernort'),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.search, color: Colors.white), onPressed: null),
-            IconButton(
-                icon: Icon(Icons.filter_alt, color: Colors.white),
-                onPressed: null)
-          ],
-        ),
-        body: new Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: LernortListView()));
-  }
+  _LernortListeScreenState createState() => _LernortListeScreenState();
 }
 
-class LernortListView extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => LernortListState();
-}
-
-class LernortListState extends State<LernortListView> {
-  int _listLength = 0;
-  List<Lernort> lernortList = List();
-  List<Lernort> lernortListGefiltert = List();
-
-  @override
-  void initState() {
-    super.initState();
-    var lernorteFuture = Lernort.shared.gibObjekte();
-    lernorteFuture.then((lernorte) {
-      setState(() {
-        _listLength = lernorte.length;
-        lernortList = lernorte;
-        print(lernortList);
-      });
-    });
-  }
-
-  void filterLernortList(value) {
-    setState(() {
-      lernortListGefiltert = lernortList
-          .where((lernort) =>
-              lernort.name.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
-
+class _LernortListeScreenState extends State<LernortListeScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _listLength,
-      itemBuilder: erstelleListViewitem,
-      padding: EdgeInsets.all(0.0),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          drawer: NavDrawer(),
+          appBar: AppBar(
+            // backgroundColor: Color(0xff109618),
+            backgroundColor: Colors.blue,
+            title: Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: _CustomAppBar(context),
+            ),
+            bottom: TabBar(
+              isScrollable: true,
+              indicatorColor: Colors.white,
+              indicatorWeight: 6.0,
+              tabs: <Widget>[
+                Tab(
+                  child: Container(
+                    child: Text(
+                      'Alle Lernorte',
+                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Container(
+                    child: Text(
+                      'Lernkategorien',
+                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: <Widget>[AlleTopTab(), KategorieTopTab()],
+          )),
     );
   }
+}
 
-  /*Diese Methode erstellt die ListViewItems*/
-  Widget erstelleListViewitem(BuildContext context, int index) {
-    return new Card(
-        child: new Column(
+Widget _CustomAppBar(BuildContext context) {
+  return Container(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-        leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-        ),*/
-        new ListTile(
-          title: new Text(
-            /*NAME*/
-            lernortList[index].name != null ? lernortList[index].name : 'empty',
-            style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+        Container(
+          child: Text(
+            'Lernorte',
+            style: TextStyle(color: Colors.white),
           ),
-          subtitle: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /*KURZBESCHREIBUNG*/
-                new Text(
-                    lernortList[index].kurzbeschreibung != null
-                        ? lernortList[index].kurzbeschreibung
-                        : '',
-                    style: new TextStyle(
-                        fontSize: 13.0, fontWeight: FontWeight.normal)),
-                /*KATEGORIE*/
-                /*new Text('Kategorie: ${lernortList[index].kategorieId}',
-                  style: new TextStyle(
-                      fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]),
-          onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        LernortScreen(l: lernortList[index])));
-          },
-        )
+        ),
+        Container(
+          child: IconButton(
+              icon: Icon(Icons.search, color: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => SuchenScreen()));
+              }),
+        ),
       ],
-    ));
-  }
+    ),
+  );
 }

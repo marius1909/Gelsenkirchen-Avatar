@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
-import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
+import 'database_url.dart';
+import 'datenbankObjekt.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart';
 import 'package:http/http.dart' as http;
 

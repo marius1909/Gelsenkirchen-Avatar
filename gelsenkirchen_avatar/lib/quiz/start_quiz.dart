@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/data/global.dart';
 import 'package:gelsenkirchen_avatar/quiz/quizpage.dart';
 import 'package:http/http.dart' as http;
 
@@ -103,7 +105,7 @@ class _StartQuizState extends State<StartQuiz> {
                 ),
               ),
               //Belohnungen-Button
-              Padding(
+              /*Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: Container(
                     width: double.infinity,
@@ -143,7 +145,7 @@ class _StartQuizState extends State<StartQuiz> {
                                 TextStyle(fontSize: 18.0, color: Colors.white),
                           )),
                     )),
-              ),
+              ),*/
               //Starten-Button
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
@@ -158,13 +160,21 @@ class _StartQuizState extends State<StartQuiz> {
                               MaterialTapTargetSize.shrinkWrap,
                           color: Colors.green[400],
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => QuizPage(
-                                    quizID: int.parse(data['quizID']),
-                                    benutzerID: 2,
-                                    lernKategorieID:
-                                        int.parse(data['kategorieID']),
-                                    lernortID: int.parse(data['id']))));
+                            if (global.user?.id != null) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => QuizPage(
+                                        quizID: int.parse(data['quizID']),
+                                        benutzerID: global.user.id,
+                                        lernKategorieID:
+                                            int.parse(data['kategorieID']),
+                                        lernortID: int.parse(data['id']),
+                                        title: data['name'],
+                                      )));
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Anmeldung fehlt!",
+                                  toastLength: Toast.LENGTH_SHORT);
+                            }
                           },
                           child: Text(
                             "Starten",

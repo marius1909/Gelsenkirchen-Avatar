@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -54,84 +55,101 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       dynamic lernCategories = data['data'];
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.name_lern_category),
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            RichText(
-              text: TextSpan(
-                  style: TextStyle(color: Colors.black, fontSize: 17),
-                  children: <TextSpan>[
-                    TextSpan(text: "Your Rank : "),
-                    TextSpan(
-                        text: data['current_rank'].toString(),
-                        style: TextStyle(color: Colors.red)),
-                  ]),
-            ),
-            RichText(
-              text: TextSpan(
-                  style: TextStyle(color: Colors.black, fontSize: 17),
-                  children: <TextSpan>[
-                    TextSpan(text: "Your Score : "),
-                    TextSpan(
-                        text: data['current_point'].toString(),
-                        style: TextStyle(color: Colors.red)),
-                  ]),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: DataTable(
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text(
-                        'Rank',
-                        style: TextStyle(fontStyle: FontStyle.italic),
+      if (lernCategories != null) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.name_lern_category),
+          ),
+          body: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+              RichText(
+                text: TextSpan(
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    children: <TextSpan>[
+                      TextSpan(text: "Your Rank : "),
+                      TextSpan(
+                          text: data['current_rank'].toString(),
+                          style: TextStyle(color: Colors.red)),
+                    ]),
+              ),
+              RichText(
+                text: TextSpan(
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    children: <TextSpan>[
+                      TextSpan(text: "Your Score : "),
+                      TextSpan(
+                          text: data['current_point'].toString(),
+                          style: TextStyle(color: Colors.red)),
+                    ]),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: DataTable(
+                    columns: const <DataColumn>[
+                      DataColumn(
+                        label: Text(
+                          'Rank',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'UserName',
-                        style: TextStyle(fontStyle: FontStyle.italic),
+                      DataColumn(
+                        label: Text(
+                          'UserName',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Score',
-                        style: TextStyle(fontStyle: FontStyle.italic),
+                      DataColumn(
+                        label: Text(
+                          'Score',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
                       ),
-                    ),
-                  ],
-                  rows: List<DataRow>.generate(
-                    lernCategories.length,
-                    (index) => DataRow(
-                      cells: <DataCell>[
-                        DataCell(Container(
-                          child: Center(
-                              child: Text(
-                                  lernCategories[index]['rank'].toString())),
-                          width: 20,
-                        )),
-                        DataCell(Container(
-                            width: double.infinity,
-                            child: Text(lernCategories[index]['username']))),
-                        DataCell(Container(
-                            width: 50,
+                    ],
+                    rows: List<DataRow>.generate(
+                      lernCategories.length,
+                      (index) => DataRow(
+                        cells: <DataCell>[
+                          DataCell(Container(
                             child: Center(
-                                child: Text(lernCategories[index]
-                                        ['erfahrungspunkte']
-                                    .toString())))),
-                      ],
-                    ),
-                  )),
+                                child: Text(
+                                    lernCategories[index]['rank'].toString())),
+                            width: 20,
+                          )),
+                          DataCell(Container(
+                              width: double.infinity,
+                              child: Text(lernCategories[index]['username'] ==
+                                          null ||
+                                      lernCategories[index]['username'] == ""
+                                  ? lernCategories[index]['email']
+                                  : lernCategories[index]['username']))),
+                          DataCell(Container(
+                              width: 50,
+                              child: Center(
+                                  child: Text(lernCategories[index]
+                                          ['sum_erfahrungspunkte']
+                                      .toString())))),
+                        ],
+                      ),
+                    )),
+              ),
+            ],
+          ),
+        );
+      } else {
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.name_lern_category),
             ),
-          ],
-        ),
-      );
+            body: new Container(
+                margin: EdgeInsets.all(10.0),
+                alignment: Alignment.topCenter,
+                child: Center(
+                    child: Text(
+                        "There is no ranking for ${widget.name_lern_category}"))));
+      }
     }
   }
 }

@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/quiz_fragen.dart';
-import 'package:gelsenkirchen_avatar/data/benutzer_spiel.dart';
 import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+// Für Map-Style
+import 'package:flutter/services.dart' show rootBundle;
+
+/* TODO: Mapmarker_rot.png als Marker einbinden */
 
 class MapScreen extends StatefulWidget {
   @override
@@ -16,6 +17,10 @@ class MapSampleState extends State<MapScreen> {
   Completer<GoogleMapController> _controller = Completer();
   final Set<Marker> _markers = {};
 
+  /* Inhalt der map_style.txt */
+  String _mapStyle;
+
+  /* TODO: Kameraposition beim Starten der App sollte auf dem aktuellen Standort des Benutzers liegen (Lisa) */
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
     zoom: 17,
@@ -29,6 +34,11 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
     addMarkersForLernorte();
+
+    /* Lädt das map_style.txt File als ein String ein */
+    rootBundle.loadString('assets/styles/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
   }
 
   @override
@@ -39,6 +49,9 @@ class MapSampleState extends State<MapScreen> {
         initialCameraPosition: _whsGelsenkrichen,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
+
+          /* Style setzen */
+          controller.setMapStyle(_mapStyle);
         },
         markers: _markers,
         myLocationEnabled: true,
@@ -49,6 +62,7 @@ class MapSampleState extends State<MapScreen> {
     );
   }
 
+  /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
     var lernorte = Lernort.shared.gibObjekte();
     lernorte.then((value) {
@@ -56,6 +70,9 @@ class MapSampleState extends State<MapScreen> {
         final marker = Marker(
           markerId: MarkerId(element.id.toString()),
           position: LatLng(element.nord, element.ost),
+
+          /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
+          Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
           onTap: () {
             Navigator.push(
                 context,

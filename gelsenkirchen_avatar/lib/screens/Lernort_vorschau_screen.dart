@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+/* import 'package:http/http.dart' as http;
+import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class LernortVorschau extends StatefulWidget {
@@ -64,7 +64,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
       case "1":
         {
-          kategorienSymbol = Icon(FlutterIcons.flask_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.compass_faw5s, size: 30);
         }
         break;
 
@@ -82,19 +82,19 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
       case "4":
         {
-          kategorienSymbol = Icon(FlutterIcons.theater_masks_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.palette_faw5s, size: 30);
         }
         break;
 
       case "5":
         {
-          kategorienSymbol = Icon(FlutterIcons.school_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s, size: 30);
         }
         break;
 
       case "6":
         {
-          kategorienSymbol = Icon(FlutterIcons.graduation_cap_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.book_faw5s, size: 30);
         }
         break;
 
@@ -102,6 +102,18 @@ class _LernortVorschauState extends State<LernortVorschau> {
         {
           kategorienSymbol =
               Icon(FlutterIcons.hand_holding_heart_faw5s, size: 30);
+        }
+        break;
+
+      case "8":
+        {
+          kategorienSymbol = Icon(FlutterIcons.music_faw5s, size: 30);
+        }
+        break;
+
+      case "9":
+        {
+          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s, size: 30);
         }
         break;
     }
@@ -191,7 +203,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                LernortScreen(l: lernort)));
+                                LernortScreen(l: lernort, k: "TODO")));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
