@@ -1,9 +1,9 @@
-import 'package:gelsenkirchen_avatar/data/suchspiel_art.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 
 class SuchspielHinweis {
   int _hinweisAnzahl;
   int _derzeitigerHinweis;
-  List<String> _loesungsWort;
+  String _loesungsWort;
   List<String> _hinweise;
 
   int get hinweisAnzahl {
@@ -14,7 +14,7 @@ class SuchspielHinweis {
     return _derzeitigerHinweis;
   }
 
-  SuchspielHinweis(List<String> _loesungswort) {
+  SuchspielHinweis(String _loesungswort) {
     this._hinweisAnzahl = 0;
     this._derzeitigerHinweis = 0;
     this._loesungsWort = _loesungswort;
@@ -30,6 +30,10 @@ class SuchspielHinweis {
     return _loesungsWort.contains(loesungswort.toLowerCase());
   }
 
+  int loesungsWortLaenge() {
+    return _loesungsWort.length;
+  }
+
   String naechsterHinweis() {
     if (_derzeitigerHinweis == _hinweisAnzahl) {
       return null;
@@ -42,8 +46,7 @@ class SuchspielHinweis {
   static Map<SuchspielArt, SuchspielHinweis> get alleHinweise {
     Map<SuchspielArt, SuchspielHinweis> _alleHinweise = Map();
 
-    SuchspielHinweis edelweissHinweis =
-        SuchspielHinweis(["alpen-edelweiß", "edelweiß", "edelweiss"]);
+    SuchspielHinweis edelweissHinweis = SuchspielHinweis("edelweiß");
     edelweissHinweis.hinweisHinzufuegen(
         "Sie ist eine überwinternd grüne, ausdauernde krautige Pflanze, die Wuchshöhen von 5 bis über 20 Zentimetern erreicht.");
     edelweissHinweis.hinweisHinzufuegen(
@@ -58,7 +61,7 @@ class SuchspielHinweis {
         "Weitere Trivialnamen sind Wollblume, Bauchwehbleamerl, Irlweiß, Almsterndl, Federweiß, selten auch Silberstern und Wülblume (in der Schweiz). Auf romanisch [vierte schweizerische Landessprache, neben deutsch und italienisch im Kanton Graubünden gesprochen und geschrieben] heißt Leontopodium nivale «Alvetern» (alv = weiß, etern = ewig): das spiegelt die Besonderheit, dass die weißen Blütenstände bis in den Winter hinein überdauern.");
     _alleHinweise[SuchspielArt.edelweiss] = edelweissHinweis;
 
-    SuchspielHinweis rotbucheHinweis = SuchspielHinweis(["rotbuche"]);
+    SuchspielHinweis rotbucheHinweis = SuchspielHinweis("rotbuche");
     rotbucheHinweis.hinweisHinzufuegen(
         "Während der letzten Kaltzeit wurde Sie aus Mitteleuropa verdrängt. Sie überlebte im Mittelmeerraum und begann ihre Rückeroberung des europäischen Verbreitungsgebietes vor etwa 10.000 Jahren.");
     rotbucheHinweis.hinweisHinzufuegen(
@@ -71,7 +74,7 @@ class SuchspielHinweis {
         "Der Namensteil „Rot“ bezieht sich auf die mitunter leicht rötliche Färbung des Holzes.");
     _alleHinweise[SuchspielArt.rotbuche] = rotbucheHinweis;
 
-    SuchspielHinweis korkeicheHinweis = SuchspielHinweis(["korkeiche"]);
+    SuchspielHinweis korkeicheHinweis = SuchspielHinweis("korkeiche");
     korkeicheHinweis.hinweisHinzufuegen(
         "Sie ist einhäusig getrenntgeschlechtig (monözisch), es treten sowohl weibliche als auch männliche Blüten an einem Exemplar auf.");
     korkeicheHinweis.hinweisHinzufuegen(

@@ -8,6 +8,7 @@ import 'package:gelsenkirchen_avatar/screens/hilfe_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -54,6 +55,16 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
                             LernortListeScreen()));
+              }),
+              ListTile(
+              leading: Icon(Icons.search),
+              title: Text('Suchspiel'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Suchspiel()));
               }),
 
           /*Im Folgenden sind die Menüeinträge "Freunde und Scoreboard, die ggf.

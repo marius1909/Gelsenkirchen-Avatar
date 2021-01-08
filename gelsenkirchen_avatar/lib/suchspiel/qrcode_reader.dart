@@ -4,32 +4,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-// class Suchspiel extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Material(
-//       type: MaterialType.transparency,
-//       child: Container(
-//         child: SafeArea(
-//           child: FlutterLogo(style: FlutterLogoStyle.horizontal)
-//         ),
-//       ),
-//     );
-//   }
-// }
+class QRCodeReader extends StatefulWidget {
+  QRCodeReader({this.onQRCodeScanned});
 
-class Suchspiel extends StatefulWidget {
+  final Function(String) onQRCodeScanned;
+
   @override
   _QRViewState createState() => _QRViewState();
 }
 
-class _QRViewState extends State<Suchspiel> {
+class _QRViewState extends State<QRCodeReader> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  Barcode result;
   QRViewController controller;
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -43,12 +30,13 @@ class _QRViewState extends State<Suchspiel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Scan QR Code"),
+      ),
       body: Column(
         children: <Widget>[
           Expanded(
             flex: 5,
-            // To ensure the Scanner view is properly sizes after rotation
-            // we need to listen for Flutter SizeChanged notification and update controller
             child: NotificationListener<SizeChangedLayoutNotification>(
               onNotification: (notification) {
                 Future.microtask(() => controller?.updateDimensions(qrKey));
@@ -63,15 +51,6 @@ class _QRViewState extends State<Suchspiel> {
               ),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? Text(
-                      'Data: ${result.code}')
-                  : Text("Scan a code"),
-            ),
-          )
         ],
       ),
     );
@@ -82,8 +61,7 @@ class _QRViewState extends State<Suchspiel> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         controller.dispose();
-        result = scanData;
-        print(result.code);
+        widget.onQRCodeScanned(scanData.code);
       });
     });
   }
