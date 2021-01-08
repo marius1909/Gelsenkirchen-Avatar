@@ -49,7 +49,7 @@ dev_dependencies:
   provider: ^3.0.0
   location: ^2.3.5
   photo_view: ^0.5.0
-  #chewie: ^0.10.1
+  imagebutton: ^0.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,7 +65,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
 
+    - assets/audio/
+    - assets/buttons/
+    - assets/fonts/
+    - assets/icons/
     - assets/images/
+    - assets/styles/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,17 +83,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+
+  fonts:
+    # Standarschrift. Für Hervorhebungen "style: TextStyle(fontWeight: FontWeight.bold)" verwenden.
+     - family: Montserrat
+       fonts:
+         - asset: assets/fonts/Montserrat-Light.ttf
+    # Schrift für Überschriften etc.
+     - family: Ccaps
+       fonts:
+          - asset: assets/fonts/ccaps.ttf
+    # Schrift für besondere Stellen wo Transparenz funktioniert
+     - family: Ccapshad
+       fonts:
+          - asset: assets/fonts/ccapshad.ttf
+     
+  
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

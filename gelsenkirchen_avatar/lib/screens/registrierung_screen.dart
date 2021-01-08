@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class Registrierung extends StatefulWidget {
   @override
@@ -54,7 +55,9 @@ class _RegistrierungState extends State<Registrierung> {
                 builder: (BuildContext context) =>
                     WeiterleitenZurAnmeldungScreen()));
       } else {
-        Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
+        Fluttertoast.showToast(
+            msg: "Registrierung fehlgeschlagen",
+            toastLength: Toast.LENGTH_SHORT);
       }
     }
     setState(() {
@@ -69,126 +72,152 @@ class _RegistrierungState extends State<Registrierung> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text(
-          'Registrieren',
-        ),
-        backgroundColor: Colors.blueGrey[800],
+        title: Text('Registrieren'),
+        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
+        backgroundColor: Color(0xff0B3E99),
       ),
       body: Form(
           key: _formKey,
           child: ListView(children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 80, 15, 0),
+              padding: const EdgeInsets.fromLTRB(15, 50, 15, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text("Zuerst brauchen wir ein paar Infos von dir:",
+                      style: Theme.of(context).textTheme.headline3),
+                  SizedBox(
+                    height: 50,
+                  ),
+
+                  /*BENUTZERNAME*/
+
                   TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Benutzernamen an';
-                        }
-                        return null;
-                      },
-                      controller: namectrl,
-                      decoration: InputDecoration(
-                          labelText: "Benutzername:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                    decoration: new InputDecoration(
+                      /*Prompt*/
+                      labelText: "Benutzername",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib einen Benutzernamen an';
+                      }
+                      return null;
+                    },
+                    controller: namectrl,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib eine gültige Email Adresse an';
-                        }
-                        if (EmailValidator.validate(value)) {
-                          return null;
-                        }
 
-                        return 'Keine gültige Email Adresse im Format sample@example.com.';
-                      },
-                      controller: emailctrl,
-                      decoration: InputDecoration(
-                          labelText: "Email:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                  /*EMAIL*/
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      /*Prompt*/
+                      labelText: "Email",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib eine gültige Email Adresse an';
+                      }
+                      if (EmailValidator.validate(value)) {
+                        return null;
+                      }
+
+                      //Die Textzeile ist zu lang um angezeigt zu werden.*/
+                      return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailctrl,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
+
+                  /*PASSWORT*/
                   TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Passwort an.';
-                        }
+                    decoration: new InputDecoration(
+                      /*Prompt*/
+                      labelText: "Passwort",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib ein Passwort an.';
+                      }
 
-                        passwortvalue = value;
+                      passwortvalue = value;
 
-                        return null;
-                      },
-                      controller: passctrl,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: "Passwort:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                      return null;
+                    },
+                    controller: passctrl,
+                    obscureText: true,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                      controller: validatepassctrl,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Bitte gib ein Passwort an.';
-                        }
-                        if (value != passwortvalue) {
-                          return 'Passwörter stimmen nicht überein';
-                        }
 
-                        return null;
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: "Passwort wiederholen:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
+                  /*PASSWORT WIEDERHOLEN*/
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      /*Prompt*/
+                      labelText: "Passwort wiederholen",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    controller: validatepassctrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib ein Passwort ein.';
+                      }
+                      if (value != passwortvalue) {
+                        return 'Die Passwörter stimmen nicht überein.';
+                      }
+
+                      return null;
+                    },
+                    obscureText: true,
+                  ),
                   SizedBox(height: 40),
-                  ButtonTheme(
-                      padding: EdgeInsets.fromLTRB(145, 13, 145, 13),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blueGrey[900])),
-                      child: RaisedButton(
-                        onPressed: () {
-                          var valid = _formKey.currentState.validate();
-                          if (!valid) {
-                            return;
-                          }
+                  ImageButton(
+                    children: <Widget>[],
+                    /* 302 x 91 sind die Originalmaße der Buttons */
+                    width: 302 / 1.3,
+                    height: 91 / 1.3,
+                    paddingTop: 5,
+                    /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                    pressedImage: Image.asset(
+                      "assets/buttons/Registrieren_dunkelblau_groß.png",
+                    ),
+                    unpressedImage: Image.asset(
+                        "assets/buttons/Registrieren_dunkelblau_groß.png"),
+                    onTap: () {
+                      var valid = _formKey.currentState.validate();
+                      if (!valid) {
+                        return;
+                      }
 
-                          benutzerRegistrierung();
-                        },
-                        color: Colors.blueGrey[800],
-                        child: Text(
-                          "Registrieren",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[100]),
-                        ),
-                      )),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Anmeldung()));
-                      },
-                      child: Text(
-                        "Bereits registriert? Hier zur Anmeldung",
-                        style: TextStyle(
-                          color: Colors.blueGrey[900],
-                        ),
-                      )),
+                      benutzerRegistrierung();
+                    },
+                  ),
                   FormField(
                     initialValue: false,
                     builder: (FormFieldState formFieldState) {
@@ -212,6 +241,22 @@ class _RegistrierungState extends State<Registrierung> {
               ),
             )
           ])),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        child: FlatButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Anmeldung()));
+          },
+          child: Text(
+            "Du bist schon registriert? \n Hier geht's zur Anmeldung.",
+            textAlign: TextAlign.center,
+          ),
+        ),
+        elevation: 0,
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
@@ -30,5 +31,10 @@ class LernKategorie extends DatenbankObjekt<LernKategorie> {
       "name": "$name",
       "logo": "$logo",
     };
+  }
+
+  @override
+  String toString() {
+    return super.toString();
   }
 }

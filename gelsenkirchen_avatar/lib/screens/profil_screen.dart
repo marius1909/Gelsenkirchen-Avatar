@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
+import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 class Profil extends StatefulWidget {
   @override
@@ -15,9 +16,10 @@ class _ProfilState extends State<Profil> {
     loadName();
 
     return Scaffold(
+        drawer: NavDrawer(),
         appBar: AppBar(
           title: Text('Profil'),
-          centerTitle: true,
+          //centerTitle: true,
           elevation: 0.0,
         ),
         body: Padding(
@@ -30,7 +32,7 @@ class _ProfilState extends State<Profil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'NAME',
+                          'Name',
                           style:
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
@@ -55,6 +57,7 @@ class _ProfilState extends State<Profil> {
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
+                        /* TODO: Level des Spielers anzeigen (Lisa) */
                         Text(
                           '8',
                           style: TextStyle(

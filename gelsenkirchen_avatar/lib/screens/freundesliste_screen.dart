@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/testfreund.dart';
+import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 class Freundesliste extends StatefulWidget {
   //loadFreunde
@@ -35,10 +36,11 @@ class _FreundeslisteState extends State<Freundesliste> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavDrawer(),
         backgroundColor: Colors.lightBlueAccent,
         appBar: AppBar(
-          title: Text('Freundesliste'),
-          centerTitle: true,
+          title: Text('Freunde'),
+          //centerTitle: true,
           elevation: 0.0,
         ),
         body: Padding(

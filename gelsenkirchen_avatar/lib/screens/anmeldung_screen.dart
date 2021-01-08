@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart'
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class Anmeldung extends StatefulWidget {
   @override
@@ -49,8 +50,7 @@ class _AnmeldungState extends State<Anmeldung> {
     switch (invalidErrorCause) {
       case InvalidLoginExceptionCause.emailNotFound:
         Fluttertoast.showToast(
-            msg: "Der angegebene Benutzer existiert nicht",
-            toastLength: Toast.LENGTH_SHORT);
+            msg: "Falscher Benutzername", toastLength: Toast.LENGTH_SHORT);
         break;
       case InvalidLoginExceptionCause.passwordIncorrect:
         Fluttertoast.showToast(
@@ -63,89 +63,129 @@ class _AnmeldungState extends State<Anmeldung> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey[600],
-        body: SafeArea(
-            child: ListView(children: [
-          Padding(padding: EdgeInsets.fromLTRB(30, 90, 30, 0)),
-          Column(children: [
-            CircleAvatar(
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        title: Text('Anmelden'),
+        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
+        backgroundColor: Color(0xff0B3E99),
+        /*Entfernt den Zurückbutton*/
+        automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(
+          child: ListView(children: [
+        Padding(padding: EdgeInsets.fromLTRB(30, 50, 30, 0)),
+        Column(children: [
+          Text("Bitte gib deine Anmeldedaten ein:",
+              style: Theme.of(context).textTheme.headline3),
+          /* CircleAvatar(
                 backgroundImage: AssetImage('assets/images/wink.png'),
-                radius: 130),
-            Padding(
-                padding: EdgeInsets.fromLTRB(15, 110, 15, 0),
-                child: Column(children: [
-                  TextFormField(
-                      controller: emailctrl,
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey[900], width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey[900], width: 2),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          labelText: "Email:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
-                  SizedBox(
-                    height: 20,
+                radius: 130), */
+          Padding(
+              padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
+              child: Column(children: [
+                /*EMAIL*/
+                TextFormField(
+                  decoration: new InputDecoration(
+                    /*Prompt*/
+                    labelText: "Email",
+                    fillColor: Colors.white,
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                      borderSide: new BorderSide(),
+                    ),
                   ),
-                  TextFormField(
-                      controller: passctrl,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey[900], width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey[900], width: 2),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          labelText: "Passwort:",
-                          labelStyle:
-                              TextStyle(fontSize: 16, color: Colors.black))),
-                  SizedBox(height: 40),
-                  ButtonTheme(
-                      padding: EdgeInsets.fromLTRB(120, 13, 120, 13),
-                      child: RaisedButton(
-                        onPressed: benutzerLogin,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.blueGrey[900])),
-                        color: Colors.blueGrey[800],
-                        child: Text(
-                          "Anmelden",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[100]),
-                        ),
-                      )),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Registrierung()));
-                      },
-                      child: Text(
-                        "Noch kein Account? Hier registrieren",
-                        style: TextStyle(
-                          color: Colors.grey[100],
-                        ),
-                      ))
-                ]))
-          ])
-        ])));
+                  /* validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib eine gültige Email Adresse an';
+                      }
+                      if (EmailValidator.validate(value)) {
+                        return null;
+                      }
+
+                      //Die Textzeile ist zu lang um angezeigt zu werden.*/
+                  //return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
+                  //}, */
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailctrl,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: new InputDecoration(
+                    /*Prompt*/
+                    labelText: "Passwort",
+                    fillColor: Colors.white,
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                      borderSide: new BorderSide(),
+                    ),
+                  ),
+                  /* validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Bitte gib ein Passwort an.';
+                      }
+
+                      passwortvalue = value;
+
+                      return null;
+                    }, */
+                  controller: passctrl,
+                  obscureText: true,
+                ),
+                SizedBox(height: 40),
+                ImageButton(
+                  children: <Widget>[],
+                  /* 302 x 91 sind die Originalmaße der Buttons */
+                  width: 302 / 1.3,
+                  height: 91 / 1.3,
+                  paddingTop: 5,
+                  /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                  pressedImage: Image.asset(
+                    "assets/buttons/Anmelden_dunkelblau_groß.png",
+                  ),
+                  unpressedImage: Image.asset(
+                      "assets/buttons/Anmelden_dunkelblau_groß.png"),
+                  onTap: () {
+                    benutzerLogin();
+                  },
+                ),
+                SizedBox(height: 40),
+
+                /* Dieser Button dient nur dazu während der Entwicklung den Anmeldescreen zu überspringen */
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => HomeScreen()));
+                  },
+                  child: Text(
+                    "Ich bin Entwickler ;)",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]))
+        ])
+      ])),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        child: FlatButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Registrierung()));
+          },
+          child: Text(
+            "Du hast noch keinen Account? \n Hier geht's zur Registrierung.",
+            textAlign: TextAlign.center,
+          ),
+        ),
+        elevation: 0,
+      ),
+    );
   }
 }

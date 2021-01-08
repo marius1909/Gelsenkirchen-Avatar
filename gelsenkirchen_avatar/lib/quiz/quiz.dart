@@ -1,19 +1,17 @@
 import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Quiz {
   int quizID;
   static Quiz shared = Quiz();
 
-  Quiz({this.quizID,
-        });
+  Quiz({
+    this.quizID,
+  });
 
   static Quiz _QuizVonJson(dynamic json) {
-    return new  Quiz(
-        quizID: int.parse(json["quizID"])
-    );
+    return new Quiz(quizID: int.parse(json["quizID"]));
   }
 
   Future<Quiz> getQuiz(int id) async {

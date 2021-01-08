@@ -7,6 +7,7 @@ import 'package:gelsenkirchen_avatar/screens/suchen_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 
 class LernortListeScreen extends StatefulWidget {
   @override
