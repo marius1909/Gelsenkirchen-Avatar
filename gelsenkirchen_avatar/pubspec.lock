@@ -225,8 +225,7 @@ packages:
       name: nfc_in_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.3.0"
+    version: "2.0.5"
   open_iconic_flutter:
     dependency: transitive
     description:
@@ -234,9 +233,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-=======
-    version: "2.0.5"
->>>>>>> QR_Suchspiel
   path:
     dependency: transitive
     description:
@@ -361,7 +357,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.3"
-<<<<<<< HEAD
   video_player:
     dependency: "direct main"
     description:
@@ -390,29 +385,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4+2"
-  win32:
-    dependency: transitive
-    description:
-      name: win32
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.4"
-  wkt_parser:
-    dependency: transitive
-    description:
-      name: wkt_parser
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
-  xdg_directories:
-    dependency: transitive
-    description:
-      name: xdg_directories
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
-=======
->>>>>>> QR_Suchspiel
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
   flutter: ">=1.22.0 <2.0.0"
