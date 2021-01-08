@@ -10,6 +10,7 @@ import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 import 'package:gelsenkirchen_avatar/data/global.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -89,6 +90,16 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
                             LernortListeScreen()));
+              }),
+              ListTile(
+              leading: Icon(Icons.search),
+              title: Text('Suchspiel'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Suchspiel()));
               }),
 
           /* FREUNDE */

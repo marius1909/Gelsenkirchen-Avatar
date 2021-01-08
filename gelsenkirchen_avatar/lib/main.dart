@@ -4,6 +4,11 @@ import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/body.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/scan_screen.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/score_screen.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 void main() => runApp(MyApp());
 

@@ -19,9 +19,14 @@ public final class GeneratedPluginRegistrant {
       io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin.registerWith(shimPluginRegistry.registrarFor("io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.googlemaps.GoogleMapsPlugin());
     flutterEngine.getPlugins().add(new com.lyokone.location.LocationPlugin());
+<<<<<<< HEAD
     flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
     flutterEngine.getPlugins().add(new com.tekartik.sqflite.SqflitePlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.videoplayer.VideoPlayerPlugin());
     flutterEngine.getPlugins().add(new creativecreatorormaybenot.wakelock.WakelockPlugin());
+=======
+      me.andisemler.nfc_in_flutter.NfcInFlutterPlugin.registerWith(shimPluginRegistry.registrarFor("me.andisemler.nfc_in_flutter.NfcInFlutterPlugin"));
+    flutterEngine.getPlugins().add(new net.touchcapture.qr.flutterqr.FlutterQrPlugin());
+>>>>>>> QR_Suchspiel
   }
 }

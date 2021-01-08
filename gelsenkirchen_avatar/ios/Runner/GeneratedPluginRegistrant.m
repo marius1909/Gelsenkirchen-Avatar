@@ -22,16 +22,16 @@
 @import location;
 #endif
 
-#if __has_include(<path_provider/FLTPathProviderPlugin.h>)
-#import <path_provider/FLTPathProviderPlugin.h>
+#if __has_include(<nfc_in_flutter/NfcInFlutterPlugin.h>)
+#import <nfc_in_flutter/NfcInFlutterPlugin.h>
 #else
-@import path_provider;
+@import nfc_in_flutter;
 #endif
 
-#if __has_include(<sqflite/SqflitePlugin.h>)
-#import <sqflite/SqflitePlugin.h>
+#if __has_include(<qr_code_scanner/FlutterQrPlugin.h>)
+#import <qr_code_scanner/FlutterQrPlugin.h>
 #else
-@import sqflite;
+@import qr_code_scanner;
 #endif
 
 #if __has_include(<video_player/FLTVideoPlayerPlugin.h>)
@@ -52,10 +52,15 @@
   [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
+<<<<<<< HEAD
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];
   [WakelockPlugin registerWithRegistrar:[registry registrarForPlugin:@"WakelockPlugin"]];
+=======
+  [NfcInFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"NfcInFlutterPlugin"]];
+  [FlutterQrPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterQrPlugin"]];
+>>>>>>> QR_Suchspiel
 }
 
 @end
