@@ -3,6 +3,10 @@
 3    package="io.flutter.plugins.flutter_plugin_android_lifecycle" >
 4
 5    <uses-sdk android:minSdkVersion="16" />
+<<<<<<< HEAD
 5-->C:\_Daten\Programme\Flutter SDK\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_plugin_android_lifecycle-1.0.11\android\src\main\AndroidManifest.xml
+=======
+5-->/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/android/src/main/AndroidManifest.xml
+>>>>>>> levelup
 6
 7</manifest>

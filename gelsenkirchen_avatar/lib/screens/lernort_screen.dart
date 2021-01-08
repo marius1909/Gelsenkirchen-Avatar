@@ -14,13 +14,19 @@ class LernortScreen extends StatelessWidget {
       : super(key: key);
   List<LernKategorie> lernKato = List();
 
+  @override
+  _LernortScreenState createState() => _LernortScreenState();
+}
+
+class _LernortScreenState extends State<LernortScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         //resizeToAvoidBottomInset: false,
         //drawer: NavDrawer(),
         appBar: AppBar(
           /*NAME*/
-          title: Text(l.name),
+          title: Text(widget.l.name),
         ),
         body: SingleChildScrollView(
             child: Column(children: [

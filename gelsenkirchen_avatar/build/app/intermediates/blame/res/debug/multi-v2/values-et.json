@@ -1,10 +1,34 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "C:\\_Daten\\Schule und Studium\\Studium\\SPMI\\Git\\Gelsenkirchen-Avatar\\gelsenkirchen_avatar\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-et\\values-et.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\a219aaa53005fa677df3bfd14ede3871\\core-1.1.0\\res\\values-et\\values-et.xml",
+=======
+            "outputFile": "/home/phuong/thaonew/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-et/values-et.xml",
+            "map": [
+                {
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/res/values-et/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "198",
+                        "endOffsets": "445"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1261",
+                        "endColumns": "198",
+                        "endOffsets": "1455"
+                    }
+                },
+                {
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/res/values-et/values-et.xml",
+>>>>>>> levelup
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +45,11 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\27a51f2d6fb4c91d7925584bc266b0ae\\play-services-base-17.0.0\\res\\values-et\\values.xml",
+=======
+                    "source": "/home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/res/values-et/values.xml",
+>>>>>>> levelup
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -36,6 +64,7 @@
                         "endColumns": "104,193,128,109,208,130,145,131,218,109,194,133,213,174,92,94,116",
                         "endOffsets": "205,399,528,638,847,978,1124,1256,1674,1784,1979,2113,2327,2502,2595,2690,2807"
                     }
+<<<<<<< HEAD
                 },
                 {
                     "source": "C:\\Users\\lisan\\.gradle\\caches\\transforms-2\\files-2.1\\7cffab07687aaafbd172c410541d2dea\\jetified-play-services-basement-17.0.0\\res\\values-et\\values.xml",
@@ -53,6 +82,8 @@
                         "endColumns": "198",
                         "endOffsets": "1455"
                     }
+=======
+>>>>>>> levelup
                 }
             ]
         }

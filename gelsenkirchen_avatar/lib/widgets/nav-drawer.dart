@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
@@ -122,10 +123,16 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Bestenliste'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => ScoreBoard(2)));
+                  if (global.user?.id != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ScoreBoard(global.user.id)));
+                } else {
+                  Fluttertoast.showToast(
+                      msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
+                }
               }),
 
           /* TODO: Hilfe muss noch implenentiert werden (optional) (Lisa)*/

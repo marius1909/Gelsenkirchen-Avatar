@@ -10,6 +10,7 @@ enum DatabaseURL {
   getBenutzerSpiel,
   getMinispielArt,
   getQuiz,
+  getQuizID,
   insertIntoLernort,
   getQuizFragen,
   insertIntoQuizFragen,
@@ -56,7 +57,7 @@ extension DatabaseURLExtension on DatabaseURL {
       case DatabaseURL.getRollen:
         return _baseURL + "getRollen.php";
       case DatabaseURL.getFreigeschaltet:
-        return _baseURL + "getFreigeschaltet.php";  
+        return _baseURL + "getFreigeschaltet.php";
       case DatabaseURL.getSammelKategorie:
         return _baseURL + "getSammelKategorie.php";
       case DatabaseURL.getSammelbares:
@@ -71,6 +72,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "getMinispielArt.php";
       case DatabaseURL.getQuiz:
         return _baseURL + "getQuiz.php";
+      case DatabaseURL.getQuizID:
+        return _baseURL + "get_lernortID.php?id=";
       case DatabaseURL.getBenutzer:
         return _baseURL + "getBenutzer.php";
       case DatabaseURL.registrierung:

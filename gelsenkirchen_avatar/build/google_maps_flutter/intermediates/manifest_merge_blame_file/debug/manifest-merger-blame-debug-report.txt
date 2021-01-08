@@ -4,9 +4,13 @@
 4
 5    <uses-sdk android:minSdkVersion="16" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 5-->C:\src\flutter\.pub-cache\hosted\pub.dartlang.org\google_maps_flutter-1.0.6\android\src\main\AndroidManifest.xml
 =======
 5-->C:\_Daten\Programme\Flutter SDK\flutter_windows_1.20.2-stable\flutter\.pub-cache\hosted\pub.dartlang.org\google_maps_flutter-1.0.6\android\src\main\AndroidManifest.xml
 >>>>>>> Sprint_04_Lisa
+=======
+5-->/home/phuong/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-1.0.5/android/src/main/AndroidManifest.xml
+>>>>>>> levelup
 6
 7</manifest>

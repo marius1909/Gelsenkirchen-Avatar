@@ -97,7 +97,16 @@ flutter:
      - family: Ccapshad
        fonts:
           - asset: assets/fonts/ccapshad.ttf
-     
-  
+          
+    - family: Langar
+      fonts:
+        - asset: fonts/Langar-Regular.ttf
+          weight: 500
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

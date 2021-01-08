@@ -12,8 +12,13 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
+<<<<<<< HEAD
 14-->C:\_Daten\Schule und Studium\Studium\SPMI\Git\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:5-66
 14-->C:\_Daten\Schule und Studium\Studium\SPMI\Git\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:6:22-64
+=======
+14-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:10:5-67
+14-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:10:22-64
+>>>>>>> levelup
 15    <!--
 16     io.flutter.app.FlutterApplication is an android.app.Application that
 17         calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -22,6 +27,7 @@
 20         FlutterApplication and put your custom class here.
 21    -->
 22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<<<<<<< HEAD
 22-->C:\_Daten\Schule und Studium\Studium\SPMI\Git\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:10-84
 22-->C:\_Daten\Schule und Studium\Studium\SPMI\Git\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:27-81
 23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
@@ -141,6 +147,128 @@
 92-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\lisan\.gradle\caches\transforms-2\files-2.1\7cffab07687aaafbd172c410541d2dea\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
 93            android:value="@integer/google_play_services_version" />
 93-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\lisan\.gradle\caches\transforms-2\files-2.1\7cffab07687aaafbd172c410541d2dea\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+=======
+22-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:9:10-84
+22-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:9:27-81
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:11:5-79
+23-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:11:22-76
+24    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+24-->[:location] /home/phuong/thaonew/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-81
+24-->[:location] /home/phuong/thaonew/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-78
+25
+26    <uses-feature
+26-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+27        android:glEsVersion="0x00020000"
+27-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+28        android:required="true" />
+28-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+29
+30    <application
+30-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:14:5-56:19
+31        android:name="io.flutter.app.FlutterApplication"
+31-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:15:9-57
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.1.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/a219aaa53005fa677df3bfd14ede3871/core-1.1.0/AndroidManifest.xml:24:18-86
+33        android:debuggable="true"
+34        android:icon="@mipmap/ic_launcher"
+34-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:18:9-43
+35        android:label="gelsenkirchen_avatar"
+35-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:16:9-45
+36        android:usesCleartextTraffic="true" >
+36-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:17:9-44
+37        <meta-data
+37-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:19:9-21:71
+38            android:name="com.google.android.geo.API_KEY"
+38-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:20:13-58
+39            android:value="AIzaSyCw8_FsCnu0iXlY6FLJVhZuVKYrUHsYf-g" />
+39-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:21:13-68
+40
+41        <activity
+41-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:22:9-50:20
+42            android:name="com.example.gelsenkirchen_avatar.MainActivity"
+42-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:23:13-41
+43            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+43-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:26:13-163
+44            android:hardwareAccelerated="true"
+44-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:27:13-47
+45            android:launchMode="singleTop"
+45-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:24:13-43
+46            android:theme="@style/LaunchTheme"
+46-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:25:13-47
+47            android:windowSoftInputMode="adjustResize" >
+47-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:28:13-55
+48
+49            <!--
+50                 Specifies an Android theme to apply to this Activity as soon as
+51                 the Android process has started. This theme is visible to the user
+52                 while the Flutter UI initializes. After that, this theme continues
+53                 to determine the Window background behind the Flutter UI.
+54            -->
+55            <meta-data
+55-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:33:13-36:17
+56                android:name="io.flutter.embedding.android.NormalTheme"
+56-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:34:15-70
+57                android:resource="@style/NormalTheme" />
+57-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:35:15-52
+58            <!--
+59                 Displays an Android View that continues showing the launch screen
+60                 Drawable until Flutter paints its first frame, then this splash
+61                 screen fades out. A splash screen is useful to avoid any visual
+62                 gap between the end of Android's launch screen and the painting of
+63                 Flutter's first frame.
+64            -->
+65            <meta-data
+65-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:42:13-45:17
+66                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+66-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:43:15-79
+67                android:resource="@drawable/launch_background" />
+67-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:44:15-61
+68
+69            <intent-filter>
+69-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:46:13-49:29
+70                <action android:name="android.intent.action.MAIN" />
+70-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:47:17-68
+70-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:47:25-66
+71
+72                <category android:name="android.intent.category.LAUNCHER" />
+72-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:48:17-76
+72-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:48:27-74
+73            </intent-filter>
+74        </activity>
+75        <!--
+76 Don't delete the meta-data below.
+77             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+78        -->
+79        <meta-data
+79-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:53:9-55:33
+80            android:name="flutterEmbedding"
+80-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:54:13-44
+81            android:value="2" /> <!-- Needs to be explicitly declared on P+ -->
+81-->/home/phuong/thaonew/android/app/src/main/AndroidManifest.xml:55:13-30
+82        <uses-library
+82-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+83            android:name="org.apache.http.legacy"
+83-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
+84            android:required="false" />
+84-->[com.google.android.gms:play-services-maps:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/e49fed8d39766f1f36a6cb127fe644ae/play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+85
+86        <activity
+86-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+87            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+87-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+88            android:exported="false"
+88-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+89            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+89-->[com.google.android.gms:play-services-base:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/27a51f2d6fb4c91d7925584bc266b0ae/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+90
+91        <meta-data
+91-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+92            android:name="com.google.android.gms.version"
+92-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+93            android:value="@integer/google_play_services_version" />
+93-->[com.google.android.gms:play-services-basement:17.0.0] /home/phuong/.gradle/caches/transforms-2/files-2.1/b82a28619f9d6cba48745170126fc39f/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+>>>>>>> levelup
 94    </application>
 95
 96</manifest>

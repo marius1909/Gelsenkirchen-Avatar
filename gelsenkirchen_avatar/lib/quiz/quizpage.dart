@@ -1,13 +1,22 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 class QuizPage extends StatefulWidget {
-  final int id;
-
-  QuizPage(this.id);
+  final int benutzerID;
+  final int lernKategorieID;
+  final int lernortID;
+  final int quizID;
+  final String title;
+  QuizPage(
+      {this.benutzerID,
+      this.lernKategorieID,
+      this.lernortID,
+      this.quizID,
+      this.title});
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -17,6 +26,7 @@ class _QuizPageState extends State<QuizPage> {
   final List<Widget> punkteBehalten = [];
 
   Timer _timer;
+
   //Erst testen mit 10sec
   int _start = 10;
 
@@ -25,6 +35,9 @@ class _QuizPageState extends State<QuizPage> {
   int punkteProFragen = 1;
   List data = [];
   List fragenList;
+  int erfahrungspunkte;
+
+  int level;
 
   //prüfen ob Antwort richtig oder falsch
   void checkAnswer(String value) {
@@ -47,10 +60,19 @@ class _QuizPageState extends State<QuizPage> {
           content: new Text("Final Score: $sumPunkte"),
           actions: [
             CupertinoDialogAction(
-              child: new Text("End"),
+              child: new Text("Exit Game"),
               onPressed: () => {
                 Navigator.of(context).pop(true),
                 Navigator.of(context).pop()
+              },
+            ),
+            CupertinoDialogAction(
+              child: new Text("Save Your Score"),
+              onPressed: () async {
+                erfahrungspunkte = sumPunkte;
+                Navigator.of(context).pop(true);
+                await savePoint();
+//
               },
             ),
           ],
@@ -62,8 +84,119 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
+  Future<void> savePoint() async {
+    var param = "?benutzerID=" +
+        widget.benutzerID.toString() +
+        "&lernKategorieID=" +
+        widget.lernKategorieID.toString() +
+        "&erfahrungspunkte=" +
+        erfahrungspunkte.toString() +
+        "&lernortID=" +
+        widget.lernortID.toString() +
+        "&quizID=" +
+        widget.quizID.toString();
+    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    if (jsonData['status']) {
+      Fluttertoast.showToast(msg: "Success", toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
+    }
+    if (CalculatorLevel(jsonData['total_point_new']) >
+        CalculatorLevel(jsonData['total_point_old'])) {
+      String text3;
+      if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
+        text3 = "You have reached max level";
+      } else {
+        text3 =
+            "You still need ${CalculatorPointLevelUp(jsonData['total_point_new'])} points for Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
+      }
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => new CupertinoAlertDialog(
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                  style: TextStyle(color: Colors.black, fontSize: 30),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: "Level Up",
+                        style:
+                            TextStyle(color: Colors.red, fontFamily: 'Langar'))
+                  ]),
+            ),
+          ),
+          content: Column(
+            children: [
+              Text("Your Reward ..."),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text(text3),
+            ],
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: new Text("Back"),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+//                          Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
+  int CalculatorLevel(total_point) {
+    if (total_point >= 0 && total_point <= 29) {
+      return 1;
+    } else if (total_point >= 30 && total_point <= 50) {
+      return 2;
+    } else if (total_point >= 51 && total_point <= 85) {
+      return 3;
+    } else if (total_point >= 86 && total_point <= 145) {
+      return 4;
+    } else if (total_point >= 146 && total_point <= 247) {
+      return 5;
+    } else if (total_point >= 248 && total_point <= 420) {
+      return 6;
+    } else if (total_point >= 421 && total_point <= 714) {
+      return 7;
+    } else if (total_point >= 715 && total_point <= 1214) {
+      return 8;
+    } else if (total_point >= 1215) {
+      return 9;
+    }
+  }
+
+  int CalculatorPointLevelUp(total_point) {
+    if (total_point >= 0 && total_point <= 29) {
+      return 30 - total_point;
+    } else if (total_point >= 30 && total_point <= 50) {
+      return 51 - total_point;
+    } else if (total_point >= 51 && total_point <= 85) {
+      return 86 - total_point;
+    } else if (total_point >= 86 && total_point <= 145) {
+      return 146 - total_point;
+    } else if (total_point >= 146 && total_point <= 247) {
+      return 248 - total_point;
+    } else if (total_point >= 248 && total_point <= 420) {
+      return 421 - total_point;
+    } else if (total_point >= 421 && total_point <= 714) {
+      return 715 - total_point;
+    } else if (total_point >= 715 && total_point <= 1214) {
+      return 1215 - total_point;
+    } else if (total_point >= 1215) {
+      return -1;
+    }
+  }
+
   void quizFragen() async {
-    var quizid = widget.id;
+    var quizid = widget.quizID;
     var url = "http://zukunft.sportsocke522.de/quiz.php";
     var body = {"quizID": quizid.toString()};
 
@@ -159,50 +292,47 @@ class _QuizPageState extends State<QuizPage> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
         body: new Container(
-          margin: const EdgeInsets.all(1.0),
+          margin: const EdgeInsets.only(top: 1),
           alignment: Alignment.topCenter,
           child: new Column(
             children: <Widget>[
               //aktuelle Frage + Punkte
               new Padding(padding: EdgeInsets.all(5.0)),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text("Question ${positionFragen + 1}",
-                              style: new TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.w700)),
-                          new Text(
-                            "Score: $sumPunkte",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w700,
-                            ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Text("Question ${positionFragen + 1}",
+                            style: new TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.w700)),
+                        new Text(
+                          "Score: $sumPunkte",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
                           ),
-                        ]),
-                  ),
+                        ),
+                      ]),
                 ),
               ),
               //Zeit
-              new Padding(padding: EdgeInsets.all(5.0)),
               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Center(
-                      child: Text(
-                        "$_start",
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.redAccent,
-                        ),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Center(
+                    child: Text(
+                      "$_start",
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.redAccent,
                       ),
                     ),
                   ),

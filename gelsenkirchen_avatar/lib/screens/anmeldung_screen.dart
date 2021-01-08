@@ -4,7 +4,8 @@ import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart'
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
-import 'package:imagebutton/imagebutton.dart';
+import 'package:gelsenkirchen_avatar/data/database_url.dart';
+import 'package:gelsenkirchen_avatar/data/global.dart';
 
 class Anmeldung extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _AnmeldungState extends State<Anmeldung> {
     futureBenutzer.catchError(invalidError);
     futureBenutzer.then((benutzer) {
       angemeldeterBenutzer = benutzer;
+      global.user = benutzer;
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -50,7 +52,8 @@ class _AnmeldungState extends State<Anmeldung> {
     switch (invalidErrorCause) {
       case InvalidLoginExceptionCause.emailNotFound:
         Fluttertoast.showToast(
-            msg: "Falscher Benutzername", toastLength: Toast.LENGTH_SHORT);
+            msg: "Der angegebene Benutzer existiert nicht",
+            toastLength: Toast.LENGTH_SHORT);
         break;
       case InvalidLoginExceptionCause.passwordIncorrect:
         Fluttertoast.showToast(
