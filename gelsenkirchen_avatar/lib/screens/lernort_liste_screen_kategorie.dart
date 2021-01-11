@@ -21,10 +21,13 @@ class _LernortListeScreenKategorieState
     var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
-        lernortListGefiltert = lernorte
-            .where((lernort) => lernort.kategorieID == widget.lk.id)
-            .toList();
-        print(lernortListGefiltert);
+        if (widget.lk.name != "Alle Lernorte") {
+          lernortListGefiltert = lernorte
+              .where((lernort) => lernort.kategorieID == widget.lk.id)
+              .toList();
+        } else {
+          lernortListGefiltert = lernorte;
+        }
       });
     });
     super.initState();

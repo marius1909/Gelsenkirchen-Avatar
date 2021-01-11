@@ -15,7 +15,6 @@ class KategorieTopTab extends StatefulWidget {
 class _KategorieTopTabState extends State<KategorieTopTab> {
   int _listLength = 0;
   List<LernKategorie> lernKategorieList = List();
-  String s = "ac_unit";
 
   @override
   void initState() {
@@ -23,9 +22,12 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
-        _listLength = lernkategorie.length;
-        lernKategorieList = lernkategorie;
-        print(lernKategorieList);
+        LernKategorie alleKategorien =
+            LernKategorie(id: lernkategorie.length, name: "Alle Lernorte");
+        lernKategorieList.add(alleKategorien);
+        lernkategorie.sort((a, b) => a.name.compareTo(b.name));
+        lernKategorieList.addAll(lernkategorie);
+        _listLength = lernKategorieList.length;
       });
     });
   }
@@ -38,8 +40,8 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
     switch (lernKategorieList[index].id) {
       case 0:
         {
-          kategorienSymbol =
-              Icon(Icons.category, size: symbolsize, color: symbolcolor);
+          kategorienSymbol = Icon(FlutterIcons.cube_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
@@ -105,6 +107,11 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
               size: symbolsize, color: symbolcolor);
         }
         break;
+      default:
+        {
+          kategorienSymbol =
+              Icon(Icons.category, size: symbolsize, color: symbolcolor);
+        }
     }
 
     return new Card(
@@ -135,6 +142,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
             ],
           ),
           onTap: () {
+            print(lernKategorieList[index]);
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
