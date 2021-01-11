@@ -73,8 +73,8 @@ class _LernortListeScreenKategorieState
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        LernortScreen(l: lernortListGefiltert[index])));
+                    builder: (context) => LernortScreen(
+                        l: lernortListGefiltert[index], k: "Todo")));
           },
         )
       ],

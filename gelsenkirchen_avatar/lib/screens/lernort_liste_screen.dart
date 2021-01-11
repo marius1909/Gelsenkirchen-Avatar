@@ -17,6 +17,7 @@ class LernortListeScreen extends StatelessWidget {
             child: _CustomAppBar(context),
           ),
         ),
+        /* Auflistung der einzelnen Kategorien */
         body: KategorieTopTab());
   }
 }
@@ -36,6 +37,7 @@ Widget _CustomAppBar(BuildContext context) {
           child: IconButton(
               icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
+                /* Nach Klick auf Lupe Lernortsuche */
                 Navigator.push(
                     context,
                     MaterialPageRoute(
