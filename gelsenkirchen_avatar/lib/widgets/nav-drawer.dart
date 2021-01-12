@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
@@ -65,10 +66,16 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Profil'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Profil()));
+                if (global.user?.id != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Profil(global.user.id)));
+                } else {
+                  Fluttertoast.showToast(
+                      msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
+                }
               }),
 
           /* LERNORTE */
@@ -91,15 +98,14 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) =>
                             LernortListeScreen()));
               }),
-              ListTile(
+          ListTile(
               leading: Icon(Icons.search),
               title: Text('Suchspiel'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Suchspiel()));
+                        builder: (BuildContext context) => Suchspiel()));
               }),
 
           /* FREUNDE */
@@ -137,7 +143,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Bestenliste'),
               onTap: () {
-                  if (global.user?.id != null) {
+                if (global.user?.id != null) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
