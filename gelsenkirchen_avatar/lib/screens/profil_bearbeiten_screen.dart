@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 import 'avatarbearbeiten_screen.dart';
 
 class ProfilBearbeiten extends StatefulWidget {
+  int id_user;
+
+  ProfilBearbeiten(this.id_user);
+
   @override
   _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
 }
@@ -18,10 +21,8 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
 
   @override
   Widget build(BuildContext context) {
-    if (!initComplete) {
-      loadName();
-      initComplete = true;
-    }
+    loadName();
+    initComplete = true;
 
     return Scaffold(
         appBar: AppBar(
@@ -133,16 +134,14 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   Future<void> loadName() async {
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
     setState(() {
-      aktuellerName = alleBenutzerFuture[0].benutzer;
+      aktuellerName = alleBenutzerFuture[widget.id_user].benutzer;
     });
   }
 
 /*Funktion zum ändern des Benutzernamens
-TODO: Neuen Namen in Datenbank speichern
+TODO: Neuen Namen in Datenbank speichern php
 
 Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
-Wenn nicht speichert neuen Namen (TODO!)
-
 */
 
   Future<void> aendereName(String name) async {

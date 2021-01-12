@@ -4,12 +4,19 @@ import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 /*TODO: Richtiges Benutzerlevel laden
   TODO: Anzahl an Errungenschaften laden
 */
 
 class Profil extends StatefulWidget {
+  // ignore: non_constant_identifier_names
+  int id_user;
+
+  Profil(this.id_user);
+
   @override
   _ProfilState createState() => _ProfilState();
 }
@@ -21,11 +28,9 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
-    //wird immer wieder gecalled warum?
-    //loadName();
-    // loadErrungenschaften();
-
-    print("Reload warum?");
+    loadName();
+    loadErrungenschaften();
+    loadUserLevel();
 
     return Scaffold(
         drawer: NavDrawer(),
@@ -122,7 +127,8 @@ class _ProfilState extends State<Profil> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProfilBearbeiten()),
+                          builder: (context) =>
+                              ProfilBearbeiten(widget.id_user)),
                     );
                   },
                   child: Text(
@@ -160,15 +166,13 @@ class _ProfilState extends State<Profil> {
 /*
 Lädt den Namen aus der DB um ihm im Screen anzuzeigen. 
 
-TODO: Zeigt derzeit BENUTZER 0!
+TODO: Unsauber gelöst?
 */
   Future<void> loadName() async {
     var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
 
     setState(() {
-      spielername = alleBenutzerFuture[0].benutzer;
-      //DUMMY
-      level = 12;
+      spielername = alleBenutzerFuture[widget.id_user].benutzer;
     });
   }
 
@@ -184,7 +188,6 @@ TODO: Zeigt derzeit BENUTZER 0!
 
 /*
 
-TODO: Level laden
 Lädt die Errungenschaften 
 */
   Future<void> loadErrungenschaften() async {
@@ -198,5 +201,18 @@ Lädt die Errungenschaften
       //DUMMY
       anzahlErrungenschaften = 12;
     });
+  }
+
+  Future<void> loadUserLevel() async {
+    var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
+        widget.id_user.toString();
+    var res = await http.get(url);
+    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
+      print('Datensatz nicht gefunden');
+    } else {
+      setState(() {
+        level = jsonDecode(res.body)['level'];
+      });
+    }
   }
 }
