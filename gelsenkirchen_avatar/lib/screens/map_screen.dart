@@ -23,7 +23,7 @@ class MapSampleState extends State<MapScreen> {
   /* TODO: Kameraposition beim Starten der App sollte auf dem aktuellen Standort des Benutzers liegen (Lisa) */
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
-    zoom: 17,
+    zoom: 12,
   );
 
   // Camera bounds: Bourges, Danzig
@@ -55,6 +55,7 @@ class MapSampleState extends State<MapScreen> {
         },
         markers: _markers,
         myLocationEnabled: true,
+        padding: EdgeInsets.only(top: 150,),
         myLocationButtonEnabled: true,
         cameraTargetBounds: CameraTargetBounds(bounds),
         minMaxZoomPreference: MinMaxZoomPreference(5, 20),
