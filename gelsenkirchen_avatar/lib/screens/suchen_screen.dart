@@ -50,9 +50,9 @@ class _SuchenScreenState extends State<SuchenScreen> {
             lernortListGefiltert[index].name != null
                 ? lernortListGefiltert[index].name
                 : 'empty',
-            style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
-          subtitle: new Column(
+          /* subtitle: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -67,7 +67,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
                 /*new Text('Kategorie: ${lernortListGefiltert[index].kategorieId}',
               style: new TextStyle(
                   fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]),
+              ]), */
           onTap: () {
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
@@ -86,17 +86,15 @@ class _SuchenScreenState extends State<SuchenScreen> {
     return Scaffold(
         appBar: AppBar(
             title: TextField(
+              style: TextStyle(color: Colors.white),
                 onChanged: (value) {
                   sucheLernort(value);
                 },
                 autofocus: true,
-                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                    // icon: Icon(
-                    //   Icons.search,
-                    //   color: Colors.white,
-                    // ),
-                    hintText: "Lernort Suchen"))),
+                  hintText: "Suchen",
+                  hintStyle: TextStyle(color: Colors.grey),
+          ))),
         body: Container(
             color: Colors.white,
             child: ListView.builder(

@@ -37,22 +37,28 @@ class _LernortListeScreenKategorieState
     return new Card(
         child: new Column(
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-        leading: new Image.asset(
+
+        new ListTile(
+          
+          /* TODO: Bild aus DB holen und anzeigen (Lisa) */
+
+          /* leading: new Image.asset(
           "assets/" + _allCities[index].image,
           fit: BoxFit.cover,
           width: 100.0,
-        ),*/
-        new ListTile(
+          ), */
+          leading: CircleAvatar(
+          backgroundImage: NetworkImage("https://www.hanse-haus.de/fileadmin/_processed_/7/b/csm_fertighaus-bauen-startseiten-bild_d13e0ec91d.jpg"),
+          ),
           title: new Text(
             /*NAME*/
             lernortListGefiltert[index].name != null
                 ? lernortListGefiltert[index].name
                 : 'empty',
-            style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
-          subtitle: new Column(
+          
+          /* subtitle: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -61,13 +67,13 @@ class _LernortListeScreenKategorieState
                     lernortListGefiltert[index].kurzbeschreibung != null
                         ? lernortListGefiltert[index].kurzbeschreibung
                         : '',
-                    style: new TextStyle(
-                        fontSize: 13.0, fontWeight: FontWeight.normal)),
+                    style: Theme.of(context).textTheme.bodyText1,
+                        ),
                 /*KATEGORIE*/
                 /*new Text('Kategorie: ${lernortListGefiltert[index].kategorieId}',
                   style: new TextStyle(
                       fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]),
+              ]), */
           onTap: () {
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
