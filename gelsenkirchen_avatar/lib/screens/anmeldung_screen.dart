@@ -40,7 +40,7 @@ class _AnmeldungState extends State<Anmeldung> {
           context,
           MaterialPageRoute(
               builder: (BuildContext context) =>
-                  HomeScreen(angemeldeterBenutzer: this.angemeldeterBenutzer)));
+                  HomeScreen()));
     });
 
     setState(() {

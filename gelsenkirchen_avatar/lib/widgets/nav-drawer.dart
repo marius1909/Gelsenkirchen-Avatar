@@ -50,7 +50,7 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => HomeScreen()));
+                        builder: (BuildContext context) => HomeScreen(angemeldeterBenutzer: global.user)));
               }),
 
           /* PROFIL */
