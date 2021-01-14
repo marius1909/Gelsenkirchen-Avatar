@@ -20,7 +20,7 @@ class MapSampleState extends State<MapScreen> {
   /* Inhalt der map_style.txt */
   String _mapStyle;
 
-  /* TODO: Kameraposition beim Starten der App sollte auf dem aktuellen Standort des Benutzers liegen (Lisa) */
+  
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
     zoom: 12,
@@ -39,6 +39,8 @@ class MapSampleState extends State<MapScreen> {
     rootBundle.loadString('assets/styles/map_style.txt').then((string) {
       _mapStyle = string;
     });
+
+
   }
 
   @override
@@ -71,6 +73,7 @@ class MapSampleState extends State<MapScreen> {
         final marker = Marker(
           markerId: MarkerId(element.id.toString()),
           position: LatLng(element.nord, element.ost),
+
 
           /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
           Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
