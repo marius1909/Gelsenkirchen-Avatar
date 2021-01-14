@@ -261,6 +261,7 @@ class _RegistrierungState extends State<Registrierung> {
   }
 }
 
+/* TODO: Design (Lisa) */
 class WeiterleitenZurAnmeldungScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

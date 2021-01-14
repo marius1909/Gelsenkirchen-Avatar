@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
                 /* TODO: Durch Avatar erzetzen. (Lisa) */
                 /* TODO: Durch Klick auf Avatar soll man zum Profil gelangen (Lisa) */
-                child: Image.asset("assets/icons/Impressum_dunkelblau_Icon.png",
+                child: Image.asset("assets/avatare/200px/DerBlaue_200px.png",
                     width: 100, height: 100),
               ),
               /* TODO: Unter dem Name soll ein Balken für das Level angezeigt werden (Lisa) */

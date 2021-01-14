@@ -111,10 +111,9 @@ class _ProfilState extends State<Profil> {
                   height: 50.0,
                   color: Colors.grey[800],
                 ),
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/profilbild.jpg'),
-                  radius: 100,
-                ),
+                Image.asset("assets/avatare/500px/DerBlaue_500px.png",
+                    width: 250, height: 250),
+                    
                 SizedBox(height: 10),
                 FlatButton(
                   color: Colors.blue,
