@@ -27,37 +27,34 @@ class LernortScreen extends StatelessWidget {
           /*TITELBILD*/
 
           Container(child: getWidgetTitelbild(l)),
-          Text("Test"),
           /*KATEGORIE*/
-          /*TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
-                  - linksbündig*/
-          Container(
-            decoration: BoxDecoration(
-                //color: Color(0xffe54b4b),
-                //color: Color(0xffe54b4b).withOpacity(0.5),
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            margin: EdgeInsets.only(
-                left: 10.0, top: 10.0, right: 10.0, bottom: 0.0),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            alignment: Alignment(-1.0, 0.0),
-            child: Text(
-                /* KATEGORIE */
-                /* TODO: "Kategorie" fett schreiben (Lisa) */
-                "Kategorie: " +
-                    k +
-                    "\n\n" +
-                    /*ADRESSE*/
-                    /* TODO: - Hier muss noch die Adresse angegeben werden. Zuvor in DB einfügen (Lisa) */
-                    /* TODO: "Adresse" fett schreiben (Lisa) */
-                    "Adresse: " +
-                    "\n\n" +
-                    /*ÖFFNUNGSZEITEN*/
-                    /* TODO: - Hier müssen noch die Öffnungszeiten angegeben werden. Zuvor in DB einfügen (Lisa) */
-                    /* TODO: "Öffnungszeiten" fett schreiben (Lisa) */
-                    "Öffnungszeiten: ",
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.bodyText1),
-          ),
+          /*TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
+
+          Row(children: [
+            /* KATEGORIE */
+            Text("Kategorie: ", style: Theme.of(context).textTheme.headline3),
+            /* TODO: Kategoriename anzeigen (Lisa) */
+            Text(""),
+          ]),
+          SizedBox(height: 10),
+
+          Row(children: [
+            /* ADRESSE */
+            Text("Adresse: ", style: Theme.of(context).textTheme.headline3),
+            /* TODO: Kategoriename anzeigen (Lisa) */
+            Text(""),
+          ]),
+          SizedBox(height: 10),
+
+          Row(children: [
+            /* ADRESSE */
+            Text("Öffnungszeiten: ", style: Theme.of(context).textTheme.headline3),
+            /* TODO: Kategoriename anzeigen (Lisa) */
+            Text(""),
+          ]),
+          SizedBox(height: 10),
+
+          
 
           /*BESCHREIBUNG*/
           /* TODO: "Beschreibung" fett schreiben (Lisa) */
