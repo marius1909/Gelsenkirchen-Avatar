@@ -19,13 +19,21 @@ class _FreundState extends State<Freund> {
   String spielername = "";
   int level = 0;
   int anzahlErrungenschaften = 0;
+  Image avatar;
+
+  @override
+  void initState() {
+    super.initState();
+    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+      loadName(alleBenutzer);
+      loadUserLevel();
+      loadErrungenschaften();
+      loadAvatar(alleBenutzer);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    loadName();
-    loadErrungenschaften();
-    loadUserLevel();
-
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -141,21 +149,20 @@ class _FreundState extends State<Freund> {
 Lädt den Namen des Freundes anhand der userID aus der DB um ihm im Screen anzuzeigen. 
 
 */
-  Future<void> loadName() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-
+  void loadName(List<Benutzer> alleBenutzer) {
     setState(() {
-      spielername = alleBenutzerFuture[widget.id_user].benutzer;
+      spielername = alleBenutzer.firstWhere((benutzer) {
+        return benutzer.id == widget.id_user;
+      }).benutzer;
     });
   }
 
 /* TODO: Placeholderfunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
 
-  Future<void> loadAvatar() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-
+  void loadAvatar(List<Benutzer> alleBenutzer) {
     setState(() {
-      //Avatar
+      avatar = Image.asset("assets/avatar/500px/DerBlaue_500px.png",
+          width: 250, height: 250);
     });
   }
 

@@ -50,7 +50,8 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => HomeScreen(angemeldeterBenutzer: global.user)));
+                        builder: (BuildContext context) => HomeScreen()));
+                //Error @Simon HomeScreen(angemeldeterBenutzer: global.user)));
               }),
 
           /* PROFIL */
@@ -118,7 +119,7 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Suchspiel()));
-              }),    
+              }),
 
           /* FREUNDE */
           ListTile(
@@ -151,7 +152,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -204,8 +206,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Impressum_blau_Icon.png"),
+                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -226,8 +227,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Anmelden_rot_Icon.png"),
+                child: Image.asset("assets/icons/Anmelden_rot_Icon.png"),
               ),
               title: Text('Anmelden'),
               onTap: () {
@@ -237,9 +237,6 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Anmeldung()));
               }),
 
-
-          
-
           /* TODO: Logout-Funktion muss noch implementiert werden (Lisa) */
           /* TODO: Logouticon fehlt (Lisa) */
           /* LOGOUT */
@@ -247,20 +244,19 @@ class NavDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () {
-              if(global.user?.id != null){
+              if (global.user?.id != null) {
                 global.user = null;
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Anmeldung()));
+                        builder: (BuildContext context) => Anmeldung()));
+              } else {
+                Fluttertoast.showToast(
+                    msg: "Sie haben noch nicht angemeldet!",
+                    toastLength: Toast.LENGTH_SHORT);
               }
-              else{
-                Fluttertoast.showToast(msg: "Sie haben noch nicht angemeldet!", toastLength: Toast.LENGTH_SHORT);
-              }
-
             },
-          ),  
+          ),
         ],
       ),
     );
