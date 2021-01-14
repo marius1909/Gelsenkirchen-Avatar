@@ -35,7 +35,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   /*Diese Methode erstellt die ListViewItems*/
   Widget erstelleListViewitem(BuildContext context, int index) {
     Icon kategorienSymbol;
-    Color symbolcolor = Color(0xff45d6a9);
+    Color symbolcolor = Color(0xffe54b4b);
     double symbolsize = 25;
     switch (lernKategorieList[index].id) {
       case 0:

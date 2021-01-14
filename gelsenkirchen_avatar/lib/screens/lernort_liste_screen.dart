@@ -11,9 +11,9 @@ class LernortListeScreen extends StatelessWidget {
         drawer: NavDrawer(),
         appBar: AppBar(
           // backgroundColor: Color(0xff109618),
-          backgroundColor: Colors.blue,
+          // backgroundColor: Colors.blue,
           title: Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            padding: EdgeInsets.only(top: 0),
             child: _CustomAppBar(context),
           ),
         ),
@@ -30,7 +30,7 @@ Widget _CustomAppBar(BuildContext context) {
         Container(
           child: Text(
             'Lernorte',
-            style: TextStyle(color: Colors.white),
+            // style: TextStyle(color: Colors.white),
           ),
         ),
         Container(
