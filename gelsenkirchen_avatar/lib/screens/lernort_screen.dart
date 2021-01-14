@@ -32,48 +32,43 @@ class LernortScreen extends StatelessWidget {
 
           Row(children: [
             /* KATEGORIE */
-            Text("Kategorie: ", style: Theme.of(context).textTheme.headline3),
-            /* TODO: Kategoriename anzeigen (Lisa) */
-            Text(""),
+            /* TODO: Kategorieicon anzeigen (Lisa) */
+            Text("Abenteuer", style: Theme.of(context).textTheme.bodyText1),
+            /* TODO: Kategoriename aus DB anzeigen (Lisa) */
           ]),
           SizedBox(height: 10),
 
           Row(children: [
             /* ADRESSE */
-            Text("Adresse: ", style: Theme.of(context).textTheme.headline3),
-            /* TODO: Kategoriename anzeigen (Lisa) */
-            Text(""),
+            Text("Neidenburger Str. 43, 45897 Gelsenkirchen", style: Theme.of(context).textTheme.bodyText1),
+            /* TODO: Adresse aus DB anzeigen (Lisa) */
           ]),
           SizedBox(height: 10),
 
           Row(children: [
             /* ADRESSE */
-            Text("Öffnungszeiten: ", style: Theme.of(context).textTheme.headline3),
-            /* TODO: Kategoriename anzeigen (Lisa) */
-            Text(""),
+            Text("Mo - Fr: 7:00 - 21:30 Uhr\nSa: 7:30 - 18:00 Uhr", style: Theme.of(context).textTheme.bodyText1),
+            /* TODO: Öffnungszeiten aus DB anzeigen (Lisa) */
           ]),
           SizedBox(height: 10),
-
           
-
           /*BESCHREIBUNG*/
-          /* TODO: "Beschreibung" fett schreiben (Lisa) */
-          Container(
-            decoration: BoxDecoration(
-                //color: Color(0xffe54b4b).withOpacity(0.5),
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            margin: EdgeInsets.only(
-                left: 10.0, top: 10.0, right: 10.0, bottom: 0.0),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Text(
-              "Beschreibung:\n\n" + l.beschreibung,
+          Text(
+              '' + l.beschreibung,
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyText1,
             ),
-            /* margin: EdgeInsets.only(
-                      left: 30.0, top: 0.0, right: 30.0, bottom: 0.0)) */
-          ),
           SizedBox(height: 40),
+
+          Divider(
+            height: 50.0,
+            color: Colors.grey[800],
+          ),
+          
+          Container(
+            child: getWidgetTabs(l, context),
+          ),
+
           ImageButton(
             children: <Widget>[],
             /* 302 x 91 sind die Originalmaße der Buttons */
@@ -94,7 +89,7 @@ class LernortScreen extends StatelessWidget {
                       builder: (BuildContext context) => Lernen(l: l)));
             },
           ),
-          SizedBox(height: 20),
+          /* SizedBox(height: 20), */
           ImageButton(
             children: <Widget>[],
             /* 302 x 91 sind die Originalmaße der Buttons */
@@ -126,5 +121,94 @@ Widget getWidgetTitelbild(Lernort l) {
         fit: BoxFit.fill);
   } else {
     return new Image.network(l.titelbild, fit: BoxFit.fill);
+  }
+}
+
+Widget getWidgetTabs(Lernort l, BuildContext context) {
+  int anzahl = 0;
+  bool text = false;
+  bool videos = false;
+  bool sounds = false;
+  bool bilder = false;
+
+  if (!l.beschreibung.isEmpty) {
+    anzahl++;
+    text = true;
+  }
+  if (!l.videos.isEmpty) {
+    anzahl++;
+    videos = true;
+  }
+  if (!l.sounds.isEmpty) {
+    anzahl++;
+    sounds = true;
+  }
+  if (!l.weitereBilder.isEmpty) {
+    anzahl++;
+    bilder = true;
+  }
+  if (anzahl > 0) {
+    return DefaultTabController(
+        length: 4,
+        initialIndex: 0,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                child: TabBar(
+                  labelColor: Color(0xffe54b4b),
+                  unselectedLabelColor: Color(0xff0b3e99),
+                  tabs: [
+                    get_TabsTitel(
+                      1,
+                      true,
+                    ),
+                    get_TabsTitel(
+                      2,
+                      true,
+                    ),
+                    get_TabsTitel(
+                      3,
+                      true,
+                    ),
+                    get_TabsTitel(
+                      4,
+                      true,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  height: 400,
+                  decoration: BoxDecoration(
+                      /* border: Border(
+                          top: BorderSide(color: Colors.grey, width: 0.5)) */),
+                  child: TabBarView(children: <Widget>[
+                    Container(
+                      child: Center(
+                        child: Text(
+                          l.beschreibung.replaceAll('<br>', '\n'),
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Center(
+                        child: getWidgetVideos(l, context),
+                      ),
+                    ),
+                    Container(
+                      child: Center(
+                        child: getWidgetSound(l, context),
+                      ),
+                    ),
+                    Container(
+                        child: Center(
+                          child: getWidgetWeitereBilder(l, context),
+                        ),
+                        height: 400),
+                  ]))
+            ]));
   }
 }

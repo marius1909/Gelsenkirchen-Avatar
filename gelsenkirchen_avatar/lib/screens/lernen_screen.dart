@@ -140,7 +140,7 @@ Widget get_TabsTitel(int i, bool sollRein) {
   //1 = Text  //2= Video   //3 = Sounds    //4= Bilder
   if (sollRein) {
     if (i == 1) {
-      return Tab(text: 'Text', icon: Icon(Icons.list));
+      return Tab(text: 'Texte', icon: Icon(Icons.list));
     } else if (i == 2) {
       return Tab(text: 'Videos', icon: Icon(Icons.video_label));
     } else if (i == 3) {
@@ -158,15 +158,15 @@ Widget get_TabsTitel(int i, bool sollRein) {
 Widget getWidgetSound(Lernort l, BuildContext context) {
   if (l.sounds.isEmpty) {
     return new Text(
-      'Leider sind keine Sounds Vorhanden',
+      'Es sind derzeit leider keine Audiodateien verfügbar.',
       textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      style: Theme.of(context).textTheme.bodyText1,
     );
   } else {
     return new Text(
-      'Leider wird diese Funktion derzeit noch nicht Unterstützt',
+      'Diese Funktion wird derzeit leider noch nicht unterstützt.',
       textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      style: Theme.of(context).textTheme.bodyText1,
     );
   }
 }
@@ -174,9 +174,9 @@ Widget getWidgetSound(Lernort l, BuildContext context) {
 Widget getWidgetVideos(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
-      'Leider sind keine Weiteren Bilder Vorhanden',
+      'Es sind leider keine weiteren Bilder verfügbar.',
       textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      style: Theme.of(context).textTheme.bodyText1,
     );
   } else {
     return ChewieListItem(
@@ -191,9 +191,9 @@ Widget getWidgetVideos(Lernort l, BuildContext context) {
 Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
-      'Leider sind keine Weiteren Bilder Vorhanden',
+      'Es sind leider keine weiteren Bilder verfügbar.',
       textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      style: Theme.of(context).textTheme.bodyText1,
     );
   } else {
     var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links
