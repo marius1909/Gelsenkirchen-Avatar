@@ -26,6 +26,8 @@ class _ProfilState extends State<Profil> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
+  Image avatar;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,7 @@ class _ProfilState extends State<Profil> {
       loadName(alleBenutzer);
       loadUserLevel();
       loadErrungenschaften();
+      loadAvatar(alleBenutzer);
     });
   }
 
@@ -117,9 +120,9 @@ class _ProfilState extends State<Profil> {
                   height: 50.0,
                   color: Colors.grey[800],
                 ),
-                /* TODO: Im Profil richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                Image.asset("assets/avatar/500px/DerBlaue_500px.png",
-                    width: 250, height: 250),
+                /* TODO: Im Profil richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) 
+                Marius an Lisa: avatar wird nun in loadAvatar geladcen*/
+                avatar,
                 SizedBox(height: 10),
                 FlatButton(
                   color: Colors.blue,
@@ -183,11 +186,10 @@ TODO: Unsauber gelöst?
 
 /* TODO: Placeholderfunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
 
-  Future<void> loadAvatar() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-
+  void loadAvatar(List<Benutzer> alleBenutzer) {
     setState(() {
-      //Avatar
+      avatar = Image.asset("assets/avatar/500px/DerBlaue_500px.png",
+          width: 250, height: 250);
     });
   }
 

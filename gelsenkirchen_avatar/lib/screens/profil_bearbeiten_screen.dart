@@ -18,13 +18,14 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   bool nameSchonVergeben = false;
   TextEditingController neuerNameController = new TextEditingController();
   bool initComplete = false;
+  AssetImage avatar;
 
   @override
   void initState() {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       loadName(alleBenutzer);
-      loadAvatar();
+      loadAvatar(alleBenutzer);
     });
   }
 
@@ -100,8 +101,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/profilbild.jpg'),
+                      backgroundImage: avatar,
                       radius: 50,
                     ),
                     IconButton(
@@ -118,7 +118,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                 ),
                 SizedBox(height: 100),
                 FlatButton(
-                  color: Colors.grey[800],
+                  color: Colors.blue[800],
                   textColor: Colors.white,
                   disabledColor: Colors.grey,
                   disabledTextColor: Colors.black,
@@ -180,11 +180,9 @@ Wenn schon vergeben wird setState nicht aufgerufen
   }
 
 //Placeholder methode um Avatar zu laden
-  Future<void> loadAvatar() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-
+  void loadAvatar(List<Benutzer> alleBenutzer) {
     setState(() {
-      //Avatar
+      avatar = AssetImage("assets/avatar/500px/DerBlaue_500px.png");
     });
   }
 }
