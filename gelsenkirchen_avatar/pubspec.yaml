@@ -70,7 +70,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/styles/
-    - assets/avatare/500px/
+    - assets/avatar/500px/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

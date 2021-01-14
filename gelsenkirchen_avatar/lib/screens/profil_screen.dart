@@ -112,7 +112,7 @@ class _ProfilState extends State<Profil> {
                   color: Colors.grey[800],
                 ),
                 /* TODO: Im Profil richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                Image.asset("assets/avatare/500px/DerBlaue_500px.png",
+                Image.asset("assets/avatar/500px/DerBlaue_500px.png",
                     width: 250, height: 250),
                     
                 SizedBox(height: 10),
