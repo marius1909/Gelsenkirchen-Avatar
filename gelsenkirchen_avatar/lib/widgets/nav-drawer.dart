@@ -8,6 +8,7 @@ import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 import 'package:gelsenkirchen_avatar/data/global.dart';
@@ -98,15 +99,26 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) =>
                             LernortListeScreen()));
               }),
+
+          /* SUCHSPIEL */
           ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Suchspiel'),
+              //leading: Icon(Icons.people),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/QR_gelb_Icon.png"),
+              ),
+              title: Text('QR-Spiel'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Suchspiel()));
-              }),
+              }),    
 
           /* FREUNDE */
           ListTile(
@@ -118,7 +130,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Freunde_gelb_Icon.png"),
+                child: Image.asset("assets/icons/Freunde_gruen_Icon.png"),
               ),
               title: Text('Freunde'),
               onTap: () {
@@ -139,7 +151,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
+                child: Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -193,7 +205,7 @@ class NavDrawer extends StatelessWidget {
                   maxHeight: 30,
                 ),
                 child:
-                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+                    Image.asset("assets/icons/Impressum_blau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -203,17 +215,30 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
-          /* TODO: Registrieren muss entfernt werden (Lisa) */
-          /* REGISTRIEREN */
+          /* ANMELDEN */
+
           ListTile(
-              leading: Icon(Icons.menu_book),
-              title: Text('Registrierung'),
+              //leading: Icon(Icons.description),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child:
+                    Image.asset("assets/icons/Anmelden_rot_Icon.png"),
+              ),
+              title: Text('Anmelden'),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => Registrierung()));
+                        builder: (BuildContext context) => Anmeldung()));
               }),
+
+
+          
 
           /* TODO: Logout-Funktion muss noch implementiert werden (Lisa) */
           /* TODO: Logouticon fehlt (Lisa) */
