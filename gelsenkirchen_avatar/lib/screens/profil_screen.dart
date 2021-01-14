@@ -27,8 +27,15 @@ class _ProfilState extends State<Profil> {
   int anzahlErrungenschaften = 0;
 
   @override
+  void initState() {
+    super.initState();
+    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+      loadName(alleBenutzer);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    loadName();
     loadErrungenschaften();
     loadUserLevel();
 
@@ -114,7 +121,6 @@ class _ProfilState extends State<Profil> {
                 /* TODO: Im Profil richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
                 Image.asset("assets/avatar/500px/DerBlaue_500px.png",
                     width: 250, height: 250),
-                    
                 SizedBox(height: 10),
                 FlatButton(
                   color: Colors.blue,
@@ -168,11 +174,14 @@ Lädt den Namen aus der DB um ihm im Screen anzuzeigen.
 
 TODO: Unsauber gelöst?
 */
-  Future<void> loadName() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-
+  void loadName(List<Benutzer> alleBenutzer) {
     setState(() {
-      spielername = alleBenutzerFuture[widget.id_user].benutzer;
+      spielername = alleBenutzer
+          .where((benutzer) {
+            return benutzer.id == widget.id_user;
+          })
+          .first
+          .benutzer;
     });
   }
 

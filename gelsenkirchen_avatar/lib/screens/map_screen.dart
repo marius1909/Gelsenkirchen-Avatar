@@ -67,7 +67,7 @@ class MapSampleState extends State<MapScreen> {
   /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
     final markerImageFuture = BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 4.0), "assets/icons/Mapmarker_rot.png");
+        ImageConfiguration(devicePixelRatio: 1.0), "assets/icons/Mapmarker_rot_25px.png");
 
     markerImageFuture.then((markerImage) {
       var lernorte = Lernort.shared.gibObjekte();
