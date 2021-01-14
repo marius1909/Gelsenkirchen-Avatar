@@ -37,7 +37,7 @@ class _FreundState extends State<Freund> {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text("Freudsadadssnd"),
+          title: Text("Freund"),
           //centerTitle: true,
           elevation: 0.0,
         ),
@@ -113,10 +113,7 @@ class _FreundState extends State<Freund> {
                   height: 50.0,
                   color: Colors.grey[800],
                 ),
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/profilbild.jpg'),
-                  radius: 100,
-                ),
+                avatar,
                 SizedBox(height: 10),
                 FlatButton(
                   color: Colors.blue,
@@ -157,7 +154,7 @@ Lädt den Namen des Freundes anhand der userID aus der DB um ihm im Screen anzuz
     });
   }
 
-/* TODO: Placeholderfunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
+/* TODO: Templatefunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
 
   void loadAvatar(List<Benutzer> alleBenutzer) {
     setState(() {
