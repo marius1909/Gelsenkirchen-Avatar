@@ -20,6 +20,7 @@ class MapSampleState extends State<MapScreen> {
   /* Inhalt der map_style.txt */
   String _mapStyle;
 
+  
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
     zoom: 12,
@@ -38,6 +39,8 @@ class MapSampleState extends State<MapScreen> {
     rootBundle.loadString('assets/styles/map_style.txt').then((string) {
       _mapStyle = string;
     });
+
+
   }
 
   @override
@@ -54,9 +57,7 @@ class MapSampleState extends State<MapScreen> {
         },
         markers: _markers,
         myLocationEnabled: true,
-        padding: EdgeInsets.only(
-          top: 150,
-        ),
+        padding: EdgeInsets.only(top: 150,),
         myLocationButtonEnabled: true,
         cameraTargetBounds: CameraTargetBounds(bounds),
         minMaxZoomPreference: MinMaxZoomPreference(5, 20),
@@ -66,33 +67,28 @@ class MapSampleState extends State<MapScreen> {
 
   /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
-    final markerImageFuture = BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 1.0), "assets/icons/Mapmarker_rot_25px.png");
+    var lernorte = Lernort.shared.gibObjekte();
+    lernorte.then((value) {
+      value.forEach((element) {
+        final marker = Marker(
+          markerId: MarkerId(element.id.toString()),
+          position: LatLng(element.nord, element.ost),
 
-    markerImageFuture.then((markerImage) {
-      var lernorte = Lernort.shared.gibObjekte();
 
-      lernorte.then((value) {
-        value.forEach((element) {
-          final marker = Marker(
-            icon: markerImage,
-            markerId: MarkerId(element.id.toString()),
-            position: LatLng(element.nord, element.ost),
-            /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
+          /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
           Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          LernortVorschau(l: element)));
-            },
-            infoWindow: InfoWindow(
-                title: element.name, snippet: element.kurzbeschreibung),
-          );
-          setState(() {
-            _markers.add(marker);
-          });
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        LernortVorschau(l: element)));
+          },
+          infoWindow: InfoWindow(
+              title: element.name, snippet: element.kurzbeschreibung),
+        );
+        setState(() {
+          _markers.add(marker);
         });
       });
     });
