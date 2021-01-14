@@ -7,7 +7,7 @@ import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-/*TODO: Richtiges Benutzerlevel laden
+/*
   TODO: Anzahl an Errungenschaften laden
 */
 
@@ -31,13 +31,15 @@ class _ProfilState extends State<Profil> {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       loadName(alleBenutzer);
+      loadUserLevel();
+      loadErrungenschaften();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    loadErrungenschaften();
-    loadUserLevel();
+
+  
 
     return Scaffold(
         drawer: NavDrawer(),
