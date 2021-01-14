@@ -177,10 +177,9 @@ TODO: Unsauber gelöst?
   void loadName(List<Benutzer> alleBenutzer) {
     setState(() {
       spielername = alleBenutzer
-          .where((benutzer) {
+          .firstWhere((benutzer) {
             return benutzer.id == widget.id_user;
           })
-          .first
           .benutzer;
     });
   }
