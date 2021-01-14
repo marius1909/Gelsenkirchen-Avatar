@@ -27,9 +27,9 @@ class LernortScreen extends StatelessWidget {
           /*TITELBILD*/
 
           Container(child: getWidgetTitelbild(l)),
-
+          Text("Test"),
           /*KATEGORIE*/
-          /*Todo: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
+          /*TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden
                   - linksbündig*/
           Container(
             decoration: BoxDecoration(
@@ -63,14 +63,13 @@ class LernortScreen extends StatelessWidget {
           /* TODO: "Beschreibung" fett schreiben (Lisa) */
           Container(
             decoration: BoxDecoration(
-                //color: Color(0xffe54b4b),
-                color: Color(0xffe54b4b).withOpacity(0.5),
+                //color: Color(0xffe54b4b).withOpacity(0.5),
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             margin: EdgeInsets.only(
                 left: 10.0, top: 10.0, right: 10.0, bottom: 0.0),
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Text(
-              "Beschreibung:\n" + l.beschreibung,
+              "Beschreibung:\n\n" + l.beschreibung,
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyText1,
             ),

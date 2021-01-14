@@ -5,13 +5,30 @@ import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 import 'map_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final Benutzer angemeldeterBenutzer;
   HomeScreen({Key key, @required this.angemeldeterBenutzer}) : super(key: key);
+
+  int id_user;
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String spielername = "";
+
+  @override
+  void initState() {
+    super.initState();
+    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+      loadName(alleBenutzer);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         /* drawer für den Menü-Button statt dem Zurück-Button */
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -42,12 +59,20 @@ class HomeScreen extends StatelessWidget {
               /* TODO: Unter dem Name soll ein Balken für das Level angezeigt werden (Lisa) */
               /* TODO: Name soll aus der DB geholt und angezeigt werden. */
               Text(
-                "Name",
+                spielername,
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.headline1,
               ),
             ],
           ),
         ]));
+  }
+
+  void loadName(List<Benutzer> alleBenutzer) {
+    setState(() {
+      spielername = alleBenutzer.firstWhere((benutzer) {
+        return benutzer.id == widget.id_user;
+      }).benutzer;
+    });
   }
 }
