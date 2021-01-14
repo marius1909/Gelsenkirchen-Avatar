@@ -20,10 +20,16 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   bool initComplete = false;
 
   @override
-  Widget build(BuildContext context) {
-    loadName();
-    initComplete = true;
+  void initState() {
+    super.initState();
+    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+      loadName(alleBenutzer);
+      loadAvatar();
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Profil bearbeiten'),
@@ -131,10 +137,11 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
 /* Lädt namen aus der Datenbank um ihn im Screen anzuzeigen
 */
 
-  Future<void> loadName() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+  void loadName(List<Benutzer> alleBenutzer) {
     setState(() {
-      aktuellerName = alleBenutzerFuture[widget.id_user].benutzer;
+      aktuellerName = alleBenutzer.firstWhere((benutzer) {
+        return benutzer.id == widget.id_user;
+      }).benutzer;
     });
   }
 
@@ -142,6 +149,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
 TODO: Neuen Namen in Datenbank speichern php
 
 Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
+Wenn schon vergeben wird setState nicht aufgerufen
 */
 
   Future<void> aendereName(String name) async {
@@ -169,5 +177,14 @@ Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
         nameSchonVergeben = false;
       });
     }
+  }
+
+//Placeholder methode um Avatar zu laden
+  Future<void> loadAvatar() async {
+    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
+
+    setState(() {
+      //Avatar
+    });
   }
 }

@@ -38,9 +38,6 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
-
-  
-
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
