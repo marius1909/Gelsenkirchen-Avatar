@@ -243,12 +243,24 @@ class NavDrawer extends StatelessWidget {
           /* TODO: Logout-Funktion muss noch implementiert werden (Lisa) */
           /* TODO: Logouticon fehlt (Lisa) */
           /* LOGOUT */
-          /* ListTile(
+          ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
-            //Funktionalität zum Ausloggen fehlt noch
-          ), */
+            onTap: () {
+              if(global.user?.id != null){
+                global.user = null;
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Anmeldung()));
+              }
+              else{
+                Fluttertoast.showToast(msg: "Sie haben noch nicht angemeldet!", toastLength: Toast.LENGTH_SHORT);
+              }
+
+            },
+          ),  
         ],
       ),
     );
