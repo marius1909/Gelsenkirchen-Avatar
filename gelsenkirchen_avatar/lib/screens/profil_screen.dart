@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
@@ -188,7 +189,7 @@ TODO: Unsauber gelöst?
 
   void loadAvatar(List<Benutzer> alleBenutzer) {
     setState(() {
-      avatar = Image.asset("assets/avatar/500px/DerBlaue_500px.png",
+      avatar = Image.asset(DerBlaue().imagePath,
           width: 250, height: 250);
     });
   }
