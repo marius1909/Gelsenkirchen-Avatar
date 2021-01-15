@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -69,7 +69,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                       children: <TextSpan>[
                         TextSpan(text: "Congratulations, "),
                         TextSpan(
-                            text: " ${global.user.benutzer == null || global.user.benutzer == "" ? global.user.email : global.user.benutzer}! ",
+                            text: " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),

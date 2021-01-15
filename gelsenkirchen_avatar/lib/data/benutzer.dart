@@ -12,6 +12,7 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
   int rolleID;
 
   static Benutzer get shared => Benutzer();
+  static Benutzer current;
 
   Benutzer({this.id, this.email, this.benutzer, this.passwort, this.rolleID})
       : super(DatabaseURL.getBenutzer.value, DatabaseURL.registrierung.value,
@@ -27,7 +28,8 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
         InvalidLoginExceptionCause.passwordIncorrect.message) {
       throw InvalidLoginException(InvalidLoginExceptionCause.passwordIncorrect);
     } else {
-      return shared.objektVonJasonArray(responseBody);
+      current = shared.objektVonJasonArray(responseBody);
+      return current;
     }
   }
 

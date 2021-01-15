@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/quiz/quizpage.dart';
 import 'package:http/http.dart' as http;
 
@@ -160,11 +160,11 @@ class _StartQuizState extends State<StartQuiz> {
                               MaterialTapTargetSize.shrinkWrap,
                           color: Colors.green[400],
                           onPressed: () {
-                            if (global.user?.id != null) {
+                            if (Benutzer.current?.id != null) {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => QuizPage(
                                         quizID: int.parse(data['quizID']),
-                                        benutzerID: global.user.id,
+                                        benutzerID: Benutzer.current.id,
                                         lernKategorieID:
                                             int.parse(data['kategorieID']),
                                         lernortID: int.parse(data['id']),

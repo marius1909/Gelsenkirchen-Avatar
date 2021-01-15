@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
 
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
@@ -8,7 +7,7 @@ import 'map_screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  final String spielername = global.user.benutzer;
+  final String spielername = Benutzer.current.benutzer;
 
   @override
   Widget build(BuildContext context) {

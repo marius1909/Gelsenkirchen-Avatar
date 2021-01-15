@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
@@ -11,7 +12,6 @@ import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -68,12 +68,12 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Profil'),
               onTap: () {
-                if (global.user?.id != null) {
+                if (Benutzer.current?.id != null) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              Profil(global.user.id)));
+                              Profil(Benutzer.current.id)));
                 } else {
                   Fluttertoast.showToast(
                       msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
@@ -157,12 +157,12 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Bestenliste'),
               onTap: () {
-                if (global.user?.id != null) {
+                if (Benutzer.current?.id != null) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              ScoreBoard(global.user.id)));
+                              ScoreBoard(Benutzer.current.id)));
                 } else {
                   Fluttertoast.showToast(
                       msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
@@ -244,8 +244,8 @@ class NavDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () {
-              if (global.user?.id != null) {
-                global.user = null;
+              if (Benutzer.current?.id != null) {
+                Benutzer.current = null;
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
