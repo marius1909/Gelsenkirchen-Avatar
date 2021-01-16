@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
@@ -16,17 +18,28 @@ class _LernortListeScreenKategorieState
     extends State<LernortListeScreenKategorie> {
   bool isSearching = false;
   List lernortListGefiltert = List();
+  bool timeout = false;
+  String lkname;
 
   void initState() {
+    lkname = widget.lk.name;
+    Timer(Duration(seconds: 4), () {
+      if (this.mounted) {
+        setState(() {
+          timeout = true;
+        });
+      }
+    });
     var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
-        if (widget.lk.name != "Alle Lernorte") {
+        if (lkname != "Alle Lernorte") {
           lernortListGefiltert = lernorte
               .where((lernort) => lernort.kategorieID == widget.lk.id)
               .toList();
         } else {
           lernortListGefiltert = lernorte;
+          print(lernortListGefiltert);
         }
       });
     });
@@ -37,9 +50,7 @@ class _LernortListeScreenKategorieState
     return new Card(
         child: new Column(
       children: <Widget>[
-
         new ListTile(
-          
           /* TODO: Bild aus DB holen und anzeigen (Lisa) */
 
           /* leading: new Image.asset(
@@ -48,7 +59,12 @@ class _LernortListeScreenKategorieState
           width: 100.0,
           ), */
           leading: CircleAvatar(
-          backgroundImage: NetworkImage("https://www.hanse-haus.de/fileadmin/_processed_/7/b/csm_fertighaus-bauen-startseiten-bild_d13e0ec91d.jpg"),
+            backgroundImage: lernortListGefiltert[index]
+                    .titelbild
+                    .contains("http")
+                ? NetworkImage(lernortListGefiltert[index].titelbild)
+                : NetworkImage(
+                    "https://www.hanse-haus.de/fileadmin/_processed_/7/b/csm_fertighaus-bauen-startseiten-bild_d13e0ec91d.jpg"),
           ),
           title: new Text(
             /*NAME*/
@@ -57,23 +73,6 @@ class _LernortListeScreenKategorieState
                 : 'empty',
             style: Theme.of(context).textTheme.bodyText1,
           ),
-          
-          /* subtitle: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /*KURZBESCHREIBUNG*/
-                new Text(
-                    lernortListGefiltert[index].kurzbeschreibung != null
-                        ? lernortListGefiltert[index].kurzbeschreibung
-                        : '',
-                    style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                /*KATEGORIE*/
-                /*new Text('Kategorie: ${lernortListGefiltert[index].kategorieId}',
-                  style: new TextStyle(
-                      fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]), */
           onTap: () {
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
@@ -99,9 +98,22 @@ class _LernortListeScreenKategorieState
                 itemBuilder: erstelleListViewitem,
                 padding: EdgeInsets.all(0.0),
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
+            : timeout
+                ? Center(
+                    child: RichText(
+                        text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 15, color: Colors.grey[700]),
+                            children: [
+                          TextSpan(text: "Keine Ergebnisse für die Kategorie "),
+                          TextSpan(
+                              text: lkname,
+                              style: TextStyle(fontWeight: FontWeight.bold))
+                        ])),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
       ),
     );
   }

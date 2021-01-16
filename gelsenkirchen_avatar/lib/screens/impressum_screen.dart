@@ -41,7 +41,7 @@ class ImpressumScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1),
               SizedBox(height: 10),
               Text(
-                  'Tobias Hoffmann \n Lisa Narewski \n Simon Schöpke \n Alexander Dünne \n Marisu Weise \n Phuong Thao Nguyen',
+                  'Tobias Hoffmann \n Lisa Narewski \n Simon Schöpke \n Alexander Dünne \n Marius Weise \n Phuong Thao Nguyen',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyText1),
               SizedBox(height: 70),

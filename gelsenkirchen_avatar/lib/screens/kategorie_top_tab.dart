@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen_kategorie.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class KategorieTopTab extends StatefulWidget {
   @override
@@ -22,9 +19,11 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
+        /* Zusätzliche Lernkategorie "Alle Lernorte" zum laden aller Lernorte */
         LernKategorie alleKategorien =
             LernKategorie(id: lernkategorie.length, name: "Alle Lernorte");
         lernKategorieList.add(alleKategorien);
+        /* Alphabetische Sortierung der Liste */
         lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
         _listLength = lernKategorieList.length;
@@ -37,6 +36,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
     Icon kategorienSymbol;
     Color symbolcolor = Color(0xff0b3e99);
     double symbolsize = 25;
+    /* Erstellt Kategoriesymbol der jeweiligen Kategorie entsprechend */
     switch (lernKategorieList[index].id) {
       case 0:
         {
@@ -142,7 +142,6 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
             ],
           ),
           onTap: () {
-            print(lernKategorieList[index]);
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
