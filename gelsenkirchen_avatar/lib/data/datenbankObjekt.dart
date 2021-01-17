@@ -7,9 +7,10 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   String getFromDatabaseURL;
   String insertIntoDatabaseURL;
   String removeFromDatabaseURL;
+  String updateDatabaseURL;
 
   DatenbankObjekt(this.getFromDatabaseURL, this.insertIntoDatabaseURL,
-      this.removeFromDatabaseURL);
+      this.removeFromDatabaseURL, this.updateDatabaseURL);
 
   List<D> _datenbankObjektList = List();
 
@@ -52,6 +53,17 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
 
   Future<Response> removeFromDatabaseWithID(Map<String, String> id) async {
     final response = await http.post(removeFromDatabaseURL, body: id);
+    return response;
+  }
+
+  Future<Response> updateDatabaseWithID(
+      String attribut, String neuerWert, int id) async {
+    var data = {
+      "attribut": attribut,
+      "neuerWert": neuerWert,
+      "id": id.toString()
+    };
+    final response = await http.post(updateDatabaseURL, body: data);
     return response;
   }
 

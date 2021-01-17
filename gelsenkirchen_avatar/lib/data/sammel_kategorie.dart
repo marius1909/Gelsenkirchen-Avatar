@@ -12,7 +12,8 @@ class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
       : super(
             DatabaseURL.getSammelKategorie.value,
             DatabaseURL.insertIntoSammelKategorie.value,
-            DatabaseURL.removeFromSammelKategorie.value);
+            DatabaseURL.removeFromSammelKategorie.value,
+            '');
 
   @override
   SammelKategorie objektVonJasonArray(objekt) {

@@ -38,7 +38,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
       : super(
             DatabaseURL.getLernorte.value,
             DatabaseURL.insertIntoLernort.value,
-            DatabaseURL.removeFromLernort.value);
+            DatabaseURL.removeFromLernort.value,
+            DatabaseURL.updateLernort.value);
 
   @override
   Lernort objektVonJasonArray(objekt) {

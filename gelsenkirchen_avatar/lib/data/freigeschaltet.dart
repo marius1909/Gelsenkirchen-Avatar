@@ -13,7 +13,8 @@ class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
       : super(
             DatabaseURL.getFreigeschaltet.value,
             DatabaseURL.insertIntoFreigeschaltet.value,
-            DatabaseURL.removeFromFreigeschaltet.value);
+            DatabaseURL.removeFromFreigeschaltet.value,
+            '');
 
   @override
   Freigeschaltet objektVonJasonArray(objekt) {

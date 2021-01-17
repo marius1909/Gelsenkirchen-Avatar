@@ -13,7 +13,8 @@ class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
       : super(
             DatabaseURL.getBenutzerKategorie.value,
             DatabaseURL.insertIntoLernKategorie.value,
-            DatabaseURL.removeFromBenutzerKategorie.value);
+            DatabaseURL.removeFromBenutzerKategorie.value,
+            '');
 
   @override
   BenutzerKategorie objektVonJasonArray(objekt) {

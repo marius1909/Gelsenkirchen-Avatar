@@ -4,9 +4,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart'
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Anmeldung extends StatefulWidget {
   @override
@@ -31,9 +29,6 @@ class _AnmeldungState extends State<Anmeldung> {
       processing = true;
     });
 
-    // final SharedPreferences sharedPreferences =
-    //     await SharedPreferences.getInstance();
-    // sharedPreferences.setString("email", emailctrl.text);
     var futureBenutzer = Benutzer.getBenutzer(emailctrl.text, passctrl.text);
     futureBenutzer.catchError(invalidError);
     futureBenutzer.then((benutzer) {

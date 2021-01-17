@@ -15,7 +15,8 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
       : super(
             DatabaseURL.getSammelbares.value,
             DatabaseURL.insertIntoSammelbares.value,
-            DatabaseURL.removeFromSammelbares.value);
+            DatabaseURL.removeFromSammelbares.value,
+            '');
 
   @override
   Sammelbares objektVonJasonArray(objekt) {

@@ -15,7 +15,8 @@ class LernKategorie extends DatenbankObjekt<LernKategorie> {
       : super(
             DatabaseURL.getLernkategorie.value,
             DatabaseURL.insertIntoLernKategorie.value,
-            DatabaseURL.removeFromLernKategorie.value);
+            DatabaseURL.removeFromLernKategorie.value,
+            '');
 
   @override
   LernKategorie objektVonJasonArray(objekt) {

@@ -14,7 +14,8 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
       : super(
             DatabaseURL.getBenutzerSpiel.value,
             DatabaseURL.insertIntoBenutzerSpiel.value,
-            DatabaseURL.removeFromBenutzerSpiel.value);
+            DatabaseURL.removeFromBenutzerSpiel.value,
+            '');
 
   @override
   BenutzerSpiel objektVonJasonArray(objekt) {

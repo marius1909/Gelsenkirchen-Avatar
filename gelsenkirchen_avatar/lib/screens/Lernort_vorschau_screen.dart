@@ -32,7 +32,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
     //   print('Datensatz nicht gefunden');
     // } else {
     setState(() {
-      setKategorienSymbol(lernort.kategorieID.toString());
+      setKategorienSymbol(lernort.kategorieID);
       setTitelbild(lernort.titelbild);
     });
     // }
@@ -51,71 +51,84 @@ class _LernortVorschauState extends State<LernortVorschau> {
     }
   }
 
-  void setKategorienSymbol(String kategorienID) {
+  void setKategorienSymbol(int kategorienID) {
+    Color symbolcolor = Color(0xff0b3e99);
+    double symbolsize = 30;
     switch (kategorienID) {
-      case "0":
+      case 0:
         {
-          kategorienSymbol = Icon(
-            Icons.category,
-            size: 30,
-          );
+          kategorienSymbol = Icon(FlutterIcons.cube_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "1":
+      case 1:
         {
-          kategorienSymbol = Icon(FlutterIcons.compass_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "2":
+      case 2:
         {
-          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "3":
+      case 3:
         {
-          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "4":
+      case 4:
         {
-          kategorienSymbol = Icon(FlutterIcons.palette_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "5":
+      case 5:
         {
-          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "6":
+      case 6:
         {
-          kategorienSymbol = Icon(FlutterIcons.book_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.book_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "7":
+      case 7:
+        {
+          kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 8:
+        {
+          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 9:
+        {
+          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+      default:
         {
           kategorienSymbol =
-              Icon(FlutterIcons.hand_holding_heart_faw5s, size: 30);
+              Icon(Icons.category, size: symbolsize, color: symbolcolor);
         }
-        break;
-
-      case "8":
-        {
-          kategorienSymbol = Icon(FlutterIcons.music_faw5s, size: 30);
-        }
-        break;
-
-      case "9":
-        {
-          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s, size: 30);
-        }
-        break;
     }
   }
 
