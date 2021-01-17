@@ -51,8 +51,6 @@ class _LernortListeScreenKategorieState
         child: new Column(
       children: <Widget>[
         new ListTile(
-          /* TODO: Bild aus DB holen und anzeigen (Lisa) */
-
           /* leading: new Image.asset(
           "assets/" + _allCities[index].image,
           fit: BoxFit.cover,

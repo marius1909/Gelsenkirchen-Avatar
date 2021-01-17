@@ -6,7 +6,6 @@ import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 import 'map_screen.dart';
 
-
 class HomeScreen extends StatelessWidget {
   final String spielername = Benutzer.current.benutzer;
 
@@ -37,8 +36,8 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
                 /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
                 /* TODO: Durch Klick auf Avatar soll man zum Profil gelangen (Lisa) */
-                child: Image.asset(DerBlaue().imagePath,
-                    width: 100, height: 100),
+                child:
+                    Image.asset(DerBlaue().imagePath, width: 100, height: 100),
               ),
               /* TODO: Unter dem Name soll ein Balken für das Level angezeigt werden (Lisa) */
               /* TODO: Name soll aus der DB geholt und angezeigt werden. */

@@ -31,6 +31,7 @@ dependencies:
   google_maps_flutter: ^1.0.5
   video_player: "^0.10.11+2"
   chewie: "0.9.10"
+  shared_preferences: ^0.5.12+4
   
   nfc_in_flutter: ^2.0.5
   qr_code_scanner: ^0.2.1

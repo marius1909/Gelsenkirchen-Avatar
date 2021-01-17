@@ -73,8 +73,8 @@ class _SuchenScreenState extends State<SuchenScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        LernortScreen(l: lernortListGefiltert[index])));
+                    builder: (context) => LernortScreen(
+                        l: lernortListGefiltert[index], k: "TODO")));
           },
         )
       ],
@@ -86,7 +86,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
     return Scaffold(
         appBar: AppBar(
             title: TextField(
-              style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white),
                 onChanged: (value) {
                   sucheLernort(value);
                 },
@@ -94,7 +94,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
                 decoration: InputDecoration(
                   hintText: "Suchen",
                   hintStyle: TextStyle(color: Colors.grey),
-          ))),
+                ))),
         body: Container(
             color: Colors.white,
             child: ListView.builder(

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'database_url.dart';
 import 'datenbankObjekt.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class Benutzer extends DatenbankObjekt<Benutzer> {
@@ -28,9 +29,16 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
         InvalidLoginExceptionCause.passwordIncorrect.message) {
       throw InvalidLoginException(InvalidLoginExceptionCause.passwordIncorrect);
     } else {
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString("benutzer", response.body);
       current = shared.objektVonJasonArray(responseBody);
       return current;
     }
+  }
+
+  void setCurrent(dynamic objekt) {
+    current = shared.objektVonJasonArray(objekt);
   }
 
   @override

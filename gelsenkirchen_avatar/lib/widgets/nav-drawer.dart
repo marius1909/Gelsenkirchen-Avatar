@@ -13,6 +13,7 @@ import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -243,9 +244,12 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () {
+            onTap: () async {
               if (Benutzer.current?.id != null) {
                 Benutzer.current = null;
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                sharedPreferences.remove("benutzer");
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
