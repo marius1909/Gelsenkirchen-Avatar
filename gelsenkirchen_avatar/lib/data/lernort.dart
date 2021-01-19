@@ -7,6 +7,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
   double ost;
   int kategorieID;
   String name;
+  String adresse;
+  String oeffnungszeiten;
   String kurzbeschreibung;
   String beschreibung;
   String titelbild;
@@ -27,6 +29,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
       this.ost,
       this.kategorieID,
       this.name,
+      this.adresse,
+      this.oeffnungszeiten,
       this.kurzbeschreibung,
       this.beschreibung,
       this.titelbild,
@@ -49,6 +53,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
         ost: double.parse(objekt["ost"]),
         kategorieID: int.parse(objekt["kategorieID"]),
         name: objekt["name"] as String,
+        adresse: objekt["adresse"] as String,
+        oeffnungszeiten: objekt["oeffnungszeiten"] as String,
         kurzbeschreibung: objekt["kurzbeschreibung"] as String,
         beschreibung: objekt["beschreibung"] as String,
         titelbild: objekt["titelbild"] as String,
@@ -75,6 +81,8 @@ class Lernort extends DatenbankObjekt<Lernort> {
       "ost": "$ost",
       "kategorieID": "$kategorieID",
       "name": "$name",
+      "adresse": "$adresse",
+      "oeffnungszeiten": "$oeffnungszeiten",
       "kurzbeschreibung": "$kurzbeschreibung",
       "beschreibung": "$beschreibung",
       "titelbild": "$belohnungenID",

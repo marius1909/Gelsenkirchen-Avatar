@@ -198,7 +198,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                           fontWeight: FontWeight.bold, fontSize: 20.0),
                     ),
                     SizedBox(height: 5),
-                    Text(lernort.beschreibung,
+                    Text(lernort.kurzbeschreibung,
                         style: Theme.of(context).textTheme.subtitle1,
                         textAlign: TextAlign.justify),
                   ],

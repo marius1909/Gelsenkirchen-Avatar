@@ -37,38 +37,32 @@ class LernortScreen extends StatelessWidget {
             /* TODO: Kategoriename aus DB anzeigen (Lisa) */
           ]),
           SizedBox(height: 10),
-
           Row(children: [
             /* ADRESSE */
-            Text("Neidenburger Str. 43, 45897 Gelsenkirchen", style: Theme.of(context).textTheme.bodyText1),
-            /* TODO: Adresse aus DB anzeigen (Lisa) */
+            Text(l.adresse, style: Theme.of(context).textTheme.bodyText1),
+          ]),
+          SizedBox(height: 10),
+          Row(children: [
+            /* Öffnungszeiten */
+            Text(l.oeffnungszeiten,
+                style: Theme.of(context).textTheme.bodyText1),
           ]),
           SizedBox(height: 10),
 
-          Row(children: [
-            /* ADRESSE */
-            Text("Mo - Fr: 7:00 - 21:30 Uhr\nSa: 7:30 - 18:00 Uhr", style: Theme.of(context).textTheme.bodyText1),
-            /* TODO: Öffnungszeiten aus DB anzeigen (Lisa) */
-          ]),
-          SizedBox(height: 10),
-          
           /*BESCHREIBUNG*/
           Text(
-              '' + l.beschreibung,
-              textAlign: TextAlign.justify,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+            '' + l.kurzbeschreibung,
+            textAlign: TextAlign.justify,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
           SizedBox(height: 40),
-
           Divider(
             height: 50.0,
             color: Colors.grey[800],
           ),
-          
           Container(
             child: getWidgetTabs(l, context),
           ),
-
           ImageButton(
             children: <Widget>[],
             /* 302 x 91 sind die Originalmaße der Buttons */
@@ -182,9 +176,11 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                   height: 400,
                   decoration: BoxDecoration(
                       /* border: Border(
-                          top: BorderSide(color: Colors.grey, width: 0.5)) */),
+                          top: BorderSide(color: Colors.grey, width: 0.5)) */
+                      ),
                   child: TabBarView(children: <Widget>[
-                    Container(
+                    SingleChildScrollView(
+                        child: Container(
                       child: Center(
                         child: Text(
                           l.beschreibung.replaceAll('<br>', '\n'),
@@ -192,7 +188,7 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ),
-                    ),
+                    )),
                     Container(
                       child: Center(
                         child: getWidgetVideos(l, context),
