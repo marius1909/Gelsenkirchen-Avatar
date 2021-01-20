@@ -6,6 +6,7 @@ import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 class Freund extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -26,10 +27,15 @@ class _FreundState extends State<Freund> {
   void initState() {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
-      loadName(alleBenutzer);
-      loadUserLevel();
-      loadErrungenschaften();
-      loadAvatar(alleBenutzer);
+      setState(() {
+        spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
+        anzahlErrungenschaften = loadInfo.loadErrungenschaften(alleBenutzer);
+        avatar = loadInfo.loadAvatar(alleBenutzer);
+      });
+      //BROKEN
+      setState(() async {
+        level = await loadInfo.loadUserLevel(widget.id_user);
+      });
     });
   }
 
@@ -141,56 +147,5 @@ class _FreundState extends State<Freund> {
 
   String getText() {
     return spielername;
-  }
-
-/*
-Lädt den Namen des Freundes anhand der userID aus der DB um ihm im Screen anzuzeigen. 
-
-*/
-  void loadName(List<Benutzer> alleBenutzer) {
-    setState(() {
-      spielername = alleBenutzer.firstWhere((benutzer) {
-        return benutzer.id == widget.id_user;
-      }).benutzer;
-    });
-  }
-
-/* TODO: Templatefunktion um den Avatar zu laden und im Profil anzeigen zu lassen */
-
-  void loadAvatar(List<Benutzer> alleBenutzer) {
-    setState(() {
-      avatar = Image.asset("assets/avatar/500px/DerBlaue_500px.png",
-          width: 250, height: 250);
-    });
-  }
-
-/*
-
-Lädt die Errungenschaften 
-*/
-  Future<void> loadErrungenschaften() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-    var freigeschalteteErrungenschaften =
-        await Freigeschaltet.shared.gibObjekte();
-
-    for (int i = 0; i < freigeschalteteErrungenschaften.length; i++) {}
-
-    setState(() {
-      //DUMMY
-      anzahlErrungenschaften = 12;
-    });
-  }
-
-  Future<void> loadUserLevel() async {
-    var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
-        widget.id_user.toString();
-    var res = await http.get(url);
-    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
-      print('Datensatz nicht gefunden');
-    } else {
-      setState(() {
-        level = jsonDecode(res.body)['level'];
-      });
-    }
   }
 }

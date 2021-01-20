@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 import 'avatarbearbeiten_screen.dart';
 
@@ -18,14 +19,16 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   bool nameSchonVergeben = false;
   TextEditingController neuerNameController = new TextEditingController();
   bool initComplete = false;
-  AssetImage avatar;
+  Image avatar;
 
   @override
   void initState() {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
-      loadName(alleBenutzer);
-      loadAvatar(alleBenutzer);
+      setState(() {
+        aktuellerName = loadInfo.loadName(alleBenutzer, widget.id_user);
+        avatar = loadInfo.loadAvatar(alleBenutzer);
+      });
     });
   }
 
@@ -100,10 +103,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: avatar,
-                      radius: 50,
-                    ),
+                    avatar,
                     IconButton(
                       icon: Icon(Icons.edit, color: Colors.black),
                       onPressed: () {
@@ -132,17 +132,6 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                 )
               ],
             )));
-  }
-
-/* Lädt namen aus der Datenbank um ihn im Screen anzuzeigen
-*/
-
-  void loadName(List<Benutzer> alleBenutzer) {
-    setState(() {
-      aktuellerName = alleBenutzer.firstWhere((benutzer) {
-        return benutzer.id == widget.id_user;
-      }).benutzer;
-    });
   }
 
 /*Funktion zum ändern des Benutzernamens
@@ -177,12 +166,5 @@ Wenn schon vergeben wird setState nicht aufgerufen
         nameSchonVergeben = false;
       });
     }
-  }
-
-//Placeholder methode um Avatar zu laden
-  void loadAvatar(List<Benutzer> alleBenutzer) {
-    setState(() {
-      avatar = AssetImage("assets/avatar/500px/DerBlaue_500px.png");
-    });
   }
 }
