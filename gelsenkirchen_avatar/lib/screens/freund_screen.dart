@@ -21,7 +21,16 @@ class _FreundState extends State<Freund> {
   String spielername = "";
   int level = 0;
   int anzahlErrungenschaften = 0;
-  Image avatar;
+
+//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+  //Typ des Avatars (1= Blau 2 = Gelb usw)
+  int avatarTypID = 2;
+
+  //Collectablesanpassung als ID (zurzeit 0 bis 7)
+  int ausgeruesteteCollectablesID = 0;
+
+//DefaultAvatar wird zurerst geladen damit kein error wenn Profil das erste mal aufgerufen wird
+  Image avatar = Image.asset(DerBlaue(0).imagePath, width: 250, height: 250);
 
   @override
   void initState() {
@@ -29,8 +38,10 @@ class _FreundState extends State<Freund> {
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
         spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
-        anzahlErrungenschaften = loadInfo.loadErrungenschaften(alleBenutzer);
-        avatar = loadInfo.loadAvatar(alleBenutzer);
+        anzahlErrungenschaften =
+            loadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
+        avatar = loadInfo.loadAvatar(
+            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
       //BROKEN
       setState(() async {

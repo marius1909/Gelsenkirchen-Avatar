@@ -28,20 +28,39 @@ class _ProfilState extends State<Profil> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-  Image avatar;
+//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+
+  //Typ des Avatars (1= Blau 2 = Gelb usw)
+  int avatarTypID = 0;
+
+  //Collectablesanpassung als ID (zurzeit 0 bis 7)
+  int ausgeruesteteCollectablesID = 0;
+
+//Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
+  Image avatar = Image.asset(DerBlaue(0).imagePath, width: 250, height: 250);
 
   @override
   void initState() {
     super.initState();
-    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+    List<Freigeschaltet> a =
+        loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
+    setState(() {
+      level = 0;
+    });
+    Benutzer.shared.gibObjekte().then((alleBenutzer) async {
       setState(() {
         spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
-        anzahlErrungenschaften = loadInfo.loadErrungenschaften(alleBenutzer);
-        avatar = loadInfo.loadAvatar(alleBenutzer);
+        anzahlErrungenschaften = a.length;
+
+       
+        avatar = loadInfo.loadAvatar(
+            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
+
+      int levelTemp = await loadInfo.loadUserLevel(widget.id_user);
       //BROKEN
-      setState(() async {
-        level = await loadInfo.loadUserLevel(widget.id_user);
+      setState(() {
+        level = levelTemp;
       });
     });
   }
