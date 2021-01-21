@@ -21,7 +21,7 @@ class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
     return Freigeschaltet(
         benutzerID: int.parse(objekt["benutzerID"]),
         sammelID: int.parse(objekt["sammelID"]),
-        ausgeruestet: objekt["ausgeruestet"] as bool);
+        ausgeruestet: bool.fromEnvironment(objekt["ausgeruestet"]));
   }
 
   @override
