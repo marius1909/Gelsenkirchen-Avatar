@@ -1,13 +1,38 @@
-class DerBlaue {
+/* 
+_typIndex = 0= DerBlaue 1= Der Gelbe usw
+_imageIndex = Collectable anpassung
+
+*/
+
+abstract class Avatar {
+  int _typIndex;
+  int _imageIndex;
+
+  String get imagePath {
+    return "";
+  }
+
+  int get imageIndex {
+    return _imageIndex;
+  }
+}
+
+class DerBlaue extends Avatar {
   static final String _basePath = "assets/avatar/500px/";
   static final String _avatar = "DerBlaue/";
   static final String _suffix = ".png";
-  int _imageIndex = 0;
+
+  @override
   String get imagePath {
     return _basePath + _avatar + _imageIndex.toString() + _suffix;
   }
 
-  DerBlaue({List<BlauesAccessoir> accessoires}) {
+  DerBlaue(int imageIndex) {
+    _imageIndex = imageIndex;
+    _typIndex = 0;
+  }
+
+  DerBlaue.withAccessoir({List<BlauesAccessoir> accessoires}) {
     if (accessoires != null) {
       _imageIndex = accessoires.fold(0, (previousValue, element) {
         return previousValue + element.accessoir;
@@ -16,7 +41,7 @@ class DerBlaue {
   }
 }
 
-class DerGelbe {
+class DerGelbe extends Avatar {
   static final String _basePath = "assets/avatar/500px/";
   static final String _avatar = "DerGelbe/";
   static final String _suffix = ".png";
@@ -25,7 +50,12 @@ class DerGelbe {
     return _basePath + _avatar + _imageIndex.toString() + _suffix;
   }
 
-  DerGelbe({List<GelbesAccessoir> accessoires}) {
+  DerGelbe(int imageIndex) {
+    _imageIndex = imageIndex;
+    _typIndex = 1;
+  }
+
+  DerGelbe.mitAccessoir({List<GelbesAccessoir> accessoires}) {
     if (accessoires != null) {
       _imageIndex = accessoires.fold(0, (previousValue, element) {
         return previousValue + element.accessoir;
@@ -34,7 +64,7 @@ class DerGelbe {
   }
 }
 
-class DerGruene {
+class DerGruene extends Avatar {
   static final String _basePath = "assets/avatar/500px/";
   static final String _avatar = "DerGruene/";
   static final String _suffix = ".png";
@@ -43,7 +73,12 @@ class DerGruene {
     return _basePath + _avatar + _imageIndex.toString() + _suffix;
   }
 
-  DerGruene({List<GruenesAccessoir> accessoires}) {
+  DerGruene(int imageIndex) {
+    _imageIndex = imageIndex;
+    _typIndex = 2;
+  }
+
+  DerGruene.mitAccessoir({List<GruenesAccessoir> accessoires}) {
     if (accessoires != null) {
       _imageIndex = accessoires.fold(0, (previousValue, element) {
         return previousValue + element.accessoir;
@@ -52,7 +87,7 @@ class DerGruene {
   }
 }
 
-class DerRote {
+class DerRote extends Avatar {
   static final String _basePath = "assets/avatar/500px/";
   static final String _avatar = "DerRote/";
   static final String _suffix = ".png";
@@ -61,7 +96,12 @@ class DerRote {
     return _basePath + _avatar + _imageIndex.toString() + _suffix;
   }
 
-  DerRote({List<RotesAccessoir> accessoires}) {
+  DerRote(int imageIndex) {
+    _imageIndex = imageIndex;
+    _typIndex = 3;
+  }
+
+  DerRote.mitAccesoir({List<RotesAccessoir> accessoires}) {
     if (accessoires != null) {
       _imageIndex = accessoires.fold(0, (previousValue, element) {
         return previousValue + element.accessoir;
