@@ -186,7 +186,10 @@ class _LernortScreenState extends State<LernortScreen>
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),
                     Flexible(
-                      child: Text(lernort.adresse,
+                      child: Text(
+                          lernort.adresse == ""
+                              ? "Keine Adresse vorhanden"
+                              : lernort.adresse,
                           style: Theme.of(context).textTheme.headline3),
                     ),
                   ]),
@@ -199,7 +202,7 @@ class _LernortScreenState extends State<LernortScreen>
                     SizedBox(width: 10),
                     Text(
                       lernort.oeffnungszeiten == ""
-                          ? "Keine Öffnungszeiten"
+                          ? "Keine Öffnungszeiten vorhanden"
                           : lernort.oeffnungszeiten,
                       style: Theme.of(context).textTheme.headline3,
                     ),
