@@ -6,106 +6,114 @@ import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 
 /* TODO: Kategorieicon einfügen */
-class LernortScreen extends StatelessWidget {
+class LernortScreen extends StatefulWidget {
   final Lernort l;
   final String k;
 
   LernortScreen({Key key, @required this.l, @required this.k})
       : super(key: key);
+
+  @override
+  _LernortScreenState createState() => _LernortScreenState();
+}
+
+class _LernortScreenState extends State<LernortScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
   List<LernKategorie> lernKato = List();
+  @override
+  void initState() {
+    _tabController = TabController(length: 3, vsync: this);
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        //resizeToAvoidBottomInset: false,
-        //drawer: NavDrawer(),
-        appBar: AppBar(
-          /*NAME*/
-          title: Text(l.name),
+      //resizeToAvoidBottomInset: false,
+      //drawer: NavDrawer(),
+      appBar: AppBar(
+        /*NAME*/
+        title: Text(widget.l.name),
+        bottom: TabBar(
+          unselectedLabelColor: Colors.white,
+          //labelColor: Colors.green,
+          tabs: [
+            Tab(
+              child: Text("Überblick"),
+            ),
+            Tab(
+              child: Text("Lernen"),
+            ),
+            Tab(
+              child: Text("Spielen"),
+            )
+          ],
+          controller: _tabController,
+          indicatorColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.tab,
         ),
-        body: SingleChildScrollView(
-            child: Column(children: [
-          /*TITELBILD*/
+        bottomOpacity: 1,
+      ),
+      body: TabBarView(
+        children: [
+          /* Tab: INFO */
+          SingleChildScrollView(
+              child: Column(children: [
+            /* TITELBILD */
+            Container(child: getWidgetTitelbild(widget.l)),
+            Container(
+              padding: new EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  /* KATEGORIE*/
+                  /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
+                  /* TODO: Kategorieicon anzeigen (Lisa) */
+                  /* TODO: Kategoriename aus DB anzeigen (Lisa) */
+                  Row(children: [
+                    Text("Abenteuer",
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ]),
+                  SizedBox(height: 10),
 
-          Container(child: getWidgetTitelbild(l)),
-          /*KATEGORIE*/
-          /*TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
+                  /* ADRESSE */
+                  Row(children: [
+                    Text(widget.l.adresse,
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ]),
+                  SizedBox(height: 10),
 
-          Row(children: [
-            /* KATEGORIE */
-            /* TODO: Kategorieicon anzeigen (Lisa) */
-            Text("Abenteuer", style: Theme.of(context).textTheme.bodyText1),
-            /* TODO: Kategoriename aus DB anzeigen (Lisa) */
-          ]),
-          SizedBox(height: 10),
-          Row(children: [
-            /* ADRESSE */
-            Text(l.adresse, style: Theme.of(context).textTheme.bodyText1),
-          ]),
-          SizedBox(height: 10),
-          Row(children: [
-            /* Öffnungszeiten */
-            Text(l.oeffnungszeiten,
-                style: Theme.of(context).textTheme.bodyText1),
-          ]),
-          SizedBox(height: 10),
+                  /* ÖFFNUNGSZEITEN */
+                  Row(children: [
+                    Text(widget.l.oeffnungszeiten,
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ]),
+                  SizedBox(height: 10),
 
-          /*BESCHREIBUNG*/
-          Text(
-            '' + l.kurzbeschreibung,
-            textAlign: TextAlign.justify,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          SizedBox(height: 40),
-          Divider(
-            height: 50.0,
-            color: Colors.grey[800],
-          ),
-          Container(
-            child: getWidgetTabs(l, context),
-          ),
-          ImageButton(
-            children: <Widget>[],
-            /* 302 x 91 sind die Originalmaße der Buttons */
-            width: 302 / 1.3,
-            height: 91 / 1.3,
-            paddingTop: 5,
-            /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
-            pressedImage: Image.asset(
-              "assets/buttons/Lernen_blau_groß.png",
+                  /*BESCHREIBUNG*/
+                  Text(
+                    '' + widget.l.kurzbeschreibung,
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ],
+              ),
+            )
+          ])),
+
+          /* Tab: LERNEN */
+          SingleChildScrollView(
+              child: Column(children: [
+            Container(
+              child: getWidgetTabs(widget.l, context),
             ),
-            unpressedImage: Image.asset("assets/buttons/Lernen_blau_groß.png"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => Lernen(l: l)));
-            },
-          ),
-          /* SizedBox(height: 20), */
-          ImageButton(
-            children: <Widget>[],
-            /* 302 x 91 sind die Originalmaße der Buttons */
-            width: 302 / 1.3,
-            height: 91 / 1.3,
-            paddingTop: 5,
-            /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
-            pressedImage: Image.asset(
-              "assets/buttons/Spielen_dunkelblau_groß.png",
-            ),
-            unpressedImage:
-                Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => StartQuiz(l.id)));
-            },
-          ),
-        ])));
+          ])),
+
+          /* Tab: SPIELEN */
+          Center(child: Text("Contacts Tab Bar View")),
+        ],
+        controller: _tabController,
+      ),
+    );
   }
 }
 
