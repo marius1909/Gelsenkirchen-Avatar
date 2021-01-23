@@ -230,7 +230,33 @@ class _LernortScreenState extends State<LernortScreen>
 
           /* Tab: SPIELEN */
           /* TODO: Inhalt einfügen (Lisa) */
-          Center(child: Text("Contacts Tab Bar View")),
+          Column(
+            children: [
+              Text("In Bearbeitung"),
+              ImageButton(
+                children: <Widget>[],
+                /* 302 x 91 sind die Originalmaße der Buttons */
+                width: 302 / 1.5,
+                height: 91 / 1.5,
+                paddingTop: 5,
+                /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                pressedImage: Image.asset(
+                  "assets/buttons/Spielen_dunkelblau_groß.png",
+                ),
+                unpressedImage:
+                    Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              StartQuiz(widget.l.id)));
+                },
+              )
+            ],
+          )
         ],
         controller: _tabController,
       ),
