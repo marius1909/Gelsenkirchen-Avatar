@@ -84,8 +84,8 @@ class MapSampleState extends State<MapScreen> {
             icon: markerImage,
             markerId: MarkerId(element.id.toString()),
             position: LatLng(element.nord, element.ost),
-            /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
-          Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
+            /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. Es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. (Lisa) */
+
             onTap: () {
               Navigator.push(
                   context,
