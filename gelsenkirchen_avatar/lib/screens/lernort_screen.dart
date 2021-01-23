@@ -172,7 +172,7 @@ class _LernortScreenState extends State<LernortScreen>
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                   Row(children: [
                     kategorienSymbol,
-                    SizedBox(width: 15),
+                    SizedBox(width: 10),
                     /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                     Text("Kategorie",
                         //lernKategorieList[lernort.kategorieID].name,
