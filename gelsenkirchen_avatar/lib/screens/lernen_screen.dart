@@ -4,7 +4,7 @@ import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 import 'package:gelsenkirchen_avatar/widgets/chewie_list_item.dart';
-
+import 'package:flutter_icons/flutter_icons.dart';
 
 //ToDo Weitere Medien einfügen
 
@@ -140,15 +140,15 @@ Widget get_TabsTitel(int i, bool sollRein) {
   //1 = Text  //2= Video   //3 = Sounds    //4= Bilder
   if (sollRein) {
     if (i == 1) {
-      return Tab(text: 'Texte', icon: Icon(Icons.list));
+      return Tab(text: 'Texte', icon: Icon(FlutterIcons.text_document_ent));
     } else if (i == 2) {
-      return Tab(text: 'Videos', icon: Icon(Icons.video_label));
+      return Tab(text: 'Videos', icon: Icon(FlutterIcons.video_camera_ent));
     } else if (i == 3) {
-      return Tab(text: 'Sounds', icon: Icon(Icons.voice_chat));
+      return Tab(text: 'Audio', icon: Icon(FlutterIcons.audiotrack_mdi));
     } else if (i == 4) {
-      return Tab(text: 'Bilder', icon: Icon(Icons.image));
+      return Tab(text: 'Bilder', icon: Icon(FlutterIcons.image_faw5s));
     } else if (i == 0) {
-      return Tab(text: 'Fehler', icon: Icon(Icons.error));
+      return Tab(text: 'Fehler', icon: Icon(FlutterIcons.error_mdi));
     }
   } else {
     return null;
@@ -210,7 +210,7 @@ Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
           child: new InkResponse(
             child: Image.network(
               arr[index],
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.cover,
             ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) {

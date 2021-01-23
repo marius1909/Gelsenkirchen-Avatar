@@ -137,7 +137,7 @@ class _LernortScreenState extends State<LernortScreen>
         title: Text(widget.l.name),
         bottom: TabBar(
           unselectedLabelColor: Colors.white,
-          //labelColor: Colors.green,
+          //labelColor: Color(0xffe54b4b),
           tabs: [
             Tab(
               child: Text("Überblick"),
@@ -182,17 +182,25 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /* ADRESSE */
                   Row(children: [
-                    Text(lernort.adresse,
-                        style: Theme.of(context).textTheme.headline3),
+                    Icon(FlutterIcons.location_arrow_faw5s,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Flexible(
+                      child: Text(lernort.adresse,
+                          style: Theme.of(context).textTheme.headline3),
+                    ),
                   ]),
                   SizedBox(height: 20),
 
                   /* ÖFFNUNGSZEITEN */
                   Row(children: [
+                    Icon(FlutterIcons.clock_faw5s,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
                     Text(
                       lernort.oeffnungszeiten == ""
-                          ? "Keine Öffnungszeiten verfügbar"
-                          : widget.l.oeffnungszeiten,
+                          ? "Keine Öffnungszeiten"
+                          : lernort.oeffnungszeiten,
                       style: Theme.of(context).textTheme.headline3,
                     ),
                   ]),
@@ -200,7 +208,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /*BESCHREIBUNG*/
                   Text(
-                    lernort.beschreibung,
+                    lernort.kurzbeschreibung,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
@@ -213,7 +221,7 @@ class _LernortScreenState extends State<LernortScreen>
           SingleChildScrollView(
               child: Column(children: [
             Container(
-              child: getWidgetTabs(widget.l, context),
+              child: getWidgetTabs(lernort, context),
             ),
           ])),
 
@@ -291,7 +299,9 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                 ),
               ),
               Container(
-                  height: 400,
+                  padding: new EdgeInsets.all(15.0),
+                  /* TODO: Die Inhalte sollen das gesamte Display einnehmen und ggf. scrollbar sein (Lisa) */
+                  height: 500,
                   decoration: BoxDecoration(
                       /* border: Border(
                           top: BorderSide(color: Colors.grey, width: 0.5)) */
