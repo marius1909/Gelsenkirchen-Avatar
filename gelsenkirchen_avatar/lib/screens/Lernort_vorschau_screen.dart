@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 /* import 'package:http/http.dart' as http;
 import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class LernortVorschau extends StatefulWidget {
   // final Lernort l;
@@ -159,13 +160,14 @@ class _LernortVorschauState extends State<LernortVorschau> {
             padding: new EdgeInsets.all(15.0),
             child: Column(
               children: [
+                /*
                 /* KATEGORIE*/
                 /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
                 /* TODO: Kategorieicon anzeigen (Lisa) */
                 /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                 Row(children: [
                   kategorienSymbol,
-                  SizedBox(width: 15),
+                  SizedBox(width: 10),
                   /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                   Text("Kategorie",
                       //lernKategorieList[lernort.kategorieID].name,
@@ -175,27 +177,61 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
                 /* ADRESSE */
                 Row(children: [
-                  Text(lernort.adresse,
-                      style: Theme.of(context).textTheme.headline3),
+                  Icon(FlutterIcons.location_arrow_faw5s,
+                      size: 20, color: Color(0xff0b3e99)),
+                  SizedBox(width: 10),
+                  Flexible(
+                    child: Text(
+                        lernort.adresse == ""
+                            ? "Keine Adresse vorhanden"
+                            : lernort.adresse,
+                        style: Theme.of(context).textTheme.headline3),
+                  ),
                 ]),
                 SizedBox(height: 20),
 
                 /* ÖFFNUNGSZEITEN */
                 Row(children: [
+                  Icon(FlutterIcons.clock_faw5s,
+                      size: 20, color: Color(0xff0b3e99)),
+                  SizedBox(width: 10),
                   Text(
                     lernort.oeffnungszeiten == ""
-                        ? "Keine Öffnungszeiten verfügbar"
-                        : widget.l.oeffnungszeiten,
+                        ? "Keine Öffnungszeiten vorhanden"
+                        : lernort.oeffnungszeiten,
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ]),
-                SizedBox(height: 40),
+                SizedBox(height: 40), */
 
                 /*BESCHREIBUNG*/
                 Text(
                   lernort.kurzbeschreibung,
                   textAlign: TextAlign.justify,
                   style: Theme.of(context).textTheme.bodyText1,
+                ),
+                SizedBox(height: 50),
+                ImageButton(
+                  children: <Widget>[],
+                  /* 302 x 91 sind die Originalmaße der Buttons */
+                  width: 302 / 1.5,
+                  height: 91 / 1.5,
+                  paddingTop: 5,
+                  /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                  pressedImage: Image.asset(
+                    "assets/buttons/Lernort_dunkelblau_groß.png",
+                  ),
+                  unpressedImage:
+                      Image.asset("assets/buttons/Lernort_dunkelblau_groß.png"),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LernortScreen(l: lernort, k: "TODO")));
+                  },
                 ),
               ],
             ),
