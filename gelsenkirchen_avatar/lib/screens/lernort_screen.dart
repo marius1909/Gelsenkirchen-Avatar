@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 /* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatefulWidget {
@@ -21,10 +22,110 @@ class _LernortScreenState extends State<LernortScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   List<LernKategorie> lernKato = List();
+  Lernort lernort;
+  Icon kategorienSymbol;
+  List<LernKategorie> lernKategorieList = List();
+  int _listLength = 0;
+  LernKategorie lk;
+
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
     super.initState();
+    lernort = widget.l;
+    _tabController = TabController(length: 3, vsync: this);
+    setKategorienSymbol(lernort.kategorieID);
+
+    /* Neuer Kram */
+    var lernKategorieFuture = LernKategorie.shared.gibObjekte();
+    lernKategorieFuture.then((lernkategorie) {
+      setState(() {
+        /* Alphabetische Sortierung der Liste */
+        lernkategorie.sort((a, b) => a.name.compareTo(b.name));
+        lernKategorieList.addAll(lernkategorie);
+        _listLength = lernKategorieList.length;
+      });
+    });
+  }
+
+  void setKategorienSymbol(int kategorienID) {
+    Color symbolcolor = Color(0xff0b3e99);
+    double symbolsize = 20;
+    switch (kategorienID) {
+      case 0:
+        {
+          kategorienSymbol = Icon(FlutterIcons.cube_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 1:
+        {
+          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 2:
+        {
+          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 3:
+        {
+          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 4:
+        {
+          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 5:
+        {
+          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 6:
+        {
+          kategorienSymbol = Icon(FlutterIcons.book_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 7:
+        {
+          kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 8:
+        {
+          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 9:
+        {
+          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+      default:
+        {
+          kategorienSymbol =
+              Icon(Icons.category, size: symbolsize, color: symbolcolor);
+        }
+    }
   }
 
   Widget build(BuildContext context) {
@@ -70,8 +171,11 @@ class _LernortScreenState extends State<LernortScreen>
                   /* TODO: Kategorieicon anzeigen (Lisa) */
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                   Row(children: [
-                    Text("Abenteuer",
-                        style: Theme.of(context).textTheme.bodyText1),
+                    kategorienSymbol,
+                    SizedBox(width: 10),
+                    /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. (Lisa) */
+                    Text(lernKategorieList[lernort.kategorieID].name,
+                        style: Theme.of(context).textTheme.headline3),
                   ]),
                   SizedBox(height: 10),
 
@@ -109,6 +213,7 @@ class _LernortScreenState extends State<LernortScreen>
           ])),
 
           /* Tab: SPIELEN */
+          /* TODO: Inhalt einfügen (Lisa) */
           Center(child: Text("Contacts Tab Bar View")),
         ],
         controller: _tabController,

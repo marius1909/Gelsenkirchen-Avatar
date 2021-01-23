@@ -83,7 +83,10 @@ class _MyAppState extends State<MyApp> {
             headline2: TextStyle(fontSize: 20),
 
             /* Verwendung für kurze wichtige Infos o. ä.: Text('custom theme', style: Theme.of(context).textTheme.headline3) */
-            headline3: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            headline3: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff0b3e99)),
 
             /* Verwendung für normalen Fließtext: Text('custom theme', style: Theme.of(context).textTheme.bodyText1) */
             bodyText1: TextStyle(fontSize: 14),
