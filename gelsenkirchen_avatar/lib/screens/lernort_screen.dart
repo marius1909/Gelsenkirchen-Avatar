@@ -35,7 +35,7 @@ class _LernortScreenState extends State<LernortScreen>
     _tabController = TabController(length: 3, vsync: this);
     setKategorienSymbol(lernort.kategorieID);
 
-    /* Neuer Kram */
+    /* Wird für den Lernortkategorienamen benötigt */
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
@@ -161,7 +161,7 @@ class _LernortScreenState extends State<LernortScreen>
           SingleChildScrollView(
               child: Column(children: [
             /* TITELBILD */
-            Container(child: getWidgetTitelbild(widget.l)),
+            Container(child: setTitelbild(widget.l)),
             Container(
               padding: new EdgeInsets.all(15.0),
               child: Column(
@@ -182,7 +182,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /* ADRESSE */
                   Row(children: [
-                    Text(widget.l.adresse,
+                    Text(lernort.adresse,
                         style: Theme.of(context).textTheme.headline3),
                   ]),
                   SizedBox(height: 20),
@@ -190,7 +190,7 @@ class _LernortScreenState extends State<LernortScreen>
                   /* ÖFFNUNGSZEITEN */
                   Row(children: [
                     Text(
-                      widget.l.oeffnungszeiten == ""
+                      lernort.oeffnungszeiten == ""
                           ? "Keine Öffnungszeiten verfügbar"
                           : widget.l.oeffnungszeiten,
                       style: Theme.of(context).textTheme.headline3,
@@ -200,7 +200,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /*BESCHREIBUNG*/
                   Text(
-                    widget.l.kurzbeschreibung,
+                    lernort.beschreibung,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
@@ -227,12 +227,12 @@ class _LernortScreenState extends State<LernortScreen>
   }
 }
 
-Widget getWidgetTitelbild(Lernort l) {
+Widget setTitelbild(Lernort l) {
   if (l.titelbild.isEmpty) {
     return new Image.asset('assets/images/lernortPlaceholderTitelbild.jpg',
-        fit: BoxFit.fill);
+        fit: BoxFit.cover);
   } else {
-    return new Image.network(l.titelbild, fit: BoxFit.fill);
+    return new Image.network(l.titelbild, fit: BoxFit.cover);
   }
 }
 

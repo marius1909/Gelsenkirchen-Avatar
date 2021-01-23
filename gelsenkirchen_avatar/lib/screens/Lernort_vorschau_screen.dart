@@ -41,9 +41,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
   void setTitelbild(String bildUrl) {
     if (bildUrl.isEmpty) {
       titelbild = Image.asset(
-        'assets/images/lernort.jpg',
-        color: Colors.grey[300],
-        colorBlendMode: BlendMode.darken,
+        'assets/images/lernortPlaceholderTitelbild.jpg',
         fit: BoxFit.cover,
       );
     } else {
@@ -53,7 +51,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
   void setKategorienSymbol(int kategorienID) {
     Color symbolcolor = Color(0xff0b3e99);
-    double symbolsize = 30;
+    double symbolsize = 20;
     switch (kategorienID) {
       case 0:
         {
@@ -148,9 +146,63 @@ class _LernortVorschauState extends State<LernortVorschau> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
+        appBar: AppBar(
+          title: Text(lernort.name),
+        ),
         //   body: SafeArea(
         // child:
-        body: CustomScrollView(
+        body: SingleChildScrollView(
+            child: Column(children: [
+          /* TITELBILD */
+          Container(child: titelbild),
+          Container(
+            padding: new EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                /* KATEGORIE*/
+                /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
+                /* TODO: Kategorieicon anzeigen (Lisa) */
+                /* TODO: Kategoriename aus DB anzeigen (Lisa) */
+                Row(children: [
+                  kategorienSymbol,
+                  SizedBox(width: 15),
+                  /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
+                  Text("Kategorie",
+                      //lernKategorieList[lernort.kategorieID].name,
+                      style: Theme.of(context).textTheme.headline3),
+                ]),
+                SizedBox(height: 20),
+
+                /* ADRESSE */
+                Row(children: [
+                  Text(lernort.adresse,
+                      style: Theme.of(context).textTheme.headline3),
+                ]),
+                SizedBox(height: 20),
+
+                /* ÖFFNUNGSZEITEN */
+                Row(children: [
+                  Text(
+                    lernort.oeffnungszeiten == ""
+                        ? "Keine Öffnungszeiten verfügbar"
+                        : widget.l.oeffnungszeiten,
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ]),
+                SizedBox(height: 40),
+
+                /*BESCHREIBUNG*/
+                Text(
+                  lernort.kurzbeschreibung,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ],
+            ),
+          )
+        ]))
+
+        /* CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
               title: Text(lernort.name),
@@ -231,7 +283,8 @@ class _LernortVorschauState extends State<LernortVorschau> {
               )
             ]))
           ],
-        ),
+        ) */
+        ,
       );
     }
   }
