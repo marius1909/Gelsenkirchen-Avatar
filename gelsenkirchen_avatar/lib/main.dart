@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
                 color: Color(0xff0b3e99)),
 
             /* Verwendung für normalen Fließtext: Text('custom theme', style: Theme.of(context).textTheme.bodyText1) */
-            bodyText1: TextStyle(fontSize: 14),
+            bodyText1: TextStyle(fontSize: 15),
           )),
       home: processing
           ? Ladescreen()

@@ -172,30 +172,35 @@ class _LernortScreenState extends State<LernortScreen>
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                   Row(children: [
                     kategorienSymbol,
-                    SizedBox(width: 10),
-                    /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. (Lisa) */
-                    Text(lernKategorieList[lernort.kategorieID].name,
+                    SizedBox(width: 15),
+                    /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
+                    Text("Kategorie",
+                        //lernKategorieList[lernort.kategorieID].name,
                         style: Theme.of(context).textTheme.headline3),
                   ]),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
 
                   /* ADRESSE */
                   Row(children: [
                     Text(widget.l.adresse,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.headline3),
                   ]),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
 
                   /* ÖFFNUNGSZEITEN */
                   Row(children: [
-                    Text(widget.l.oeffnungszeiten,
-                        style: Theme.of(context).textTheme.bodyText1),
+                    Text(
+                      widget.l.oeffnungszeiten == ""
+                          ? "Keine Öffnungszeiten verfügbar"
+                          : widget.l.oeffnungszeiten,
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
                   ]),
-                  SizedBox(height: 10),
+                  SizedBox(height: 40),
 
                   /*BESCHREIBUNG*/
                   Text(
-                    '' + widget.l.kurzbeschreibung,
+                    widget.l.kurzbeschreibung,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
