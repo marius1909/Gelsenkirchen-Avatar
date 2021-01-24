@@ -166,6 +166,7 @@ class _LernortScreenState extends State<LernortScreen>
               padding: new EdgeInsets.all(15.0),
               child: Column(
                 children: [
+                  SizedBox(height: 25),
                   /* KATEGORIE*/
                   /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
                   /* TODO: Kategorieicon anzeigen (Lisa) */
