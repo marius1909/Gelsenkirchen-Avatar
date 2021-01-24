@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class ScoreBoard extends StatefulWidget {
   int id_user;
@@ -53,99 +54,86 @@ class _ScoreBoardState extends State<ScoreBoard> {
       return Scaffold(
         appBar: AppBar(
           /*NAME*/
-          title: Text("Scoreboard for QUIZ"),
+          title: Text("Bestenliste"),
         ),
         body: Column(
           children: [
             Container(
+              padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(color: Colors.black, fontSize: 20),
-                      children: <TextSpan>[
-                        TextSpan(text: "Congratulations, "),
-                        TextSpan(
-                            text: " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                        children: <TextSpan>[
-                          TextSpan(text: "You have reached level "),
-                          TextSpan(
-                              text: level.toString(),
-                              style: TextStyle(color: Colors.red)),
-                          TextSpan(text: " with total score: "),
-                          TextSpan(
-                              text: total_point.toString(),
-                              style: TextStyle(color: Colors.red)),
-                          //TextSpan(text: " score"),
-                        ]),
-                  ),
+                  Text(
+                      "Glückwunsch," +
+                          " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline1.apply(
+                            color: Color(0xffe54b4b),
+                          )),
+                  SizedBox(height: 10),
+                  Text(
+                      "Du hast Level " +
+                          level.toString() +
+                          " erreicht, mit insgesamt " +
+                          total_point.toString() +
+                          " Erfahrungspunkten.",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline3),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
             ),
             Expanded(
                 child: ListView.builder(
               itemCount: data.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(top: 10, left: 10, right: 10),
-                  child: Material(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    elevation: 6.0,
-                    clipBehavior: Clip.antiAlias,
-                    child: MaterialButton(
-                      minWidth: double.infinity,
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              child: Text(
-                            data[index]['name'].toString(),
-                            style: TextStyle(fontSize: 16.0),
-                          )),
-                          Spacer(),
-                          Container(
-                            child: Text(
-                              " Your Score : " +
-                                  data[index]['erfahrungspunkte'].toString(),
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    RankKategorieScreen(
-                                        int.parse(data[index]['id']),
-                                        widget.id_user,
-                                        data[index]['name'].toString())));
-                      },
-                    ),
-                  ),
-                );
-              },
+              itemBuilder: erstelleListViewitem,
               padding: EdgeInsets.all(0.0),
             ))
           ],
         ),
       );
     }
+  }
+
+  /*Diese Methode erstellt die ListViewItems*/
+  Widget erstelleListViewitem(BuildContext context, int index) {
+    return new Card(
+        child: new Column(
+      children: <Widget>[
+        new ListTile(
+          title: Row(
+            children: [
+              /* TODO: Kategoriesymbol einfügen. Vgl. kategorie_top_tab.dart, dort wurde das auch schon mal gemacht. (Lisa) */
+              //kategorienSymbol,
+
+              Text(
+                data[index]['name'].toString(),
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                data[index]['erfahrungspunkte'].toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .apply(color: Color(0xffff9f1c)),
+              ),
+              SizedBox(width: 5),
+              Icon(
+                FlutterIcons.coin_mco,
+                color: Color(0xffff9f1c),
+              ),
+            ],
+          ),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => RankKategorieScreen(
+                        int.parse(data[index]['id']),
+                        widget.id_user,
+                        data[index]['name'].toString())));
+          },
+        )
+      ],
+    ));
   }
 }
