@@ -217,8 +217,8 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
+          /* TODO: Wenn Benutzer angemeldet, dann "Abmelden" anzeigen, wenn Benutzer nicht angemeldet, dann "Anmelden" anzeigen. (Lisa) */
           /* ANMELDEN */
-
           ListTile(
               //leading: Icon(Icons.description),
               leading: ConstrainedBox(
@@ -238,12 +238,18 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Anmeldung()));
               }),
 
-          /* TODO: Logout-Funktion muss noch implementiert werden (Lisa) */
-          /* TODO: Logouticon fehlt (Lisa) */
-          /* LOGOUT */
+          /* ABMELDEN */
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: 20,
+                minHeight: 20,
+                maxWidth: 30,
+                maxHeight: 30,
+              ),
+              child: Image.asset("assets/icons/Abmelden_rot_Icon.png"),
+            ),
+            title: Text('Abmelden'),
             onTap: () async {
               if (Benutzer.current?.id != null) {
                 Benutzer.current = null;
@@ -256,7 +262,7 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => Anmeldung()));
               } else {
                 Fluttertoast.showToast(
-                    msg: "Sie haben noch nicht angemeldet!",
+                    msg: "Du musst angemeldet sein, um dich abzumelden.S",
                     toastLength: Toast.LENGTH_SHORT);
               }
             },
