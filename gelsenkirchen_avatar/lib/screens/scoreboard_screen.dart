@@ -59,16 +59,24 @@ class _ScoreBoardState extends State<ScoreBoard> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+              padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
               child: Column(
                 children: [
-                  Text(
-                      "Glückwunsch," +
-                          " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline1.apply(
-                            color: Color(0xffe54b4b),
-                          )),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Icon(
+                      FlutterIcons.like1_ant,
+                      size: 20,
+                      color: Color(0xffe54b4b),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                        "Glückwunsch," +
+                            " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline1.apply(
+                              color: Color(0xffe54b4b),
+                            )),
+                  ]),
                   SizedBox(height: 10),
                   Text(
                       "Du hast Level " +
@@ -77,7 +85,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                           total_point.toString() +
                           " Erfahrungspunkten.",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.headline3)
                 ],
               ),
             ),
