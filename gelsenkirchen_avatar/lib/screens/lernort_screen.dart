@@ -176,7 +176,7 @@ class _LernortScreenState extends State<LernortScreen>
                     /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                     Text("Kategorie",
                         //lernKategorieList[lernort.kategorieID].name,
-                        style: Theme.of(context).textTheme.headline3),
+                        style: Theme.of(context).textTheme.headline4),
                   ]),
                   SizedBox(height: 20),
 
@@ -190,7 +190,7 @@ class _LernortScreenState extends State<LernortScreen>
                           lernort.adresse == ""
                               ? "Keine Adresse vorhanden"
                               : lernort.adresse,
-                          style: Theme.of(context).textTheme.headline3),
+                          style: Theme.of(context).textTheme.headline4),
                     ),
                   ]),
                   SizedBox(height: 20),
@@ -201,11 +201,10 @@ class _LernortScreenState extends State<LernortScreen>
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),
                     Text(
-                      lernort.oeffnungszeiten == ""
-                          ? "Keine Öffnungszeiten vorhanden"
-                          : lernort.oeffnungszeiten,
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
+                        lernort.oeffnungszeiten == ""
+                            ? "Keine Öffnungszeiten vorhanden"
+                            : lernort.oeffnungszeiten,
+                        style: Theme.of(context).textTheme.headline4),
                   ]),
                   SizedBox(height: 40),
 

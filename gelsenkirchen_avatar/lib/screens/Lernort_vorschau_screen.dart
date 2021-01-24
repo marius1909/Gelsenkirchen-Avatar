@@ -171,7 +171,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                   /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                   Text("Kategorie",
                       //lernKategorieList[lernort.kategorieID].name,
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.headline4),
                 ]),
                 SizedBox(height: 20),
 
@@ -185,7 +185,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                         lernort.adresse == ""
                             ? "Keine Adresse vorhanden"
                             : lernort.adresse,
-                        style: Theme.of(context).textTheme.headline3),
+                        style: Theme.of(context).textTheme.headline4),
                   ),
                 ]),
                 SizedBox(height: 20),
@@ -199,7 +199,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
                     lernort.oeffnungszeiten == ""
                         ? "Keine Öffnungszeiten vorhanden"
                         : lernort.oeffnungszeiten,
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.headline4
                   ),
                 ]),
                 SizedBox(height: 40), */
