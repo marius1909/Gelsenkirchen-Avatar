@@ -8,6 +8,9 @@ import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'avatarbearbeiten_screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 /*
   TODO: Anzahl an Errungenschaften laden
@@ -52,7 +55,6 @@ class _ProfilState extends State<Profil> {
         spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
         anzahlErrungenschaften = a.length;
 
-       
         avatar = loadInfo.loadAvatar(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
@@ -71,126 +73,191 @@ class _ProfilState extends State<Profil> {
         drawer: NavDrawer(),
         appBar: AppBar(
           title: Text('Profil'),
-          //centerTitle: true,
-          elevation: 0.0,
         ),
-        body: Padding(
-            padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+        body: SingleChildScrollView(
             child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Name',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      /* TODO: Evtl. schöner lösen. IconButton nur da, damit Name zentirert ist (optional) (Lisa) */
+                      IconButton(
+                        icon: Icon(
+                          FlutterIcons.edit_faw5s,
+                          color: Color(0xff999999).withOpacity(0),
+                          size: 15,
                         ),
-                        SizedBox(height: 10.0),
-                        new Text(
-                          spielername,
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        onPressed: () {},
+                      ),
+                      Text(
+                        spielername,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: "Ccaps",
+                            fontSize: 35.0,
+                            color: Color(0xff0b3e99)),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          FlutterIcons.edit_faw5s,
+                          color: Color(0xff999999),
+                          size: 15,
                         ),
-                      ],
-                    ),
-                    SizedBox(width: 40.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Level',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
-                        ),
-                        SizedBox(height: 10.0),
-                        /* TODO: Level des Spielers anzeigen (Lisa) */
-                        Text(
-                          level.toString(),
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 40.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Errungenschaften',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
-                        ),
-                        SizedBox(height: 10.0),
-                        new Text(
-                          anzahlErrungenschaften.toString(),
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Divider(
-                  height: 50.0,
-                  color: Colors.grey[800],
-                ),
-                /* TODO: Im Profil richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) 
-                Marius an Lisa: avatar wird nun in loadAvatar geladcen*/
-                avatar,
-                SizedBox(height: 10),
-                FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
-                  padding: EdgeInsets.all(8.0),
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ProfilBearbeiten(widget.id_user)),
-                    );
-                  },
-                  child: Text(
-                    "Profil bearbeiten",
-                    style: TextStyle(fontSize: 20.0),
+                        onPressed: () {
+                          /* TODO: Funktionalität zum Ändern des Benutzernamens */
+                        },
+                      )
+                    ],
                   ),
-                ),
-                FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
-                  padding: EdgeInsets.all(8.0),
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ErrungenschaftenScreen()),
-                    );
-                  },
-                  child: Text(
-                    "Errungenschaften",
-                    style: TextStyle(fontSize: 20.0),
+                  SizedBox(height: 20),
+                  /* TODO: Evtl. durch einen Levelbalken ersetzen (optional) (Lisa) */
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Level: " + level.toString(),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline3),
+                    ],
                   ),
-                )
-              ],
-            )));
+                  SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      /* TODO: Evtl. schöner lösen. IconButton nur da, damit Name zentirert ist (optional) (Lisa) */
+                      IconButton(
+                        icon: Icon(
+                          FlutterIcons.edit_faw5s,
+                          color: Color(0xff999999).withOpacity(0),
+                          size: 15,
+                        ),
+                        onPressed: () {},
+                      ),
+                      /* TODO: Der Avatar könnte ruhig etwas größer sein (Lisa) */
+                      avatar,
+                      /* TODO: Das Icon muss tiefer (Lisa) */
+                      IconButton(
+                        icon: Icon(
+                          FlutterIcons.edit_faw5s,
+                          color: Color(0xff999999),
+                          size: 15,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Avatarbearbeiten()),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 70),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
+                      Text(
+                          "Errungenschaften: " +
+                              (anzahlErrungenschaften + 4).toString(),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline3),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    /* TODO: Müsste mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
+                    items: [
+                      //1. Bild im Slider
+                      Container(
+                        margin: EdgeInsets.all(6.0),
+                        child: Image.asset(DerBlaue(0).imagePath),
+                      ),
+
+                      //2. Bild im Slider
+                      Container(
+                        margin: EdgeInsets.all(6.0),
+                        child: Image.asset(DerGruene(0).imagePath),
+                      ),
+
+                      //3. Bild im Slider
+                      Container(
+                        margin: EdgeInsets.all(6.0),
+                        child: Image.asset(DerRote(0).imagePath),
+                      ),
+
+                      //4. Bild im Slider
+                      Container(
+                        margin: EdgeInsets.all(6.0),
+                        child: Image.asset(DerGelbe(0).imagePath),
+                      ),
+                    ],
+
+                    //Slider Eigenschaften
+                    options: CarouselOptions(
+                      height: 100,
+                      enlargeCenterPage: true,
+                      autoPlay: false,
+                      aspectRatio: 16 / 9,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enableInfiniteScroll: true,
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      viewportFraction: 0.3,
+                    ),
+                  ),
+
+                  /* FlatButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    padding: EdgeInsets.all(8.0),
+                    splashColor: Colors.blueAccent,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProfilBearbeiten(widget.id_user)),
+                      );
+                    },
+                    child: Text(
+                      "Profil bearbeiten",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                  FlatButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    padding: EdgeInsets.all(8.0),
+                    splashColor: Colors.blueAccent,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ErrungenschaftenScreen()),
+                      );
+                    },
+                    child: Text(
+                      "Errungenschaften",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ) */
+                ],
+              ),
+            )
+          ],
+        )));
   }
 
   String getText() {
