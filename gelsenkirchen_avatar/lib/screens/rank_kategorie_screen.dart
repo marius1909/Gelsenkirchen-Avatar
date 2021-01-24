@@ -71,11 +71,11 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                       children: [
                         /* TODO: Vielleicht ein anderes Icon (Lisa) */
                         Icon(FlutterIcons.arrow_up_faw5s,
-                            size: 20, color: Color(0xff0b3e99)),
+                            size: 20, color: Color(0xff98ce00)),
                         SizedBox(width: 10),
                         Text("Dein Level: " + data['current_rank'].toString(),
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline4),
+                            style: Theme.of(context).textTheme.headline3),
                       ],
                     ),
                     SizedBox(height: 20),
@@ -90,10 +90,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                             "Deine Erfahrungspunkte: " +
                                 data['current_point'].toString(),
                             textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4
-                                .apply(color: Color(0xffff9f1c))),
+                            style: Theme.of(context).textTheme.headline3),
                       ],
                     )
                   ])),
@@ -103,36 +100,31 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                   child: SizedBox(
                 width: double.infinity,
                 child: DataTable(
+                    /* SPALTENKÖPFE */
                     columns: const <DataColumn>[
                       DataColumn(
-                        label: Text(
-                          'Rank',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
+                        label: Text('Platz'),
                       ),
                       DataColumn(
-                        label: Text(
-                          'UserName',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
+                        label: Text('Name'),
                       ),
                       DataColumn(
-                        label: Text(
-                          'Score',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
+                        label: Text('Punkte'),
                       ),
                     ],
                     rows: List<DataRow>.generate(
                       lernCategories.length,
                       (index) => DataRow(
                         cells: <DataCell>[
+                          /* PLATZIERUNG */
                           DataCell(Container(
+                            width: 20,
                             child: Center(
                                 child: Text(
                                     lernCategories[index]['rank'].toString())),
-                            width: 20,
                           )),
+
+                          /* BENUTZERNAME */
                           DataCell(Container(
                               width: double.infinity,
                               child: Text(lernCategories[index]['username'] ==
@@ -140,6 +132,8 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                                       lernCategories[index]['username'] == ""
                                   ? lernCategories[index]['email']
                                   : lernCategories[index]['username']))),
+
+                          /* ERFAHRUNGSPUNKTE */
                           DataCell(Container(
                               width: 50,
                               child: Center(
