@@ -163,7 +163,7 @@ class _LernortScreenState extends State<LernortScreen>
             /* TITELBILD */
             Container(child: setTitelbild(widget.l)),
             Container(
-              padding: new EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(15.0),
               child: Column(
                 children: [
                   SizedBox(height: 25),
