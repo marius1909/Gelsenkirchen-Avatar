@@ -1,109 +1,74 @@
 /* 
-_typIndex = 0= DerBlaue 1= Der Gelbe usw
-_imageIndex = Collectable anpassung
+Klasse Avatar
+
+Erstellt einen Avatar mit angebenen Typ und angebenen Collectable
+
+avatarTypId: Der (Farb)Typ des Avatars. Blau = 0, Gruen = 1, Gelb = 2, Rot = 3
+collectableId: Das ausgerüstete Collectable das angezeigt werden soll
+
+Assetpaths: Erstellt den Dateipfad zum richtigem Avatarbild
+
+Um einen neuen Avatar zu implementieren muss eine weiteres "else if" unter "AvatarTypen" eingefügt:
+
+ else if (avatarTypID == "i") {
+      _avatar = "TYP/";
+    }
+
+AvatarImage kann über Image.asset(Avatar(i,j).imagePath) geladen werden
+Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage in loadInfo.dart benutzen.
 
 */
 
-abstract class Avatar {
-  int _typIndex;
-  int _imageIndex;
+class Avatar {
+  int avatarTypID;
+  int collectableID;
 
+//Assetpaths
+  String _basePath = "assets/avatar/500px/";
+  String _avatar;
+  String _suffix = ".png";
+
+  Avatar(int _avatarTypID, int _collectableID) {
+    avatarTypID = _avatarTypID;
+    collectableID = _collectableID;
+
+//AvatarTypen
+
+    //Blau
+    if (avatarTypID == 0) {
+      _avatar = "DerBlaue/";
+    }
+    //Gelb
+    else if (avatarTypID == 1) {
+      _avatar = "DerGelbe/";
+    }
+    //Gruen
+    else if (avatarTypID == 2) {
+      _avatar = "DerGruene/";
+    }
+    //Rot
+    else if (avatarTypID == 3) {
+      _avatar = "DerRote/";
+    }
+  }
+
+  //Gibt den gesamten Pfad des Bildes zurueck (inklusive Collectable)
   String get imagePath {
-    return "";
+    return _basePath + _avatar + collectableID.toString() + _suffix;
   }
-
-  int get imageIndex {
-    return _imageIndex;
-  }
-}
-
-class DerBlaue extends Avatar {
-  static final String _basePath = "assets/avatar/500px/";
-  static final String _avatar = "DerBlaue/";
-  static final String _suffix = ".png";
 
   @override
-  String get imagePath {
-    return _basePath + _avatar + _imageIndex.toString() + _suffix;
+  String toString() {
+    return "AvatarTyp= " +
+        _avatar +
+        " CollectableID= " +
+        collectableID.toString();
   }
 
-  DerBlaue(int imageIndex) {
-    _imageIndex = imageIndex;
-    _typIndex = 0;
-  }
-
-  DerBlaue.withAccessoir({List<BlauesAccessoir> accessoires}) {
+//_____________________________unused
+  Avatar.withAccessoir({List<BlauesAccessoir> accessoires}) {
     if (accessoires != null) {
-      _imageIndex = accessoires.fold(0, (previousValue, element) {
-        return previousValue + element.accessoir;
-      });
-    }
-  }
-}
-
-class DerGelbe extends Avatar {
-  static final String _basePath = "assets/avatar/500px/";
-  static final String _avatar = "DerGelbe/";
-  static final String _suffix = ".png";
-  int _imageIndex = 0;
-  String get imagePath {
-    return _basePath + _avatar + _imageIndex.toString() + _suffix;
-  }
-
-  DerGelbe(int imageIndex) {
-    _imageIndex = imageIndex;
-    _typIndex = 1;
-  }
-
-  DerGelbe.mitAccessoir({List<GelbesAccessoir> accessoires}) {
-    if (accessoires != null) {
-      _imageIndex = accessoires.fold(0, (previousValue, element) {
-        return previousValue + element.accessoir;
-      });
-    }
-  }
-}
-
-class DerGruene extends Avatar {
-  static final String _basePath = "assets/avatar/500px/";
-  static final String _avatar = "DerGruene/";
-  static final String _suffix = ".png";
-  int _imageIndex = 0;
-  String get imagePath {
-    return _basePath + _avatar + _imageIndex.toString() + _suffix;
-  }
-
-  DerGruene(int imageIndex) {
-    _imageIndex = imageIndex;
-    _typIndex = 2;
-  }
-
-  DerGruene.mitAccessoir({List<GruenesAccessoir> accessoires}) {
-    if (accessoires != null) {
-      _imageIndex = accessoires.fold(0, (previousValue, element) {
-        return previousValue + element.accessoir;
-      });
-    }
-  }
-}
-
-class DerRote extends Avatar {
-  static final String _basePath = "assets/avatar/500px/";
-  static final String _avatar = "DerRote/";
-  static final String _suffix = ".png";
-  int _imageIndex = 0;
-  String get imagePath {
-    return _basePath + _avatar + _imageIndex.toString() + _suffix;
-  }
-
-  DerRote(int imageIndex) {
-    _imageIndex = imageIndex;
-    _typIndex = 3;
-  }
-
-  DerRote.mitAccesoir({List<RotesAccessoir> accessoires}) {
-    if (accessoires != null) {
-      _imageIndex = accessoires.fold(0, (previousValue, element) {
+      collectableID = accessoires.fold(0, (previousValue, element) {
         return previousValue + element.accessoir;
       });
     }
