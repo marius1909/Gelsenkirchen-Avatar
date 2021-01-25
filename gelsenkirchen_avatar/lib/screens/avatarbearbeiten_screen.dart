@@ -43,25 +43,25 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                   //1. Bild im Slider
                   Container(
                     margin: EdgeInsets.all(6.0),
-                    child: Image.asset(DerBlaue(0).imagePath, height: 300),
+                    child: Image.asset(Avatar(0, 6).imagePath, height: 300),
                   ),
 
                   //2. Bild im Slider
                   Container(
                     margin: EdgeInsets.all(6.0),
-                    child: Image.asset(DerGruene(0).imagePath, height: 300),
+                    child: Image.asset(Avatar(1, 0).imagePath, height: 300),
                   ),
 
                   //3. Bild im Slider
                   Container(
                     margin: EdgeInsets.all(6.0),
-                    child: Image.asset(DerRote(0).imagePath, height: 300),
+                    child: Image.asset(Avatar(2, 0).imagePath, height: 300),
                   ),
 
                   //4. Bild im Slider
                   Container(
                     margin: EdgeInsets.all(6.0),
-                    child: Image.asset(DerGelbe(0).imagePath, height: 300),
+                    child: Image.asset(Avatar(3, 0).imagePath, height: 300),
                   ),
                 ],
 

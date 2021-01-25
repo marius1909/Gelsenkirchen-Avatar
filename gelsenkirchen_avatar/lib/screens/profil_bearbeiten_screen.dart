@@ -29,7 +29,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   int ausgeruesteteCollectablesID = 0;
 
   //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar = Image.asset(DerBlaue(0).imagePath, width: 250, height: 250);
+  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
         aktuellerName = loadInfo.loadName(alleBenutzer, widget.id_user);
-        avatar = loadInfo.loadAvatar(
+        avatar = loadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
     });

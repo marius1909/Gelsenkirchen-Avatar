@@ -30,7 +30,7 @@ class _FreundState extends State<Freund> {
   int ausgeruesteteCollectablesID = 0;
 
 //DefaultAvatar wird zurerst geladen damit kein error wenn Profil das erste mal aufgerufen wird
-  Image avatar = Image.asset(DerBlaue(0).imagePath, width: 250, height: 250);
+  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _FreundState extends State<Freund> {
         spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
         anzahlErrungenschaften =
             loadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
-        avatar = loadInfo.loadAvatar(
+        avatar = loadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
       //BROKEN

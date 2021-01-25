@@ -40,10 +40,13 @@ class _ProfilState extends State<Profil> {
   int ausgeruesteteCollectablesID = 0;
 
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar = Image.asset(DerBlaue(0).imagePath, width: 250, height: 250);
+  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
 
   @override
   void initState() {
+
+   
+
     super.initState();
     List<Freigeschaltet> a =
         loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
@@ -55,7 +58,7 @@ class _ProfilState extends State<Profil> {
         spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
         anzahlErrungenschaften = a.length;
 
-        avatar = loadInfo.loadAvatar(
+        avatar = loadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
 
@@ -179,25 +182,25 @@ class _ProfilState extends State<Profil> {
                       //1. Bild im Slider
                       Container(
                         margin: EdgeInsets.all(6.0),
-                        child: Image.asset(DerBlaue(0).imagePath),
+                        child: Image.asset(Avatar(0, 0).imagePath),
                       ),
 
                       //2. Bild im Slider
                       Container(
                         margin: EdgeInsets.all(6.0),
-                        child: Image.asset(DerGruene(0).imagePath),
+                        child: Image.asset(Avatar(1, 0).imagePath),
                       ),
 
                       //3. Bild im Slider
                       Container(
                         margin: EdgeInsets.all(6.0),
-                        child: Image.asset(DerRote(0).imagePath),
+                        child: Image.asset(Avatar(2, 0).imagePath),
                       ),
 
                       //4. Bild im Slider
                       Container(
                         margin: EdgeInsets.all(6.0),
-                        child: Image.asset(DerGelbe(0).imagePath),
+                        child: Image.asset(Avatar(3, 0).imagePath),
                       ),
                     ],
 
