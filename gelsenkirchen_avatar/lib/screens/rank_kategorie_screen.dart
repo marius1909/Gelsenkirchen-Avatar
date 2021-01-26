@@ -73,7 +73,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                         Icon(FlutterIcons.arrow_up_faw5s,
                             size: 20, color: Color(0xff98ce00)),
                         SizedBox(width: 10),
-                        Text("Dein Level: " + data['current_rank'].toString(),
+                        Text("Dein Platz: " + data['current_rank'].toString(),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline3),
                       ],
@@ -103,13 +103,16 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                     /* SPALTENKÖPFE */
                     columns: const <DataColumn>[
                       DataColumn(
-                        label: Text('Platz'),
+                        label: Text('Platz',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       DataColumn(
-                        label: Text('Name'),
+                        label: Text('Name',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       DataColumn(
-                        label: Text('Punkte'),
+                        label: Text('Punkte',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ],
                     rows: List<DataRow>.generate(
@@ -157,7 +160,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                 alignment: Alignment.topCenter,
                 child: Center(
                     child: Text(
-                        "There is no ranking for ${widget.name_lern_category}"))));
+                        "Es gibt keine Bestenliste für ${widget.name_lern_category}"))));
       }
     }
   }
