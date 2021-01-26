@@ -36,164 +36,7 @@ class _QuizPageState extends State<QuizPage> {
   List data = [];
   List fragenList;
   int erfahrungspunkte;
-
   int level;
-
-  //prüfen ob Antwort richtig oder falsch
-  void checkAnswer(String value) {
-    if (data[positionFragen]['antwort'][4] == value) {
-      punkteBehalten.add(Icon(Icons.check, color: Colors.green));
-      sumPunkte = sumPunkte + positionFragen * 2 + punkteProFragen;
-    } else {
-      punkteBehalten.add(Icon(Icons.close, color: Colors.red));
-    }
-    positionFragen++;
-    punkteProFragen++;
-    timerReset();
-
-    if (positionFragen == data.length) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => new CupertinoAlertDialog(
-          title: new Text("Finished"),
-          content: new Text("Final Score: $sumPunkte"),
-          actions: [
-            CupertinoDialogAction(
-              child: new Text("Exit Game"),
-              onPressed: () => {
-                Navigator.of(context).pop(true),
-                Navigator.of(context).pop()
-              },
-            ),
-            CupertinoDialogAction(
-              child: new Text("Save Your Score"),
-              onPressed: () async {
-                erfahrungspunkte = sumPunkte;
-                Navigator.of(context).pop(true);
-                await savePoint();
-//
-              },
-            ),
-          ],
-        ),
-      );
-      _timer.cancel();
-      positionFragen = 0;
-      punkteProFragen = 1;
-    }
-  }
-
-  Future<void> savePoint() async {
-    var param = "?benutzerID=" +
-        widget.benutzerID.toString() +
-        "&lernKategorieID=" +
-        widget.lernKategorieID.toString() +
-        "&erfahrungspunkte=" +
-        erfahrungspunkte.toString() +
-        "&lernortID=" +
-        widget.lernortID.toString() +
-        "&quizID=" +
-        widget.quizID.toString();
-    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
-    final response = await http.get(url);
-    final jsonData = jsonDecode(response.body);
-    if (jsonData['status']) {
-      Fluttertoast.showToast(msg: "Success", toastLength: Toast.LENGTH_SHORT);
-    } else {
-      Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
-    }
-    if (CalculatorLevel(jsonData['total_point_new']) >
-        CalculatorLevel(jsonData['total_point_old'])) {
-      String text3;
-      if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
-        text3 = "You have reached max level";
-      } else {
-        text3 =
-            "You still need ${CalculatorPointLevelUp(jsonData['total_point_new'])} points for Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
-      }
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => new CupertinoAlertDialog(
-          title: Center(
-            child: RichText(
-              text: TextSpan(
-                  style: TextStyle(color: Colors.black, fontSize: 30),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: "Level Up",
-                        style:
-                            TextStyle(color: Colors.red, fontFamily: 'Langar'))
-                  ]),
-            ),
-          ),
-          content: Column(
-            children: [
-              Text("Your Reward ..."),
-              Padding(padding: EdgeInsets.only(top: 20)),
-              Text(text3),
-            ],
-          ),
-          actions: [
-            CupertinoDialogAction(
-              child: new Text("Back"),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-//                          Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
-    } else {
-      Navigator.of(context).pop();
-    }
-  }
-
-  int CalculatorLevel(total_point) {
-    if (total_point >= 0 && total_point <= 29) {
-      return 1;
-    } else if (total_point >= 30 && total_point <= 50) {
-      return 2;
-    } else if (total_point >= 51 && total_point <= 85) {
-      return 3;
-    } else if (total_point >= 86 && total_point <= 145) {
-      return 4;
-    } else if (total_point >= 146 && total_point <= 247) {
-      return 5;
-    } else if (total_point >= 248 && total_point <= 420) {
-      return 6;
-    } else if (total_point >= 421 && total_point <= 714) {
-      return 7;
-    } else if (total_point >= 715 && total_point <= 1214) {
-      return 8;
-    } else if (total_point >= 1215) {
-      return 9;
-    }
-  }
-
-  int CalculatorPointLevelUp(total_point) {
-    if (total_point >= 0 && total_point <= 29) {
-      return 30 - total_point;
-    } else if (total_point >= 30 && total_point <= 50) {
-      return 51 - total_point;
-    } else if (total_point >= 51 && total_point <= 85) {
-      return 86 - total_point;
-    } else if (total_point >= 86 && total_point <= 145) {
-      return 146 - total_point;
-    } else if (total_point >= 146 && total_point <= 247) {
-      return 248 - total_point;
-    } else if (total_point >= 248 && total_point <= 420) {
-      return 421 - total_point;
-    } else if (total_point >= 421 && total_point <= 714) {
-      return 715 - total_point;
-    } else if (total_point >= 715 && total_point <= 1214) {
-      return 1215 - total_point;
-    } else if (total_point >= 1215) {
-      return -1;
-    }
-  }
 
   void quizFragen() async {
     var quizid = widget.quizID;
@@ -212,6 +55,28 @@ class _QuizPageState extends State<QuizPage> {
       });
     }
   }
+
+  //set Time
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) => setState(
+        () {
+          if (_start == 1) {
+            setState(() {
+              timer.cancel();
+              displayDialog("Do you want to continue?");
+            });
+          } else {
+            _start = _start - 1;
+          }
+        },
+      ),
+    );
+  }
+
+//Benachrichtigung erhalten, wenn Zeit abgelaufen ist
 
   void displayDialog(String title) {
     showDialog(
@@ -236,26 +101,6 @@ class _QuizPageState extends State<QuizPage> {
                 {Navigator.of(context).pop(true), Navigator.of(context).pop()},
           ),
         ],
-      ),
-    );
-  }
-
-  //set Time
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) => setState(
-        () {
-          if (_start == 1) {
-            setState(() {
-              timer.cancel();
-              displayDialog("Do you want to continue?");
-            });
-          } else {
-            _start = _start - 1;
-          }
-        },
       ),
     );
   }
@@ -505,6 +350,167 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ),
       );
+    }
+  }
+
+  //prüfen ob Antwort richtig oder falsch war
+  void checkAnswer(String value) {
+    if (data[positionFragen]['antwort'][4] == value) {
+      punkteBehalten.add(Icon(Icons.check, color: Colors.green));
+      sumPunkte = sumPunkte + positionFragen * 2 + punkteProFragen;
+    } else {
+      punkteBehalten.add(Icon(Icons.close, color: Colors.red));
+    }
+    positionFragen++;
+    punkteProFragen++;
+    timerReset();
+//wenn keine Frage mehr...
+    if (positionFragen == data.length) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => new CupertinoAlertDialog(
+          title: new Text("Finished"),
+          content: new Text("Final Score: $sumPunkte"),
+          actions: [
+            CupertinoDialogAction(
+              child: new Text("Exit Game"),
+              onPressed: () => {
+                Navigator.of(context).pop(true),
+                Navigator.of(context).pop()
+              },
+            ),
+            CupertinoDialogAction(
+              child: new Text("Save Your Score"),
+              onPressed: () async {
+                erfahrungspunkte = sumPunkte;
+                Navigator.of(context).pop(true);
+                await savePoint();
+              },
+            ),
+          ],
+        ),
+      );
+      _timer.cancel();
+      positionFragen = 0;
+      punkteProFragen = 1;
+    }
+  }
+
+////Punkte speichern
+  Future<void> savePoint() async {
+    var param = "?benutzerID=" +
+        widget.benutzerID.toString() +
+        "&lernKategorieID=" +
+        widget.lernKategorieID.toString() +
+        "&erfahrungspunkte=" +
+        erfahrungspunkte.toString() +
+        "&lernortID=" +
+        widget.lernortID.toString() +
+        "&quizID=" +
+        widget.quizID.toString();
+    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    if (jsonData['status']) {
+      Fluttertoast.showToast(msg: "Success", toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
+    }
+
+    //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
+
+    if (CalculatorLevel(jsonData['total_point_new']) >
+        CalculatorLevel(jsonData['total_point_old'])) {
+      String showtext;
+      if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
+        showtext = "You have reached max level";
+      } else {
+        showtext =
+            "You still need ${CalculatorPointLevelUp(jsonData['total_point_new'])} points for Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
+      }
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => new CupertinoAlertDialog(
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                  style: TextStyle(color: Colors.black, fontSize: 30),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: "Level Up",
+                        style:
+                            TextStyle(color: Colors.red, fontFamily: 'Langar'))
+                  ]),
+            ),
+          ),
+          content: Column(
+            children: [
+              Text("Your Reward ..."),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text(showtext),
+            ],
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: new Text("Back"),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
+//Level von Spieler
+  int CalculatorLevel(total_point) {
+    if (total_point >= 0 && total_point <= 29) {
+      return 1;
+    } else if (total_point >= 30 && total_point <= 50) {
+      return 2;
+    } else if (total_point >= 51 && total_point <= 85) {
+      return 3;
+    } else if (total_point >= 86 && total_point <= 145) {
+      return 4;
+    } else if (total_point >= 146 && total_point <= 247) {
+      return 5;
+    } else if (total_point >= 248 && total_point <= 420) {
+      return 6;
+    } else if (total_point >= 421 && total_point <= 714) {
+      return 7;
+    } else if (total_point >= 715 && total_point <= 1214) {
+      return 8;
+    } else if (total_point >= 1215) {
+      return 9;
+    }
+  }
+
+//Berechnet, wie viele Punktzahl Spieler benötigt, um das nächse Level zu erreichen
+  int CalculatorPointLevelUp(total_point) {
+    if (total_point >= 0 && total_point <= 29) {
+      return 30 - total_point;
+    } else if (total_point >= 30 && total_point <= 50) {
+      return 51 - total_point;
+    } else if (total_point >= 51 && total_point <= 85) {
+      return 86 - total_point;
+    } else if (total_point >= 86 && total_point <= 145) {
+      return 146 - total_point;
+    } else if (total_point >= 146 && total_point <= 247) {
+      return 248 - total_point;
+    } else if (total_point >= 248 && total_point <= 420) {
+      return 421 - total_point;
+    } else if (total_point >= 421 && total_point <= 714) {
+      return 715 - total_point;
+    } else if (total_point >= 715 && total_point <= 1214) {
+      return 1215 - total_point;
+    } else if (total_point >= 1215) {
+      return -1;
     }
   }
 }
