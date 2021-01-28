@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 /* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatefulWidget {
@@ -198,6 +199,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /* ÖFFNUNGSZEITEN */
                   Row(children: [
+                    //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.clock_faw5s,
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),

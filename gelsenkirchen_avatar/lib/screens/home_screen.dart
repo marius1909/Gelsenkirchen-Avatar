@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 import 'map_screen.dart';
@@ -48,6 +48,25 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+          /* TODO: Levelanzeige. (Wird außerdem noch im Profil gebraucht) (Lisa) */
+          /* Die Levelanzeige hab ich aus Zeitgründen und für die Screenshots
+          für das Show & Tell Plakat etwas unschön implementiert.
+          Sie sollte später noch so platziert werden, dass sie auch auf andern
+          Displays richtig angezeit wird. */
+          Container(
+              padding: EdgeInsets.fromLTRB(143, 85, 20, 20),
+              child: LinearPercentIndicator(
+                width: 200,
+                lineHeight: 22,
+                percent: 0.7,
+                backgroundColor: Color(0xff0d4dbb),
+                progressColor: Color(0xff2d75f0),
+                //leading: Text("Level 1 "),
+                center: Text(
+                  "Level 1",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ))
         ]));
   }
 }
