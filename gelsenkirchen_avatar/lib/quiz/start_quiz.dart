@@ -69,12 +69,32 @@ class _StartQuizState extends State<StartQuiz> {
             data['name'],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          child: Column(
-            children: [
-              //Bilder
-              Padding(
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+              child: Text(
+                "Quiz",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: "Ccaps",
+                    fontSize: 35.0,
+                    color: Color(0xff0b3e99)),
+              ),
+            ),
+
+            Container(
+              padding: EdgeInsets.all(15.0),
+              //padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+              child: Text(
+                "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
+                textAlign: TextAlign.justify,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+
+            //Bilder
+            /* Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Image.network(
@@ -83,8 +103,8 @@ class _StartQuizState extends State<StartQuiz> {
                   height: 100,
                   width: double.infinity,
                 ),
-              ),
-              Expanded(
+              ), */
+            /* Expanded(
                 child: Container(
                   child: Padding(
                     padding:
@@ -103,9 +123,9 @@ class _StartQuizState extends State<StartQuiz> {
                     ),
                   ),
                 ),
-              ),
-              //Belohnungen-Button
-              /*Padding(
+              ), */
+            //Belohnungen-Button
+            /*Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: Container(
                     width: double.infinity,
@@ -146,45 +166,43 @@ class _StartQuizState extends State<StartQuiz> {
                           )),
                     )),
               ),*/
-              //Starten-Button
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
-                child: Container(
-                    width: double.infinity,
-                    child: Material(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)),
-                      clipBehavior: Clip.antiAlias,
-                      child: MaterialButton(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          color: Colors.green[400],
-                          onPressed: () {
-                            if (Benutzer.current?.id != null) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => QuizPage(
-                                        quizID: int.parse(data['quizID']),
-                                        benutzerID: Benutzer.current.id,
-                                        lernKategorieID:
-                                            int.parse(data['kategorieID']),
-                                        lernortID: int.parse(data['id']),
-                                        title: data['name'],
-                                      )));
-                            } else {
-                              Fluttertoast.showToast(
-                                  msg: "Anmeldung fehlt!",
-                                  toastLength: Toast.LENGTH_SHORT);
-                            }
-                          },
-                          child: Text(
-                            "Starten",
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                          )),
-                    )),
-              ),
-              //Zurück-Button
-              /*Padding(
+            //Starten-Button
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                  width: double.infinity,
+                  child: Material(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0)),
+                    clipBehavior: Clip.antiAlias,
+                    child: MaterialButton(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        color: Colors.green[400],
+                        onPressed: () {
+                          if (Benutzer.current?.id != null) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => QuizPage(
+                                      quizID: int.parse(data['quizID']),
+                                      benutzerID: Benutzer.current.id,
+                                      lernKategorieID:
+                                          int.parse(data['kategorieID']),
+                                      lernortID: int.parse(data['id']),
+                                      title: data['name'],
+                                    )));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Anmeldung fehlt!",
+                                toastLength: Toast.LENGTH_SHORT);
+                          }
+                        },
+                        child: Text(
+                          "Starten",
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        )),
+                  )),
+            ),
+            //Zurück-Button
+            /*Padding(
                 padding: EdgeInsets.symmetric(vertical: 1),
                 child: SizedBox(
                   width: double.infinity,
@@ -199,11 +217,9 @@ class _StartQuizState extends State<StartQuiz> {
                       )),
                 ),
               ),*/
-            ],
-          ),
+          ],
         ),
       );
     }
   }
 }
-
