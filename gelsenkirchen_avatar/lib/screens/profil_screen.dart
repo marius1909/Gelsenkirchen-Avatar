@@ -172,7 +172,7 @@ class _ProfilState extends State<Profil> {
                     children: [
                       /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
                       Text(
-                          "Errungenschaften: " +
+                          "Deine Errungenschaften: " +
                               (anzahlErrungenschaften + 4).toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headline3),

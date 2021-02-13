@@ -231,10 +231,64 @@ class _LernortScreenState extends State<LernortScreen>
           ])),
 
           /* Tab: SPIELEN */
-          /* TODO: Inhalt einfügen (Lisa) */
-          Column(
+          SingleChildScrollView(
+              child: Column(
             children: [
-              Text("In Bearbeitung"),
+              /* SPIEL 1 - QUIZ */
+              Container(
+                  child: Card(
+                      color: Colors.pink,
+                      elevation: 1,
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                              leading:
+                                  Image.asset("assets/icons/QR_gelb_Icon.png"),
+                              title: Text('QR-Spiel',
+                                  style: TextStyle(color: Colors.white)),
+                              subtitle: Text(
+                                  'Finde QR-Codes und errate irgendwas',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            ButtonBar(children: <Widget>[
+                              FlatButton(
+                                child: Text('Spielen',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                onPressed: () {},
+                              )
+                            ])
+                          ]))),
+
+              /* SPIEL 2 - QR-SPIEL */
+              Container(
+                  child: Card(
+                      color: Colors.pink,
+                      elevation: 1,
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                              leading:
+                                  Image.asset("assets/icons/QR_gelb_Icon.png"),
+                              title: Text('QR-Spiel',
+                                  style: TextStyle(color: Colors.white)),
+                              subtitle: Text(
+                                  'Finde QR-Codes und errate irgendwas',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            ButtonBar(children: <Widget>[
+                              FlatButton(
+                                child: Text('Spielen',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                onPressed: () {},
+                              )
+                            ])
+                          ]))),
               ImageButton(
                 children: <Widget>[],
                 /* 302 x 91 sind die Originalmaße der Buttons */
@@ -258,7 +312,7 @@ class _LernortScreenState extends State<LernortScreen>
                 },
               )
             ],
-          )
+          ))
         ],
         controller: _tabController,
       ),

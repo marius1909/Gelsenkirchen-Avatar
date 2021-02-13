@@ -58,6 +58,12 @@ class _MyAppState extends State<MyApp> {
           primaryColorLight: Color(0xff0e53c9), //helles dunkelblau
           primaryColorDark: Color(0xff072c6b), //dunkles dunkelblau
 
+          /* Alle App-Farben
+          Color(0xff0b3e99), //normales dunkelblau
+          Color(0xff0e53c9), //helles dunkelblau
+          Color(0xff072c6b), //dunkles dunkelblau
+          */
+
           /* Sekundäre/ Akzent-Farbe */
           /* Muss ggf. angepasst werden */
           accentColor: Color(0xffe54b4b),
