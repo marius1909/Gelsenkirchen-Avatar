@@ -91,7 +91,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Lernort_rot_Icon.png"),
+                child: Image.asset("assets/icons/Lernort_gelb_Icon.png"),
               ),
               title: Text('Lernorte'),
               onTap: () {
@@ -100,26 +100,6 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
                             LernortListeScreen()));
-              }),
-
-          /* SUCHSPIEL */
-          ListTile(
-              //leading: Icon(Icons.people),
-              leading: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                  maxWidth: 30,
-                  maxHeight: 30,
-                ),
-                child: Image.asset("assets/icons/QR_gelb_Icon.png"),
-              ),
-              title: Text('QR-Spiel'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Suchspiel()));
               }),
 
           /* FREUNDE */
@@ -132,7 +112,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Freunde_gruen_Icon.png"),
+                child: Image.asset("assets/icons/Freunde_rot_Icon.png"),
               ),
               title: Text('Freunde'),
               onTap: () {
@@ -153,8 +133,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -207,7 +186,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -217,7 +197,6 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
-          
           /* TODO: Wenn Benutzer angemeldet, dann "Abmelden" anzeigen, wenn Benutzer nicht angemeldet, dann "Anmelden" anzeigen. (Lisa) */
           /* ANMELDEN */
           ListTile(
@@ -229,7 +208,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Anmelden_rot_Icon.png"),
+                child: Image.asset("assets/icons/Anmelden_blau_Icon.png"),
               ),
               title: Text('Anmelden'),
               onTap: () {
@@ -248,7 +227,7 @@ class NavDrawer extends StatelessWidget {
                 maxWidth: 30,
                 maxHeight: 30,
               ),
-              child: Image.asset("assets/icons/Abmelden_rot_Icon.png"),
+              child: Image.asset("assets/icons/Abmelden_blau_Icon.png"),
             ),
             title: Text('Abmelden'),
             onTap: () async {

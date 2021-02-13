@@ -6,6 +6,7 @@ import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 /* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatefulWidget {
@@ -237,27 +238,38 @@ class _LernortScreenState extends State<LernortScreen>
               /* SPIEL 1 - QUIZ */
               Container(
                   child: Card(
-                      color: Colors.pink,
                       elevation: 1,
                       child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                          //mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             ListTile(
                               leading:
-                                  Image.asset("assets/icons/QR_gelb_Icon.png"),
-                              title: Text('QR-Spiel',
-                                  style: TextStyle(color: Colors.white)),
+                                  /* TODO: Spiel-Icon anpassen (Lisa) (Notiz an mich) */
+                                  Image.asset(
+                                      "assets/icons/Quiz_gelb_Icon.png"),
+                              title:
+                                  Text('Quiz', style: TextStyle(fontSize: 16)),
                               subtitle: Text(
-                                  'Finde QR-Codes und errate irgendwas',
-                                  style: TextStyle(color: Colors.white)),
+                                'Teste dein Wissen in einem klassischen Quiz',
+                              ),
+                              /* damit der subtitle in die Zeile passt */
+                              dense: true,
                             ),
                             ButtonBar(children: <Widget>[
                               FlatButton(
                                 child: Text('Spielen',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                                onPressed: () {},
+                                    style:
+                                        /* TODO: Fontcolor an Spiel-Icon anpassen (Lisa) (Notiz an mich) */
+                                        TextStyle(
+                                            color: Color(0xffff9f1c),
+                                            fontWeight: FontWeight.bold)),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              StartQuiz(widget.l.id)));
+                                },
                               )
                             ])
                           ]))),
@@ -265,52 +277,37 @@ class _LernortScreenState extends State<LernortScreen>
               /* SPIEL 2 - QR-SPIEL */
               Container(
                   child: Card(
-                      color: Colors.pink,
                       elevation: 1,
                       child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             ListTile(
                               leading:
-                                  Image.asset("assets/icons/QR_gelb_Icon.png"),
+                                  Image.asset("assets/icons/QR_rot_Icon.png"),
                               title: Text('QR-Spiel',
-                                  style: TextStyle(color: Colors.white)),
+                                  style: TextStyle(fontSize: 16)),
                               subtitle: Text(
-                                  'Finde QR-Codes und errate irgendwas',
-                                  style: TextStyle(color: Colors.white)),
+                                'Finde QR-Codes und rate',
+                              ),
+                              /* damit der subtitle in die Zeile passt */
+                              dense: true,
                             ),
                             ButtonBar(children: <Widget>[
                               FlatButton(
                                 child: Text('Spielen',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: Color(0xffe54b4b),
                                         fontWeight: FontWeight.bold)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Suchspiel()));
+                                },
                               )
                             ])
                           ]))),
-              ImageButton(
-                children: <Widget>[],
-                /* 302 x 91 sind die Originalmaße der Buttons */
-                width: 302 / 1.5,
-                height: 91 / 1.5,
-                paddingTop: 5,
-                /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
-                pressedImage: Image.asset(
-                  "assets/buttons/Spielen_dunkelblau_groß.png",
-                ),
-                unpressedImage:
-                    Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              StartQuiz(widget.l.id)));
-                },
-              )
             ],
           ))
         ],
