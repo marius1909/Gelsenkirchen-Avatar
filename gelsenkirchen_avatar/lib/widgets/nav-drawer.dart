@@ -217,6 +217,7 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
+          
           /* TODO: Wenn Benutzer angemeldet, dann "Abmelden" anzeigen, wenn Benutzer nicht angemeldet, dann "Anmelden" anzeigen. (Lisa) */
           /* ANMELDEN */
           ListTile(

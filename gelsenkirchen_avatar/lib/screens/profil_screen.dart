@@ -11,6 +11,7 @@ import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 /*
   TODO: Anzahl an Errungenschaften laden
@@ -44,9 +45,6 @@ class _ProfilState extends State<Profil> {
 
   @override
   void initState() {
-
-   
-
     super.initState();
     List<Freigeschaltet> a =
         loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
@@ -87,7 +85,7 @@ class _ProfilState extends State<Profil> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      /* TODO: Evtl. schöner lösen. IconButton nur da, damit Name zentirert ist (optional) (Lisa) */
+                      /* Icon-Button nur da, damit Name zentriert ist */
                       IconButton(
                         icon: Icon(
                           FlutterIcons.edit_faw5s,
@@ -117,20 +115,31 @@ class _ProfilState extends State<Profil> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  /* TODO: Evtl. durch einen Levelbalken ersetzen (optional) (Lisa) */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Level: " + level.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline3),
-                    ],
+                  Center(
+                    child: Container(
+                      height: 22,
+                      width: 200,
+                      color: Colors.blue[50],
+                      child: Align(
+                          alignment: Alignment(0, 0),
+                          child: LinearPercentIndicator(
+                              width: 200,
+                              lineHeight: 22,
+                              /* TODO: Richtigen Fortschritt des Levels anzeigen (Lisa) */
+                              percent: 0.7,
+                              backgroundColor: Color(0xff0d4dbb),
+                              progressColor: Color(0xff2d75f0),
+                              center: Text(
+                                "Level: " + level.toString(),
+                                style: TextStyle(color: Colors.white),
+                              ))),
+                    ),
                   ),
                   SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      /* TODO: Evtl. schöner lösen. IconButton nur da, damit Name zentirert ist (optional) (Lisa) */
+                      /* Icon-Button nur da, damit Name zentriert ist */
                       IconButton(
                         icon: Icon(
                           FlutterIcons.edit_faw5s,
@@ -139,7 +148,6 @@ class _ProfilState extends State<Profil> {
                         ),
                         onPressed: () {},
                       ),
-                      /* TODO: Der Avatar könnte ruhig etwas größer sein (Lisa) */
                       avatar,
                       /* TODO: Das Icon muss tiefer (Lisa) */
                       IconButton(
