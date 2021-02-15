@@ -11,11 +11,18 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
   String benutzer;
   String passwort;
   int rolleID;
+  int erfahrung;
 
   static Benutzer get shared => Benutzer();
   static Benutzer current;
 
-  Benutzer({this.id, this.email, this.benutzer, this.passwort, this.rolleID})
+  Benutzer(
+      {this.id,
+      this.email,
+      this.benutzer,
+      this.passwort,
+      this.rolleID,
+      this.erfahrung})
       : super(DatabaseURL.getBenutzer.value, DatabaseURL.registrierung.value,
             DatabaseURL.removeFromBenutzer.value, '');
 
@@ -48,7 +55,8 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
         email: objekt["email"] as String,
         benutzer: objekt["benutzer"] as String,
         passwort: objekt["passwort"] as String,
-        rolleID: int.parse(objekt["rolleID"]));
+        rolleID: int.parse(objekt["rolleID"]),
+        erfahrung: int.parse(objekt["erfahrung"]));
   }
 
   @override
@@ -66,7 +74,8 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
       "email": "$email",
       "benutzer": "$benutzer",
       "passwort": "$passwort",
-      "rolleID": "$rolleID"
+      "rolleID": "$rolleID",
+      "erfahrung": "$erfahrung"
     };
   }
 }
