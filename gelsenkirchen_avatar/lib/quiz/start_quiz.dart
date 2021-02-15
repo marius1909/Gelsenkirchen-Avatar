@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/quiz/quizpage.dart';
 import 'package:http/http.dart' as http;
+import 'package:imagebutton/imagebutton.dart';
 
 // ignore: must_be_immutable
 class StartQuiz extends StatefulWidget {
@@ -66,7 +67,7 @@ class _StartQuizState extends State<StartQuiz> {
         appBar: AppBar(
           title: Text(
             //Name von aktuellen Lernort
-            data['name'],
+            data['name'] + " - Quiz",
           ),
         ),
         body: Column(
@@ -79,7 +80,7 @@ class _StartQuizState extends State<StartQuiz> {
                 style: TextStyle(
                     fontFamily: "Ccaps",
                     fontSize: 35.0,
-                    color: Color(0xff0b3e99)),
+                    color: Color(0xffff9f1c)),
               ),
             ),
 
@@ -166,6 +167,38 @@ class _StartQuizState extends State<StartQuiz> {
                           )),
                     )),
               ),*/
+
+            ImageButton(
+              children: <Widget>[],
+              /* 302 x 91 sind die Originalmaße der Buttons */
+              width: 302 / 1.3,
+              height: 91 / 1.3,
+              paddingTop: 5,
+              /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+              pressedImage: Image.asset(
+                "assets/buttons/Spielen_gelb_groß.png",
+              ),
+              unpressedImage:
+                  Image.asset("assets/buttons/Spielen_gelb_groß.png"),
+              onTap: () {
+                if (Benutzer.current?.id != null) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => QuizPage(
+                            quizID: int.parse(data['quizID']),
+                            benutzerID: Benutzer.current.id,
+                            lernKategorieID: int.parse(data['kategorieID']),
+                            lernortID: int.parse(data['id']),
+                            title: data['name'],
+                          )));
+                } else {
+                  Fluttertoast.showToast(
+                      msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
+                }
+              },
+            ),
+
             //Starten-Button
             Padding(
               padding: EdgeInsets.symmetric(vertical: 1),
