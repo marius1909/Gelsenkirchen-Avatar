@@ -185,7 +185,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /* ADRESSE */
                   Row(children: [
-                    Icon(FlutterIcons.location_arrow_faw5s,
+                    Icon(FlutterIcons.location_on_mdi,
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),
                     Flexible(
@@ -201,7 +201,7 @@ class _LernortScreenState extends State<LernortScreen>
                   /* ÖFFNUNGSZEITEN */
                   Row(children: [
                     //Icon(MdiIcons.sword),
-                    Icon(FlutterIcons.clock_faw5s,
+                    Icon(FlutterIcons.access_time_mdi,
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),
                     Text(
@@ -210,7 +210,37 @@ class _LernortScreenState extends State<LernortScreen>
                             : lernort.oeffnungszeiten,
                         style: Theme.of(context).textTheme.headline4),
                   ]),
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
+
+                  /* KOSTEN */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.attach_money_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.kosten == "" ? "Keine Angaben" : lernort.kosten,
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* BARRIEREFREIHEIT */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.accessible_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.barrierefrei == 0
+                            ? "nicht barrierefrei"
+                            : "barrierefrei",
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* WEBSITE */
+                  Container(child: setWebsite(widget.l)),
+                  SizedBox(height: 20),
 
                   /*BESCHREIBUNG*/
                   Text(
@@ -314,6 +344,24 @@ class _LernortScreenState extends State<LernortScreen>
         controller: _tabController,
       ),
     );
+  }
+}
+
+Widget setWebsite(Lernort l) {
+  if (l.website == "") {
+    return null;
+  } else {
+    return Row(children: [
+      Icon(FlutterIcons.web_fou, size: 20, color: Color(0xff0b3e99)),
+      SizedBox(width: 10),
+      Text(
+        l.website,
+        style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff0b3e99)),
+      ),
+    ]);
   }
 }
 

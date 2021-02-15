@@ -9,6 +9,10 @@ class Lernort extends DatenbankObjekt<Lernort> {
   String name;
   String adresse;
   String oeffnungszeiten;
+  String website;
+  String kosten;
+  /* 0 = nicht barrierefrei und 1 = barrierefrei */
+  int barrierefrei;
   String kurzbeschreibung;
   String beschreibung;
   String titelbild;
@@ -31,6 +35,9 @@ class Lernort extends DatenbankObjekt<Lernort> {
       this.name,
       this.adresse,
       this.oeffnungszeiten,
+      this.website,
+      this.kosten,
+      this.barrierefrei,
       this.kurzbeschreibung,
       this.beschreibung,
       this.titelbild,
@@ -55,6 +62,9 @@ class Lernort extends DatenbankObjekt<Lernort> {
         name: objekt["name"] as String,
         adresse: objekt["adresse"] as String,
         oeffnungszeiten: objekt["oeffnungszeiten"] as String,
+        website: objekt["webseite"] as String,
+        kosten: objekt["kosten"] as String,
+        barrierefrei: int.parse(objekt["barrierefrei"]),
         kurzbeschreibung: objekt["kurzbeschreibung"] as String,
         beschreibung: objekt["beschreibung"] as String,
         titelbild: objekt["titelbild"] as String,
@@ -83,6 +93,9 @@ class Lernort extends DatenbankObjekt<Lernort> {
       "name": "$name",
       "adresse": "$adresse",
       "oeffnungszeiten": "$oeffnungszeiten",
+      "website": "$website",
+      "kosten": "$kosten",
+      "barrierefrei": "$barrierefrei",
       "kurzbeschreibung": "$kurzbeschreibung",
       "beschreibung": "$beschreibung",
       "titelbild": "$belohnungenID",
