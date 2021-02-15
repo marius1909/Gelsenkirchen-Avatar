@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/qrcode_reader.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class ScanScreen extends StatelessWidget {
   ScanScreen({this.onScanned});
@@ -12,45 +13,62 @@ class ScanScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Suchspiel"),
+        backgroundColor: Color(0xff98ce00),
       ),
-      body: SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(40),
-              child: Image(
-                image: AssetImage('assets/images/hand_phone.png'),
-              ),
+      body: /* SizedBox.expand(
+        child:  */
+          Column(
+        /* mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center, */
+        children: <Widget>[
+          /* HEADLINE "QR-SUCHSPIEL" */
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+            child: Text(
+              "QR-Suchspiel",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: "Ccaps",
+                  fontSize: 35.0,
+                  color: Color(0xff98ce00)),
             ),
-            SizedBox(
-              height: 40,
+          ),
+          /* BILD */
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: Image(
+              image: AssetImage('assets/images/hand_phone.png'),
             ),
-            scanButton("Scanne QR-Code, um das Spiel zu starten.", QRCodeReader(
-              onQRCodeScanned: (code) {
-                SuchspielArt art =
-                    SuchspielExtension.fromAssociatedStartphrase(code);
-                if (art != null) {
-                  onScanned(art);
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Text("Ungültiger Code"),
-                        content:
-                            Text("Kein passendes Spiel zum QRCode gefunden."),
-                        actions: [okButton(context)],
-                      );
-                    },
-                  );
-                }
-              },
-            ), context),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          scanButton("Scanne QR-Code, um das Spiel zu starten.", QRCodeReader(
+            onQRCodeScanned: (code) {
+              SuchspielArt art =
+                  SuchspielExtension.fromAssociatedStartphrase(code);
+              if (art != null) {
+                onScanned(art);
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    /* Dialog, der angezeigt wird, wenn ein falscher QR-Code gescannt wurde. */
+                    return AlertDialog(
+                      title: Text("Ungültiger QR-Code",
+                          style: TextStyle(color: Color(0xff98ce00))),
+                      content: Text(
+                          "Zu diesem QR-Code wurde kein passendes Spiel gefunden. Bitte scanne einen anderen QR-Code."),
+                      actions: [okButton(context)],
+                    );
+                  },
+                );
+              }
+            },
+          ), context),
+        ],
       ),
+      /* ), */
     );
   }
 
@@ -65,7 +83,27 @@ class ScanScreen extends StatelessWidget {
   }
 
   Widget scanButton(String text, Widget widget, BuildContext context) {
-    return FlatButton(
+    return /* SPIELEN-BUTTON */
+        ImageButton(
+            children: <Widget>[],
+            /* 302 x 91 sind die Originalmaße der Buttons */
+            width: 302 / 1.3,
+            height: 91 / 1.3,
+            paddingTop: 5,
+            /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+            pressedImage: Image.asset(
+              "assets/buttons/Spielen_gruen_groß.png",
+            ),
+            unpressedImage:
+                Image.asset("assets/buttons/Spielen_gruen_groß.png"),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => widget));
+            });
+    /* Alter Spiel-Starten-Button */
+    /* return FlatButton(
       onPressed: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => widget));
@@ -77,6 +115,6 @@ class ScanScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.blue)),
-    );
+    ); */
   }
 }

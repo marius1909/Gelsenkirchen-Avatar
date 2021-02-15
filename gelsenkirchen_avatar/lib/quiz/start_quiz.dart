@@ -72,6 +72,7 @@ class _StartQuizState extends State<StartQuiz> {
             ),
           ),
           body: Column(children: [
+            /* HEADLINE "QUIZ" */
             Container(
               padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
               child: Text(
@@ -84,8 +85,8 @@ class _StartQuizState extends State<StartQuiz> {
               ),
             ),
 
+            /* BESCHREIBUNG */
             Container(
-              //padding: EdgeInsets.all(15.0),
               padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
               child: Text(
                 "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
@@ -136,6 +137,7 @@ class _StartQuizState extends State<StartQuiz> {
                   )),
             ), */
 
+            /* SPIELEN-BUTTON */
             ImageButton(
                 children: <Widget>[],
                 /* 302 x 91 sind die Originalmaße der Buttons */
