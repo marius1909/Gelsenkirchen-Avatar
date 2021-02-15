@@ -85,31 +85,33 @@ class _QuizPageState extends State<QuizPage> {
   void displayDialog(String title) {
     /* Dialog, der erscheint, wenn die Zeit abgelaufen ist */
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title:
-                Text("Die Zeit ist abgelaufen", style: TextStyle(color: Color(0xffff9f1c))),
-            content: Text(title),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Ja"),
-                onPressed: () {
-              Navigator.of(context).pop(true);
-              checkAnswer("aghdhgfahsdfhj");
-                },
-              ),
-              new FlatButton(
-                child: new Text("Nein"),
-                onPressed: () =>
-                {Navigator.of(context).pop(true), Navigator.of(context).pop()},
-              ),
-            ],
-          );
-        },
-      );
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Die Zeit ist abgelaufen",
+              style: TextStyle(color: Color(0xffff9f1c))),
+          content: Text(title),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Ja"),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                checkAnswer("aghdhgfahsdfhj");
+              },
+            ),
+            new FlatButton(
+              child: new Text("Nein"),
+              onPressed: () => {
+                Navigator.of(context).pop(true),
+                Navigator.of(context).pop()
+              },
+            ),
+          ],
+        );
+      },
+    );
 
-      /* Alter Dialog, der erscheint, wenn die Zeit abgelaufen ist */
+    /* Alter Dialog, der erscheint, wenn die Zeit abgelaufen ist */
     /* showDialog(
       context: context,
       barrierDismissible: false,
@@ -180,8 +182,8 @@ class _QuizPageState extends State<QuizPage> {
                 child: Column(children: [
                   Row(
                     children: [
-                      Icon(FlutterIcons.arrow_up_faw5s,
-                          size: 20, color: Color(0xff98ce00)),
+                      Icon(FlutterIcons.help_outline_mdi,
+                          size: 20, color: Color(0xffe54b4b)),
                       SizedBox(width: 10),
                       Text("Frage: ${positionFragen + 1}",
                           textAlign: TextAlign.center,
@@ -193,7 +195,7 @@ class _QuizPageState extends State<QuizPage> {
                     children: [
                       Icon(
                         FlutterIcons.coin_mco,
-                        color: Color(0xffff9f1c),
+                        color: Color(0xff98ce00),
                       ),
                       SizedBox(width: 10),
                       Text("Punktzahl: $sumPunkte",
@@ -202,8 +204,6 @@ class _QuizPageState extends State<QuizPage> {
                     ],
                   )
                 ])),
-
-            
 
             /* ZEIT */
             CircularCountDownTimer(
@@ -266,7 +266,6 @@ class _QuizPageState extends State<QuizPage> {
                 style: Theme.of(context).textTheme.headline3,
               ),
             ),
-
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -440,26 +439,26 @@ class _QuizPageState extends State<QuizPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title:
-                Text("Glückwunsch!", style: TextStyle(color: Color(0xffff9f1c))),
-                /* TODO: Belohnung anzeigen (Lisa) */
+            title: Text("Glückwunsch!",
+                style: TextStyle(color: Color(0xffff9f1c))),
+            /* TODO: Belohnung anzeigen (Lisa) */
             content: Text(
-              "Du hast alle Fragen beantwortet.\nDeine Punktzahl: $sumPunkte"),
+                "Du hast alle Fragen beantwortet.\nDeine Punktzahl: $sumPunkte"),
             actions: <Widget>[
               new FlatButton(
                 child: new Text("Ohne Speichern beenden"),
                 onPressed: () {
-                Navigator.of(context).pop(true);
-                Navigator.of(context).pop();
+                  Navigator.of(context).pop(true);
+                  Navigator.of(context).pop();
                 },
               ),
               new FlatButton(
                 child: new Text("Speichern und beenden"),
                 onPressed: () async {
-                erfahrungspunkte = sumPunkte;
-                Navigator.of(context).pop(true);
-                await savePoint();
-              },
+                  erfahrungspunkte = sumPunkte;
+                  Navigator.of(context).pop(true);
+                  await savePoint();
+                },
               ),
             ],
           );
@@ -525,17 +524,16 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
-if (CalculatorLevel(jsonData['total_point_new']) >
-        CalculatorLevel(jsonData['total_point_old']))  
-    {
+    if (CalculatorLevel(jsonData['total_point_new']) >
+        CalculatorLevel(jsonData['total_point_old'])) {
       String showtext;
-        if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
+      if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
         showtext = "Glückwunsch!\nDu hast Level ... erreicht";
       } else {
         showtext =
             "Du benötigst noch ${CalculatorPointLevelUp(jsonData['total_point_new'])} Punkte für Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
       }
-      
+
       /* Dialog für Levelaufstieg */
       showDialog(
         context: context,
@@ -543,7 +541,7 @@ if (CalculatorLevel(jsonData['total_point_new']) >
           return AlertDialog(
             title:
                 Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
-                /* TODO: Belohnung anzeigen (Lisa) */
+            /* TODO: Belohnung anzeigen (Lisa) */
             content: Text(showtext + "\nDeine Belohnung: ..."),
             actions: <Widget>[
               new FlatButton(
