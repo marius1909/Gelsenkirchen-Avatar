@@ -194,7 +194,37 @@ class _LernortVorschauState extends State<LernortVorschau> {
                             : lernort.oeffnungszeiten,
                         style: Theme.of(context).textTheme.headline4),
                   ]),
-                  SizedBox(height: 40),
+                  SizedBox(height: 20),
+
+                  /* KOSTEN */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.attach_money_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.kosten == "" ? "Keine Angaben" : lernort.kosten,
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* BARRIEREFREIHEIT */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.accessible_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.barrierefrei == 0
+                            ? "nicht barrierefrei"
+                            : "barrierefrei",
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* WEBSITE */
+                  Container(child: setWebsite(widget.l)),
+                  SizedBox(height: 20),
 
                   /*BESCHREIBUNG*/
                   Text(

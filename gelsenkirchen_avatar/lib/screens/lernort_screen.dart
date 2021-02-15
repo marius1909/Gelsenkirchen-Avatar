@@ -165,7 +165,6 @@ class _LernortScreenState extends State<LernortScreen>
               padding: EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  SizedBox(height: 25),
                   /* KATEGORIE*/
                   /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
@@ -240,7 +239,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /*BESCHREIBUNG*/
                   Text(
-                    lernort.kurzbeschreibung,
+                    lernort.beschreibung,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
