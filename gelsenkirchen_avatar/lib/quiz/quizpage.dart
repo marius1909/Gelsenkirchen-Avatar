@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class QuizPage extends StatefulWidget {
   final int benutzerID;
@@ -23,6 +25,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  CountDownController _controller = CountDownController();
   final List<Widget> punkteBehalten = [];
 
   Timer _timer;
@@ -66,7 +69,8 @@ class _QuizPageState extends State<QuizPage> {
           if (_start == 1) {
             setState(() {
               timer.cancel();
-              displayDialog("Do you want to continue?");
+              /* displayDialog(
+                  "Du bekommst für diese Frage leider keine Punkte. \n Möchtest du weiterspielen?"); */
             });
           } else {
             _start = _start - 1;
@@ -83,12 +87,12 @@ class _QuizPageState extends State<QuizPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => new CupertinoAlertDialog(
-        title: new Text("TIME'S UP"),
+        title: new Text("Die Zeit ist abgelaufen"),
         content: new Text(title),
         actions: [
           CupertinoDialogAction(
             //yes -> spielen weiter mit nächsten Frage -> Antwort von aktuellen Fragen ist automatisch falsch(keine Antwort bekommen)
-            child: new Text("Yes"),
+            child: new Text("Ja"),
             onPressed: () {
               Navigator.of(context).pop(true);
               checkAnswer("aghdhgfahsdfhj");
@@ -96,7 +100,7 @@ class _QuizPageState extends State<QuizPage> {
           ),
           CupertinoDialogAction(
             //no -> nicht weiter spielen -> zurück zur vorherigen Seite
-            child: new Text("No"),
+            child: new Text("Nein"),
             onPressed: () =>
                 {Navigator.of(context).pop(true), Navigator.of(context).pop()},
           ),
@@ -139,14 +143,40 @@ class _QuizPageState extends State<QuizPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Color(0xffff9f1c),
         ),
-        body: new Container(
-          margin: const EdgeInsets.only(top: 1),
-          alignment: Alignment.topCenter,
-          child: new Column(
-            children: <Widget>[
-              //aktuelle Frage + Punkte
-              new Padding(padding: EdgeInsets.all(5.0)),
+        body: Column(
+          children: <Widget>[
+            /* FRAGENNUMMER UND PUNKTZAHL */
+            Container(
+                padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Icon(FlutterIcons.arrow_up_faw5s,
+                          size: 20, color: Color(0xff98ce00)),
+                      SizedBox(width: 10),
+                      Text("Frage: ${positionFragen + 1}",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline3),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Icon(
+                        FlutterIcons.coin_mco,
+                        color: Color(0xffff9f1c),
+                      ),
+                      SizedBox(width: 10),
+                      Text("Punktzahl: $sumPunkte",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline3),
+                    ],
+                  )
+                ])),
+
+            /* new Padding(padding: EdgeInsets.all(5.0)),
               Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Container(
@@ -166,25 +196,70 @@ class _QuizPageState extends State<QuizPage> {
                         ),
                       ]),
                 ),
-              ),
-              //Zeit
-              Expanded(
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Center(
-                    child: Text(
-                      "$_start",
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.redAccent,
-                      ),
+              ), */
+
+            /* ZEIT */
+            CircularCountDownTimer(
+              duration: 31,
+              initialDuration: 0,
+              controller: _controller,
+              width: MediaQuery.of(context).size.width / 4,
+              height: MediaQuery.of(context).size.height / 4,
+              ringColor: Colors.grey[300],
+              ringGradient: null,
+              fillColor: Color(0xffffae3c),
+              fillGradient: null,
+              backgroundColor: Color(0xffee8b00),
+              backgroundGradient: null,
+              strokeWidth: 10.0,
+              strokeCap: StrokeCap.round,
+              textStyle: TextStyle(
+                  fontSize: 33.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              textFormat: CountdownTextFormat.S,
+              isReverse: true,
+              isReverseAnimation: false,
+              isTimerTextShown: true,
+              autoStart: true,
+              onStart: () {
+                print('Countdown Started');
+              },
+              onComplete: () {
+                print('Countdown Ended');
+
+                displayDialog(
+                    "Du bekommst für diese Frage leider keine Punkte. \n Möchtest du weiterspielen?");
+              },
+            ),
+
+            /* Alte Zeitangabe */
+            /* Expanded(
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Center(
+                  child: Text(
+                    "$_start",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.redAccent,
                     ),
                   ),
                 ),
               ),
-              //Frage
-              new Padding(padding: EdgeInsets.all(5.0)),
+            ), */
+
+            /* FRAGE */
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 30),
+              child: Text(
+                data[positionFragen]['frage'],
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ),
+            /* new Padding(padding: EdgeInsets.all(5.0)),
               Expanded(
                 flex: 2,
                 child: Padding(
@@ -206,148 +281,157 @@ class _QuizPageState extends State<QuizPage> {
                         ),
                       ),
                     )),
+              ), */
+
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  /* ANTWORT 1 */
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      child: RaisedButton(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5)),
+                        textColor: Colors.white,
+                        color: Color(0xffff9f1c),
+                        splashColor: Color(0xffc47300),
+                        child: Text(
+                          data[positionFragen]['antwort'][0],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            checkAnswer(data[positionFragen]['antwort'][0]);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  /* ANTWORT 2 */
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(5, 5, 15, 5),
+                      child: RaisedButton(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5)),
+                        textColor: Colors.white,
+                        color: Color(0xffff9f1c),
+                        splashColor: Color(0xffc47300),
+                        child: Text(
+                          data[positionFragen]['antwort'][1],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            checkAnswer(data[positionFragen]['antwort'][1]);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              //Antwort 1
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0)),
-                          textColor: Colors.white,
-                          color: Colors.blue[400],
-                          child: Text(
-                            data[positionFragen]['antwort'][0],
-                            style: TextStyle(
+            ),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  /* ANTWORT 3 */
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      child: RaisedButton(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5)),
+                        textColor: Colors.white,
+                        color: Color(0xffff9f1c),
+                        splashColor: Color(0xffc47300),
+                        child: Text(
+                          data[positionFragen]['antwort'][2],
+                          style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              checkAnswer(data[positionFragen]['antwort'][0]);
-                            });
-                          },
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            checkAnswer(data[positionFragen]['antwort'][2]);
+                          });
+                        },
                       ),
                     ),
-                    //Antwort 2
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0)),
-                          textColor: Colors.white,
-                          color: Colors.blue[400],
-                          child: Text(
-                            data[positionFragen]['antwort'][1],
-                            style: TextStyle(
+                  ),
+                  /* ANTWORT 4 */
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(5, 5, 15, 5),
+                      child: RaisedButton(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5)),
+                        textColor: Colors.white,
+                        color: Color(0xffff9f1c),
+                        splashColor: Color(0xffc47300),
+                        child: Text(
+                          data[positionFragen]['antwort'][3],
+                          style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              checkAnswer(data[positionFragen]['antwort'][1]);
-                            });
-                          },
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            checkAnswer(data[positionFragen]['antwort'][3]);
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              //Antwort 3
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0)),
-                          textColor: Colors.white,
-                          color: Colors.blue[400],
-                          child: Text(
-                            data[positionFragen]['antwort'][2],
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              checkAnswer(data[positionFragen]['antwort'][2]);
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    //Antwort 4
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0)),
-                          textColor: Colors.white,
-                          color: Colors.blue[400],
-                          child: Text(
-                            data[positionFragen]['antwort'][3],
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              checkAnswer(data[positionFragen]['antwort'][3]);
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              //Quit-Button
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: new MaterialButton(
-                      minWidth: 240.0,
-                      height: 30.0,
-                      color: Colors.red[300],
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: new Text(
-                        "Quit",
-                        style:
-                            new TextStyle(fontSize: 18.0, color: Colors.white),
-                      ),
+            ),
+
+            /* BEEDEN - BUTTON */
+            /* Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: new MaterialButton(
+                    minWidth: 240.0,
+                    height: 30.0,
+                    color: Colors.red[300],
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text(
+                      "Quit",
+                      style: new TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
                   ),
                 ),
               ),
+            ), */
 
-              //Icons
-              Expanded(
-                child: Row(
-                  children: punkteBehalten,
-                ),
+            /* ICONS FÜR RICHTIGE ODER FALSCHE ANTWORTEN */
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: punkteBehalten,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }
@@ -364,6 +448,7 @@ class _QuizPageState extends State<QuizPage> {
     positionFragen++;
     punkteProFragen++;
     timerReset();
+    _controller.restart(duration: 31);
 //wenn keine Frage mehr...
     if (positionFragen == data.length) {
       showDialog(

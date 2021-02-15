@@ -35,6 +35,7 @@ dependencies:
   carousel_slider: ^2.3.1
   material_design_icons_flutter: 4.0.5855
   percent_indicator: "^2.1.7+2"
+  circular_countdown_timer: ^0.1.0
   
   nfc_in_flutter: ^2.0.5
   qr_code_scanner: ^0.2.1
