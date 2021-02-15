@@ -132,14 +132,11 @@ class _LernortScreenState extends State<LernortScreen>
 
   Widget build(BuildContext context) {
     return Scaffold(
-      //resizeToAvoidBottomInset: false,
-      //drawer: NavDrawer(),
       appBar: AppBar(
         /*NAME*/
         title: Text(widget.l.name),
         bottom: TabBar(
           unselectedLabelColor: Colors.white,
-          //labelColor: Color(0xffe54b4b),
           tabs: [
             Tab(
               child: Text("Überblick"),
@@ -171,7 +168,6 @@ class _LernortScreenState extends State<LernortScreen>
                   SizedBox(height: 25),
                   /* KATEGORIE*/
                   /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
-                  /* TODO: Kategorieicon anzeigen (Lisa) */
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                   Row(children: [
                     kategorienSymbol,
