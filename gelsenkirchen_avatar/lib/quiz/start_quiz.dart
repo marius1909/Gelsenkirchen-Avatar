@@ -162,7 +162,7 @@ class _StartQuizState extends State<StartQuiz> {
                             )));
                   } else {
                     Fluttertoast.showToast(
-                        msg: "Anmeldung fehlt!",
+                        msg: "Bitte melde dich an, um dieses Spiel zu spielen.",
                         toastLength: Toast.LENGTH_SHORT);
                   }
                 })
