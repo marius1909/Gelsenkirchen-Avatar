@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 
+/* Wird aktuell nicht mehr verwendet. Wurde durch einen AlertDialog ersetzt */
 class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

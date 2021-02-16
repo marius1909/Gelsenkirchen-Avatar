@@ -11,65 +11,81 @@ class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Suchspiel"),
-        backgroundColor: Color(0xff98ce00),
-      ),
-      body: /* SizedBox.expand(
-        child:  */
-          Column(
-        /* mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center, */
-        children: <Widget>[
-          /* HEADLINE "QR-SUCHSPIEL" */
-          Container(
-            padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
-            child: Text(
-              "QR-Suchspiel",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Ccaps",
-                  fontSize: 35.0,
-                  color: Color(0xff98ce00)),
-            ),
-          ),
-          /* BILD */
-          ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-            child: Image(
-              image: AssetImage('assets/images/hand_phone.png'),
-            ),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          scanButton("Scanne QR-Code, um das Spiel zu starten.", QRCodeReader(
-            onQRCodeScanned: (code) {
-              SuchspielArt art =
-                  SuchspielExtension.fromAssociatedStartphrase(code);
-              if (art != null) {
-                onScanned(art);
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    /* Dialog, der angezeigt wird, wenn ein falscher QR-Code gescannt wurde. */
-                    return AlertDialog(
-                      title: Text("Ungültiger QR-Code",
-                          style: TextStyle(color: Color(0xff98ce00))),
-                      content: Text(
-                          "Zu diesem QR-Code wurde kein passendes Spiel gefunden. Bitte scanne einen anderen QR-Code."),
-                      actions: [okButton(context)],
-                    );
+        appBar: AppBar(
+          title: Text("QR-Suchspiel"),
+          backgroundColor: Color(0xff98ce00),
+        ),
+        body: SizedBox.expand(
+          child: SingleChildScrollView(
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                /* HEADLINE "QR-SUCHSPIEL" */
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text(
+                    "QR-Suchspiel",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "Ccaps",
+                        fontSize: 35.0,
+                        color: Color(0xff98ce00)),
+                  ),
+                ),
+                /* BILD */
+                Image(
+                  image: AssetImage('assets/images/hand_phone.png'),
+                  width: 250,
+                ),
+                /* Altes Bild */
+                /* ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image(
+                    image: AssetImage('assets/images/hand_phone.png'),
+                  ),
+                ), */
+                SizedBox(
+                  height: 40,
+                ),
+
+                /* BESCHREIBUNG */
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
+                  child: Text(
+                    "Scanne einen QR-Code in der Nähe des Lernortes und errate das gesuchte Wort.",
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                scanButton("Scanne QR-Code, um das Spiel zu starten.",
+                    QRCodeReader(
+                  onQRCodeScanned: (code) {
+                    SuchspielArt art =
+                        SuchspielExtension.fromAssociatedStartphrase(code);
+                    if (art != null) {
+                      onScanned(art);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          /* Dialog, der angezeigt wird, wenn ein falscher QR-Code gescannt wurde. */
+                          return AlertDialog(
+                            title: Text("Ungültiger QR-Code",
+                                style: TextStyle(color: Color(0xff98ce00))),
+                            content: Text(
+                                "Zu diesem QR-Code wurde kein passendes Spiel gefunden. Bitte scanne einen anderen QR-Code."),
+                            actions: [okButton(context)],
+                          );
+                        },
+                      );
+                    }
                   },
-                );
-              }
-            },
-          ), context),
-        ],
-      ),
-      /* ), */
-    );
+                ), context),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget okButton(BuildContext context) {
