@@ -1,0 +1,351 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+MERGED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+MERGED from [:fluttertoast] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:video_player] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:nfc_in_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\nfc_in_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:wakelock] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:google_maps_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_plugin_android_lifecycle] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:qr_code_scanner] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
+MERGED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
+MERGED from [:shared_preferences] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\4376d161eae214343da71045e01eac3b\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\365c28b4b2e572f339fd178e44934366\jetified-play-services-location-16.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c6acd5760b9007f223feff583720be2e\play-services-places-placereport-16.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\d9cecb6a424f4f045529b7d36afd631e\play-services-tasks-17.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\850a2bd39fb2472bb8b5c76c00822cf2\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\779e9e8d16e1bced1fde29b479a02531\activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9312ddac89260b2b525984aab07a9387\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c82ac2f4afc4ba01d059e9f951067653\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\cb345e8f6552e8f7e485ad46b324284d\appcompat-resources-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5b0918276968b6c22007cbd84219abff\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\b8dcf0a063a8b9a5d9e8bb746012de08\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\7a3963549df8491a4f5cbe72a0004645\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\68ff646bac7aac76f953b0862a926fb8\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\1d7ab461ee6e72872c9e945ce11b49f0\lifecycle-runtime-2.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\0671cce739248519baaaa9f372880030\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a6ca52331cd4f9559f8b640a2331f8e6\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\bec6d3814f81277fcea9edeed603985a\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\018e9e14fdf3eb6691f3197b4171bf3a\jetified-exoplayer-hls-2.9.6\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\79b1212902ee1cddaf20b606006a1312\jetified-exoplayer-dash-2.9.6\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\450628a897fe7d8dc6db8a7aae7546ed\jetified-exoplayer-smoothstreaming-2.9.6\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e42b157e6d768bc0781005d98ff35cfa\jetified-exoplayer-core-2.9.6\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f798254e16a298640e302d5c3bfb9a5f\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f9fa4632f26ccdf6c9d29ef02caf2303\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9b160e4cdf9f6359f59ac7b50c271c06\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\955a5a01537028a1372756f2f0c913f6\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a5f607af3e05cf1c3157116d88a9ed54\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:17:1-56:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:1:1-9:12
+	package
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:2:5-47
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:1-55:12
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:10-84
+MERGED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-79
+MERGED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:9:27-81
+uses-permission#android.permission.INTERNET
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:10:5-67
+MERGED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:10:5-67
+MERGED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:10:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:10:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:11:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e42b157e6d768bc0781005d98ff35cfa\jetified-exoplayer-core-2.9.6\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e42b157e6d768bc0781005d98ff35cfa\jetified-exoplayer-core-2.9.6\AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:11:22-76
+application
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:13:5-54:19
+MERGED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:13:5-54:19
+MERGED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:13:5-54:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\365c28b4b2e572f339fd178e44934366\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\365c28b4b2e572f339fd178e44934366\jetified-play-services-location-16.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c6acd5760b9007f223feff583720be2e\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c6acd5760b9007f223feff583720be2e\play-services-places-placereport-16.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\d9cecb6a424f4f045529b7d36afd631e\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\d9cecb6a424f4f045529b7d36afd631e\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f9fa4632f26ccdf6c9d29ef02caf2303\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f9fa4632f26ccdf6c9d29ef02caf2303\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:46:5-54:19
+MERGED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:46:5-54:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:15:9-33
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:15:9-33
+	android:icon
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:16:9-43
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:16:9-43
+	android:usesCleartextTraffic
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml:7:18-53
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:14:9-57
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:14:9-57
+meta-data#com.google.android.geo.API_KEY
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:17:9-19:71
+	android:value
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:19:13-68
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:18:13-58
+activity#com.example.gelsenkirchen_avatar.MainActivity
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:20:9-48:20
+	android:launchMode
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:22:13-43
+	android:hardwareAccelerated
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:25:13-47
+	android:windowSoftInputMode
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:26:13-55
+	android:configChanges
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:24:13-163
+	android:theme
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:23:13-47
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:21:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:31:13-34:17
+	android:resource
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:33:15-52
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:32:15-70
+meta-data#io.flutter.embedding.android.SplashScreenDrawable
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:40:13-43:17
+	android:resource
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:42:15-61
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:41:15-79
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:44:13-47:29
+action#android.intent.action.MAIN
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:45:17-68
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:45:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:46:17-76
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:46:27-74
+meta-data#flutterEmbedding
+ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:51:9-53:33
+	android:value
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:53:13-30
+	android:name
+		ADDED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml:52:13-44
+uses-sdk
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+MERGED from [:fluttertoast] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:nfc_in_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\nfc_in_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:nfc_in_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\nfc_in_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\wakelock\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\google_maps_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:qr_code_scanner] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-8:67
+MERGED from [:qr_code_scanner] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-8:67
+MERGED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\4376d161eae214343da71045e01eac3b\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\4376d161eae214343da71045e01eac3b\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\365c28b4b2e572f339fd178e44934366\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\365c28b4b2e572f339fd178e44934366\jetified-play-services-location-16.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c6acd5760b9007f223feff583720be2e\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c6acd5760b9007f223feff583720be2e\play-services-places-placereport-16.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\d9cecb6a424f4f045529b7d36afd631e\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\d9cecb6a424f4f045529b7d36afd631e\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\850a2bd39fb2472bb8b5c76c00822cf2\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\850a2bd39fb2472bb8b5c76c00822cf2\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\779e9e8d16e1bced1fde29b479a02531\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\779e9e8d16e1bced1fde29b479a02531\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9312ddac89260b2b525984aab07a9387\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9312ddac89260b2b525984aab07a9387\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c82ac2f4afc4ba01d059e9f951067653\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\c82ac2f4afc4ba01d059e9f951067653\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\cb345e8f6552e8f7e485ad46b324284d\appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\cb345e8f6552e8f7e485ad46b324284d\appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5b0918276968b6c22007cbd84219abff\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5b0918276968b6c22007cbd84219abff\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\b8dcf0a063a8b9a5d9e8bb746012de08\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\b8dcf0a063a8b9a5d9e8bb746012de08\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\7a3963549df8491a4f5cbe72a0004645\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\7a3963549df8491a4f5cbe72a0004645\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\68ff646bac7aac76f953b0862a926fb8\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\68ff646bac7aac76f953b0862a926fb8\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.3.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\3028511468ecbb7d99d038bb9d84c87f\core-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\1d7ab461ee6e72872c9e945ce11b49f0\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\1d7ab461ee6e72872c9e945ce11b49f0\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\0671cce739248519baaaa9f372880030\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\0671cce739248519baaaa9f372880030\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a6ca52331cd4f9559f8b640a2331f8e6\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a6ca52331cd4f9559f8b640a2331f8e6\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\bec6d3814f81277fcea9edeed603985a\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\bec6d3814f81277fcea9edeed603985a\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\018e9e14fdf3eb6691f3197b4171bf3a\jetified-exoplayer-hls-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\018e9e14fdf3eb6691f3197b4171bf3a\jetified-exoplayer-hls-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\79b1212902ee1cddaf20b606006a1312\jetified-exoplayer-dash-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\79b1212902ee1cddaf20b606006a1312\jetified-exoplayer-dash-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\450628a897fe7d8dc6db8a7aae7546ed\jetified-exoplayer-smoothstreaming-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\450628a897fe7d8dc6db8a7aae7546ed\jetified-exoplayer-smoothstreaming-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e42b157e6d768bc0781005d98ff35cfa\jetified-exoplayer-core-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e42b157e6d768bc0781005d98ff35cfa\jetified-exoplayer-core-2.9.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f798254e16a298640e302d5c3bfb9a5f\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f798254e16a298640e302d5c3bfb9a5f\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f9fa4632f26ccdf6c9d29ef02caf2303\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\f9fa4632f26ccdf6c9d29ef02caf2303\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9b160e4cdf9f6359f59ac7b50c271c06\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\9b160e4cdf9f6359f59ac7b50c271c06\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\955a5a01537028a1372756f2f0c913f6\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\955a5a01537028a1372756f2f0c913f6\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a5f607af3e05cf1c3157116d88a9ed54\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\a5f607af3e05cf1c3157116d88a9ed54\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:20:5-44
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [:qr_code_scanner] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-64
+	android:targetSdkVersion
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\android\app\src\debug\AndroidManifest.xml
+uses-permission#android.permission.NFC
+ADDED from [:nfc_in_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\nfc_in_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-62
+	android:name
+		ADDED from [:nfc_in_flutter] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\nfc_in_flutter\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-59
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from [:location] D:\Alex\Gelsenkirchen-Avatar\gelsenkirchen_avatar\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\e49fed8d39766f1f36a6cb127fe644ae\play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\27a51f2d6fb4c91d7925584bc266b0ae\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5315adffb2dc905f5b82949fce14e319\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+uses-permission#android.permission.CAMERA
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:22:5-65
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:22:22-62
+uses-feature#android.hardware.camera
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:25:5-27:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:27:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:26:9-47
+uses-feature#android.hardware.camera.front
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:28:5-30:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:30:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:29:9-53
+uses-feature#android.hardware.camera.autofocus
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:33:5-35:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:35:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:34:9-57
+uses-feature#android.hardware.camera.flash
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:36:5-38:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:38:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:37:9-53
+uses-feature#android.hardware.screen.landscape
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:39:5-41:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:41:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:40:9-57
+uses-feature#android.hardware.wifi
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:42:5-44:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:44:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:43:9-45
+activity#com.journeyapps.barcodescanner.CaptureActivity
+ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:47:9-53:63
+	android:screenOrientation
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:50:13-56
+	android:clearTaskOnLaunch
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:49:13-45
+	android:stateNotNeeded
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:51:13-42
+	android:windowSoftInputMode
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:53:13-60
+	android:theme
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:52:13-54
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:4.1.0] C:\Users\Alex\.gradle\caches\transforms-2\files-2.1\5333f99a9fa82bec27a1d6e0c10ebbd4\zxing-android-embedded-4.1.0\AndroidManifest.xml:48:13-74

@@ -23,8 +23,11 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
       this.passwort,
       this.rolleID,
       this.erfahrung})
-      : super(DatabaseURL.getBenutzer.value, DatabaseURL.registrierung.value,
-            DatabaseURL.removeFromBenutzer.value, '');
+      : super(
+            DatabaseURL.getBenutzer.value,
+            DatabaseURL.registrierung.value,
+            DatabaseURL.removeFromBenutzer.value,
+            DatabaseURL.updateBenutzer.value);
 
   static Future<Benutzer> getBenutzer(String email, String passwort) async {
     final response = await http.post(DatabaseURL.anmeldung.value,

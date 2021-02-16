@@ -12,6 +12,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /*
   TODO: Anzahl an Errungenschaften laden
@@ -31,6 +32,8 @@ class _ProfilState extends State<Profil> {
   String spielername = "";
   int level = 0;
   int anzahlErrungenschaften = 0;
+  TextEditingController namectrl;
+  bool isEditable = false;
 
 //TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
 
@@ -46,6 +49,7 @@ class _ProfilState extends State<Profil> {
   @override
   void initState() {
     super.initState();
+    namectrl = new TextEditingController();
     List<Freigeschaltet> a =
         loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
     setState(() {
@@ -66,6 +70,23 @@ class _ProfilState extends State<Profil> {
         level = levelTemp;
       });
     });
+  }
+
+  /* Ändern des Namens im Zwischenspeicher */
+  void changeSharedPreferences(String name) async {
+    Map<String, dynamic> storedBenutzer = Map<String, dynamic>();
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    storedBenutzer = jsonDecode(sharedPreferences.getString("benutzer"));
+
+    print(storedBenutzer);
+    storedBenutzer["benutzer"] = name;
+
+    sharedPreferences.setString("benutzer", jsonEncode(storedBenutzer));
+
+    Benutzer.shared.setCurrent(storedBenutzer);
   }
 
   @override
@@ -94,14 +115,31 @@ class _ProfilState extends State<Profil> {
                         ),
                         onPressed: () {},
                       ),
-                      Text(
-                        spielername,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: "Ccaps",
-                            fontSize: 35.0,
-                            color: Color(0xff0b3e99)),
-                      ),
+                      Flexible(
+                          child: !isEditable
+                              ? Text(
+                                  spielername,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: "Ccaps",
+                                      fontSize: 35.0,
+                                      color: Color(0xff0b3e99)),
+                                )
+                              : TextFormField(
+                                  initialValue: spielername,
+                                  autofocus: true,
+                                  textInputAction: TextInputAction.done,
+                                  onFieldSubmitted: (value) {
+                                    setState(() => {
+                                          isEditable = false,
+                                          spielername = value,
+                                          Benutzer.shared.updateDatabaseWithID(
+                                              "benutzer",
+                                              value,
+                                              widget.id_user),
+                                          changeSharedPreferences(value)
+                                        });
+                                  })),
                       IconButton(
                         icon: Icon(
                           FlutterIcons.edit_faw5s,
@@ -109,7 +147,9 @@ class _ProfilState extends State<Profil> {
                           size: 15,
                         ),
                         onPressed: () {
-                          /* TODO: Funktionalität zum Ändern des Benutzernamens */
+                          setState(() => {
+                                isEditable = true,
+                              });
                         },
                       )
                     ],
