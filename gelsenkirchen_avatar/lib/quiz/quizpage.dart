@@ -171,7 +171,7 @@ class _QuizPageState extends State<QuizPage> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(widget.title + " - Quiz"),
           backgroundColor: Color(0xffff9f1c),
         ),
         body: Column(
