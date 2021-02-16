@@ -102,34 +102,36 @@ class NavDrawer extends StatelessWidget {
                   ),
                   child: Image.asset("assets/icons/Lernort_gelb_Icon.png"),
                 ),
-                title: Text('Lernorte'),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              LernortListeScreen()));
-                }),
+                child: Image.asset("assets/icons/QR_rot_Icon.png"),
+              ),
+              title: Text('QR-Suchspiel'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Suchspiel()));
+              }),
 
-            /* QR-SUCHSPIEL */
-            ListTile(
-                leading: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: 20,
-                    minHeight: 20,
-                    maxWidth: 30,
-                    maxHeight: 30,
-                  ),
-                  child: Image.asset("assets/icons/QR_rot_Icon.png"),
+          /* FREUNDE */
+          /* Auskommentiert für Show & Tell */
+          /* ListTile(
+              //leading: Icon(Icons.people),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
                 ),
-                title: Text('QR-Suchspiel'),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              LernortListeScreen()));
-                }),
+                child: Image.asset("assets/icons/Freunde_gruen_Icon.png"),
+              ),
+              title: Text('Freunde'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Freundesliste()));
+              }), */
 
             /* FREUNDE */
             ListTile(
@@ -143,8 +145,11 @@ class NavDrawer extends StatelessWidget {
                   ),
                   child: Image.asset("assets/icons/Freunde_gruen_Icon.png"),
                 ),
-                title: Text('Freunde'),
-                onTap: () {
+                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
+              ),
+              title: Text('Bestenliste'),
+              onTap: () {
+                if (Benutzer.current?.id != null) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -219,14 +224,16 @@ class NavDrawer extends StatelessWidget {
                   ),
                   child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
                 ),
-                title: Text('Impressum'),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ImpressumScreen()));
-                }),
+                child:
+                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+              ),
+              title: Text('Impressum'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ImpressumScreen()));
+              }),
 
             /* ANMELDEN / ABMELDEN je nachdem, ob Benutzer angemeldet*/
             ListTile(
