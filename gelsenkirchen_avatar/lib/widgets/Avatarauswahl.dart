@@ -41,26 +41,6 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   @override
   void initState() {
     super.initState();
-    List<Freigeschaltet> a =
-        loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
-    setState(() {
-      level = 0;
-    });
-    Benutzer.shared.gibObjekte().then((alleBenutzer) async {
-      setState(() {
-        spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
-        anzahlErrungenschaften = a.length;
-
-        avatar = loadInfo.loadUserAvatarImage(
-            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
-      });
-
-      int levelTemp = await loadInfo.loadUserLevel(widget.id_user);
-      //BROKEN
-      setState(() {
-        level = levelTemp;
-      });
-    });
   }
 
   @override
@@ -145,3 +125,4 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
           ],
         )));
   }
+}
