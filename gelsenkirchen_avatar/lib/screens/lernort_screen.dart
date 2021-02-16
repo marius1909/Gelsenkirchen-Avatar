@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
+import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
@@ -133,7 +134,7 @@ class _LernortScreenState extends State<LernortScreen>
       appBar: AppBar(
         /*NAME*/
         title: Text(widget.l.name),
-        bottom: TabBar(
+        bottom: ColoredTabBar(Colors.blueAccent, TabBar(
           unselectedLabelColor: Colors.white,
           tabs: [
             Tab(
@@ -149,7 +150,7 @@ class _LernortScreenState extends State<LernortScreen>
           controller: _tabController,
           indicatorColor: Colors.white,
           indicatorSize: TabBarIndicatorSize.tab,
-        ),
+        )),
         bottomOpacity: 1,
       ),
       body: TabBarView(
