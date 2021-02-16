@@ -118,8 +118,7 @@ class NavDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            LernortListeScreen()));
+                        builder: (BuildContext context) => Suchspiel()));
               }),
 
           /* FREUNDE */
