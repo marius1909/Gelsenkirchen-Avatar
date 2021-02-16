@@ -95,71 +95,74 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                   ])),
 
               /* Tabelle mit dem Ranking */
-              Container(
-                  child: SizedBox(
+              Expanded(
+                  child: Container(
+                      child: SizedBox(
                 width: double.infinity,
-                child: DataTable(
-                    /* SPALTENKÖPFE */
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Text('Platz',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Name',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Punkte',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(
-                      lernCategories.length,
-                      (index) => DataRow(
-                        cells: <DataCell>[
-                          /* PLATZIERUNG */
-                          DataCell(Container(
-                            width: 20,
-                            child: Center(
-                                child: Text(
-                                    lernCategories[index]['rank'].toString())),
-                          )),
-
-                          /* BENUTZERNAME */
-                          DataCell(Container(
-                              width: double.infinity,
-                              child: Text(lernCategories[index]['username'] ==
-                                          null ||
-                                      lernCategories[index]['username'] == ""
-                                  ? lernCategories[index]['email']
-                                  : lernCategories[index]['username']))),
-
-                          /* ERFAHRUNGSPUNKTE */
-                          DataCell(Container(
-                              width: 50,
+                child: ListView(children: [
+                  DataTable(
+                      /* SPALTENKÖPFE */
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Text('Platz',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataColumn(
+                          label: Text('Name',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataColumn(
+                          label: Text('Punkte',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      ],
+                      rows: List<DataRow>.generate(
+                        lernCategories.length,
+                        (index) => DataRow(
+                          cells: <DataCell>[
+                            /* PLATZIERUNG */
+                            DataCell(Container(
+                              width: 20,
                               child: Center(
-                                  child: Text(lernCategories[index]
-                                          ['sum_erfahrungspunkte']
-                                      .toString())))),
-                        ],
-                      ),
-                    )),
-              ))
+                                  child: Text(lernCategories[index]['rank']
+                                      .toString())),
+                            )),
+
+                            /* BENUTZERNAME */
+                            DataCell(Container(
+                                width: double.infinity,
+                                child: Text(lernCategories[index]['username'] ==
+                                            null ||
+                                        lernCategories[index]['username'] == ""
+                                    ? lernCategories[index]['email']
+                                    : lernCategories[index]['username']))),
+
+                            /* ERFAHRUNGSPUNKTE */
+                            DataCell(Container(
+                                width: 50,
+                                child: Center(
+                                    child: Text(lernCategories[index]
+                                            ['sum_erfahrungspunkte']
+                                        .toString())))),
+                          ],
+                        ),
+                      ))
+                ]),
+              )))
             ],
           ),
         );
       } else {
         return Scaffold(
             appBar: AppBar(
-              title: Text(widget.nameLernCategory),
+              title: Text(widget.name_lern_category),
             ),
             body: Container(
                 margin: EdgeInsets.all(10.0),
                 alignment: Alignment.topCenter,
                 child: Center(
                     child: Text(
-                        "Es gibt keine Bestenliste für ${widget.nameLernCategory}"))));
+                        "Es gibt keine Bestenliste für ${widget.name_lern_category}"))));
       }
     }
   }
