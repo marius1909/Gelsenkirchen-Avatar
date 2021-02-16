@@ -50,7 +50,7 @@ class _LernortScreenState extends State<LernortScreen>
   }
 
   void setKategorienSymbol(int kategorienID) {
-    Color symbolcolor = Color(0xff0b3e99);
+    Color symbolcolor = Color(0xff0e53c9);
     double symbolsize = 20;
     switch (kategorienID) {
       case 0:
@@ -181,7 +181,7 @@ class _LernortScreenState extends State<LernortScreen>
                   /* ADRESSE */
                   Row(children: [
                     Icon(FlutterIcons.location_on_mdi,
-                        size: 20, color: Color(0xff0b3e99)),
+                        size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
                     Flexible(
                       child: Text(
@@ -197,7 +197,7 @@ class _LernortScreenState extends State<LernortScreen>
                   Row(children: [
                     //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.access_time_mdi,
-                        size: 20, color: Color(0xff0b3e99)),
+                        size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
                     Text(
                         lernort.oeffnungszeiten == ""
@@ -211,7 +211,7 @@ class _LernortScreenState extends State<LernortScreen>
                   Row(children: [
                     //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.attach_money_mdi,
-                        size: 20, color: Color(0xff0b3e99)),
+                        size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
                     Text(
                         lernort.kosten == "" ? "Keine Angaben" : lernort.kosten,
@@ -223,7 +223,7 @@ class _LernortScreenState extends State<LernortScreen>
                   Row(children: [
                     //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.accessible_mdi,
-                        size: 20, color: Color(0xff0b3e99)),
+                        size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
                     Text(
                         lernort.barrierefrei == 0
@@ -347,7 +347,7 @@ Widget setWebsite(Lernort l) {
     return null;
   } else {
     return Row(children: [
-      Icon(FlutterIcons.web_fou, size: 20, color: Color(0xff0b3e99)),
+      Icon(FlutterIcons.web_fou, size: 20, color: Color(0xff0e53c9)),
       SizedBox(width: 10),
       Text(
         l.website,
@@ -401,8 +401,9 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
             children: <Widget>[
               Container(
                 child: TabBar(
-                  labelColor: Color(0xffe54b4b),
-                  unselectedLabelColor: Color(0xff0b3e99),
+                  labelColor: Color(0xff0b3e99),
+                  indicatorColor: Color(0xff0b3e99),
+                  unselectedLabelColor: Color(0xff0e53c9),
                   tabs: [
                     get_TabsTitel(
                       1,
