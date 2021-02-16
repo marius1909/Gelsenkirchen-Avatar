@@ -84,7 +84,8 @@ class NavDrawer extends StatelessWidget {
                               Profil(Benutzer.current.id)));
                 } else {
                   Fluttertoast.showToast(
-                      msg: "Anmeldung fehlt!", toastLength: Toast.LENGTH_SHORT);
+                      msg: "Bitte melde dich an!",
+                      toastLength: Toast.LENGTH_SHORT);
                 }
               }),
 
