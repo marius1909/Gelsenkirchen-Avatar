@@ -69,7 +69,6 @@ class MapSampleState extends State<MapScreen> {
     );
   }
 
-  /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
     final markerImageFuture = BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 4.0),
