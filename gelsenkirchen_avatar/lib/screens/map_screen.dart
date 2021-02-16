@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/screens/map_info_screen.dart';
 // Für Map-Style
 import 'package:flutter/services.dart' show rootBundle;
-
 
 class MapScreen extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class MapScreen extends StatefulWidget {
 class MapSampleState extends State<MapScreen> {
   Completer<GoogleMapController> _controller = Completer();
   final Set<Marker> _markers = {};
+  Lernort lernort;
 
   /* Inhalt der map_style.txt */
   String _mapStyle;
@@ -47,25 +48,38 @@ class MapSampleState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _whsGelsenkrichen,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+        body: Stack(
+      children: [
+        GoogleMap(
+          mapType: MapType.normal,
+          initialCameraPosition: _whsGelsenkrichen,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
 
-          /* Style setzen */
-          controller.setMapStyle(_mapStyle);
-        },
-        markers: _markers,
-        myLocationEnabled: true,
-        padding: EdgeInsets.only(
-          top: 150,
+            /* Style setzen */
+            controller.setMapStyle(_mapStyle);
+          },
+          markers: _markers,
+          myLocationEnabled: true,
+          padding: EdgeInsets.only(
+            top: 150,
+          ),
+          myLocationButtonEnabled: true,
+          cameraTargetBounds: CameraTargetBounds(bounds),
+          minMaxZoomPreference: MinMaxZoomPreference(5, 20),
         ),
-        myLocationButtonEnabled: true,
-        cameraTargetBounds: CameraTargetBounds(bounds),
-        minMaxZoomPreference: MinMaxZoomPreference(5, 20),
-      ),
-    );
+        InfoScreen(
+          lernort: lernort,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LernortVorschau(l: lernort)),
+            );
+          },
+        )
+      ],
+    ));
   }
 
   void addMarkersForLernorte() {
@@ -74,25 +88,19 @@ class MapSampleState extends State<MapScreen> {
         "assets/icons/Mapmarker_rot.png");
 
     markerImageFuture.then((markerImage) {
-      var lernorte = Lernort.shared.gibObjekte();
+      var lernorteFuture = Lernort.shared.gibObjekte();
 
-      lernorte.then((value) {
-        value.forEach((element) {
+      lernorteFuture.then((lernorte) {
+        lernorte.forEach((lernort) {
           final marker = Marker(
             icon: markerImage,
-            markerId: MarkerId(element.id.toString()),
-            position: LatLng(element.nord, element.ost),
-            /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. Es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. (Lisa) */
-
+            markerId: MarkerId(lernort.id.toString()),
+            position: LatLng(lernort.nord, lernort.ost),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          LernortVorschau(l: element)));
+              setState(() {
+                this.lernort = lernort;
+              });
             },
-            infoWindow: InfoWindow(
-                title: element.name, snippet: element.kurzbeschreibung),
           );
           setState(() {
             _markers.add(marker);
