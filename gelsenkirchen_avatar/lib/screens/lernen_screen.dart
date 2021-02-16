@@ -49,9 +49,13 @@ Widget getWidgetTitelbild(Lernort l) {
 
 Widget getWidgetTabs(Lernort l, BuildContext context) {
   int anzahl = 0;
+  // ignore: unused_local_variable
   bool text = false;
+  // ignore: unused_local_variable
   bool videos = false;
+  // ignore: unused_local_variable
   bool sounds = false;
+  // ignore: unused_local_variable
   bool bilder = false;
 
   if (l.beschreibung.isNotEmpty) {
@@ -197,8 +201,10 @@ Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
   } else {
     var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links
 
+    // ignore: unused_local_variable
     var i = 0;
 
+    // ignore: unused_local_variable
     var ii = 0;
     return new GridView.builder(
       itemCount: arr.length,
