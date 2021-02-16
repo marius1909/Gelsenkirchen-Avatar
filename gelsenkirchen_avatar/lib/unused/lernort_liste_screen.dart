@@ -96,6 +96,7 @@ class LernortListState extends State<LernortListView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
+                        // ignore: missing_required_param
                         LernortScreen(l: lernortList[index])));
           },
         )

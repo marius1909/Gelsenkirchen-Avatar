@@ -24,6 +24,7 @@ class _LernortScreenState extends State<LernortScreen>
   Lernort lernort;
   Icon kategorienSymbol;
   List<LernKategorie> lernKategorieList = List();
+  // ignore: unused_field
   int _listLength = 0;
   LernKategorie lk;
 
@@ -274,9 +275,8 @@ class _LernortScreenState extends State<LernortScreen>
                           //mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             ListTile(
-                              leading:
-                                  Image.asset(
-                                      "assets/icons/Quiz_gelb_Icon.png"),
+                              leading: Image.asset(
+                                  "assets/icons/Quiz_gelb_Icon.png"),
                               title:
                                   Text('Quiz', style: TextStyle(fontSize: 16)),
                               subtitle: Text(
@@ -288,10 +288,9 @@ class _LernortScreenState extends State<LernortScreen>
                             ButtonBar(children: <Widget>[
                               FlatButton(
                                 child: Text('Spielen',
-                                    style:
-                                        TextStyle(
-                                            color: Color(0xffff9f1c),
-                                            fontWeight: FontWeight.bold)),
+                                    style: TextStyle(
+                                        color: Color(0xffff9f1c),
+                                        fontWeight: FontWeight.bold)),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -377,9 +376,13 @@ Widget setTitelbild(Lernort l) {
 
 Widget getWidgetTabs(Lernort l, BuildContext context) {
   int anzahl = 0;
+  // ignore: unused_local_variable
   bool text = false;
+  // ignore: unused_local_variable
   bool videos = false;
+  // ignore: unused_local_variable
   bool sounds = false;
+  // ignore: unused_local_variable
   bool bilder = false;
 
   if (l.beschreibung.isNotEmpty) {
