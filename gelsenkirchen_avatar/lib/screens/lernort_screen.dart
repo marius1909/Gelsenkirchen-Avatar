@@ -308,7 +308,7 @@ class _LernortScreenState extends State<LernortScreen>
                           children: <Widget>[
                             ListTile(
                               leading:
-                                  Image.asset("assets/icons/QR_rot_Icon.png"),
+                                  Image.asset("assets/icons/QR_gruen_Icon.png"),
                               title: Text('QR-Spiel',
                                   style: TextStyle(fontSize: 16)),
                               subtitle: Text(
@@ -321,7 +321,7 @@ class _LernortScreenState extends State<LernortScreen>
                               FlatButton(
                                 child: Text('Spielen',
                                     style: TextStyle(
-                                        color: Color(0xffe54b4b),
+                                        color: Color(0xff98ce00),
                                         fontWeight: FontWeight.bold)),
                                 onPressed: () {
                                   Navigator.push(

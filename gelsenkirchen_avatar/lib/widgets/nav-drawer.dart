@@ -102,6 +102,26 @@ class NavDrawer extends StatelessWidget {
                             LernortListeScreen()));
               }),
 
+          /* QR-SUCHSPIEL */
+          ListTile(
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
+                child: Image.asset("assets/icons/QR_rot_Icon.png"),
+              ),
+              title: Text('QR-Suchspiel'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            LernortListeScreen()));
+              }),
+
           /* FREUNDE */
           ListTile(
               //leading: Icon(Icons.people),
@@ -112,7 +132,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Freunde_rot_Icon.png"),
+                child: Image.asset("assets/icons/Freunde_gruen_Icon.png"),
               ),
               title: Text('Freunde'),
               onTap: () {
@@ -133,7 +153,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -186,8 +207,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -208,7 +228,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Anmelden_blau_Icon.png"),
+                child: Image.asset("assets/icons/Anmelden_gelb_Icon.png"),
               ),
               title: Text('Anmelden'),
               onTap: () {
@@ -227,7 +247,7 @@ class NavDrawer extends StatelessWidget {
                 maxWidth: 30,
                 maxHeight: 30,
               ),
-              child: Image.asset("assets/icons/Abmelden_blau_Icon.png"),
+              child: Image.asset("assets/icons/Abmelden_gelb_Icon.png"),
             ),
             title: Text('Abmelden'),
             onTap: () async {

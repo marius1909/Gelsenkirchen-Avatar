@@ -64,7 +64,6 @@ class _AnmeldungState extends State<Anmeldung> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Anmelden'),
-        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
         backgroundColor: Color(0xff0B3E99),
         /*Entfernt den Zurückbutton*/
         automaticallyImplyLeading: false,
@@ -75,9 +74,6 @@ class _AnmeldungState extends State<Anmeldung> {
         Column(children: [
           Text("Bitte gib deine Anmeldedaten ein:",
               style: Theme.of(context).textTheme.headline3),
-          /* CircleAvatar(
-                backgroundImage: AssetImage('assets/images/wink.png'),
-                radius: 130), */
           Padding(
               padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
               child: Column(children: [

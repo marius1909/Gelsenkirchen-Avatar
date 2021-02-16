@@ -183,7 +183,7 @@ class _QuizPageState extends State<QuizPage> {
                   Row(
                     children: [
                       Icon(FlutterIcons.help_outline_mdi,
-                          size: 20, color: Color(0xffe54b4b)),
+                          size: 20, color: Color(0xffee8b00)),
                       SizedBox(width: 10),
                       Text("Frage: ${positionFragen + 1}",
                           textAlign: TextAlign.center,
@@ -195,7 +195,7 @@ class _QuizPageState extends State<QuizPage> {
                     children: [
                       Icon(
                         FlutterIcons.coin_mco,
-                        color: Color(0xff98ce00),
+                        color: Color(0xffee8b00),
                       ),
                       SizedBox(width: 10),
                       Text("Punktzahl: $sumPunkte",
@@ -528,7 +528,9 @@ class _QuizPageState extends State<QuizPage> {
         CalculatorLevel(jsonData['total_point_old'])) {
       String showtext;
       if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
-        showtext = "Glückwunsch!\nDu hast Level ... erreicht";
+        /* TODO: Belohnung anzeigen (Lisa) */
+        showtext = "Glückwunsch!\nDu hast Level ... erreicht" +
+            "\nDeine Belohnung: ...";
       } else {
         showtext =
             "Du benötigst noch ${CalculatorPointLevelUp(jsonData['total_point_new'])} Punkte für Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
@@ -541,8 +543,7 @@ class _QuizPageState extends State<QuizPage> {
           return AlertDialog(
             title:
                 Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
-            /* TODO: Belohnung anzeigen (Lisa) */
-            content: Text(showtext + "\nDeine Belohnung: ..."),
+            content: Text(showtext),
             actions: <Widget>[
               new FlatButton(
                 child: new Text("OK"),
