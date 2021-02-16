@@ -158,7 +158,7 @@ Widget get_TabsTitel(int i, bool sollRein) {
 Widget getWidgetSound(Lernort l, BuildContext context) {
   if (l.sounds.isEmpty) {
     return new Text(
-      'Es sind derzeit leider keine Audiodateien verfügbar.',
+      'Derzeit sind leider keine Audiodateien verfügbar.',
       textAlign: TextAlign.justify,
       style: Theme.of(context).textTheme.bodyText1,
     );
@@ -174,7 +174,7 @@ Widget getWidgetSound(Lernort l, BuildContext context) {
 Widget getWidgetVideos(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
-      'Es sind leider keine weiteren Bilder verfügbar.',
+      'Derzeit sind leider keine Videos verfügbar.',
       textAlign: TextAlign.justify,
       style: Theme.of(context).textTheme.bodyText1,
     );
@@ -191,7 +191,7 @@ Widget getWidgetVideos(Lernort l, BuildContext context) {
 Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
-      'Es sind leider keine weiteren Bilder verfügbar.',
+      'Derzeit sind leider keine weiteren Bilder verfügbar.',
       textAlign: TextAlign.justify,
       style: Theme.of(context).textTheme.bodyText1,
     );
