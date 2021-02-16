@@ -51,11 +51,6 @@ class _LernortListeScreenKategorieState
         child: new Column(
       children: <Widget>[
         new ListTile(
-          /* leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-          ), */
           leading: CircleAvatar(
             backgroundImage: lernortListGefiltert[index]
                     .titelbild
@@ -72,7 +67,6 @@ class _LernortListeScreenKategorieState
             style: Theme.of(context).textTheme.bodyText1,
           ),
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -103,10 +97,14 @@ class _LernortListeScreenKategorieState
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                             children: [
-                          TextSpan(text: "Keine Ergebnisse für die Kategorie "),
                           TextSpan(
+                              text: "Keine Ergebnisse für die Kategorie \"" +
+                                  lkname +
+                                  "\"",
+                              style: Theme.of(context).textTheme.headline3),
+                          /* TextSpan(
                               text: lkname,
-                              style: TextStyle(fontWeight: FontWeight.bold))
+                              style: TextStyle(fontWeight: FontWeight.bold)) */
                         ])),
                   )
                 : Center(

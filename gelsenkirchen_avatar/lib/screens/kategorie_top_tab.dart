@@ -34,7 +34,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   /*Diese Methode erstellt die ListViewItems*/
   Widget erstelleListViewitem(BuildContext context, int index) {
     Icon kategorienSymbol;
-    Color symbolcolor = Color(0xff0b3e99);
+    Color symbolcolor = Color(0xff0e53c9);
     double symbolsize = 25;
     /* Erstellt Kategoriesymbol der jeweiligen Kategorie entsprechend */
     switch (lernKategorieList[index].id) {
@@ -137,7 +137,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
                     ? lernKategorieList[index].name
                     : 'empty',
                 style: Theme.of(context).textTheme.bodyText1,
-                    //new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                //new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
