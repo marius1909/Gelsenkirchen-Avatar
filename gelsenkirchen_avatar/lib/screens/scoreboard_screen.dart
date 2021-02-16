@@ -49,7 +49,6 @@ class _ScoreBoardState extends State<ScoreBoard> {
           body: new Container(
               margin: EdgeInsets.all(10.0),
               alignment: Alignment.topCenter,
-              /* TODO: Dem Benutzer irgendein Feedback geben was passiert. (Lisa) */
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(

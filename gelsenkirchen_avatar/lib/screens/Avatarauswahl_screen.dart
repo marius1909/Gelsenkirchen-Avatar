@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
-import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
-import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class Avatarauswahl extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -27,7 +18,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+//TODO: avatarTyp und ausgerüstete Collectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;

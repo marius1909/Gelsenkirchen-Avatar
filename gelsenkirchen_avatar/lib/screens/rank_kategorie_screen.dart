@@ -68,7 +68,6 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                   child: Column(children: [
                     Row(
                       children: [
-                        /* TODO: Vielleicht ein anderes Icon (Lisa) */
                         Icon(FlutterIcons.arrow_up_faw5s,
                             size: 20, color: Color(0xff98ce00)),
                         SizedBox(width: 10),

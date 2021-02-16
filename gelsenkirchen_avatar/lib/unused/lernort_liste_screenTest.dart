@@ -90,11 +90,11 @@ class _LernortListeScreenTestState extends State<LernortListeScreenTest> {
               ]),
           onTap: () {
             /*Hier kommt Aktion beim Klick auf Lernort hin*/
-            Navigator.push(
+             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        LernortScreen(l: lernortListGefiltert[index])));
+                        LernortScreen(l: lernortListGefiltert[index]))); 
           },
         )
       ],
