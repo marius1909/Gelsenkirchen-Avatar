@@ -148,8 +148,8 @@ class _AnmeldungState extends State<Anmeldung> {
                 ),
                 SizedBox(height: 40),
 
-                /* Dieser Button dient nur dazu während der Entwicklung den Anmeldescreen zu überspringen */
-                FlatButton(
+                /* Dieser Button dient nur dazu die App ohne Anmeldung anzusehen. */
+                /* FlatButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                         context,
@@ -157,10 +157,10 @@ class _AnmeldungState extends State<Anmeldung> {
                             builder: (BuildContext context) => HomeScreen()));
                   },
                   child: Text(
-                    "Ich bin Entwickler ;)",
+                    "Ohne Anmeldung fortfahren",
                     textAlign: TextAlign.center,
                   ),
-                ),
+                ), */
               ]))
         ])
       ])),
