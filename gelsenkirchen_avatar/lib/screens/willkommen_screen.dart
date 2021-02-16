@@ -7,6 +7,7 @@ import 'map_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:imagebutton/imagebutton.dart';
 
+/* TODO: WillkommenScreen nach der Registrierung und nach der Avatarauswahl anzeigen */
 class WillkommenScreen extends StatelessWidget {
   final String spielername = Benutzer.current.benutzer;
 
