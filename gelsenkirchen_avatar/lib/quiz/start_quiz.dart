@@ -60,7 +60,8 @@ class _StartQuizState extends State<StartQuiz> {
               data['name'] + " - Quiz",
             ),
           ),
-          body: Column(children: [
+          body: SingleChildScrollView(
+              child: Column(children: [
             /* HEADLINE "QUIZ" */
             Container(
               padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
@@ -75,19 +76,14 @@ class _StartQuizState extends State<StartQuiz> {
             ),
 
             /* BESCHREIBUNG */
-            Expanded(
-                child: Container(
-                    child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
-                        child: ListView(children: [
-                          Text(
-                            "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
-                            textAlign: TextAlign.justify,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ])))),
-            SizedBox(height: 40),
-            
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
+              child: Text(
+                "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
+                textAlign: TextAlign.justify,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),            
 
             /* SPIELEN-BUTTON */
             ImageButton(
@@ -120,7 +116,7 @@ class _StartQuizState extends State<StartQuiz> {
                         toastLength: Toast.LENGTH_SHORT);
                   }
                 })
-          ]));
+          ])));
     }
   }
 }
