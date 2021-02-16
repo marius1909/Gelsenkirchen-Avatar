@@ -159,24 +159,24 @@ Widget getWidgetSound(Lernort l, BuildContext context) {
   if (l.sounds.isEmpty) {
     return new Text(
       'Derzeit sind leider keine Audiodateien verfügbar.',
-      textAlign: TextAlign.justify,
-      style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     return new Text(
       'Diese Funktion wird derzeit leider noch nicht unterstützt.',
-      textAlign: TextAlign.justify,
-      style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   }
 }
 
 Widget getWidgetVideos(Lernort l, BuildContext context) {
-  if (l.weitereBilder.isEmpty) {
+  if (l.videos.isEmpty) {
     return new Text(
       'Derzeit sind leider keine Videos verfügbar.',
-      textAlign: TextAlign.justify,
-      style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     return ChewieListItem(
@@ -192,8 +192,8 @@ Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
       'Derzeit sind leider keine weiteren Bilder verfügbar.',
-      textAlign: TextAlign.justify,
-      style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links

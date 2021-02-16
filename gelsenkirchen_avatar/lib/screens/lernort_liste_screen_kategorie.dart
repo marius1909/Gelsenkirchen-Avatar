@@ -92,21 +92,15 @@ class _LernortListeScreenKategorieState
               )
             : timeout
                 ? Center(
-                    child: RichText(
-                        text: TextSpan(
-                            style: TextStyle(
-                                fontSize: 15, color: Colors.grey[700]),
-                            children: [
-                          TextSpan(
-                              text: "Keine Ergebnisse für die Kategorie \"" +
-                                  lkname +
-                                  "\"",
-                              style: Theme.of(context).textTheme.headline3),
-                          /* TextSpan(
-                              text: lkname,
-                              style: TextStyle(fontWeight: FontWeight.bold)) */
-                        ])),
-                  )
+                    child: Container(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Text(
+                        "Derzeit gibt es leider keine Lernorte in die Kategorie \"" +
+                            lkname +
+                            "\"",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline3),
+                  ))
                 : Center(
                     child: CircularProgressIndicator(),
                   ),
