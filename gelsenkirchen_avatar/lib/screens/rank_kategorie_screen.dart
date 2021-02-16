@@ -155,14 +155,14 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
       } else {
         return Scaffold(
             appBar: AppBar(
-              title: Text(widget.name_lern_category),
+              title: Text(widget.nameLernCategory),
             ),
             body: Container(
                 margin: EdgeInsets.all(10.0),
                 alignment: Alignment.topCenter,
                 child: Center(
                     child: Text(
-                        "Es gibt keine Bestenliste für ${widget.name_lern_category}"))));
+                        "Es gibt keine Bestenliste für ${widget.nameLernCategory}"))));
       }
     }
   }
