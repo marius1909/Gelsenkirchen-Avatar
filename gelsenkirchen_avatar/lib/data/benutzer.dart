@@ -51,6 +51,11 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
     current = shared.objektVonJasonArray(objekt);
   }
 
+  void erwerbZusaetzlicherErfahrungspunkte(int erfahrungspunkte) {
+    this.erfahrung += erfahrungspunkte;
+    super.updateDatabaseWithID("erfahrung", "$erfahrung", this.id);
+  }
+
   @override
   Benutzer objektVonJasonArray(dynamic objekt) {
     return Benutzer(

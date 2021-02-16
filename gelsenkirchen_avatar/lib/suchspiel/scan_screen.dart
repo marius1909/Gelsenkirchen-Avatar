@@ -108,7 +108,7 @@ class ScanScreen extends StatelessWidget {
             paddingTop: 5,
             /* PressedImage gibt ein Bild für den Button im gedrückten 
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
+                    Bild im normalen Zustand angegeben werden. */
             pressedImage: Image.asset(
               "assets/buttons/Spielen_gruen_groß.png",
             ),

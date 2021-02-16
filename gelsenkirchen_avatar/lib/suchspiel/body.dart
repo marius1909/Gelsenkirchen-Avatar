@@ -14,6 +14,7 @@ class Body extends StatefulWidget {
   Body({this.art});
 
   final SuchspielArt art;
+  final int _sekundenProHinweis = 20;
 
   State<StatefulWidget> createState() => _BodyState();
 }
@@ -25,6 +26,8 @@ class _BodyState extends State<Body> {
   int maxHinweise;
   String aktuellerHinweistext;
   int verbleibendeZeit;
+  int erreichtePunkte;
+  CountDownController _controller = CountDownController();
 
   @override
   void initState() {
@@ -33,8 +36,8 @@ class _BodyState extends State<Body> {
     derzeitigerHinweis = hinweis.derzeitigerHinweis + 1;
     maxHinweise = hinweis.hinweisAnzahl;
     aktuellerHinweistext = hinweis.naechsterHinweis();
-    verbleibendeZeit = 10;
-    startTimer();
+    verbleibendeZeit = widget._sekundenProHinweis;
+    erreichtePunkte = 30;
   }
 
   @override
@@ -53,31 +56,23 @@ class _BodyState extends State<Body> {
           children: [
             /* HINWEISANZAHL */
             Container(
-                padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Icon(FlutterIcons.announcement_mdi,
-                          size: 20, color: Color(0xff7fad00)),
-                      SizedBox(width: 10),
-                      Text("Hinweis: $derzeitigerHinweis von $maxHinweise",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline3),
-                    ],
-                  ),
-                ])),
-            /* TIMER */
-            /* Alter Angabe der Hinweise */
-            /* Column(
-              children: [
-                Text(
-                  "Hinweis: $derzeitigerHinweis von $maxHinweise",
-                  style: TextStyle(color: Colors.black, fontSize: 30),
+              padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+              child: Column(children: [
+                Row(
+                  children: [
+                    Icon(FlutterIcons.announcement_mdi,
+                        size: 20, color: Color(0xff7fad00)),
+                    SizedBox(width: 10),
+                    Text("Hinweis: $derzeitigerHinweis von $maxHinweise",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline3),
+                    /* ZEIT */
+                    Spacer(),
+                    countDownTimer()
+                  ],
                 ),
-                Row(children: [Icon(Icons.timer), Text("$verbleibendeZeit")]),
-              ],
-            ), */
-
+              ]),
+            ),
             /* HINWEIS */
             Container(
               //height: 500,
@@ -187,30 +182,42 @@ class _BodyState extends State<Body> {
     );
   }
 
-  void startTimer() {
-    if (!(timer == null)) {
-      timer.cancel();
-    }
-
-    int sekundenCounter = 10;
-
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        verbleibendeZeit = sekundenCounter;
-        sekundenCounter--;
-      });
-
-      if (verbleibendeZeit == 0) {
-        timer.cancel();
-
+  Widget countDownTimer() {
+    return CircularCountDownTimer(
+      duration: widget._sekundenProHinweis,
+      initialDuration: 0,
+      controller: _controller,
+      width: MediaQuery.of(context).size.width / 16,
+      height: MediaQuery.of(context).size.height / 16,
+      ringColor: Colors.grey[300],
+      ringGradient: null,
+      fillColor: Color(0xff98ce00),
+      fillGradient: null,
+      backgroundColor: Color(0xff7fad00),
+      backgroundGradient: null,
+      strokeWidth: 10.0,
+      strokeCap: StrokeCap.round,
+      textStyle: TextStyle(
+          fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+      textFormat: CountdownTextFormat.S,
+      isReverse: true,
+      isReverseAnimation: false,
+      isTimerTextShown: true,
+      autoStart: true,
+      onStart: () {
+        print('Countdown Started');
+      },
+      onComplete: () {
+        print('Countdown Ended');
         String neuerHinweis = hinweis.naechsterHinweis();
-
         if (neuerHinweis != null) {
-          derzeitigerHinweis++;
-          aktuellerHinweistext = neuerHinweis;
-          startTimer();
+          setState(() {
+            derzeitigerHinweis++;
+            aktuellerHinweistext = neuerHinweis;
+          });
+          _controller.restart(duration: widget._sekundenProHinweis);
         }
-      }
-    });
+      },
+    );
   }
 }

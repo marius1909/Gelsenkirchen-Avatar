@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Benutzer currentBenutzer = Benutzer();
   Benutzer angemeldeterBenutzer;
-  bool processing = true;
+  bool processing = false;
 
   /* Prüfen ob der Benutzer bereits angemeldet ist */
   Future pruefeAufLogin() async {

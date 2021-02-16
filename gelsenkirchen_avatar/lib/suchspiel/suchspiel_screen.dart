@@ -8,7 +8,7 @@ class Suchspiel extends StatelessWidget {
     return ScanScreen(
       onScanned: (art) {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Body(art: art,)));
+        .pushReplacement(MaterialPageRoute(builder: (context) => Body(art: art)));
       },
     );
   }
