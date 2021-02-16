@@ -79,11 +79,11 @@ class _StartQuizState extends State<StartQuiz> {
             Container(
               padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
               child: Text(
-                "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
+                "In diesem klassischen Quiz werden dir spezielle Fragen zum Lernort, an dem du dich gerade befindest gestellt. Für die Beantwortung der Fragen hast du jeweils 30 Sekunden Zeit. Um eine Frage zu beantworten, klicke einfach auf die entsprechende Antwort. Ob deine Antwort richtig oder falsch war, siehst du an den roten oder grünen Symbolen am unteren Bildschirmrand. Ein rotes X bedeutet, dass die Antwort leider falsch war und du dafür keine Punkte bekommst. Ein güner Haken bedeutet, die Antwort war richtig und du bekommst eine gewisse Anzahl an Punkten gutgeschrieben.\nDrücke \"Start\" und erfahre wie viel du schon über den Lernort gelernt hast.",
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
-            ),            
+            ),
 
             /* SPIELEN-BUTTON */
             ImageButton(
