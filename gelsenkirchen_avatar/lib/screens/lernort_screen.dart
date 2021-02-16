@@ -172,9 +172,11 @@ class _LernortScreenState extends State<LernortScreen>
                     kategorienSymbol,
                     SizedBox(width: 10),
                     /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
-                    Text("Kategorie",
-                        //lernKategorieList[lernort.kategorieID].name,
-                        style: Theme.of(context).textTheme.headline4),
+                    Flexible(
+                      child: Text("Kategorie",
+                          //lernKategorieList[lernort.kategorieID].name,
+                          style: Theme.of(context).textTheme.headline4),
+                    )
                   ]),
                   SizedBox(height: 20),
 
@@ -199,11 +201,13 @@ class _LernortScreenState extends State<LernortScreen>
                     Icon(FlutterIcons.access_time_mdi,
                         size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
-                    Text(
-                        lernort.oeffnungszeiten == ""
-                            ? "Keine Öffnungszeiten vorhanden"
-                            : lernort.oeffnungszeiten,
-                        style: Theme.of(context).textTheme.headline4),
+                    Flexible(
+                      child: Text(
+                          lernort.oeffnungszeiten == ""
+                              ? "Keine Öffnungszeiten vorhanden"
+                              : lernort.oeffnungszeiten,
+                          style: Theme.of(context).textTheme.headline4),
+                    )
                   ]),
                   SizedBox(height: 20),
 
@@ -213,9 +217,13 @@ class _LernortScreenState extends State<LernortScreen>
                     Icon(FlutterIcons.attach_money_mdi,
                         size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
-                    Text(
-                        lernort.kosten == "" ? "Keine Angaben" : lernort.kosten,
-                        style: Theme.of(context).textTheme.headline4),
+                    Flexible(
+                      child: Text(
+                          lernort.kosten == ""
+                              ? "Keine Angaben"
+                              : lernort.kosten,
+                          style: Theme.of(context).textTheme.headline4),
+                    )
                   ]),
                   SizedBox(height: 20),
 
@@ -225,11 +233,13 @@ class _LernortScreenState extends State<LernortScreen>
                     Icon(FlutterIcons.accessible_mdi,
                         size: 20, color: Color(0xff0e53c9)),
                     SizedBox(width: 10),
-                    Text(
-                        lernort.barrierefrei == 0
-                            ? "nicht barrierefrei"
-                            : "barrierefrei",
-                        style: Theme.of(context).textTheme.headline4),
+                    Flexible(
+                      child: Text(
+                          lernort.barrierefrei == 0
+                              ? "nicht barrierefrei"
+                              : "barrierefrei",
+                          style: Theme.of(context).textTheme.headline4),
+                    )
                   ]),
                   SizedBox(height: 20),
 
@@ -349,13 +359,15 @@ Widget setWebsite(Lernort l) {
     return Row(children: [
       Icon(FlutterIcons.web_fou, size: 20, color: Color(0xff0e53c9)),
       SizedBox(width: 10),
-      Text(
-        l.website,
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Color(0xff0b3e99)),
-      ),
+      Flexible(
+        child: Text(
+          l.website,
+          style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff0b3e99)),
+        ),
+      )
     ]);
   }
 }
