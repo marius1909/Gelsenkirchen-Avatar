@@ -5,13 +5,10 @@ import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
-import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

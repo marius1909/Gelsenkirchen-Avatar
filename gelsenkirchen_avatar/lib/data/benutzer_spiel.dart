@@ -1,8 +1,6 @@
 import 'datenbankObjekt.dart';
 import 'database_url.dart';
 
-import 'database_url.dart';
-
 class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   int benutzerID;
   int spielID;

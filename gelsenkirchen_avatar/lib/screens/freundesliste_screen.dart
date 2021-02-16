@@ -140,7 +140,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                           onPressed: () {
                             setState(() {
                               showAddFriendTextField = false;
-                              FuegeFreundHinzu(
+                              fuegeFreundHinzu(
                                   freundeHinzufuegenController.text);
                             });
                           },
@@ -166,7 +166,7 @@ class _FreundeslisteState extends State<Freundesliste> {
   }
 
   // TODO: Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
-  void FuegeFreundHinzu(String _name) {
+  void fuegeFreundHinzu(String _name) {
     print(_name);
   }
 }

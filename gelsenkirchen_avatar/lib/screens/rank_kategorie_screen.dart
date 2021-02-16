@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class RankKategorieScreen extends StatefulWidget {
-  int id_lern_category;
-  int id_user;
-  String name_lern_category;
+  final int lernCategoryID;
+  final int userID;
+  final String nameLernCategory;
 
   RankKategorieScreen(
-      this.id_lern_category, this.id_user, this.name_lern_category);
+      this.lernCategoryID, this.userID, this.nameLernCategory);
 
   @override
   _RankKategorieScreenState createState() => _RankKategorieScreenState();
@@ -20,12 +19,12 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
   int limit = 10;
   dynamic data;
 
-  Future<void> RankCategories() async {
+  Future<void> rankCategories() async {
     var url = "http://zukunft.sportsocke522.de/rank_categories.php?" +
         "id_user=" +
-        widget.id_user.toString() +
+        widget.userID.toString() +
         "&id_lern_category=" +
-        widget.id_lern_category.toString() +
+        widget.lernCategoryID.toString() +
         "&limit=" +
         limit.toString();
     var res = await http.get(url);
@@ -43,7 +42,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    RankCategories();
+    rankCategories();
   }
 
   @override
@@ -60,7 +59,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
       if (lernCategories != null) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(widget.name_lern_category),
+            title: Text(widget.nameLernCategory),
           ),
           body: Column(
             children: [
@@ -153,14 +152,14 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
       } else {
         return Scaffold(
             appBar: AppBar(
-              title: Text(widget.name_lern_category),
+              title: Text(widget.nameLernCategory),
             ),
             body: Container(
                 margin: EdgeInsets.all(10.0),
                 alignment: Alignment.topCenter,
                 child: Center(
                     child: Text(
-                        "Es gibt keine Bestenliste für ${widget.name_lern_category}"))));
+                        "Es gibt keine Bestenliste für ${widget.nameLernCategory}"))));
       }
     }
   }

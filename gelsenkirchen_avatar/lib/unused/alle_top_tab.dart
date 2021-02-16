@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 

@@ -54,19 +54,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
   bool sounds = false;
   bool bilder = false;
 
-  if (!l.beschreibung.isEmpty) {
+  if (l.beschreibung.isNotEmpty) {
     anzahl++;
     text = true;
   }
-  if (!l.videos.isEmpty) {
+  if (l.videos.isNotEmpty) {
     anzahl++;
     videos = true;
   }
-  if (!l.sounds.isEmpty) {
+  if (l.sounds.isNotEmpty) {
     anzahl++;
     sounds = true;
   }
-  if (!l.weitereBilder.isEmpty) {
+  if (l.weitereBilder.isNotEmpty) {
     anzahl++;
     bilder = true;
   }
@@ -82,19 +82,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                   labelColor: Colors.green,
                   unselectedLabelColor: Colors.black,
                   tabs: [
-                    get_TabsTitel(
+                    getTabsTitel(
                       1,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       2,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       3,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       4,
                       true,
                     ),
@@ -136,7 +136,7 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
   }
 }
 
-Widget get_TabsTitel(int i, bool sollRein) {
+Widget getTabsTitel(int i, bool sollRein) {
   //1 = Text  //2= Video   //3 = Sounds    //4= Bilder
   if (sollRein) {
     if (i == 1) {
@@ -150,9 +150,8 @@ Widget get_TabsTitel(int i, bool sollRein) {
     } else if (i == 0) {
       return Tab(text: 'Fehler', icon: Icon(FlutterIcons.error_mdi));
     }
-  } else {
-    return null;
   }
+  return null;
 }
 
 Widget getWidgetSound(Lernort l, BuildContext context) {

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
-import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 /* TODO: Kategorieicon einfügen */
@@ -388,19 +386,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
   bool sounds = false;
   bool bilder = false;
 
-  if (!l.beschreibung.isEmpty) {
+  if (l.beschreibung.isNotEmpty) {
     anzahl++;
     text = true;
   }
-  if (!l.videos.isEmpty) {
+  if (l.videos.isNotEmpty) {
     anzahl++;
     videos = true;
   }
-  if (!l.sounds.isEmpty) {
+  if (l.sounds.isNotEmpty) {
     anzahl++;
     sounds = true;
   }
-  if (!l.weitereBilder.isEmpty) {
+  if (l.weitereBilder.isNotEmpty) {
     anzahl++;
     bilder = true;
   }
@@ -417,19 +415,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                   indicatorColor: Color(0xff0b3e99),
                   unselectedLabelColor: Color(0xff0e53c9),
                   tabs: [
-                    get_TabsTitel(
+                    getTabsTitel(
                       1,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       2,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       3,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       4,
                       true,
                     ),

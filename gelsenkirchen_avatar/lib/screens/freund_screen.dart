@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 class Freund extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  int id_user;
+  final int id_user;
   Freund(this.id_user);
 
   @override
@@ -37,15 +34,15 @@ class _FreundState extends State<Freund> {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
-        spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
+        spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
         anzahlErrungenschaften =
-            loadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
-        avatar = loadInfo.loadUserAvatarImage(
+            LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
+        avatar = LoadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });
       //BROKEN
       setState(() async {
-        level = await loadInfo.loadUserLevel(widget.id_user);
+        level = await LoadInfo.loadUserLevel(widget.id_user);
       });
     });
   }

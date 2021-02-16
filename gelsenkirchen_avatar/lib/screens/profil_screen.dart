@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
-import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
-import 'package:gelsenkirchen_avatar/screens/profil_bearbeiten_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'avatarbearbeiten_screen.dart';
@@ -19,9 +15,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class Profil extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  int id_user;
+  final int userID;
 
-  Profil(this.id_user);
+  Profil(this.userID);
 
   @override
   _ProfilState createState() => _ProfilState();
@@ -47,20 +43,20 @@ class _ProfilState extends State<Profil> {
   void initState() {
     super.initState();
     List<Freigeschaltet> a =
-        loadInfo.getFreigeschalteteErrungenschaften(widget.id_user);
+        LoadInfo.getFreigeschalteteErrungenschaften(widget.userID);
     setState(() {
       level = 0;
     });
     Benutzer.shared.gibObjekte().then((alleBenutzer) async {
       setState(() {
-        spielername = loadInfo.loadName(alleBenutzer, widget.id_user);
+        spielername = LoadInfo.loadName(alleBenutzer, widget.userID);
         anzahlErrungenschaften = a.length;
 
-        avatar = loadInfo.loadUserAvatarImage(
-            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
+        avatar = LoadInfo.loadUserAvatarImage(
+            widget.userID, avatarTypID, ausgeruesteteCollectablesID);
       });
 
-      int levelTemp = await loadInfo.loadUserLevel(widget.id_user);
+      int levelTemp = await LoadInfo.loadUserLevel(widget.userID);
       //BROKEN
       setState(() {
         level = levelTemp;

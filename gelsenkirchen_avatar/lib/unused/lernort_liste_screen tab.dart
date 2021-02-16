@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/unused/alle_top_tab.dart';
 import 'package:gelsenkirchen_avatar/screens/kategorie_top_tab.dart';
-import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/suchen_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gelsenkirchen_avatar/data/lernort.dart';
-import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 
 class LernortListeScreen extends StatefulWidget {
   @override
@@ -26,7 +22,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
             backgroundColor: Colors.blue,
             title: Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: _CustomAppBar(context),
+              child: _customAppBar(context),
             ),
             bottom: TabBar(
               isScrollable: true,
@@ -59,7 +55,7 @@ class _LernortListeScreenState extends State<LernortListeScreen> {
   }
 }
 
-Widget _CustomAppBar(BuildContext context) {
+Widget _customAppBar(BuildContext context) {
   return Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

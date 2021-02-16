@@ -524,16 +524,16 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
-    if (CalculatorLevel(jsonData['total_point_new']) >
-        CalculatorLevel(jsonData['total_point_old'])) {
+    if (calculateLevel(jsonData['total_point_new']) >
+        calculateLevel(jsonData['total_point_old'])) {
       String showtext;
-      if (CalculatorPointLevelUp(jsonData['total_point_new']) == -1) {
+      if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
         /* TODO: Belohnung anzeigen (Lisa) */
         showtext = "Glückwunsch!\nDu hast Level ... erreicht" +
             "\nDeine Belohnung: ...";
       } else {
         showtext =
-            "Du benötigst noch ${CalculatorPointLevelUp(jsonData['total_point_new'])} Punkte für Level ${CalculatorLevel(jsonData['total_point_new']) + 1}";
+            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
       }
 
       /* Dialog für Levelaufstieg */
@@ -602,47 +602,48 @@ class _QuizPageState extends State<QuizPage> {
   }
 
 //Level von Spieler
-  int CalculatorLevel(total_point) {
-    if (total_point >= 0 && total_point <= 29) {
+  int calculateLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
       return 1;
-    } else if (total_point >= 30 && total_point <= 50) {
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
       return 2;
-    } else if (total_point >= 51 && total_point <= 85) {
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
       return 3;
-    } else if (total_point >= 86 && total_point <= 145) {
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
       return 4;
-    } else if (total_point >= 146 && total_point <= 247) {
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
       return 5;
-    } else if (total_point >= 248 && total_point <= 420) {
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
       return 6;
-    } else if (total_point >= 421 && total_point <= 714) {
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
       return 7;
-    } else if (total_point >= 715 && total_point <= 1214) {
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
       return 8;
-    } else if (total_point >= 1215) {
+    } else if (totalPoints >= 1215) {
       return 9;
     }
+    return 0;
   }
 
 //Berechnet, wie viele Punktzahl Spieler benötigt, um das nächse Level zu erreichen
-  int CalculatorPointLevelUp(total_point) {
-    if (total_point >= 0 && total_point <= 29) {
-      return 30 - total_point;
-    } else if (total_point >= 30 && total_point <= 50) {
-      return 51 - total_point;
-    } else if (total_point >= 51 && total_point <= 85) {
-      return 86 - total_point;
-    } else if (total_point >= 86 && total_point <= 145) {
-      return 146 - total_point;
-    } else if (total_point >= 146 && total_point <= 247) {
-      return 248 - total_point;
-    } else if (total_point >= 248 && total_point <= 420) {
-      return 421 - total_point;
-    } else if (total_point >= 421 && total_point <= 714) {
-      return 715 - total_point;
-    } else if (total_point >= 715 && total_point <= 1214) {
-      return 1215 - total_point;
-    } else if (total_point >= 1215) {
+  int pointsNeededForNextLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
+      return 30 - totalPoints;
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
+      return 51 - totalPoints;
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
+      return 86 - totalPoints;
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
+      return 146 - totalPoints;
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
+      return 248 - totalPoints;
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
+      return 421 - totalPoints;
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
+      return 715 - totalPoints;
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
+      return 1215 - totalPoints;
+    } else {
       return -1;
     }
   }

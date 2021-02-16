@@ -1,18 +1,15 @@
 // ignore: camel_case_types
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'Avatar.dart';
 import 'benutzer.dart';
 import 'package:http/http.dart' as http;
-
 import 'freigeschaltet.dart';
 
-class loadInfo {
-  static String loadName(List<Benutzer> alleBenutzer, int id_user) {
+class LoadInfo {
+  static String loadName(List<Benutzer> alleBenutzer, int userID) {
     String name = alleBenutzer.firstWhere((benutzer) {
-      return benutzer.id == id_user;
+      return benutzer.id == userID;
     }).benutzer;
 
     return name;
@@ -29,9 +26,9 @@ class loadInfo {
     //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
   }
 
-  static Future<int> loadUserLevel(int user_id) async {
+  static Future<int> loadUserLevel(int userID) async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
-        user_id.toString();
+        userID.toString();
     var res = await http.get(url);
     if (jsonDecode(res.body) == "Datensatz existiert nicht") {
       print('Datensatz nicht gefunden');

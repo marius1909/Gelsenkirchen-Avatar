@@ -14,7 +14,7 @@ class LernortListeScreen extends StatelessWidget {
           // backgroundColor: Colors.blue,
           title: Padding(
             padding: EdgeInsets.only(top: 0),
-            child: _CustomAppBar(context),
+            child: _customAppBar(context),
           ),
         ),
         /* Auflistung der einzelnen Kategorien */
@@ -22,7 +22,7 @@ class LernortListeScreen extends StatelessWidget {
   }
 }
 
-Widget _CustomAppBar(BuildContext context) {
+Widget _customAppBar(BuildContext context) {
   return Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

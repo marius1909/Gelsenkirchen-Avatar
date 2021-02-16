@@ -6,9 +6,9 @@ import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'avatarbearbeiten_screen.dart';
 
 class ProfilBearbeiten extends StatefulWidget {
-  int id_user;
+  final int userID;
 
-  ProfilBearbeiten(this.id_user);
+  ProfilBearbeiten(this.userID);
 
   @override
   _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
@@ -36,9 +36,9 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
-        aktuellerName = loadInfo.loadName(alleBenutzer, widget.id_user);
-        avatar = loadInfo.loadUserAvatarImage(
-            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
+        aktuellerName = LoadInfo.loadName(alleBenutzer, widget.userID);
+        avatar = LoadInfo.loadUserAvatarImage(
+            widget.userID, avatarTypID, ausgeruesteteCollectablesID);
       });
     });
   }

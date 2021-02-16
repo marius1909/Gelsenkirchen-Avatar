@@ -6,9 +6,9 @@ import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class ScoreBoard extends StatefulWidget {
-  int id_user;
+  final int userID;
 
-  ScoreBoard(this.id_user);
+  ScoreBoard(this.userID);
 
   @override
   _ScoreBoardState createState() => _ScoreBoardState();
@@ -16,19 +16,19 @@ class ScoreBoard extends StatefulWidget {
 
 class _ScoreBoardState extends State<ScoreBoard> {
   dynamic data;
-  int total_point;
+  int totalPoints;
   int level;
 
-  Future<void> LernKategories() async {
+  Future<void> lernKategories() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
-        widget.id_user.toString();
+        widget.userID.toString();
     var res = await http.get(url);
     if (jsonDecode(res.body) == "Datensatz existiert nicht") {
       print('Datensatz nicht gefunden');
     } else {
       setState(() {
         data = jsonDecode(res.body)['data'];
-        total_point = jsonDecode(res.body)['total_point'];
+        totalPoints = jsonDecode(res.body)['total_point'];
         level = jsonDecode(res.body)['level'];
         print(data);
       });
@@ -39,7 +39,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    LernKategories();
+    lernKategories();
   }
 
   @override
@@ -83,7 +83,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                       "Du hast Level " +
                           level.toString() +
                           " erreicht, mit insgesamt " +
-                          total_point.toString() +
+                          totalPoints.toString() +
                           " Erfahrungspunkten.",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline3)
@@ -219,7 +219,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                 MaterialPageRoute(
                     builder: (BuildContext context) => RankKategorieScreen(
                         int.parse(data[index]['id']),
-                        widget.id_user,
+                        widget.userID,
                         data[index]['name'].toString())));
           },
         )

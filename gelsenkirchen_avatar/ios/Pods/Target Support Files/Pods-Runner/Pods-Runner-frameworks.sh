@@ -203,6 +203,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/location/location.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nfc_in_flutter/nfc_in_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/qr_code_scanner/qr_code_scanner.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
@@ -213,6 +214,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/location/location.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nfc_in_flutter/nfc_in_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/qr_code_scanner/qr_code_scanner.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
@@ -223,6 +225,7 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/location/location.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nfc_in_flutter/nfc_in_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/qr_code_scanner/qr_code_scanner.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/wakelock/wakelock.framework"
 fi
