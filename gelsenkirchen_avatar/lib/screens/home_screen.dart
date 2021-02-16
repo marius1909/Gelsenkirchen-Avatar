@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 import 'map_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final String spielername = Benutzer.current.benutzer;
+  List freigeschaltetList = List();
+  Avatar aktuellerAvatar = Avatar(0, 0);
+
+  void initState() {
+    var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
+    freigeschaltetFuture.then((freigeschaltet) {
+      setState(() {
+        freigeschaltetList = freigeschaltet
+            .where((freigeschaltet) =>
+                freigeschaltet.benutzerID == Benutzer.current.id &&
+                freigeschaltet.ausgeruestet)
+            .toList();
+        print("Hallo");
+        var sammelID = freigeschaltetList[0].getSammelID();
+        print(freigeschaltetList);
+        print(sammelID);
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +59,8 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
                 /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                child: Image.asset(Avatar(0, 0).imagePath,
+                /* TODO: Durch Klick auf Avatar soll man zum Profil gelangen (Lisa) */
+                child: Image.asset(aktuellerAvatar.imagePath,
                     width: 100, height: 100),
               ),
               Text(

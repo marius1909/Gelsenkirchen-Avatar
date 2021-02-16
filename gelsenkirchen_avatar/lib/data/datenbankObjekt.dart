@@ -56,6 +56,7 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
     return response;
   }
 
+  /* Updaten des Datensatzes anhand der ID */
   Future<Response> updateDatabaseWithID(
       String attribut, String neuerWert, int id) async {
     var data = {

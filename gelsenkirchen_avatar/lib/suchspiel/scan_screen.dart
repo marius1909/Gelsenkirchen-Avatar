@@ -36,7 +36,7 @@ class ScanScreen extends StatelessWidget {
                 /* BILD */
                 Image(
                   image: AssetImage('assets/images/hand_phone.png'),
-                  width: 250,
+                  width: 180,
                 ),
                 /* Altes Bild */
                 /* ClipRRect(
@@ -53,7 +53,7 @@ class ScanScreen extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
                   child: Text(
-                    "Scanne einen QR-Code in der Nähe des Lernortes und errate das gesuchte Wort.",
+                    "Scanne einen QR-Code in der Nähe eines Lernortes. Anschließend erscheint ein Hinweis auf ein gesuchtes Wort, dass mit dem Lernort zu tun hat. Deine Aufgabe ist es, mit Hilfe von möglichst wenigen Hinweisen das gesuchte Wort zu erraten. Du hast 20 Sekunden Zeit, bis ein neuer Hinweis erscheint. Du denkst, du hast das Wort erraten? Dann tippe es unten in das Textfeld ein, die Anzahl der Boxen gibt dabei die Anzahl der Buchstaben des Wortes an. Ist das Wort richtig, ist das Spiel beendet.\nDrücke Start und und lass uns sehen wie viel du schon über den Lernort weißt.",
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
