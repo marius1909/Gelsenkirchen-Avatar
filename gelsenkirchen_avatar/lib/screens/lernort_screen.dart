@@ -247,7 +247,7 @@ class _LernortScreenState extends State<LernortScreen>
 
                   /*BESCHREIBUNG*/
                   Text(
-                    lernort.beschreibung,
+                    lernort.kurzbeschreibung,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),

@@ -9,12 +9,22 @@ import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/impressum_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
-import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
+import 'package:gelsenkirchen_avatar/quiz/nfc_quiz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
 class NavDrawer extends StatelessWidget {
+  String status;
+  String icon;
   @override
   Widget build(BuildContext context) {
+    if (Benutzer.current.id == null) {
+      status = "Anmelden";
+      icon = "assets/icons/Anmelden_gelb_Icon.png";
+    } else {
+      status = "Abmelden";
+      icon = "assets/icons/Abmelden_gelb_Icon.png";
+    }
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -88,26 +98,6 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Lernort_gelb_Icon.png"),
-              ),
-              title: Text('Lernorte'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            LernortListeScreen()));
-              }),
-
-          /* QR-SUCHSPIEL */
-          ListTile(
-              leading: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                  maxWidth: 30,
-                  maxHeight: 30,
-                ),
                 child: Image.asset("assets/icons/QR_rot_Icon.png"),
               ),
               title: Text('QR-Suchspiel'),
@@ -119,7 +109,8 @@ class NavDrawer extends StatelessWidget {
               }),
 
           /* FREUNDE */
-          ListTile(
+          /* Auskommentiert für Show & Tell */
+          /* ListTile(
               //leading: Icon(Icons.people),
               leading: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -136,7 +127,7 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Freundesliste()));
-              }),
+              }), */
 
           /* SCOREBOARD */
           /* Wurde in Sprint 4 in "Bestelnliste" umbenannt, da verständlicher für User */
@@ -203,7 +194,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -213,8 +205,7 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => ImpressumScreen()));
               }),
 
-          /* TODO: Wenn Benutzer angemeldet, dann "Abmelden" anzeigen, wenn Benutzer nicht angemeldet, dann "Anmelden" anzeigen. (Lisa) */
-          /* ANMELDEN */
+          /* ANMELDEN / ABMELDEN je nachdem, ob Benutzer angemeldet*/
           ListTile(
               //leading: Icon(Icons.description),
               leading: ConstrainedBox(
@@ -224,45 +215,21 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Anmelden_gelb_Icon.png"),
+                child: Image.asset(icon),
               ),
-              title: Text('Anmelden'),
-              onTap: () {
+              title: Text(status),
+              onTap: () async {
+                if (Benutzer.current?.id != null) {
+                  Benutzer.current = null;
+                  SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.remove("benutzer");
+                }
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Anmeldung()));
               }),
-
-          /* ABMELDEN */
-          ListTile(
-            leading: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: 20,
-                minHeight: 20,
-                maxWidth: 30,
-                maxHeight: 30,
-              ),
-              child: Image.asset("assets/icons/Abmelden_gelb_Icon.png"),
-            ),
-            title: Text('Abmelden'),
-            onTap: () async {
-              if (Benutzer.current?.id != null) {
-                Benutzer.current = null;
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.remove("benutzer");
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Anmeldung()));
-              } else {
-                Fluttertoast.showToast(
-                    msg: "Du musst angemeldet sein, um dich abzumelden.S",
-                    toastLength: Toast.LENGTH_SHORT);
-              }
-            },
-          ),
         ],
       ),
     );
