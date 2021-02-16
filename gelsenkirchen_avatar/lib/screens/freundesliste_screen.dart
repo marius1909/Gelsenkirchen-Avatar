@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-
 import 'freund_screen.dart';
 
 class Freundesliste extends StatefulWidget {

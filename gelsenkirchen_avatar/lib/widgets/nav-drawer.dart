@@ -122,7 +122,8 @@ class NavDrawer extends StatelessWidget {
               }),
 
           /* FREUNDE */
-          ListTile(
+          /* Auskommentiert für Show & Tell */
+          /* ListTile(
               //leading: Icon(Icons.people),
               leading: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -139,7 +140,7 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Freundesliste()));
-              }),
+              }), */
 
           /* SCOREBOARD */
           /* Wurde in Sprint 4 in "Bestelnliste" umbenannt, da verständlicher für User */
@@ -152,8 +153,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -206,7 +206,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
@@ -227,7 +228,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Anmelden_gelb_Icon.png"),
+                child: Image.asset("assets/icons/Anmelden_blau_Icon.png"),
               ),
               title: Text('Anmelden'),
               onTap: () {
@@ -246,7 +247,7 @@ class NavDrawer extends StatelessWidget {
                 maxWidth: 30,
                 maxHeight: 30,
               ),
-              child: Image.asset("assets/icons/Abmelden_gelb_Icon.png"),
+              child: Image.asset("assets/icons/Abmelden_blau_Icon.png"),
             ),
             title: Text('Abmelden'),
             onTap: () async {
