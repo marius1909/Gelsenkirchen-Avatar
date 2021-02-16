@@ -336,7 +336,6 @@ class _QuizPageState extends State<QuizPage> {
           return AlertDialog(
             title: Text("Glückwunsch!",
                 style: TextStyle(color: Color(0xffff9f1c))),
-            /* TODO: Belohnung anzeigen (Lisa) */
             content: Text(
                 "Du hast alle Fragen beantwortet.\nDeine Punktzahl: $sumPunkte"),
             actions: <Widget>[

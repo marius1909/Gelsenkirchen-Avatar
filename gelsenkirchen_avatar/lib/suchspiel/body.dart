@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_hinweis.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/text_box.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/scan_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';

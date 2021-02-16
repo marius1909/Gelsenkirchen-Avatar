@@ -6,7 +6,6 @@ import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 
-/* TODO: Kategorieicon einfügen */
 class LernortScreen extends StatefulWidget {
   final Lernort l;
   final String k;
@@ -164,7 +163,6 @@ class _LernortScreenState extends State<LernortScreen>
               child: Column(
                 children: [
                   /* KATEGORIE*/
-                  /* TODO: - Hier muss noch der Kategoriename anstatt die KategorieId eingefügt werden */
                   /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                   Row(children: [
                     kategorienSymbol,
@@ -277,7 +275,6 @@ class _LernortScreenState extends State<LernortScreen>
                           children: <Widget>[
                             ListTile(
                               leading:
-                                  /* TODO: Spiel-Icon anpassen (Lisa) (Notiz an mich) */
                                   Image.asset(
                                       "assets/icons/Quiz_gelb_Icon.png"),
                               title:
@@ -292,7 +289,6 @@ class _LernortScreenState extends State<LernortScreen>
                               FlatButton(
                                 child: Text('Spielen',
                                     style:
-                                        /* TODO: Fontcolor an Spiel-Icon anpassen (Lisa) (Notiz an mich) */
                                         TextStyle(
                                             color: Color(0xffff9f1c),
                                             fontWeight: FontWeight.bold)),

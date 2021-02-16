@@ -163,7 +163,7 @@ Wenn schon vergeben wird setState nicht aufgerufen
     }
 
     if (!nameSchonVergeben) {
-      //Speicher neuen Namen in Datenbank TODO!
+      //TODO: Speicher neuen Namen in Datenbank
 
       setState(() {
         aktuellerName = name;

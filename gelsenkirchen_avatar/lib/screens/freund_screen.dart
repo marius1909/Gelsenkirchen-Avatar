@@ -91,7 +91,7 @@ class _FreundState extends State<Freund> {
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        /* TODO: Level des Spielers anzeigen (Lisa) */
+                        /* TODO: Level des Spielers anzeigen */
                         Text(
                           level.toString(),
                           style: TextStyle(
