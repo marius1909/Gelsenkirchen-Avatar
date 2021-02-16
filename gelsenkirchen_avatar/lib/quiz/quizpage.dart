@@ -28,10 +28,7 @@ class _QuizPageState extends State<QuizPage> {
   CountDownController _controller = CountDownController();
   final List<Widget> punkteBehalten = [];
 
-  Timer _timer;
-
-  //Erst testen mit 10sec
-  int _start = 10;
+  int _start = 31;
 
   int sumPunkte = 0;
   int positionFragen = 0;
@@ -54,30 +51,8 @@ class _QuizPageState extends State<QuizPage> {
       setState(() {
         data = jsonDecode(res.body);
         print(data);
-        startTimer();
       });
     }
-  }
-
-  //set Time
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) => setState(
-        () {
-          if (_start == 1) {
-            setState(() {
-              timer.cancel();
-              /* displayDialog(
-                  "Du bekommst für diese Frage leider keine Punkte. \nMöchtest du weiterspielen?"); */
-            });
-          } else {
-            _start = _start - 1;
-          }
-        },
-      ),
-    );
   }
 
 //Benachrichtigung erhalten, wenn Zeit abgelaufen ist
@@ -93,6 +68,7 @@ class _QuizPageState extends State<QuizPage> {
           content: Text(title),
           actions: <Widget>[
             new FlatButton(
+              //ja -> spielen weiter mit nächsten Frage -> Antwort von aktuellen Fragen ist automatisch falsch(keine Antwort bekommen)
               child: new Text("Ja"),
               onPressed: () {
                 Navigator.of(context).pop(true);
@@ -100,6 +76,7 @@ class _QuizPageState extends State<QuizPage> {
               },
             ),
             new FlatButton(
+              //nein -> nicht weiter spielen -> zurück zur vorherigen Seite
               child: new Text("Nein"),
               onPressed: () => {
                 Navigator.of(context).pop(true),
@@ -110,48 +87,6 @@ class _QuizPageState extends State<QuizPage> {
         );
       },
     );
-
-    /* Alter Dialog, der erscheint, wenn die Zeit abgelaufen ist */
-    /* showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) => new CupertinoAlertDialog(
-        title: new Text("Die Zeit ist abgelaufen"),
-        content: new Text(title),
-        actions: [
-          CupertinoDialogAction(
-            //yes -> spielen weiter mit nächsten Frage -> Antwort von aktuellen Fragen ist automatisch falsch(keine Antwort bekommen)
-            child: new Text("Ja"),
-            onPressed: () {
-              Navigator.of(context).pop(true);
-              checkAnswer("aghdhgfahsdfhj");
-            },
-          ),
-          CupertinoDialogAction(
-            //no -> nicht weiter spielen -> zurück zur vorherigen Seite
-            child: new Text("Nein"),
-            onPressed: () =>
-                {Navigator.of(context).pop(true), Navigator.of(context).pop()},
-          ),
-        ],
-      ),
-    ); */
-  }
-
-  void timerReset() {
-    timerCancel();
-    startTimer();
-  }
-
-  void timerCancel() {
-    _timer.cancel();
-    _start = 10;
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
   }
 
   void initState() {
@@ -207,7 +142,7 @@ class _QuizPageState extends State<QuizPage> {
 
             /* ZEIT */
             CircularCountDownTimer(
-              duration: 31,
+              duration: _start,
               initialDuration: 0,
               controller: _controller,
               width: MediaQuery.of(context).size.width / 4,
@@ -239,23 +174,6 @@ class _QuizPageState extends State<QuizPage> {
                     "Du bekommst für diese Frage leider keine Punkte. \n Möchtest du weiterspielen?");
               },
             ),
-
-            /* Alte Zeitangabe */
-            /* Expanded(
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                child: Center(
-                  child: Text(
-                    "$_start",
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                ),
-              ),
-            ), */
 
             /* FRAGE */
             Container(
@@ -385,28 +303,6 @@ class _QuizPageState extends State<QuizPage> {
               ),
             ),
 
-            /* BEEDEN - BUTTON */
-            /* Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: new MaterialButton(
-                    minWidth: 240.0,
-                    height: 30.0,
-                    color: Colors.red[300],
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: new Text(
-                      "Quit",
-                      style: new TextStyle(fontSize: 18.0, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ), */
-
             /* ICONS FÜR RICHTIGE ODER FALSCHE ANTWORTEN */
             Expanded(
               child: Row(
@@ -430,9 +326,8 @@ class _QuizPageState extends State<QuizPage> {
     }
     positionFragen++;
     punkteProFragen++;
-    timerReset();
-    _controller.restart(duration: 31);
-//wenn keine Frage mehr...
+    _controller.restart(duration: _start);
+    //wenn keine Frage mehr...
     if (positionFragen == data.length) {
       /* Dialog für Beendigung des Quizes */
       showDialog(
@@ -464,41 +359,13 @@ class _QuizPageState extends State<QuizPage> {
           );
         },
       );
-
-      /* Alter Dialog für Beendigung des Quizes */
-      /* showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => new CupertinoAlertDialog(
-          title: new Text("Glückwunsch!"),
-          content: new Text(
-              "Du hast alle Fragen beantwortet.\nDeine Punktzahl: $sumPunkte"),
-          actions: [
-            CupertinoDialogAction(
-              child: new Text("Ohne Speichern beenden"),
-              onPressed: () => {
-                Navigator.of(context).pop(true),
-                Navigator.of(context).pop()
-              },
-            ),
-            CupertinoDialogAction(
-              child: new Text("Speichern und beenden"),
-              onPressed: () async {
-                erfahrungspunkte = sumPunkte;
-                Navigator.of(context).pop(true);
-                await savePoint();
-              },
-            ),
-          ],
-        ),
-      ); */
-      _timer.cancel();
+      _controller.pause();
       positionFragen = 0;
       punkteProFragen = 1;
     }
   }
 
-////Punkte speichern
+  //Punkte speichern
   Future<void> savePoint() async {
     var param = "?benutzerID=" +
         widget.benutzerID.toString() +
@@ -529,7 +396,7 @@ class _QuizPageState extends State<QuizPage> {
       String showtext;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
         /* TODO: Belohnung anzeigen (Lisa) */
-        showtext = "Glückwunsch!\nDu hast Level ... erreicht" +
+        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
             "\nDeine Belohnung: ...";
       } else {
         showtext =
@@ -556,46 +423,6 @@ class _QuizPageState extends State<QuizPage> {
           );
         },
       );
-
-      /* Alter Dialog für Levelaufstieg */
-      /* showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => new CupertinoAlertDialog(
-          title: Center(
-            child: RichText(
-              text: TextSpan(
-                  style: TextStyle(color: Colors.black, fontSize: 30),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: "Level Up",
-                      style: TextStyle(
-                          fontFamily: "Ccaps",
-                          fontSize: 25,
-                          color: Color(0xffe54b4b)),
-                    )
-                  ]),
-            ),
-          ),
-          content: Column(
-            children: [
-              Text(showtext),
-              /* TODO: Belohnung anzeigen (Lisa) */
-              Text("Deine Belohnung: ..."),
-              Padding(padding: EdgeInsets.only(top: 20)),
-            ],
-          ),
-          actions: [
-            CupertinoDialogAction(
-              child: new Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      ); */
     } else {
       Navigator.of(context).pop();
     }
@@ -648,3 +475,4 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 }
+
