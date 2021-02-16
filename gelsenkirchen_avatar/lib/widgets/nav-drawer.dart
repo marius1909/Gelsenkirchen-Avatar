@@ -20,10 +20,10 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Benutzer.current.id == null) {
       status = "Anmelden";
-      icon = "assets/icons/Anmelden_gelb_Icon.png";
+      icon = "assets/icons/Anmelden_blau_Icon.png";
     } else {
       status = "Abmelden";
-      icon = "assets/icons/Abmelden_gelb_Icon.png";
+      icon = "assets/icons/Abmelden_blau_Icon.png";
     }
     return Drawer(
       child: ListView(
@@ -99,6 +99,27 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
+                child: Image.asset("assets/icons/Lernort_gelb_Icon.png"),
+              ),
+              title: Text('Lernorte'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            LernortListeScreen()));
+              }),
+
+          /* QR-SUCHSPIEL */
+          ListTile(
+              //leading: Icon(Icons.account_balance),
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 30,
+                  maxHeight: 30,
+                ),
                 child: Image.asset("assets/icons/QR_rot_Icon.png"),
               ),
               title: Text('QR-Suchspiel'),
@@ -142,7 +163,7 @@ class NavDrawer extends StatelessWidget {
                   maxHeight: 30,
                 ),
                 child:
-                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                    Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
