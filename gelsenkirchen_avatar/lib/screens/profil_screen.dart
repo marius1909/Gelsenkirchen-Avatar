@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
@@ -132,7 +134,7 @@ class _ProfilState extends State<Profil> {
                                           Benutzer.shared.updateDatabaseWithID(
                                               "benutzer",
                                               value,
-                                              widget.id_user),
+                                              widget.userID),
                                           changeSharedPreferences(value)
                                         });
                                   })),
