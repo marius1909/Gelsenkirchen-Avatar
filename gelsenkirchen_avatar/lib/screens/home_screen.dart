@@ -14,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final String spielername = Benutzer.current.benutzer;
+  final int erfahrung = Benutzer.current.erfahrung;
+  int level = 0;
   List freigeschaltetList = List();
   Avatar aktuellerAvatar = Avatar(0, 0);
 
@@ -85,11 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: LinearPercentIndicator(
                               width: 200,
                               lineHeight: 22,
-                              percent: 0.7,
+                              percent: berechnelvlProzent(erfahrung),
                               backgroundColor: Color(0xff0d4dbb),
                               progressColor: Color(0xff2d75f0),
                               center: Text(
-                                "Level 1",
+                                "Level " + berechneLevel(erfahrung).toString(),
                                 style: TextStyle(color: Colors.white),
                               ),
                             ))
@@ -108,4 +110,40 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ]));
   }
+}
+
+int berechneLevel(int xp) {
+  int lvl = 0;
+  if (xp < 30) {
+    lvl = 1;
+  } else if (xp < 51) {
+    lvl = 2;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    lvl = 3;
+    while (xp > minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      lvl++;
+    }
+  }
+  return lvl;
+}
+
+double berechnelvlProzent(int xp) {
+  double prozent = 0.0;
+  if (xp < 30) {
+    prozent = xp / 30;
+  } else if (xp < 51) {
+    prozent = xp / 51;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    prozent = xp / minxp;
+    while (xp > minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      prozent = xp / minxp;
+    }
+  }
+  return prozent;
 }
