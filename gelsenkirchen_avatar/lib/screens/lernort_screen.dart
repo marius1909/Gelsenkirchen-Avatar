@@ -171,7 +171,7 @@ class _LernortScreenState extends State<LernortScreen>
                   Row(children: [
                     kategorienSymbol,
                     SizedBox(width: 10),
-                    /* TODO: "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
+                    /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                     Flexible(
                       child: Text("Kategorie",
                           //lernKategorieList[lernort.kategorieID].name,
@@ -377,6 +377,7 @@ Widget setTitelbild(Lernort l) {
   }
 }
 
+// ignore: missing_return
 Widget getWidgetTabs(Lernort l, BuildContext context) {
   int anzahl = 0;
   // ignore: unused_local_variable
