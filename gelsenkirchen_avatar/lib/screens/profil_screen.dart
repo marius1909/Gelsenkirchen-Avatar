@@ -243,30 +243,76 @@ class _ProfilState extends State<Profil> {
                     CarouselSlider(
                       /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
                       items: [
-                        //1. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(0, 0).imagePath),
-                        ),
+                       
+                  Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 1).imagePath, height: 300),
+                    ),
+                
+                   Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 2).imagePath, height: 300),
+                    ),
+               Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 3).imagePath, height: 300),
+                    ),
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 4).imagePath, height: 300),
+                    ),
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 5).imagePath, height: 300),
+                    ),
+                  
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 6).imagePath, height: 300),
+                    ),
+                  
+                   Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 7).imagePath, height: 300),
+                    ),
+                
 
-                        //2. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(1, 0).imagePath),
-                        ),
-
-                        //3. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(2, 0).imagePath),
-                        ),
-
-                        //4. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(3, 0).imagePath),
-                        ),
-                      ],
+            
+               
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(1, 0).imagePath, height: 300),
+                    ),
+                  
+             
+                   Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(1, 1).imagePath, height: 300),
+                    ),
+                  
+              
+                Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(1, 2).imagePath, height: 300),
+                    ),
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(1, 3).imagePath, height: 300),
+                    ),
+                Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(2, 0).imagePath, height: 300),
+                    ),
+                Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(2, 1).imagePath, height: 300),
+                    ),
+                 Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(3, 0).imagePath, height: 300),
+                    )
+                  
+                ],
 
                       //Slider Eigenschaften
                       options: CarouselOptions(
