@@ -12,7 +12,7 @@ import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+
 
 /*
   TODO: (nicht bis S&T machbar) Anzahl an Errungenschaften laden

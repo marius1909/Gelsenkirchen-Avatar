@@ -26,6 +26,18 @@ class LoadInfo {
     //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
   }
 
+
+//TODO:existiert nur temporär um richtige größe für homescreen zu laden
+  static Image loadUserAvatarImage2(
+      int userid, int avatarTypID, int ausgeruesteteCollectableID) {
+    return Image.asset(
+        Avatar(avatarTypID, ausgeruesteteCollectableID).imagePath,
+        width: 100,
+        height: 100);
+
+    //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
+  }
+
   static Future<int> loadUserLevel(int userID) async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
         userID.toString();

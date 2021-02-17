@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 
 // ignore: must_be_immutable
 class Avatarauswahl extends StatefulWidget {
@@ -69,29 +70,48 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                   children: [
                     CarouselSlider(
                       items: [
-                        //1. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(0, 0).imagePath),
-                        ),
+                        //1. Bild im Slider Blau
+                  FlatButton(
+                    onPressed: () {
+                      dummyprofil.setAvatar(0, [1]);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(0, 1).imagePath, height: 300),
+                    ),
+                  ),
 
-                        //2. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(1, 0).imagePath),
-                        ),
+                       //1. Bild im Slider Gelb
+                  FlatButton(
+                    onPressed: () {
+                      dummyprofil.setAvatar(1, [0]);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(1, 0).imagePath, height: 300),
+                    ),
+                  ),
 
-                        //3. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(2, 0).imagePath),
-                        ),
+                     //1. Bild im Slider Gruen
+                  FlatButton(
+                    onPressed: () {
+                      dummyprofil.setAvatar(2, [0]);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(2, 0).imagePath, height: 300),
+                    ),
+                  ),
 
-                        //4. Bild im Slider
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(Avatar(3, 0).imagePath),
-                        ),
+                       FlatButton(
+                    onPressed: () {
+                      dummyprofil.setAvatar(3, [0]);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(6.0),
+                      child: Image.asset(Avatar(3, 0).imagePath, height: 300),
+                    ),
+                  )
                       ],
 
                       //Slider Eigenschaften
