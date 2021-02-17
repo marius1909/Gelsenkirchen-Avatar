@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int userID;
@@ -79,9 +80,9 @@ class _ScoreBoardState extends State<ScoreBoard> {
                   SizedBox(height: 10),
                   Text(
                       "Du hast Level " +
-                          level.toString() +
+                          berechneLevel(Benutzer.current.erfahrung).toString() +
                           " erreicht, mit insgesamt " +
-                          totalPoints.toString() +
+                          Benutzer.current.erfahrung.toString() +
                           " Erfahrungspunkten.",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline3)
@@ -224,4 +225,22 @@ class _ScoreBoardState extends State<ScoreBoard> {
       ],
     ));
   }
+}
+
+int berechneLevel(int xp) {
+  int lvl = 0;
+  if (xp < 30) {
+    lvl = 1;
+  } else if (xp < 51) {
+    lvl = 2;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    lvl = 3;
+    while (xp >= minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      lvl++;
+    }
+  }
+  return lvl;
 }
