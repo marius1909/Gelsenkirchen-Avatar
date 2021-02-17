@@ -54,7 +54,8 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Karte'),
               onTap: () {
-                Navigator.push(
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => HomeScreen()));
@@ -75,6 +76,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Profil'),
               onTap: () {
+                Navigator.of(context).pop();
                 if (Benutzer.current?.id != null) {
                   Navigator.push(
                       context,
@@ -102,6 +104,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Lernorte'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -123,6 +126,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('QR-Suchspiel'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -144,6 +148,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Freunde'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -165,6 +170,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Bestenliste'),
               onTap: () {
+                Navigator.of(context).pop();
                 if (Benutzer.current?.id != null) {
                   Navigator.push(
                       context,
@@ -182,6 +188,7 @@ class NavDrawer extends StatelessWidget {
               leading: Icon(Icons.help),
               title: Text('Hilfe'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -193,6 +200,7 @@ class NavDrawer extends StatelessWidget {
               leading: Icon(Icons.settings),
               title: Text('Einstellungen'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -215,6 +223,7 @@ class NavDrawer extends StatelessWidget {
               ),
               title: Text('Impressum'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
