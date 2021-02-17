@@ -43,81 +43,93 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
         appBar: AppBar(
           title: Text('Avatar auswählen'),
         ),
-        body: SingleChildScrollView(
-            child: Column(
-          children: [
-            Container(
-                padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
-                child: Flexible(
-                  child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline3),
-                )),
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+        body: Stack(children: [
+          /* BILD */
+          Container(
+            //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
+            decoration: new BoxDecoration(
+                image: new DecorationImage(
+                    image:
+                        new AssetImage("assets/images/Profil_Hintergrund.png"),
+                    fit: BoxFit.cover)),
+          ),
+          SingleChildScrollView(
               child: Column(
-                children: [
-                  CarouselSlider(
-                    items: [
-                      //1. Bild im Slider
-                      Container(
-                        margin: EdgeInsets.all(6.0),
-                        child: Image.asset(Avatar(0, 0).imagePath),
-                      ),
+            children: [
+              Container(
+                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
+                  child: Flexible(
+                    child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline3),
+                  )),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                child: Column(
+                  children: [
+                    CarouselSlider(
+                      items: [
+                        //1. Bild im Slider
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(Avatar(0, 0).imagePath),
+                        ),
 
-                      //2. Bild im Slider
-                      Container(
-                        margin: EdgeInsets.all(6.0),
-                        child: Image.asset(Avatar(1, 0).imagePath),
-                      ),
+                        //2. Bild im Slider
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(Avatar(1, 0).imagePath),
+                        ),
 
-                      //3. Bild im Slider
-                      Container(
-                        margin: EdgeInsets.all(6.0),
-                        child: Image.asset(Avatar(2, 0).imagePath),
-                      ),
+                        //3. Bild im Slider
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(Avatar(2, 0).imagePath),
+                        ),
 
-                      //4. Bild im Slider
-                      Container(
-                        margin: EdgeInsets.all(6.0),
-                        child: Image.asset(Avatar(3, 0).imagePath),
-                      ),
-                    ],
+                        //4. Bild im Slider
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(Avatar(3, 0).imagePath),
+                        ),
+                      ],
 
-                    //Slider Eigenschaften
-                    options: CarouselOptions(
-                      height: 300,
-                      enlargeCenterPage: true,
-                      autoPlay: false,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      viewportFraction: 0.6,
+                      //Slider Eigenschaften
+                      options: CarouselOptions(
+                        height: 300,
+                        enlargeCenterPage: true,
+                        autoPlay: false,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        viewportFraction: 0.6,
+                      ),
                     ),
-                  ),
-                  ImageButton(
-                    children: <Widget>[],
-                    /* 302 x 91 sind die Originalmaße der Buttons */
-                    width: 302 / 1.3,
-                    height: 91 / 1.3,
-                    paddingTop: 5,
-                    /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    SizedBox(height: 50),
+                    ImageButton(
+                      children: <Widget>[],
+                      /* 302 x 91 sind die Originalmaße der Buttons */
+                      width: 302 / 1.3,
+                      height: 91 / 1.3,
+                      paddingTop: 5,
+                      /* PressedImage gibt ein Bild für den Button im gedrückten 
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
-                    pressedImage: Image.asset(
-                      "assets/buttons/Speichern_dunkelblau_groß.png",
+                      pressedImage: Image.asset(
+                        "assets/buttons/Speichern_dunkelblau_groß.png",
+                      ),
+                      unpressedImage: Image.asset(
+                          "assets/buttons/Speichern_dunkelblau_groß.png"),
+                      onTap: () {
+                        /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
+                      },
                     ),
-                    unpressedImage: Image.asset(
-                        "assets/buttons/Speichern_dunkelblau_groß.png"),
-                    onTap: () {
-                      /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
-        )));
+                  ],
+                ),
+              )
+            ],
+          ))
+        ]));
   }
 }

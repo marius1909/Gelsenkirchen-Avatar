@@ -77,7 +77,7 @@ class WillkommenScreen extends StatelessWidget {
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
                   pressedImage: Image.asset(
-                    "assets/buttons/Spielen_gelb_groß.png",
+                    "assets/buttons/LosGehts_dunkelblau_groß.png",
                   ),
                   unpressedImage: Image.asset(
                       "assets/buttons/LosGehts_dunkelblau_groß.png"),

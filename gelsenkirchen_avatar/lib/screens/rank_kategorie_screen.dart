@@ -67,7 +67,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                     Row(
                       children: [
                         Icon(FlutterIcons.arrow_up_faw5s,
-                            size: 20, color: Color(0xff98ce00)),
+                            size: 20, color: Color(0xff093582)),
                         SizedBox(width: 10),
                         Text("Dein Platz: " + data['current_rank'].toString(),
                             textAlign: TextAlign.center,
@@ -79,7 +79,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                       children: [
                         Icon(
                           FlutterIcons.coin_mco,
-                          color: Color(0xffff9f1c),
+                          color: Color(0xff093582),
                         ),
                         SizedBox(width: 10),
                         Text(
