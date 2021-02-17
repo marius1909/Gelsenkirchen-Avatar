@@ -54,11 +54,12 @@ class InfoScreenState extends State<InfoScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(widget.lernort.name),
-                          Text('Adresse: ${widget.lernort.adresse}',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey)),
-                          Text(
-                              'Öffungszeiten: ${widget.lernort.oeffnungszeiten}',
+                          Flexible(
+                            child: Text('${widget.lernort.adresse}',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.grey)),
+                          ),
+                          Text('${widget.lernort.oeffnungszeiten}',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.grey)),
                         ],

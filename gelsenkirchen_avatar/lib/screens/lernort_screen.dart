@@ -134,23 +134,25 @@ class _LernortScreenState extends State<LernortScreen>
       appBar: AppBar(
         /*NAME*/
         title: Text(widget.l.name),
-        bottom: ColoredTabBar(Colors.blueAccent, TabBar(
-          unselectedLabelColor: Colors.white,
-          tabs: [
-            Tab(
-              child: Text("Überblick"),
-            ),
-            Tab(
-              child: Text("Lernen"),
-            ),
-            Tab(
-              child: Text("Spielen"),
-            )
-          ],
-          controller: _tabController,
-          indicatorColor: Colors.white,
-          indicatorSize: TabBarIndicatorSize.tab,
-        )),
+        bottom: ColoredTabBar(
+            Color(0xff0e53c9),
+            TabBar(
+              unselectedLabelColor: Colors.white,
+              tabs: [
+                Tab(
+                  child: Text("Überblick"),
+                ),
+                Tab(
+                  child: Text("Lernen"),
+                ),
+                Tab(
+                  child: Text("Spielen"),
+                )
+              ],
+              controller: _tabController,
+              indicatorColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.tab,
+            )),
         bottomOpacity: 1,
       ),
       body: TabBarView(
