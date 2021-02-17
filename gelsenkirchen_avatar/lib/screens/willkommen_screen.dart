@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'Avatarauswahl_screen.dart';
 
-/* TODO: WillkommenScreen nach der Registrierung und nach der Avatarauswahl anzeigen */
 class WillkommenScreen extends StatelessWidget {
   final String spielername = Benutzer.current.benutzer;
 

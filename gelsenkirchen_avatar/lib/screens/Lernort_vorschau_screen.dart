@@ -161,7 +161,6 @@ class _LernortVorschauState extends State<LernortVorschau> {
                   Row(children: [
                     kategorienSymbol,
                     SizedBox(width: 10),
-                    /* TODO: Kategoriename anzeigen. "lernKategorieList[lernort.kategorieID].name" verursacht einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Funktioniert aber eigentlich. Deshalb auch auskommentiert. (Lisa) */
                     Text("Kategorie",
                         //lernKategorieList[lernort.kategorieID].name,
                         style: Theme.of(context).textTheme.headline4),

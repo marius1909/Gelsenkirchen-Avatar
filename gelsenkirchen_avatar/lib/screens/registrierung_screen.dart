@@ -54,6 +54,7 @@ class _RegistrierungState extends State<Registrierung> {
     } else {
       if (jsonDecode(res.body) == "true") {
         /*NICHT LÖSCHEN die Variable futureBenutzer wird genutzt um an den aktuellen Benutzer aus der Datenbank zu kommen und in sharedPreferences zwischenzuspeichern */
+        // ignore: unused_local_variable
         var futureBenutzer =
             await Benutzer.getBenutzer(emailctrl.text, passctrl.text);
 

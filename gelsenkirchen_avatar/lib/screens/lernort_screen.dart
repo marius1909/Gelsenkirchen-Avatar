@@ -172,7 +172,6 @@ class _LernortScreenState extends State<LernortScreen>
                 child: Column(
                   children: [
                     /* KATEGORIE*/
-                    /* TODO: Kategoriename aus DB anzeigen (Lisa) */
                     Row(children: [
                       kategorienSymbol,
                       SizedBox(width: 10),

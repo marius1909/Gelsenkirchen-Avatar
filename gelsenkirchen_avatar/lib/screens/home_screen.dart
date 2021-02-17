@@ -80,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 5),
                         /* LEVELANZEIGE */
-                        /* TODO: In Levelanzeige richtiges Level und richtigen Levelfortschritt anzeigen. (Wird außerdem noch im Profil gebraucht) (Lisa) */
                         Container(
                             padding: EdgeInsets.fromLTRB(135, 0, 0,
                                 0), //Unschön, könnte zu Problemen führe. Weiß nur keine andere Lösung
