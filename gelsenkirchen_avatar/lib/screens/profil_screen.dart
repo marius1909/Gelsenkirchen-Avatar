@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
@@ -50,6 +51,7 @@ class _ProfilState extends State<Profil> {
   @override
   void initState() {
     super.initState();
+
     namectrl = new TextEditingController();
     List<Freigeschaltet> a =
         LoadInfo.getFreigeschalteteErrungenschaften(widget.userID);
@@ -62,8 +64,8 @@ class _ProfilState extends State<Profil> {
         spielername = Benutzer.current.benutzer;
         anzahlErrungenschaften = a.length;
 
-        avatar = LoadInfo.loadUserAvatarImage(
-            widget.userID, avatarTypID, ausgeruesteteCollectablesID);
+        avatar = LoadInfo.loadUserAvatarImage(widget.userID,
+            dummyprofil.avatarBaseID, dummyprofil.berechneCollectablesID());
       });
 
       //int levelTemp = await LoadInfo.loadUserLevel(widget.userID);Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
