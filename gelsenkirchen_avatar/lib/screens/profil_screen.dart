@@ -29,8 +29,8 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
   String spielername = "";
-  int xp;
-  double prozent;
+  int xp = 0;
+  double prozent = 0;
   int level = 0;
   int anzahlErrungenschaften = 0;
   TextEditingController namectrl;
