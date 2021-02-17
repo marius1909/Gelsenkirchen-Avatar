@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var futureBenutzer =
+      Benutzer.getBenutzer(Benutzer.current.email, Benutzer.current.passwort);
   final String spielername = Benutzer.current.benutzer;
   final int erfahrung = Benutzer.current.erfahrung;
   int level = 0;
@@ -146,4 +148,8 @@ double berechnelvlProzent(int xp) {
     }
   }
   return prozent;
+}
+
+void benutzerUpdaten(String name, String passwort) {
+  int a = 0;
 }
