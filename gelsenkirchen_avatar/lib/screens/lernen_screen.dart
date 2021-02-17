@@ -47,6 +47,7 @@ Widget getWidgetTitelbild(Lernort l) {
   }
 }
 
+// ignore: missing_return
 Widget getWidgetTabs(Lernort l, BuildContext context) {
   int anzahl = 0;
   // ignore: unused_local_variable

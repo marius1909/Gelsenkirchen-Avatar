@@ -38,7 +38,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
             Container(
               padding: EdgeInsets.fromLTRB(0, 50, 0, 50),
               child: CarouselSlider(
-                /* TODO: Müsste mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
+                /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
                 items: [
                   //1. Bild im Slider
                   Container(
@@ -93,7 +93,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
               unpressedImage:
                   Image.asset("assets/buttons/Speichern_dunkelblau_groß.png"),
               onTap: () {
-                /* TODO: Ausgewählten Avatar in DB Speichern (Lisa) */
+                /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
               },
             ),
           ],

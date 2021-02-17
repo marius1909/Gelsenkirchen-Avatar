@@ -38,7 +38,6 @@ class _StartQuizState extends State<StartQuiz> {
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     getLernort();
   }

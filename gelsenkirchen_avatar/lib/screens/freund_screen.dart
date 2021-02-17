@@ -19,7 +19,7 @@ class _FreundState extends State<Freund> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 2;
 

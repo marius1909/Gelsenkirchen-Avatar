@@ -93,7 +93,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                                 context,
                                 MaterialPageRoute(
 
-                                    //TODO: Kaputt, navigator pushed random
+                                    //TODO: (nicht bis S&T machbar) Kaputt, navigator pushed random
                                     builder: (BuildContext context) =>
                                         Freund(freunde[index].id)));
                           },
@@ -155,7 +155,7 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-  //TODO: Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
+  //TODO: (nicht bis S&T machbar) Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
   Future<void> loadFriendList() async {
     List<Benutzer> a = await Benutzer.shared.gibObjekte();
 
@@ -164,7 +164,7 @@ class _FreundeslisteState extends State<Freundesliste> {
     });
   }
 
-  // TODO: Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
+  // TODO: (nicht bis S&T machbar) Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
   void fuegeFreundHinzu(String _name) {
     print(_name);
   }

@@ -8,8 +8,7 @@ class RankKategorieScreen extends StatefulWidget {
   final int userID;
   final String nameLernCategory;
 
-  RankKategorieScreen(
-      this.lernCategoryID, this.userID, this.nameLernCategory);
+  RankKategorieScreen(this.lernCategoryID, this.userID, this.nameLernCategory);
 
   @override
   _RankKategorieScreenState createState() => _RankKategorieScreenState();
@@ -40,7 +39,6 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     rankCategories();
   }

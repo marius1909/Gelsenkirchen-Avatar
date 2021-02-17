@@ -90,7 +90,6 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     quizFragen();
   }
@@ -394,7 +393,7 @@ class _QuizPageState extends State<QuizPage> {
         calculateLevel(jsonData['total_point_old'])) {
       String showtext;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: Belohnung anzeigen (Lisa) */
+        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
         showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
             "\nDeine Belohnung: ...";
       } else {
@@ -474,4 +473,3 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 }
-

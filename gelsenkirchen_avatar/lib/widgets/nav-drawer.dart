@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
 
+// ignore: must_be_immutable
 class NavDrawer extends StatelessWidget {
   String status;
   String icon;
@@ -176,8 +177,6 @@ class NavDrawer extends StatelessWidget {
                 }
               }),
 
-          /* TODO: Hilfe muss noch implenentiert werden (optional) (Lisa)*/
-          /* TODO: Hilfeicon fehlt (optional) (Lisa) */
           /* HILFE */
           /* ListTile(
               leading: Icon(Icons.help),
@@ -189,8 +188,6 @@ class NavDrawer extends StatelessWidget {
                         builder: (BuildContext context) => HilfeScreen()));
               }), */
 
-          /* TODO: Einstellungen muss noch implenentiert werden (optional) (Lisa) */
-          /* TODO: Einstellungenicon fehlt (optional) (Lisa) */
           /* EINSTELLUNGEN */
           /* ListTile(
               leading: Icon(Icons.settings),

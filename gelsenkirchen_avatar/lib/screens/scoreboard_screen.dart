@@ -37,7 +37,6 @@ class _ScoreBoardState extends State<ScoreBoard> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     lernKategories();
   }

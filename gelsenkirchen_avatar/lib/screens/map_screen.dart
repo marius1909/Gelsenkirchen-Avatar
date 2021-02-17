@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/map_info_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 // Für Map-Style
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -66,11 +66,11 @@ class MapSampleState extends State<MapScreen> {
         InfoScreen(
           lernort: lernort,
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => LernortVorschau(l: lernort)),
-            );
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        LernortScreen(l: lernort, k: "TODO")));
           },
         )
       ],

@@ -6,6 +6,7 @@ import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:imagebutton/imagebutton.dart';
 
+// ignore: must_be_immutable
 class LernortVorschau extends StatefulWidget {
   // final Lernort l;
   int id;
@@ -132,7 +133,6 @@ class _LernortVorschauState extends State<LernortVorschau> {
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     lernortDaten();
   }

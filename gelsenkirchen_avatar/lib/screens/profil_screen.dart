@@ -13,7 +13,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /*
-  TODO: Anzahl an Errungenschaften laden
+  TODO: (nicht bis S&T machbar) Anzahl an Errungenschaften laden
 */
 
 class Profil extends StatefulWidget {
@@ -33,7 +33,7 @@ class _ProfilState extends State<Profil> {
   TextEditingController namectrl;
   bool isEditable = false;
 
-//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;
@@ -220,7 +220,7 @@ class _ProfilState extends State<Profil> {
               child: Column(
                 children: [
                   CarouselSlider(
-                    /* TODO: Müsste mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
+                    /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
                     items: [
                       //1. Bild im Slider
                       Container(

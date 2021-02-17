@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
 
+// ignore: must_be_immutable
 class Avatarauswahl extends StatefulWidget {
   // ignore: non_constant_identifier_names
   int id_user;
@@ -19,7 +20,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-//TODO: avatarTyp und ausgerüstete Collectables aus Datenbank laden
+//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüstete Collectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;
@@ -110,7 +111,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                     unpressedImage: Image.asset(
                         "assets/buttons/Speichern_dunkelblau_groß.png"),
                     onTap: () {
-                      /* TODO: Ausgewählten Avatar in DB Speichern (Lisa) */
+                      /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
                     },
                   ),
                 ],

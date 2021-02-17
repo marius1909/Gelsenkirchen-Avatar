@@ -20,7 +20,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   bool nameSchonVergeben = false;
   TextEditingController neuerNameController = new TextEditingController();
 
-//TODO: avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 2;
@@ -163,7 +163,7 @@ Wenn schon vergeben wird setState nicht aufgerufen
     }
 
     if (!nameSchonVergeben) {
-      //TODO: Speicher neuen Namen in Datenbank
+      //Speicher neuen Namen in Datenbank
 
       setState(() {
         aktuellerName = name;

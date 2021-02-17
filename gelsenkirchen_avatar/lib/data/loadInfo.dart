@@ -15,7 +15,7 @@ class LoadInfo {
     return name;
   }
 
-//TODO: Avatar klasse muss verbessert werden damit das hier besser gemacht werden kann!
+//TODo: Avatar klasse muss verbessert werden damit das hier besser gemacht werden kann! (nicht bis S&T machbar)
   static Image loadUserAvatarImage(
       int userid, int avatarTypID, int ausgeruesteteCollectableID) {
     return Image.asset(
