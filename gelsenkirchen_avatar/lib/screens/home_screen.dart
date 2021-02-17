@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'map_screen.dart';
 
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  DateTime backbuttonpressedTime;
   var futureBenutzer =
       Benutzer.getBenutzer(Benutzer.current.email, Benutzer.current.passwort);
   final String spielername = Benutzer.current.benutzer;
@@ -109,7 +111,30 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          WillPopScope(
+            onWillPop: onWillPop,
+            child: Text(""),
+          )
         ]));
+  }
+
+  Future<bool> onWillPop() async {
+    DateTime currentTime = DateTime.now();
+
+    //bifbackbuttonhasnotbeenpreedOrToasthasbeenclosed
+    //Statement 1 Or statement2
+    bool backButton = backbuttonpressedTime == null ||
+        currentTime.difference(backbuttonpressedTime) > Duration(seconds: 3);
+
+    if (backButton) {
+      backbuttonpressedTime = currentTime;
+      Fluttertoast.showToast(
+          msg: "Doppelt drücken zum Schlißen",
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+      return false;
+    }
+    return true;
   }
 }
 
