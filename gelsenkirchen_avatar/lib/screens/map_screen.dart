@@ -66,7 +66,7 @@ class MapSampleState extends State<MapScreen> {
         InfoScreen(
           lernort: lernort,
           onTap: () {
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) =>
