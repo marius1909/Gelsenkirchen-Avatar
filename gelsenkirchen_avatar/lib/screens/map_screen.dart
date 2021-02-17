@@ -46,6 +46,7 @@ class MapSampleState extends State<MapScreen> {
         body: Stack(
       children: [
         GoogleMap(
+          mapToolbarEnabled: true,
           mapType: MapType.normal,
           initialCameraPosition: _whsGelsenkrichen,
           onMapCreated: (GoogleMapController controller) {
@@ -56,10 +57,9 @@ class MapSampleState extends State<MapScreen> {
           },
           markers: _markers,
           myLocationEnabled: true,
-          padding: EdgeInsets.only(
-            top: 150,
-          ),
           myLocationButtonEnabled: true,
+          zoomControlsEnabled: false,
+          padding: EdgeInsets.only(top: 120),
           cameraTargetBounds: CameraTargetBounds(bounds),
           minMaxZoomPreference: MinMaxZoomPreference(5, 20),
         ),

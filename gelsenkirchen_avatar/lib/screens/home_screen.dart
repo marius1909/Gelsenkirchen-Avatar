@@ -44,50 +44,68 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Stack(children: <Widget>[
           MapScreen(),
-          Container(
-            width: double.infinity,
-            height: 80,
-            decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            margin: EdgeInsets.only(
-                left: 10.0, top: 40.0, right: 10.0, bottom: 0.0),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          ),
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                /* TODO: Durch Klick auf Avatar soll man zum Profil gelangen (Lisa) */
-                child: Image.asset(aktuellerAvatar.imagePath,
-                    width: 100, height: 100),
-              ),
-              Text(
-                spielername,
-                textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.headline1,
-              ),
-            ],
-          ),
-          /* TODO: In Levelanzeige richtiges Level und richtigen Levelfortschritt anzeigen. (Wird außerdem noch im Profil gebraucht) (Lisa) */
-          /* Die Levelanzeige hab ich aus Zeitgründen und für die Screenshots
-          für das Show & Tell Plakat etwas unschön implementiert.
-          Sie sollte später noch so platziert werden, dass sie auch auf andern
-          Displays richtig angezeit wird. (Lisa)*/
-          Container(
-              padding: EdgeInsets.fromLTRB(143, 85, 20, 20),
-              child: LinearPercentIndicator(
-                width: 200,
-                lineHeight: 22,
-                percent: 0.7,
-                backgroundColor: Color(0xff0d4dbb),
-                progressColor: Color(0xff2d75f0),
-                center: Text(
-                  "Level 1",
-                  style: TextStyle(color: Colors.white),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Stack(
+              children: [
+                /* HALBTRANSPARENTE BOX OBEN */
+                Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.7),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            blurRadius: 20,
+                            offset: Offset.zero,
+                            color: Colors.grey.withOpacity(0.5))
+                      ],
+                    ),
+                    margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
+                    //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        /* SPIELERNAME */
+                        Container(
+                          //padding: EdgeInsets.fromLTRB(130, 5, 0, 0),
+                          child: Text(
+                            spielername,
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        /* LEVELANZEIGE */
+                        /* TODO: In Levelanzeige richtiges Level und richtigen Levelfortschritt anzeigen. (Wird außerdem noch im Profil gebraucht) (Lisa) */
+                        Container(
+                            padding: EdgeInsets.fromLTRB(135, 0, 0,
+                                0), //Unschön, könnte zu Problemen führe. Weiß nur keine andere Lösung
+                            child: LinearPercentIndicator(
+                              width: 200,
+                              lineHeight: 22,
+                              percent: 0.7,
+                              backgroundColor: Color(0xff0d4dbb),
+                              progressColor: Color(0xff2d75f0),
+                              center: Text(
+                                "Level 1",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ))
+                      ],
+                    )),
+
+                /* AVATAR */
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
+                  child: Image.asset(aktuellerAvatar.imagePath,
+                      width: 100, height: 100),
                 ),
-              ))
+              ],
+            ),
+          ),
         ]));
   }
 }

@@ -23,11 +23,11 @@ class InfoScreenState extends State<InfoScreen> {
             children: [
               Spacer(),
               Container(
-                margin: EdgeInsets.all(20),
-                height: 90,
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 70),
+                height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(45)),
+                  color: Colors.white.withOpacity(0.9),
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
                         blurRadius: 20,
@@ -53,20 +53,22 @@ class InfoScreenState extends State<InfoScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(widget.lernort.name),
                           Container(
-                            width: 200,
-                            child: Text('${widget.lernort.adresse}',
+                              width: 220,
+                              child: Text(
+                                widget.lernort.name,
+                                style: TextStyle(fontSize: 14),
+                              )),
+                          Container(
+                              width: 220,
+                              child: Text('${widget.lernort.adresse}',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey))),
+                          Container(
+                            width: 220,
+                            child: Text('${widget.lernort.oeffnungszeiten}',
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.grey)),
-                          ),
-                          Container(
-                            width: 200,
-                            child: Text(
-                              '${widget.lernort.oeffnungszeiten}',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
                           )
                         ],
                       ),
