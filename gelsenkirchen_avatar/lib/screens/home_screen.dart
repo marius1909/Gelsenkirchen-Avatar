@@ -5,6 +5,8 @@ import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
+import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 import 'map_screen.dart';
 
@@ -21,9 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final int erfahrung = Benutzer.current.erfahrung;
   int level = 0;
   List freigeschaltetList = List();
-  Avatar aktuellerAvatar = Avatar(0, 0);
+  Image aktuellerAvatar;
 
   void initState() {
+    aktuellerAvatar = LoadInfo.loadUserAvatarImage2(Benutzer.current.id,
+        dummyprofil.avatarBaseID, dummyprofil.berechneCollectablesID());
     var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
     freigeschaltetFuture.then((freigeschaltet) {
       setState(() {
@@ -103,11 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 /* AVATAR */
                 Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                  /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                  child: Image.asset(aktuellerAvatar.imagePath,
-                      width: 100, height: 100),
-                ),
+                    padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                    /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
+                    child: aktuellerAvatar),
               ],
             ),
           ),
