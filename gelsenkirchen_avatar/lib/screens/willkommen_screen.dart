@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'Avatarauswahl_screen.dart';
 
 /* TODO: WillkommenScreen nach der Registrierung und nach der Avatarauswahl anzeigen */
 class WillkommenScreen extends StatelessWidget {
@@ -21,7 +22,6 @@ class WillkommenScreen extends StatelessWidget {
             //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
             decoration: new BoxDecoration(
                 image: new DecorationImage(
-                  
                     image: new AssetImage(
                         "assets/images/Foerderturm_Hintergrund.png"),
                     fit: BoxFit.cover)),
@@ -85,7 +85,8 @@ class WillkommenScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => HomeScreen()));
+                            builder: (BuildContext context) =>
+                                Avatarauswahl(Benutzer.current.id)));
                   })
             ],
           ))

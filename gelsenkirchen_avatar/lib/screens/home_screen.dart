@@ -28,10 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 freigeschaltet.benutzerID == Benutzer.current.id &&
                 freigeschaltet.ausgeruestet)
             .toList();
-        print("Hallo");
-        var sammelID = freigeschaltetList[0].getSammelID();
-        print(freigeschaltetList);
-        print(sammelID);
+        // print("Hallo");
+        // var sammelID = freigeschaltetList[0].getSammelID();
+        // print(freigeschaltetList);
+        // print(sammelID);
       });
     });
     super.initState();
