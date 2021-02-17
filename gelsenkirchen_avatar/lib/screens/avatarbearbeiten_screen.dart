@@ -4,6 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 // ignore: camel_case_types
 class Avatarbearbeiten extends StatefulWidget {
@@ -65,7 +67,9 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 items: [
                   FlatButton(
                     onPressed: () {
-                      dummyprofil.setAvatar(0, [0]);
+                      setState(() {
+                        dummyprofil.setAvatar(0, [0]);
+                      });
                     },
                     child: Container(
                       margin: EdgeInsets.all(6.0),
@@ -246,7 +250,11 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
               onTap: () {
                 /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
 
-                Navigator.pop(context);
+               Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Profil(Benutzer.current.id)),
+                            );
               },
             ),
           ],
