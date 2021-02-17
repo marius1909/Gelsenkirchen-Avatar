@@ -78,8 +78,6 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 ),
               ),
             ),
-
-            /* TODO: Bild für Speichern-Button einfügen (Lisa) */
             ImageButton(
               children: <Widget>[],
               /* 302 x 91 sind die Originalmaße der Buttons */

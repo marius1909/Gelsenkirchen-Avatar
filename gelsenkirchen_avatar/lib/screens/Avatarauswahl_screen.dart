@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class Avatarauswahl extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -94,21 +95,23 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                       viewportFraction: 0.6,
                     ),
                   ),
-                  /* TODO: Speichern-Button austauschen. In Bearbeitung von Lisa (Lisa) */
-                  FlatButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    padding: EdgeInsets.all(8.0),
-                    splashColor: Colors.blueAccent,
-                    onPressed: () {
-                      /* TODO: Avatar-Speichern-Funktion (Lisa) */
-                    },
-                    child: Text(
-                      "Speichern",
-                      style: TextStyle(fontSize: 20.0),
+                  ImageButton(
+                    children: <Widget>[],
+                    /* 302 x 91 sind die Originalmaße der Buttons */
+                    width: 302 / 1.3,
+                    height: 91 / 1.3,
+                    paddingTop: 5,
+                    /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                    pressedImage: Image.asset(
+                      "assets/buttons/Speichern_dunkelblau_groß.png",
                     ),
+                    unpressedImage: Image.asset(
+                        "assets/buttons/Speichern_dunkelblau_groß.png"),
+                    onTap: () {
+                      /* TODO: Ausgewählten Avatar in DB Speichern (Lisa) */
+                    },
                   ),
                 ],
               ),
