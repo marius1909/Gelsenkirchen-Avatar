@@ -122,7 +122,7 @@ int berechneLevel(int xp) {
     int minxp = 51;
     minxp = (minxp.toDouble() * 1.7).toInt();
     lvl = 3;
-    while (xp > minxp) {
+    while (xp >= minxp) {
       minxp = (minxp.toDouble() * 1.7).toInt();
       lvl++;
     }
@@ -135,14 +135,15 @@ double berechnelvlProzent(int xp) {
   if (xp < 30) {
     prozent = xp / 30;
   } else if (xp < 51) {
-    prozent = xp / 51;
+    prozent = (xp - 30) / (51 - 30);
   } else {
     int minxp = 51;
-    minxp = (minxp.toDouble() * 1.7).toInt();
-    prozent = xp / minxp;
-    while (xp > minxp) {
-      minxp = (minxp.toDouble() * 1.7).toInt();
-      prozent = xp / minxp;
+    int maxxp = (minxp.toDouble() * 1.7).toInt();
+    prozent = (xp - minxp) / (maxxp - minxp);
+    while (xp >= maxxp) {
+      minxp = maxxp;
+      maxxp = (minxp.toDouble() * 1.7).toInt();
+      prozent = (xp - minxp) / (maxxp - minxp);
     }
   }
   return prozent;
