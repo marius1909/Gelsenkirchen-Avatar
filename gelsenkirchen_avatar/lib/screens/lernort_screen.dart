@@ -6,6 +6,7 @@ import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
+import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 
 class LernortScreen extends StatefulWidget {
   final Lernort l;
@@ -131,6 +132,7 @@ class _LernortScreenState extends State<LernortScreen>
 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         /*NAME*/
         title: Text(widget.l.name),

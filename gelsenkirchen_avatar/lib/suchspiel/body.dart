@@ -114,7 +114,7 @@ class _BodyState extends State<Body> {
                       5,
                   onNoEmptyField: (antwort) {
                     if (hinweis.istLoesungswort(antwort)) {
-                      /* TODO: Punkte vergeben?! (Lisa) */
+                      /* TODO: (nicht bis S&T machbar) Punkte vergeben?! (Lisa) */
                       /* Dialog, der angezeigt wir, wenn die richtige Antwort eingegeben wurde */
                       showDialog(
                         context: context,
