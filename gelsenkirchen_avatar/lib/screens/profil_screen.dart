@@ -132,9 +132,7 @@ class _ProfilState extends State<Profil> {
                                           isEditable = false,
                                           spielername = value,
                                           Benutzer.shared.updateDatabaseWithID(
-                                              "benutzer",
-                                              value,
-                                              widget.userID),
+                                              "benutzer", value, widget.userID),
                                           changeSharedPreferences(value)
                                         });
                                   })),
@@ -187,7 +185,6 @@ class _ProfilState extends State<Profil> {
                         onPressed: () {},
                       ),
                       avatar,
-                      /* TODO: Das Icon muss tiefer (Lisa) */
                       IconButton(
                         icon: Icon(
                           FlutterIcons.edit_faw5s,
