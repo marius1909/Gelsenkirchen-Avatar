@@ -6,7 +6,7 @@ import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 
 class LernortScreen extends StatefulWidget {
   final Lernort l;
@@ -25,7 +25,7 @@ class _LernortScreenState extends State<LernortScreen>
   List<LernKategorie> lernKato = List();
   Lernort lernort;
   Icon kategorienSymbol;
-  List<LernKategorie> lernKategorieList = List();
+  List<LernKategorie> lernKategorieList;
   // ignore: unused_field
   int _listLength = 0;
   LernKategorie lk;
@@ -41,6 +41,7 @@ class _LernortScreenState extends State<LernortScreen>
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
+        lernKategorieList = List();
         /* Alphabetische Sortierung der Liste */
         lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
@@ -131,222 +132,224 @@ class _LernortScreenState extends State<LernortScreen>
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        /*NAME*/
-        title: Text(widget.l.name),
-        bottom: ColoredTabBar(
-            Color(0xff0e53c9),
-            TabBar(
-              unselectedLabelColor: Colors.white,
-              tabs: [
-                Tab(
-                  child: Text("Überblick"),
-                ),
-                Tab(
-                  child: Text("Lernen"),
-                ),
-                Tab(
-                  child: Text("Spielen"),
-                )
-              ],
-              controller: _tabController,
-              indicatorColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.tab,
-            )),
-        bottomOpacity: 1,
-      ),
-      body: TabBarView(
-        children: [
-          /* Tab: INFO */
-          SingleChildScrollView(
-              child: Column(children: [
-            /* TITELBILD */
-            Container(child: setTitelbild(widget.l)),
-            Container(
-              padding: EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  /* KATEGORIE*/
-                  /* TODO: Kategoriename aus DB anzeigen (Lisa) */
-                  Row(children: [
-                    kategorienSymbol,
-                    SizedBox(width: 10),
-                    /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
-                    Flexible(
-                      child: Text("Kategorie",
-                          //lernKategorieList[lernort.kategorieID].name,
-                          style: Theme.of(context).textTheme.headline4),
-                    )
-                  ]),
-                  SizedBox(height: 20),
-
-                  /* ADRESSE */
-                  Row(children: [
-                    Icon(FlutterIcons.location_on_mdi,
-                        size: 20, color: Color(0xff0e53c9)),
-                    SizedBox(width: 10),
-                    Flexible(
-                      child: Text(
-                          lernort.adresse == ""
-                              ? "Keine Adresse vorhanden"
-                              : lernort.adresse,
-                          style: Theme.of(context).textTheme.headline4),
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-
-                  /* ÖFFNUNGSZEITEN */
-                  Row(children: [
-                    //Icon(MdiIcons.sword),
-                    Icon(FlutterIcons.access_time_mdi,
-                        size: 20, color: Color(0xff0e53c9)),
-                    SizedBox(width: 10),
-                    Flexible(
-                      child: Text(
-                          lernort.oeffnungszeiten == ""
-                              ? "Keine Öffnungszeiten vorhanden"
-                              : lernort.oeffnungszeiten,
-                          style: Theme.of(context).textTheme.headline4),
-                    )
-                  ]),
-                  SizedBox(height: 20),
-
-                  /* KOSTEN */
-                  Row(children: [
-                    //Icon(MdiIcons.sword),
-                    Icon(FlutterIcons.attach_money_mdi,
-                        size: 20, color: Color(0xff0e53c9)),
-                    SizedBox(width: 10),
-                    Flexible(
-                      child: Text(
-                          lernort.kosten == ""
-                              ? "Keine Angaben"
-                              : lernort.kosten,
-                          style: Theme.of(context).textTheme.headline4),
-                    )
-                  ]),
-                  SizedBox(height: 20),
-
-                  /* BARRIEREFREIHEIT */
-                  Row(children: [
-                    //Icon(MdiIcons.sword),
-                    Icon(FlutterIcons.accessible_mdi,
-                        size: 20, color: Color(0xff0e53c9)),
-                    SizedBox(width: 10),
-                    Flexible(
-                      child: Text(
-                          lernort.barrierefrei == 0
-                              ? "nicht barrierefrei"
-                              : "barrierefrei",
-                          style: Theme.of(context).textTheme.headline4),
-                    )
-                  ]),
-                  SizedBox(height: 20),
-
-                  /* WEBSITE */
-                  Container(child: setWebsite(widget.l)),
-                  SizedBox(height: 20),
-
-                  /*BESCHREIBUNG*/
-                  Text(
-                    lernort.kurzbeschreibung,
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context).textTheme.bodyText1,
+    if (lernKategorieList == null) {
+      return Ladescreen();
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          /*NAME*/
+          title: Text(widget.l.name),
+          bottom: ColoredTabBar(
+              Color(0xff0e53c9),
+              TabBar(
+                unselectedLabelColor: Colors.white,
+                tabs: [
+                  Tab(
+                    child: Text("Überblick"),
                   ),
+                  Tab(
+                    child: Text("Lernen"),
+                  ),
+                  Tab(
+                    child: Text("Spielen"),
+                  )
                 ],
+                controller: _tabController,
+                indicatorColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.tab,
+              )),
+          bottomOpacity: 1,
+        ),
+        body: TabBarView(
+          children: [
+            /* Tab: INFO */
+            SingleChildScrollView(
+                child: Column(children: [
+              /* TITELBILD */
+              Container(child: setTitelbild(widget.l)),
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    /* KATEGORIE*/
+                    /* TODO: Kategoriename aus DB anzeigen (Lisa) */
+                    Row(children: [
+                      kategorienSymbol,
+                      SizedBox(width: 10),
+                      /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
+                      Flexible(
+                        child: Text(lernKategorieList[lernort.kategorieID].name,
+                            style: Theme.of(context).textTheme.headline4),
+                      )
+                    ]),
+                    SizedBox(height: 20),
+
+                    /* ADRESSE */
+                    Row(children: [
+                      Icon(FlutterIcons.location_on_mdi,
+                          size: 20, color: Color(0xff0e53c9)),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                            lernort.adresse == ""
+                                ? "Keine Adresse vorhanden"
+                                : lernort.adresse,
+                            style: Theme.of(context).textTheme.headline4),
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+
+                    /* ÖFFNUNGSZEITEN */
+                    Row(children: [
+                      //Icon(MdiIcons.sword),
+                      Icon(FlutterIcons.access_time_mdi,
+                          size: 20, color: Color(0xff0e53c9)),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                            lernort.oeffnungszeiten == ""
+                                ? "Keine Öffnungszeiten vorhanden"
+                                : lernort.oeffnungszeiten,
+                            style: Theme.of(context).textTheme.headline4),
+                      )
+                    ]),
+                    SizedBox(height: 20),
+
+                    /* KOSTEN */
+                    Row(children: [
+                      //Icon(MdiIcons.sword),
+                      Icon(FlutterIcons.attach_money_mdi,
+                          size: 20, color: Color(0xff0e53c9)),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                            lernort.kosten == ""
+                                ? "Keine Angaben"
+                                : lernort.kosten,
+                            style: Theme.of(context).textTheme.headline4),
+                      )
+                    ]),
+                    SizedBox(height: 20),
+
+                    /* BARRIEREFREIHEIT */
+                    Row(children: [
+                      //Icon(MdiIcons.sword),
+                      Icon(FlutterIcons.accessible_mdi,
+                          size: 20, color: Color(0xff0e53c9)),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                            lernort.barrierefrei == 0
+                                ? "nicht barrierefrei"
+                                : "barrierefrei",
+                            style: Theme.of(context).textTheme.headline4),
+                      )
+                    ]),
+                    SizedBox(height: 20),
+
+                    /* WEBSITE */
+                    Container(child: setWebsite(widget.l)),
+                    SizedBox(height: 20),
+
+                    /*BESCHREIBUNG*/
+                    Text(
+                      lernort.kurzbeschreibung,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ],
+                ),
+              )
+            ])),
+
+            /* Tab: LERNEN */
+            SingleChildScrollView(
+                child: Column(children: [
+              Container(
+                child: getWidgetTabs(lernort, context),
               ),
-            )
-          ])),
+            ])),
 
-          /* Tab: LERNEN */
-          SingleChildScrollView(
-              child: Column(children: [
-            Container(
-              child: getWidgetTabs(lernort, context),
-            ),
-          ])),
-
-          /* Tab: SPIELEN */
-          SingleChildScrollView(
-              child: Column(
-            children: [
-              /* SPIEL 1 - QUIZ */
-              Container(
-                  child: Card(
-                      elevation: 1,
-                      child: Column(
-                          //mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              leading: Image.asset(
-                                  "assets/icons/Quiz_gelb_Icon.png"),
-                              title:
-                                  Text('Quiz', style: TextStyle(fontSize: 16)),
-                              subtitle: Text(
-                                'Teste dein Wissen in einem klassischen Quiz',
+            /* Tab: SPIELEN */
+            SingleChildScrollView(
+                child: Column(
+              children: [
+                /* SPIEL 1 - QUIZ */
+                Container(
+                    child: Card(
+                        elevation: 1,
+                        child: Column(
+                            //mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Image.asset(
+                                    "assets/icons/Quiz_gelb_Icon.png"),
+                                title: Text('Quiz',
+                                    style: TextStyle(fontSize: 16)),
+                                subtitle: Text(
+                                  'Teste dein Wissen in einem klassischen Quiz',
+                                ),
+                                /* damit der subtitle in die Zeile passt */
+                                dense: true,
                               ),
-                              /* damit der subtitle in die Zeile passt */
-                              dense: true,
-                            ),
-                            ButtonBar(children: <Widget>[
-                              FlatButton(
-                                child: Text('Spielen',
-                                    style: TextStyle(
-                                        color: Color(0xffff9f1c),
-                                        fontWeight: FontWeight.bold)),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              StartQuiz(widget.l.id)));
-                                },
-                              )
-                            ])
-                          ]))),
+                              ButtonBar(children: <Widget>[
+                                FlatButton(
+                                  child: Text('Spielen',
+                                      style: TextStyle(
+                                          color: Color(0xffff9f1c),
+                                          fontWeight: FontWeight.bold)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                StartQuiz(widget.l.id)));
+                                  },
+                                )
+                              ])
+                            ]))),
 
-              /* SPIEL 2 - QR-SPIEL */
-              Container(
-                  child: Card(
-                      elevation: 1,
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              leading:
-                                  Image.asset("assets/icons/QR_gruen_Icon.png"),
-                              title: Text('QR-Spiel',
-                                  style: TextStyle(fontSize: 16)),
-                              subtitle: Text(
-                                'Finde QR-Codes und rate',
+                /* SPIEL 2 - QR-SPIEL */
+                Container(
+                    child: Card(
+                        elevation: 1,
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Image.asset(
+                                    "assets/icons/QR_gruen_Icon.png"),
+                                title: Text('QR-Spiel',
+                                    style: TextStyle(fontSize: 16)),
+                                subtitle: Text(
+                                  'Finde QR-Codes und rate',
+                                ),
+                                /* damit der subtitle in die Zeile passt */
+                                dense: true,
                               ),
-                              /* damit der subtitle in die Zeile passt */
-                              dense: true,
-                            ),
-                            ButtonBar(children: <Widget>[
-                              FlatButton(
-                                child: Text('Spielen',
-                                    style: TextStyle(
-                                        color: Color(0xff98ce00),
-                                        fontWeight: FontWeight.bold)),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              Suchspiel()));
-                                },
-                              )
-                            ])
-                          ]))),
-            ],
-          ))
-        ],
-        controller: _tabController,
-      ),
-    );
+                              ButtonBar(children: <Widget>[
+                                FlatButton(
+                                  child: Text('Spielen',
+                                      style: TextStyle(
+                                          color: Color(0xff98ce00),
+                                          fontWeight: FontWeight.bold)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Suchspiel()));
+                                  },
+                                )
+                              ])
+                            ]))),
+              ],
+            ))
+          ],
+          controller: _tabController,
+        ),
+      );
+    }
   }
 }
 
