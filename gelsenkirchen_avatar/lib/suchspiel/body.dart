@@ -67,15 +67,16 @@ class _BodyState extends State<Body> {
                         style: Theme.of(context).textTheme.headline3),
                     /* ZEIT */
                     Spacer(),
-                    countDownTimer()
+                    //countDownTimer()
                   ],
                 ),
+                countDownTimer(),
               ]),
             ),
             /* HINWEIS */
             Container(
               //height: 500,
-              padding: EdgeInsets.fromLTRB(15, 40, 15, 30),
+              padding: EdgeInsets.fromLTRB(15, 15, 15, 30),
               child: Text(
                 aktuellerHinweistext,
                 textAlign: TextAlign.center,
@@ -186,8 +187,8 @@ class _BodyState extends State<Body> {
       duration: widget._sekundenProHinweis,
       initialDuration: 0,
       controller: _controller,
-      width: MediaQuery.of(context).size.width / 16,
-      height: MediaQuery.of(context).size.height / 16,
+      width: MediaQuery.of(context).size.width / 4,
+      height: MediaQuery.of(context).size.height / 4,
       ringColor: Colors.grey[300],
       ringGradient: null,
       fillColor: Color(0xff98ce00),

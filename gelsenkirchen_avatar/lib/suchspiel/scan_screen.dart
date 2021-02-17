@@ -36,7 +36,7 @@ class ScanScreen extends StatelessWidget {
                 /* BILD */
                 Image(
                   image: AssetImage('assets/images/hand_phone.png'),
-                  width: 180,
+                  width: 150,
                 ),
                 /* Altes Bild */
                 /* ClipRRect(
