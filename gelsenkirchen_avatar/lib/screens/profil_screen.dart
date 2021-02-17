@@ -11,6 +11,7 @@ import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 /*
   TODO: (nicht bis S&T machbar) Anzahl an Errungenschaften laden
@@ -28,6 +29,8 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
   String spielername = "";
+  int xp;
+  double prozent;
   int level = 0;
   int anzahlErrungenschaften = 0;
   TextEditingController namectrl;
@@ -55,17 +58,20 @@ class _ProfilState extends State<Profil> {
     });
     Benutzer.shared.gibObjekte().then((alleBenutzer) async {
       setState(() {
-        spielername = LoadInfo.loadName(alleBenutzer, widget.userID);
+        //spielername = LoadInfo.loadName(alleBenutzer, widget.userID); Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
+        spielername = Benutzer.current.benutzer;
         anzahlErrungenschaften = a.length;
 
         avatar = LoadInfo.loadUserAvatarImage(
             widget.userID, avatarTypID, ausgeruesteteCollectablesID);
       });
 
-      int levelTemp = await LoadInfo.loadUserLevel(widget.userID);
+      //int levelTemp = await LoadInfo.loadUserLevel(widget.userID);Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
+      int xp = Benutzer.current.erfahrung;
       //BROKEN
       setState(() {
-        level = levelTemp;
+        level = berechneLevel(xp);
+        prozent = berechnelvlProzent(xp);
       });
     });
   }
@@ -175,7 +181,7 @@ class _ProfilState extends State<Profil> {
                                 width: 200,
                                 lineHeight: 22,
                                 /* TODO: Richtigen Fortschritt des Levels anzeigen (Lisa) */
-                                percent: 0.7,
+                                percent: prozent,
                                 backgroundColor: Color(0xff0d4dbb),
                                 progressColor: Color(0xff2d75f0),
                                 center: Text(
@@ -323,4 +329,41 @@ class _ProfilState extends State<Profil> {
   String getText() {
     return spielername;
   }
+}
+
+int berechneLevel(int xp) {
+  int lvl = 0;
+  if (xp < 30) {
+    lvl = 1;
+  } else if (xp < 51) {
+    lvl = 2;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    lvl = 3;
+    while (xp >= minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      lvl++;
+    }
+  }
+  return lvl;
+}
+
+double berechnelvlProzent(int xp) {
+  double prozent = 0.0;
+  if (xp < 30) {
+    prozent = xp / 30;
+  } else if (xp < 51) {
+    prozent = (xp - 30) / (51 - 30);
+  } else {
+    int minxp = 51;
+    int maxxp = (minxp.toDouble() * 1.7).toInt();
+    prozent = (xp - minxp) / (maxxp - minxp);
+    while (xp >= maxxp) {
+      minxp = maxxp;
+      maxxp = (minxp.toDouble() * 1.7).toInt();
+      prozent = (xp - minxp) / (maxxp - minxp);
+    }
+  }
+  return prozent;
 }
