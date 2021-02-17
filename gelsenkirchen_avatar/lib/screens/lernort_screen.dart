@@ -443,7 +443,6 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
               ),
               Container(
                   padding: new EdgeInsets.all(15.0),
-                  /* TODO: Die Inhalte sollen das gesamte Display einnehmen und ggf. scrollbar sein (Lisa) */
                   height: MediaQuery.of(context).size.height,
                   child: TabBarView(children: <Widget>[
                     SingleChildScrollView(
