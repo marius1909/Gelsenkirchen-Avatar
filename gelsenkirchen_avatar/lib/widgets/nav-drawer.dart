@@ -55,10 +55,11 @@ class NavDrawer extends StatelessWidget {
               title: Text('Karte'),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => HomeScreen()));
+                        builder: (BuildContext context) => HomeScreen()),
+                    (Route<dynamic> route) => false);
                 //Error @Simon HomeScreen(angemeldeterBenutzer: global.user)));
               }),
 
