@@ -80,7 +80,7 @@ class MapSampleState extends State<MapScreen> {
   void addMarkersForLernorte() {
     final markerImageFuture = BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 4.0),
-        "assets/icons/Mapmarker_rot.png");
+        "assets/icons/Mapmarker_rot@2x.png");
 
     markerImageFuture.then((markerImage) {
       var lernorteFuture = Lernort.shared.gibObjekte();

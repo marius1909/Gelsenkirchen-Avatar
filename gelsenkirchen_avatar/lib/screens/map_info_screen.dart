@@ -25,6 +25,7 @@ class InfoScreenState extends State<InfoScreen> {
               Container(
                 margin: EdgeInsets.fromLTRB(10, 0, 10, 70),
                 height: 100,
+                clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.9),
                   borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -40,12 +41,11 @@ class InfoScreenState extends State<InfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      width: 70,
-                      height: 70,
-                      margin: EdgeInsets.only(left: 10),
-                      child: ClipOval(
-                          child: Image.network(widget.lernort.titelbild,
-                              fit: BoxFit.fill)),
+                      width: 90,
+                      height: 100,
+                      margin: EdgeInsets.only(left: 0),
+                      child: Image.network(widget.lernort.titelbild,
+                              fit: BoxFit.fill)
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20.0, right: 20.0),
