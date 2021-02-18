@@ -5,6 +5,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 
+import 'home_screen.dart';
+
 // ignore: must_be_immutable
 class Avatarauswahl extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -71,47 +73,51 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                     CarouselSlider(
                       items: [
                         //1. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [1]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 1).imagePath, height: 300),
-                    ),
-                  ),
+                        FlatButton(
+                          onPressed: () {
+                            dummyprofil.setAvatar(0, [1]);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6.0),
+                            child: Image.asset(Avatar(0, 1).imagePath,
+                                height: 300),
+                          ),
+                        ),
 
-                       //1. Bild im Slider Gelb
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(1, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 0).imagePath, height: 300),
-                    ),
-                  ),
+                        //1. Bild im Slider Gelb
+                        FlatButton(
+                          onPressed: () {
+                            dummyprofil.setAvatar(1, [0]);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6.0),
+                            child: Image.asset(Avatar(1, 0).imagePath,
+                                height: 300),
+                          ),
+                        ),
 
-                     //1. Bild im Slider Gruen
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(2, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(2, 0).imagePath, height: 300),
-                    ),
-                  ),
+                        //1. Bild im Slider Gruen
+                        FlatButton(
+                          onPressed: () {
+                            dummyprofil.setAvatar(2, [0]);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6.0),
+                            child: Image.asset(Avatar(2, 0).imagePath,
+                                height: 300),
+                          ),
+                        ),
 
-                       FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(3, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(3, 0).imagePath, height: 300),
-                    ),
-                  )
+                        FlatButton(
+                          onPressed: () {
+                            dummyprofil.setAvatar(3, [0]);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6.0),
+                            child: Image.asset(Avatar(3, 0).imagePath,
+                                height: 300),
+                          ),
+                        )
                       ],
 
                       //Slider Eigenschaften
@@ -142,7 +148,11 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                       unpressedImage: Image.asset(
                           "assets/buttons/Speichern_dunkelblau_groß.png"),
                       onTap: () {
-                        /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    HomeScreen()));
                       },
                     ),
                   ],
