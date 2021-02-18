@@ -57,7 +57,7 @@ class MapSampleState extends State<MapScreen> {
           },
           markers: _markers,
           myLocationEnabled: true,
-          myLocationButtonEnabled: true,
+          myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
           padding: EdgeInsets.only(top: 120),
           cameraTargetBounds: CameraTargetBounds(bounds),
