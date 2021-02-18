@@ -182,7 +182,6 @@ class _ProfilState extends State<Profil> {
                             child: LinearPercentIndicator(
                                 width: 200,
                                 lineHeight: 22,
-                                /* TODO: Richtigen Fortschritt des Levels anzeigen (Lisa) */
                                 percent: prozent,
                                 backgroundColor: Color(0xff0d4dbb),
                                 progressColor: Color(0xff2d75f0),
@@ -228,8 +227,8 @@ class _ProfilState extends State<Profil> {
                       children: [
                         /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
                         Text(
-                            "Deine Errungenschaften: " +
-                                (anzahlErrungenschaften + 4).toString(),
+                            "Deine Errungenschaften: " /* +
+                                (anzahlErrungenschaften + 4).toString() */,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline3),
                       ],
