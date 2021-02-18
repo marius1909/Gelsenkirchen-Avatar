@@ -43,38 +43,40 @@ class MapSampleState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: Stack(
-      children: [
-        GoogleMap(
-          mapToolbarEnabled: true,
-          mapType: MapType.normal,
-          initialCameraPosition: _whsGelsenkrichen,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
+      body: Stack(
+        children: [
+          GoogleMap(
+            mapToolbarEnabled: true,
+            mapType: MapType.normal,
+            initialCameraPosition: _whsGelsenkrichen,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
 
-            /* Style setzen */
-            controller.setMapStyle(_mapStyle);
-          },
-          markers: _markers,
-          myLocationEnabled: true,
-          myLocationButtonEnabled: false,
-          zoomControlsEnabled: false,
-          padding: EdgeInsets.only(top: 120),
-          cameraTargetBounds: CameraTargetBounds(bounds),
-          minMaxZoomPreference: MinMaxZoomPreference(5, 20),
-        ),
-        InfoScreen(
-          lernort: lernort,
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        LernortScreen(l: lernort, k: "TODO")));
-          },
-        )
-      ],
-    ));
+              /* Style setzen */
+              controller.setMapStyle(_mapStyle);
+            },
+            onTap: (argument) => setState(() => lernort = null),
+            markers: _markers,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            zoomControlsEnabled: false,
+            padding: EdgeInsets.only(top: 120),
+            cameraTargetBounds: CameraTargetBounds(bounds),
+            minMaxZoomPreference: MinMaxZoomPreference(5, 20),
+          ),
+          InfoScreen(
+            lernort: lernort,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          LernortScreen(l: lernort, k: "TODO")));
+            },
+          )
+        ],
+      ),
+    );
   }
 
   void addMarkersForLernorte() {
