@@ -4,7 +4,6 @@ import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int userID;
