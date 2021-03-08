@@ -42,6 +42,7 @@ enum DatabaseURL {
   removeFromSammelbares,
   updateLernort,
   updateBenutzer,
+  updateQuizFragen,
 }
 
 extension DatabaseURLExtension on DatabaseURL {
@@ -136,6 +137,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "updateLernort.php";
       case DatabaseURL.updateBenutzer:
         return _baseURL + "updateBenutzer.php";
+      case DatabaseURL.updateQuizFragen:
+        return _baseURL + "updateQuizFragen.php";
       default:
         return null;
     }

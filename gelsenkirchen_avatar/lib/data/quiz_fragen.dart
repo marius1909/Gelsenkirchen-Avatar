@@ -28,7 +28,7 @@ class QuizFragen extends DatenbankObjekt<QuizFragen> {
             DatabaseURL.getQuizFragen.value,
             DatabaseURL.insertIntoQuizFragen.value,
             DatabaseURL.removeFromQuizFragen.value,
-            '');
+            DatabaseURL.updateQuizFragen.value);
 
   @override
   QuizFragen objektVonJasonArray(objekt) {

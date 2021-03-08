@@ -45,6 +45,7 @@ class _LernortScreenState extends State<LernortScreen>
         /* Alphabetische Sortierung der Liste */
         // lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
+        print(lernKategorieList);
         _listLength = lernKategorieList.length;
       });
     });
@@ -177,7 +178,8 @@ class _LernortScreenState extends State<LernortScreen>
                       SizedBox(width: 10),
                       /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                       Flexible(
-                        child: Text(lernKategorieList[lernort.kategorieID].name,
+                        child: Text(
+                            lernKategorieList[lernort.kategorieID - 1].name,
                             style: Theme.of(context).textTheme.headline4),
                       )
                     ]),
