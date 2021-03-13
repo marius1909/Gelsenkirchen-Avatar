@@ -32,7 +32,8 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
         name: objekt["name"] as String,
         beschreibung: objekt["beschreibung"] as String,
         bild: objekt["bild"] as String,
-        pfadID: int.parse(objekt["pfadID"]));
+        //int.parse wirft error wenn pfadID NULL ist \Marius
+        pfadID: objekt["pfadID"] == null ? null : int.parse(objekt["pfadID"]));
   }
 
   @override
