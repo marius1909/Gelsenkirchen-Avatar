@@ -26,7 +26,6 @@ class LoadInfo {
     //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
   }
 
-
 //TODO:existiert nur temporär um richtige größe für homescreen zu laden
   static Image loadUserAvatarImage2(
       int userid, int avatarTypID, int ausgeruesteteCollectableID) {
@@ -58,9 +57,7 @@ class LoadInfo {
 
     Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) {
       for (var i = 0; i < alleErrungenschaften.length; i++) {
-        if (alleErrungenschaften[i].benutzerID == userID) {
-          freigeschaltet.add(alleErrungenschaften[i]);
-        }
+        if (alleErrungenschaften[i].benutzerID == userID) {}
       }
     });
 
