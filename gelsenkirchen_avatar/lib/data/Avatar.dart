@@ -20,6 +20,7 @@ Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage
 */
 
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:gelsenkirchen_avatar/data/dummyFreigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
@@ -48,34 +49,42 @@ class Avatar {
 
   Future<String> getImagePath(int userID) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+
+    String baseAvatar = "";
+    // List<FreigeschaltetDummy> freigeschalteteErrungenschaften = new List();
+    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 3, true));
+    //  freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 4, true));
+    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 7, true));
+    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 8, true));
+    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 9, true));
+    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 11, true));
+    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 12, true));
+    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 10, false));
+
+//aktuell nur einträge für benutzer 9
     List<Freigeschaltet> freigeschalteteErrungenschaften =
-        LoadInfo.getFreigeschalteteErrungenschaften(userID);
+        await LoadInfo.getFreigeschalteteErrungenschaften(userID);
     List<Sammelbares> ausgeruesteteErrungenschaften = new List();
     int pfadID = 0;
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
-      print(i);
-
       if (freigeschalteteErrungenschaften[i].ausgeruestet) {
         for (var j = 0; j < sammelbares.length; j++) {
           if (sammelbares[j].id ==
               freigeschalteteErrungenschaften[i].sammelID) {
-            //wenn basisavatar ausgerüstet ist finde raus welcher und gib direkt pfad zurück
             if (sammelbares[j].kategorieID == 2) {
-              return _basePath + getBaseAvatar(sammelbares[i].pfadID) + _suffix;
+              baseAvatar = getBaseAvatar(sammelbares[j].pfadID);
             } else {
               ausgeruesteteErrungenschaften.add(sammelbares[j]);
             }
           }
         }
       }
-
-      for (var i = 0; i < ausgeruesteteErrungenschaften.length; i++) {
-        pfadID += ausgeruesteteErrungenschaften[i].pfadID;
-      }
     }
-
-    return _basePath + pfadID.toString() + _suffix;
+    for (var i = 0; i < ausgeruesteteErrungenschaften.length; i++) {
+      pfadID += ausgeruesteteErrungenschaften[i].pfadID;
+    }
+    return _basePath + baseAvatar + pfadID.toString() + _suffix;
   }
 
   Future<String> pfadIDBasisAvatar(int sammelID) async {
@@ -103,9 +112,7 @@ class Avatar {
   }
 
   Future<List<Sammelbares>> getSammelbares() async {
-    print("sasd");
     List<Sammelbares> a = await Sammelbares.shared.gibObjekte();
-    print(a);
 
     return a;
   }

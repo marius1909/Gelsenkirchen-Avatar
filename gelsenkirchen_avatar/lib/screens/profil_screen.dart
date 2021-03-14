@@ -13,7 +13,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 /*
   TODO: (nicht bis S&T machbar) Anzahl an Errungenschaften laden
 */
@@ -37,6 +36,8 @@ class _ProfilState extends State<Profil> {
   TextEditingController namectrl;
   bool isEditable = false;
 
+  String test = "iiiiiiiiiiiiiiiiiiii";
+
 //TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
@@ -51,10 +52,19 @@ class _ProfilState extends State<Profil> {
   @override
   void initState() {
     super.initState();
+    asyncInitState();
 
     namectrl = new TextEditingController();
-    List<Freigeschaltet> a =
-        LoadInfo.getFreigeschalteteErrungenschaften(widget.userID);
+
+    List<Freigeschaltet> a = new List();
+    Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) async {
+      for (var i = 0; i < alleErrungenschaften.length; i++) {
+        if (alleErrungenschaften[i].benutzerID == 9) {
+          a.add(alleErrungenschaften[i]);
+        }
+      }
+    });
+
     setState(() {
       level = 0;
     });
@@ -87,7 +97,6 @@ class _ProfilState extends State<Profil> {
 
     storedBenutzer = jsonDecode(sharedPreferences.getString("benutzer"));
 
-    print(storedBenutzer);
     storedBenutzer["benutzer"] = name;
 
     sharedPreferences.setString("benutzer", jsonEncode(storedBenutzer));
@@ -228,7 +237,8 @@ class _ProfilState extends State<Profil> {
                         /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
                         Text(
                             "Deine Errungenschaften: " /* +
-                                (anzahlErrungenschaften + 4).toString() */,
+                                    (anzahlErrungenschaften + 4).toString() */
+                            ,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline3),
                       ],
@@ -242,76 +252,77 @@ class _ProfilState extends State<Profil> {
                     CarouselSlider(
                       /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
                       items: [
-                       
-                  Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 1).imagePath, height: 300),
-                    ),
-                
-                   Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 2).imagePath, height: 300),
-                    ),
-               Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 3).imagePath, height: 300),
-                    ),
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 4).imagePath, height: 300),
-                    ),
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 5).imagePath, height: 300),
-                    ),
-                  
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 6).imagePath, height: 300),
-                    ),
-                  
-                   Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 7).imagePath, height: 300),
-                    ),
-                
-
-            
-               
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 0).imagePath, height: 300),
-                    ),
-                  
-             
-                   Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 1).imagePath, height: 300),
-                    ),
-                  
-              
-                Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 2).imagePath, height: 300),
-                    ),
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 3).imagePath, height: 300),
-                    ),
-                Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(2, 0).imagePath, height: 300),
-                    ),
-                Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(2, 1).imagePath, height: 300),
-                    ),
-                 Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(3, 0).imagePath, height: 300),
-                    )
-                  
-                ],
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 1).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 2).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 3).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 4).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 5).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 6).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(0, 7).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(1, 0).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(1, 1).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(1, 2).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(1, 3).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(2, 0).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(2, 1).imagePath, height: 300),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          child:
+                              Image.asset(Avatar(3, 0).imagePath, height: 300),
+                        )
+                      ],
 
                       //Slider Eigenschaften
                       options: CarouselOptions(
@@ -327,44 +338,44 @@ class _ProfilState extends State<Profil> {
                     ),
 
                     /* FlatButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    padding: EdgeInsets.all(8.0),
-                    splashColor: Colors.blueAccent,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ProfilBearbeiten(widget.id_user)),
-                      );
-                    },
-                    child: Text(
-                      "Profil bearbeiten",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  FlatButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    disabledColor: Colors.grey,
-                    disabledTextColor: Colors.black,
-                    padding: EdgeInsets.all(8.0),
-                    splashColor: Colors.blueAccent,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ErrungenschaftenScreen()),
-                      );
-                    },
-                    child: Text(
-                      "Errungenschaften",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ) */
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        disabledColor: Colors.grey,
+                        disabledTextColor: Colors.black,
+                        padding: EdgeInsets.all(8.0),
+                        splashColor: Colors.blueAccent,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfilBearbeiten(widget.id_user)),
+                          );
+                        },
+                        child: Text(
+                          "Profil bearbeiten",
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      ),
+                      FlatButton(
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        disabledColor: Colors.grey,
+                        disabledTextColor: Colors.black,
+                        padding: EdgeInsets.all(8.0),
+                        splashColor: Colors.blueAccent,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ErrungenschaftenScreen()),
+                          );
+                        },
+                        child: Text(
+                          "Errungenschaften",
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      ) */
                   ],
                 ),
               )
@@ -375,6 +386,16 @@ class _ProfilState extends State<Profil> {
 
   String getText() {
     return spielername;
+  }
+
+  void asyncInitState() async {
+    Avatar as = new Avatar(1, 1);
+    String asd = await as.getImagePath(1);
+    print(asd);
+
+    setState(() {
+      test = asd;
+    });
   }
 }
 

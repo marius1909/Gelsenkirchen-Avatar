@@ -52,14 +52,17 @@ class LoadInfo {
 
 /* Geht alle Freigeschalteten Errungenschaften durch und gibt eine Liste wieder mit Errungenschaften die vom angegebenen Benutzer freigeschaltet wurden*/
 
-  static List<Freigeschaltet> getFreigeschalteteErrungenschaften(int userID) {
-    List<Freigeschaltet> freigeschaltet = new List();
+  static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
+      int userID) async {
+    List<Freigeschaltet> freigeschaltet =
+        await Freigeschaltet.shared.gibObjekte();
 
-    Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) {
-      for (var i = 0; i < alleErrungenschaften.length; i++) {
-        if (alleErrungenschaften[i].benutzerID == userID) {}
-      }
-    });
+//TODO: Auf richtigen BenutzerID prüfen fehlt, *Marius
+    // for (var i = 0; i < alleErrungenschaften.length; i++) {
+    //   if (alleErrungenschaften[i].benutzerID == userID) {
+    //     freigeschaltet.add(alleErrungenschaften[i]);
+    //   }
+    // }
 
     return freigeschaltet;
   }
