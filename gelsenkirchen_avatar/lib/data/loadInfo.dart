@@ -54,17 +54,16 @@ class LoadInfo {
 
   static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
       int userID) async {
+    List<Freigeschaltet> userFreigeschaltet = new List();
     List<Freigeschaltet> freigeschaltet =
         await Freigeschaltet.shared.gibObjekte();
 
-//TODO: Auf richtigen BenutzerID prüfen fehlt, *Marius
-    // for (var i = 0; i < alleErrungenschaften.length; i++) {
-    //   if (alleErrungenschaften[i].benutzerID == userID) {
-    //     freigeschaltet.add(alleErrungenschaften[i]);
-    //   }
-    // }
-
-    return freigeschaltet;
+    for (var i = 0; i < freigeschaltet.length; i++) {
+      if (freigeschaltet[i].benutzerID == userID) {
+        userFreigeschaltet.add(freigeschaltet[i]);
+      }
+    }
+    return userFreigeschaltet;
   }
 
   static List<Avatar> loadAlleAvatare() {

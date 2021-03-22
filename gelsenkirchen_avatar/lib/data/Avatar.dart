@@ -64,6 +64,10 @@ class Avatar {
 //aktuell nur einträge für benutzer 9
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await LoadInfo.getFreigeschalteteErrungenschaften(userID);
+
+    // print(userID);
+    //print(freigeschalteteErrungenschaften);
+
     List<Sammelbares> ausgeruesteteErrungenschaften = new List();
     int pfadID = 0;
 
@@ -84,6 +88,7 @@ class Avatar {
     for (var i = 0; i < ausgeruesteteErrungenschaften.length; i++) {
       pfadID += ausgeruesteteErrungenschaften[i].pfadID;
     }
+
     return _basePath + baseAvatar + pfadID.toString() + _suffix;
   }
 

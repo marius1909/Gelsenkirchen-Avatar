@@ -143,7 +143,7 @@ class _ProfilState extends State<Profil> {
                         Flexible(
                             child: !isEditable
                                 ? Text(
-                                    spielername,
+                                    test,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontFamily: "Ccaps",
@@ -390,11 +390,11 @@ class _ProfilState extends State<Profil> {
 
   void asyncInitState() async {
     Avatar as = new Avatar(1, 1);
-    String asd = await as.getImagePath(1);
-    print(asd);
+    String asd = await as.getImagePath(127);
 
+    print(asd);
     setState(() {
-      test = asd;
+      test = "ddasds";
     });
   }
 }
