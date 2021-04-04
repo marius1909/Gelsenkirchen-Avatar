@@ -15,6 +15,15 @@ class LoadInfo {
     return name;
   }
 
+//NEUE FUNKTION
+
+  static Future<Image> loadUserAvatarImageNeu(int userid) async {
+    String imagePath = await Avatar.getImagePath(userid);
+
+    return Image.asset(imagePath, width: 250, height: 250);
+  }
+
+//ALT
 //TODo: Avatar klasse muss verbessert werden damit das hier besser gemacht werden kann! (nicht bis S&T machbar)
   static Image loadUserAvatarImage(
       int userid, int avatarTypID, int ausgeruesteteCollectableID) {

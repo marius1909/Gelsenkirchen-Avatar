@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -25,8 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Image aktuellerAvatar;
 
   void initState() {
-    aktuellerAvatar = LoadInfo.loadUserAvatarImage2(Benutzer.current.id,
-        dummyprofil.avatarBaseID, dummyprofil.berechneCollectablesID());
+    /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
+    aktuellerAvatar =
+        Image.asset(Avatar.getDefaultImagePath(), width: 100, height: 100);
+    asyncInitState();
     var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
     freigeschaltetFuture.then((freigeschaltet) {
       setState(() {
@@ -138,6 +141,14 @@ class _HomeScreenState extends State<HomeScreen> {
       return false;
     }
     return true;
+  }
+
+  //Lädt den aktuell ausgerüsteten Avatar des derzeitigen Benutzers
+  void asyncInitState() async {
+    aktuellerAvatar = Image.asset(
+        await Avatar.getImagePath(Benutzer.current.id),
+        width: 100,
+        height: 100);
   }
 }
 

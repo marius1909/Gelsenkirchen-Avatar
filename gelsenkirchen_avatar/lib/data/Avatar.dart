@@ -19,12 +19,9 @@ Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage
 
 */
 
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:gelsenkirchen_avatar/data/dummyFreigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
-import 'package:http/http.dart';
 
 class Avatar {
   int avatarTypID;
@@ -32,8 +29,10 @@ class Avatar {
 
 //Assetpaths
   String _basePath = "assets/avatar/500px/";
-  String _avatar;
   String _suffix = ".png";
+
+  static String _basePathNeu = "assets/avatar/500px/";
+  static String _suffixNeu = ".png";
 
   Avatar(int _avatarTypID, int _collectableID) {
     collectableID = _collectableID;
@@ -42,31 +41,25 @@ class Avatar {
 
   String get imagePath {
     return _basePath +
-        getBaseAvatar(avatarTypID) +
+        getBaseAvatarAlt(avatarTypID) +
         collectableID.toString() +
         _suffix;
   }
 
-  Future<String> getImagePath(int userID) async {
+  static String getDefaultImagePath() {
+    return _basePathNeu + getBaseAvatar(0) + _suffixNeu;
+  }
+
+  static Future<String> getImagePath(int userID) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
 
     String baseAvatar = "";
-    // List<FreigeschaltetDummy> freigeschalteteErrungenschaften = new List();
-    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 3, true));
-    //  freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 4, true));
-    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 7, true));
-    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 8, true));
-    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(127, 9, true));
-    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 11, true));
-    //freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 12, true));
-    // freigeschalteteErrungenschaften.add(new FreigeschaltetDummy(1, 10, false));
 
-//aktuell nur einträge für benutzer 9
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await LoadInfo.getFreigeschalteteErrungenschaften(userID);
 
     // print(userID);
-    //print(freigeschalteteErrungenschaften);
+    print(freigeschalteteErrungenschaften);
 
     List<Sammelbares> ausgeruesteteErrungenschaften = new List();
     int pfadID = 0;
@@ -89,40 +82,58 @@ class Avatar {
       pfadID += ausgeruesteteErrungenschaften[i].pfadID;
     }
 
+    return _basePathNeu + baseAvatar + pfadID.toString() + _suffixNeu;
+  }
+
+  static Future<List<String>> getAuswaehlbareAvatareList(int userid) async {
+    List<String> auswaehlbareAvatare = new List();
+    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
+
+    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {}
+
+    return auswaehlbareAvatare;
+  }
+
+  Future<String> getImagePathAlt(int userID) async {
+    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+
+    String baseAvatar = "";
+
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await LoadInfo.getFreigeschalteteErrungenschaften(userID);
+
+    // print(userID);
+    //print(freigeschalteteErrungenschaften);
+
+    List<Sammelbares> ausgeruesteteErrungenschaften = new List();
+    int pfadID = 0;
+
+    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
+      if (freigeschalteteErrungenschaften[i].ausgeruestet) {
+        for (var j = 0; j < sammelbares.length; j++) {
+          if (sammelbares[j].id ==
+              freigeschalteteErrungenschaften[i].sammelID) {
+            if (sammelbares[j].kategorieID == 2) {
+              baseAvatar = getBaseAvatarAlt(sammelbares[j].pfadID);
+            } else {
+              ausgeruesteteErrungenschaften.add(sammelbares[j]);
+            }
+          }
+        }
+      }
+    }
+    for (var i = 0; i < ausgeruesteteErrungenschaften.length; i++) {
+      pfadID += ausgeruesteteErrungenschaften[i].pfadID;
+    }
+
     return _basePath + baseAvatar + pfadID.toString() + _suffix;
   }
 
-  Future<String> pfadIDBasisAvatar(int sammelID) async {
-    List<Sammelbares> sammelbares = await getSammelbares();
-    for (var i = 0; i < sammelbares.length; i++) {
-      return _basePath + getBaseAvatar(sammelbares[i].pfadID) + _suffix;
-    }
-  }
-
-  @override
-  String toString() {
-    return "AvatarTyp= " +
-        _avatar +
-        " CollectableID= " +
-        collectableID.toString();
-  }
-
-//_____________________________unused
-  Avatar.withAccessoir({List<BlauesAccessoir> accessoires}) {
-    if (accessoires != null) {
-      collectableID = accessoires.fold(0, (previousValue, element) {
-        return previousValue + element.accessoir;
-      });
-    }
-  }
-
-  Future<List<Sammelbares>> getSammelbares() async {
-    List<Sammelbares> a = await Sammelbares.shared.gibObjekte();
-
-    return a;
-  }
-
-  String getBaseAvatar(baseID) {
+  // ignore: missing_return
+  String getBaseAvatarAlt(baseID) {
     if (baseID == 0) {
       return "DerBlaue/";
     }
@@ -139,36 +150,22 @@ class Avatar {
       return "DerRote/";
     }
   }
-}
 
-class BlauesAccessoir {
-  final int accessoir;
-  BlauesAccessoir._(this.accessoir);
-  static final BlauesAccessoir pinkesHaar = BlauesAccessoir._(1);
-  static final BlauesAccessoir schnurrbart = BlauesAccessoir._(2);
-  static final BlauesAccessoir lilaSchuhe = BlauesAccessoir._(4);
-}
-
-class GelbesAccessoir {
-  final int accessoir;
-  GelbesAccessoir._(this.accessoir);
-  static final GelbesAccessoir gestreifteHoerner = GelbesAccessoir._(1);
-  static final GelbesAccessoir krawatte = GelbesAccessoir._(2);
-  static final GelbesAccessoir zauberstab = GelbesAccessoir._(4);
-}
-
-class GruenesAccessoir {
-  final int accessoir;
-  GruenesAccessoir._(this.accessoir);
-  static final GruenesAccessoir schnurrbart = GruenesAccessoir._(1);
-  static final GruenesAccessoir hut = GruenesAccessoir._(2);
-  static final GruenesAccessoir blaueSchuhe = GruenesAccessoir._(4);
-}
-
-class RotesAccessoir {
-  final int accessoir;
-  RotesAccessoir._(this.accessoir);
-  static final RotesAccessoir monokel = RotesAccessoir._(1);
-  static final RotesAccessoir kappe = RotesAccessoir._(2);
-  static final RotesAccessoir blaueShorts = RotesAccessoir._(4);
+  static String getBaseAvatar(baseID) {
+    if (baseID == 0) {
+      return "DerBlaue/";
+    }
+    //Gelb
+    else if (baseID == 1) {
+      return "DerGelbe/";
+    }
+    //Gruen
+    else if (baseID == 2) {
+      return "DerGruene/";
+    }
+    //Rot
+    else if (baseID == 3) {
+      return "DerRote/";
+    }
+  }
 }
