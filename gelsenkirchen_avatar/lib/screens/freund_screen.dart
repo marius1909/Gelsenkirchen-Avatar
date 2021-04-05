@@ -35,8 +35,8 @@ class _FreundState extends State<Freund> {
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
         spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
-        anzahlErrungenschaften =
-            LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
+        // anzahlErrungenschaften =
+        //     LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
         avatar = LoadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });

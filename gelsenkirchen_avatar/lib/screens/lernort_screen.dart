@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/memoryspiel.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
+import 'package:gelsenkirchen_avatar/memory/start_memory.dart';
 import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -45,7 +47,6 @@ class _LernortScreenState extends State<LernortScreen>
         /* Alphabetische Sortierung der Liste */
         // lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
-        print(lernKategorieList);
         _listLength = lernKategorieList.length;
       });
     });
@@ -340,6 +341,41 @@ class _LernortScreenState extends State<LernortScreen>
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
                                                 Suchspiel()));
+                                  },
+                                )
+                              ])
+                            ]))),
+                /* SPIEL 3 - Memory */
+                //TODO: Bisher nur Placeholder. Muss noch angepasst werden (Alex)
+                Container(
+                    child: Card(
+                        elevation: 1,
+                        child: Column(
+                            //mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Image.asset(
+                                    "assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                                title: Text('Memory',
+                                    style: TextStyle(fontSize: 16)),
+                                subtitle: Text(
+                                  'Finde die richtigen Paare',
+                                ),
+                                /* damit der subtitle in die Zeile passt */
+                                dense: true,
+                              ),
+                              ButtonBar(children: <Widget>[
+                                FlatButton(
+                                  child: Text('Spielen',
+                                      style: TextStyle(
+                                          color: Color(0xff093582),
+                                          fontWeight: FontWeight.bold)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                StartMemory(widget.l.id)));
                                   },
                                 )
                               ])
