@@ -15,6 +15,9 @@ enum DatabaseURL {
   getQuizFragen,
   insertIntoQuizFragen,
   getBenutzer,
+  getMemoryspiel,
+  getMemorykartentyp,
+  getMemorykarte,
   insertIntoMinispielArt,
   insertIntoLernKategorie,
   insertIntoFreigeschaltet,
@@ -24,6 +27,8 @@ enum DatabaseURL {
   insertIntoSammelKategorie,
   insertIntoSammelbares,
   insertIntoQuiz,
+  insertIntoMemoryspiel,
+  insertIntoMemorykarte,
   registrierung,
   lernortVorschau,
   anmeldung,
@@ -79,6 +84,12 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "get_lernortID.php?id=";
       case DatabaseURL.getBenutzer:
         return _baseURL + "getBenutzer.php";
+      case DatabaseURL.getMemoryspiel:
+        return _baseURL + "getMemoryspiel.php";
+      case DatabaseURL.getMemorykartentyp:
+        return _baseURL + "getMemorykartentyp.php";
+      case DatabaseURL.getMemorykarte:
+        return _baseURL + "getMemorykarte.php";
       case DatabaseURL.registrierung:
         return _baseURL + "registrierung.php";
       case DatabaseURL.lernortVorschau:
@@ -111,6 +122,10 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "insertIntoSammelbares.php";
       case DatabaseURL.insertIntoQuiz:
         return _baseURL + "insertIntoQuiz.php";
+      case DatabaseURL.insertIntoMemoryspiel:
+        return _baseURL + "insertIntoMemoryspiel.php";
+      case DatabaseURL.insertIntoMemorykarte:
+        return _baseURL + "insertIntoMemorykarte.php";
       case DatabaseURL.removeFromBenutzerKategorie:
         return _baseURL + "removeFromBenutzerKategorie.php";
       case DatabaseURL.removeFromBenutzerSpiel:

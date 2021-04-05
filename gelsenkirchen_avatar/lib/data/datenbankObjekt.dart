@@ -30,6 +30,15 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
     return _datenbankObjektList;
   }
 
+  //Gibt nur das Objekt für das Attribut und den genannten Wert zurück.
+  //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte oder Memoryspiel. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
+  Future<List<D>> sucheObjekt(String attribut, var wert) async {
+    if (_datenbankObjektList.isEmpty) {
+      await ladeObjektNachKriterium(attribut, wert);
+    }
+    return _datenbankObjektList;
+  }
+
   /// Lädt alle Objekte aus der Datenbank.
   /// Kann benutzt werden, um die Objekte zu aktualisieren.
   ladeObjekte() async {
@@ -38,7 +47,16 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
     _datenbankObjektList = this._parseVonJson(jsonData);
   }
 
-  /// Erstellt aus JSON-Daten eine Liste mit Elementen des Typs `D`.
+  // Lädt nur das Objekt für das genannte Kriterium zurück.
+  // //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte oder Memoryspiel. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
+  ladeObjektNachKriterium(String attribut, var wert) async {
+    var body = {"attribut": attribut, "wert": wert.toString(), "suche": "1"};
+
+    final response = await http.post(getFromDatabaseURL, body: body);
+    final jsonData = jsonDecode(response.body);
+    _datenbankObjektList = this._parseVonJson(jsonData);
+  }
+
   List<D> _parseVonJson(dynamic json) {
     List<D> objekte = List();
     for (var objekt in json) {

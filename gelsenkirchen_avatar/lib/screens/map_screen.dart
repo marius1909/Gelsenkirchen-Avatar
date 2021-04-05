@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/memorykarte.dart';
 import 'package:gelsenkirchen_avatar/screens/map_info_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 // Für Map-Style
@@ -33,7 +34,6 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
     addMarkersForLernorte();
-
     /* Lädt das map_style.txt File als ein String ein */
     rootBundle.loadString('assets/styles/map_style.txt').then((string) {
       _mapStyle = string;
