@@ -36,7 +36,7 @@ class _FreundState extends State<Freund> {
       setState(() {
         spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
         // anzahlErrungenschaften =
-        //     LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
+        // LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
         avatar = LoadInfo.loadUserAvatarImage(
             widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
       });

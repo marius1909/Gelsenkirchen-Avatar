@@ -47,7 +47,7 @@ class _ProfilState extends State<Profil> {
   int ausgeruesteteCollectablesID = 0;
 
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
+  Image avatar;
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _ProfilState extends State<Profil> {
     asyncInitState();
 
     namectrl = new TextEditingController();
-
+    avatar = Image.asset(Avatar.getDefaultImagePath(), width: 250, height: 250);
     List<Freigeschaltet> a = new List();
     Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) async {
       for (var i = 0; i < alleErrungenschaften.length; i++) {
@@ -73,9 +73,6 @@ class _ProfilState extends State<Profil> {
         //spielername = LoadInfo.loadName(alleBenutzer, widget.userID); Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
         spielername = Benutzer.current.benutzer;
         anzahlErrungenschaften = a.length;
-
-        avatar = LoadInfo.loadUserAvatarImage(widget.userID,
-            dummyprofil.avatarBaseID, dummyprofil.berechneCollectablesID());
       });
 
       //int levelTemp = await LoadInfo.loadUserLevel(widget.userID);Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
@@ -143,7 +140,7 @@ class _ProfilState extends State<Profil> {
                         Flexible(
                             child: !isEditable
                                 ? Text(
-                                    spielername,
+                                    test,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontFamily: "Ccaps",
@@ -389,12 +386,11 @@ class _ProfilState extends State<Profil> {
   }
 
   void asyncInitState() async {
-    Avatar as = new Avatar(1, 1);
-    String asd = await as.getImagePath(1);
-    print(asd);
+    avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
+        width: 250, height: 250);
 
     setState(() {
-      test = asd;
+      test = "ddasds";
     });
   }
 }

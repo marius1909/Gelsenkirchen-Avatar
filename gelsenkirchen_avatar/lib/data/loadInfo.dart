@@ -15,7 +15,16 @@ class LoadInfo {
     return name;
   }
 
-//TODO: Avatar klasse muss verbessert werden damit das hier besser gemacht werden kann! (nicht bis S&T machbar)
+//NEUE FUNKTION
+
+  static Future<Image> loadUserAvatarImageNeu(int userid) async {
+    String imagePath = await Avatar.getImagePath(userid);
+
+    return Image.asset(imagePath, width: 250, height: 250);
+  }
+
+//ALT
+//TODo: Avatar klasse muss verbessert werden damit das hier besser gemacht werden kann! (nicht bis S&T machbar)
   static Image loadUserAvatarImage(
       int userid, int avatarTypID, int ausgeruesteteCollectableID) {
     return Image.asset(
@@ -54,17 +63,16 @@ class LoadInfo {
 
   static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
       int userID) async {
+    List<Freigeschaltet> userFreigeschaltet = new List();
     List<Freigeschaltet> freigeschaltet =
         await Freigeschaltet.shared.gibObjekte();
 
-//TODO: Auf richtigen BenutzerID prüfen fehlt, *Marius
-    // for (var i = 0; i < alleErrungenschaften.length; i++) {
-    //   if (alleErrungenschaften[i].benutzerID == userID) {
-    //     freigeschaltet.add(alleErrungenschaften[i]);
-    //   }
-    // }
-
-    return freigeschaltet;
+    for (var i = 0; i < freigeschaltet.length; i++) {
+      if (freigeschaltet[i].benutzerID == userID) {
+        userFreigeschaltet.add(freigeschaltet[i]);
+      }
+    }
+    return userFreigeschaltet;
   }
 
   static List<Avatar> loadAlleAvatare() {
