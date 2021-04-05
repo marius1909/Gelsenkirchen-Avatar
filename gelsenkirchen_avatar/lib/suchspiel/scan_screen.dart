@@ -61,8 +61,9 @@ class ScanScreen extends StatelessWidget {
                 scanButton("Scanne QR-Code, um das Spiel zu starten.",
                     QRCodeReader(
                   onQRCodeScanned: (code) {
-                    SuchspielArt art =
-                        SuchspielExtension.fromAssociatedStartphrase(code);
+                    print(code);
+                    SuchspielArt art = SuchspielArt.fromQRCode(code);
+                    
                     if (art != null) {
                       onScanned(art);
                     } else {

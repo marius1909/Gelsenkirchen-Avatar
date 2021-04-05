@@ -1,29 +1,13 @@
-enum SuchspielArt { rotbuche, edelweiss, korkeiche }
+import 'dart:convert';
 
-extension SuchspielExtension on SuchspielArt {
-  String get associatedStartphrase {
-    switch (this) {
-      case SuchspielArt.rotbuche:
-        return "rotbuche";
-      case SuchspielArt.edelweiss:
-        return "edelweiß";
-      case SuchspielArt.korkeiche:
-        return "korkeiche";
-      default:
-        return null;
-    }
-  }
+class SuchspielArt {
+  String loesungswort;
+  int lernortID;
 
-  static SuchspielArt fromAssociatedStartphrase(String associatedStartphrase) {
-    switch (associatedStartphrase) {
-      case "rotbuche":
-        return SuchspielArt.rotbuche;
-      case "edelweiß":
-        return SuchspielArt.edelweiss;
-      case "korkeiche":
-        return SuchspielArt.korkeiche;
-      default:
-        return null;
-    }
+  SuchspielArt(this.loesungswort, this.lernortID);
+
+  static SuchspielArt fromQRCode(String json) {
+    dynamic object = jsonDecode(json);
+    return SuchspielArt(object['loesung'], object['lernortID']);
   }
 }

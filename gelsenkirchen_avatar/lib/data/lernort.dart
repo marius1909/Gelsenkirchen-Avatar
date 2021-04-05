@@ -1,6 +1,8 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+/// Lernort einer Stadt, mit zugehörigen Minispielen, 
+/// Beschreibungen und weiteren Informationen
 class Lernort extends DatenbankObjekt<Lernort> {
   int id;
   double nord;
@@ -82,7 +84,6 @@ class Lernort extends DatenbankObjekt<Lernort> {
     return map;
   }
 
-  /// Map Representation des Lernortes.
   @override
   Map<String, String> get map {
     return {

@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart'
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+/// Representiert einen einzelnen Benutzer in der Datenbank
 class Benutzer extends DatenbankObjekt<Benutzer> {
   int id;
   String email;
@@ -14,6 +15,8 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
   int erfahrung;
 
   static Benutzer get shared => Benutzer();
+
+  /// Der derzeitig eingeloggte Benutzer.
   static Benutzer current;
 
   Benutzer(
@@ -29,6 +32,7 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
             DatabaseURL.removeFromBenutzer.value,
             DatabaseURL.updateBenutzer.value);
 
+  /// Ruft einen vorhandenen Benutzer aus der Datenbank mit zugehörigem Login ab.
   static Future<Benutzer> getBenutzer(String email, String passwort) async {
     final response = await http.post(DatabaseURL.anmeldung.value,
         body: {"email": "$email", "passwort": "$passwort"});
@@ -74,7 +78,6 @@ class Benutzer extends DatenbankObjekt<Benutzer> {
     return map;
   }
 
-  /// Map Representation des Benutzers.
   @override
   Map<String, String> get map {
     return {

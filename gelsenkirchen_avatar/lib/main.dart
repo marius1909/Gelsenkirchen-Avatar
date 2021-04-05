@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
@@ -45,6 +46,12 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     pruefeAufLogin();
     super.initState();
+
+    Lernort.shared.gibObjekte().then((value) => value.forEach((element) {
+          print(element.id);
+          print(element.kategorieID);
+          print(element.name);
+        }));
   }
 
   @override

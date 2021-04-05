@@ -1,6 +1,8 @@
 import 'database_url.dart';
 import 'datenbankObjekt.dart';
 
+/// Benutzer sammeln in verschiedenen Kategorien Punkte, die mit Hilfe
+/// dieser Klasse dargestellt werden.
 class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
   int benutzerID;
   int lernKategorieID;

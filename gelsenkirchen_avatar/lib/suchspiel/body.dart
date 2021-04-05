@@ -1,13 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_hinweis.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/text_box.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/scan_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   Body({this.art});
@@ -27,16 +32,18 @@ class _BodyState extends State<Body> {
   int verbleibendeZeit;
   int erreichtePunkte;
   CountDownController _controller = CountDownController();
+  dynamic data;
 
   @override
   void initState() {
     super.initState();
-    hinweis = SuchspielHinweis.alleHinweise[widget.art];
+    hinweis = SuchspielHinweis.alleHinweise[widget.art.loesungswort];
     derzeitigerHinweis = hinweis.derzeitigerHinweis + 1;
     maxHinweise = hinweis.hinweisAnzahl;
     aktuellerHinweistext = hinweis.naechsterHinweis();
     verbleibendeZeit = widget._sekundenProHinweis;
     erreichtePunkte = 30;
+    getLernort();
   }
 
   @override
@@ -128,6 +135,10 @@ class _BodyState extends State<Body> {
                               new FlatButton(
                                 child: new Text("Weiterspielen"),
                                 onPressed: () {
+                                  erreichtePunkte = (erreichtePunkte /
+                                      hinweis.derzeitigerHinweis) as int;
+
+                                  savePoint();
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
@@ -137,6 +148,8 @@ class _BodyState extends State<Body> {
                               new FlatButton(
                                 child: new Text("Beenden"),
                                 onPressed: () {
+                                  erreichtePunkte = erreichtePunkte ~/ hinweis.derzeitigerHinweis;
+                                  savePoint();
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
@@ -219,5 +232,131 @@ class _BodyState extends State<Body> {
         }
       },
     );
+  }
+
+  Future<void> savePoint() async {
+    var param = "?benutzerID=" +
+        Benutzer.current.id.toString() +
+        "&lernKategorieID=" +
+        data['kategorieID'].toString() +
+        "&erfahrungspunkte=" +
+        (erreichtePunkte).toString() +
+        "&lernortID=" +
+        widget.art.lernortID.toString() +
+        "&quizID=" +
+        data['quizID'].toString();
+    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    if (jsonData['status']) {
+      Fluttertoast.showToast(
+          msg: "Deine Punkte wurden gespeichert.",
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Fluttertoast.showToast(
+          msg: "Es gab ein Fehler beim Speichern deiner Punkte.",
+          toastLength: Toast.LENGTH_SHORT);
+    }
+
+    //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
+    if (calculateLevel(jsonData['total_point_new']) >
+        calculateLevel(jsonData['total_point_old'])) {
+      String showtext;
+      if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
+        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
+        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
+            "\nDeine Belohnung: ...";
+      } else {
+        showtext =
+            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+      }
+
+      /* Dialog für Levelaufstieg */
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:
+                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+            content: Text(showtext),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
+  //Level von Spieler
+  int calculateLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
+      return 1;
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
+      return 2;
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
+      return 3;
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
+      return 4;
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
+      return 5;
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
+      return 6;
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
+      return 7;
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
+      return 8;
+    } else if (totalPoints >= 1215) {
+      return 9;
+    }
+    return 0;
+  }
+
+  //Berechnet, wie viele Punktzahl Spieler benötigt, um das nächse Level zu erreichen
+  int pointsNeededForNextLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
+      return 30 - totalPoints;
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
+      return 51 - totalPoints;
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
+      return 86 - totalPoints;
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
+      return 146 - totalPoints;
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
+      return 248 - totalPoints;
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
+      return 421 - totalPoints;
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
+      return 715 - totalPoints;
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
+      return 1215 - totalPoints;
+    } else {
+      return -1;
+    }
+  }
+
+  void getLernort() async {
+    var id = widget.art.lernortID;
+    var url =
+        "http://zukunft.sportsocke522.de/get_lernortID.php?id=" + id.toString();
+
+    var res = await http.get(url);
+
+    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
+      print('Datensatz nicht gefunden');
+    } else {
+      setState(() {
+        data = jsonDecode(res.body);
+        print(data);
+      });
+    }
   }
 }
