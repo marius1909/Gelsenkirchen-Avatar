@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/memorykarte.dart';
 import 'dart:async';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gelsenkirchen_avatar/widgets/utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_advanced_networkimage/provider.dart';
 
 class MemoryPage extends StatefulWidget {
   final int benutzerID;
@@ -41,6 +45,7 @@ class _MemoryPageState extends State<MemoryPage> {
   List<Memorykarte> karten;
   int _erfahrungspunkte;
   int _summePunkte;
+  bool laedt = true;
 
   List<bool> _cardFlips;
   List<GlobalKey<FlipCardState>> _cardStateKeys;
@@ -70,6 +75,7 @@ class _MemoryPageState extends State<MemoryPage> {
             //         new Icon(Icons.error),
             //   )
             Image.network(kartenInhalt, fit: BoxFit.fill)
+            // AdvancedNetworkImage(kartenInhalt, useDiskCache: true)
             : Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -116,6 +122,20 @@ class _MemoryPageState extends State<MemoryPage> {
     });
   }
 
+  Future ladeBilder() async {
+    setState(() {
+      laedt = true;
+    });
+
+    await Future.wait(karten.map((karte) {
+      if (karte.kartentyp == 1) Utils.cacheImage(context, karte.kartenInhalt);
+    }).toList());
+
+    setState(() {
+      laedt = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -125,6 +145,7 @@ class _MemoryPageState extends State<MemoryPage> {
       if (!_disposed)
         setState(() {
           karten = memory;
+          // ladeBilder();
 
           restart();
         });
@@ -310,7 +331,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                                           // TODO: Muss noch um Funktion zum Speichern der Punkte ergänzt werden (Alex)
                                                           Navigator.of(context)
                                                               .pop();
-                                                          // await savePoint();
+                                                          await savePoint();
                                                         },
                                                       ),
                                                     ],
@@ -363,6 +384,116 @@ class _MemoryPageState extends State<MemoryPage> {
                 ),
               ),
             );
+    }
+  }
+
+  //Punkte speichern
+  Future<void> savePoint() async {
+    var param = "?benutzerID=" +
+        widget.benutzerID.toString() +
+        "&lernKategorieID=" +
+        widget.lernKategorieID.toString() +
+        "&erfahrungspunkte=" +
+        _summePunkte.toString() +
+        "&lernortID=" +
+        widget.lernortID.toString() +
+        "&memoryID=" +
+        widget.memoryID.toString();
+    var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
+    final response = await http.get(url);
+    final jsonData = jsonDecode(response.body);
+    if (jsonData['status']) {
+      Fluttertoast.showToast(
+          msg: "Deine Punkte wurden gespeichert.",
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Fluttertoast.showToast(
+          msg: "Es gab ein Fehler beim Speichern deiner Punkte.",
+          toastLength: Toast.LENGTH_SHORT);
+    }
+
+    //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
+    if (calculateLevel(jsonData['total_point_new']) >
+        calculateLevel(jsonData['total_point_old'])) {
+      String showtext;
+      if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
+        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
+        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
+            "\nDeine Belohnung: ...";
+      } else {
+        showtext =
+            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+      }
+
+      /* Dialog für Levelaufstieg */
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:
+                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+            content: Text(showtext),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
+//Level von Spieler
+  int calculateLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
+      return 1;
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
+      return 2;
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
+      return 3;
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
+      return 4;
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
+      return 5;
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
+      return 6;
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
+      return 7;
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
+      return 8;
+    } else if (totalPoints >= 1215) {
+      return 9;
+    }
+    return 0;
+  }
+
+//Berechnet, wie viele Punktzahl Spieler benötigt, um das nächse Level zu erreichen
+  int pointsNeededForNextLevel(int totalPoints) {
+    if (totalPoints >= 0 && totalPoints <= 29) {
+      return 30 - totalPoints;
+    } else if (totalPoints >= 30 && totalPoints <= 50) {
+      return 51 - totalPoints;
+    } else if (totalPoints >= 51 && totalPoints <= 85) {
+      return 86 - totalPoints;
+    } else if (totalPoints >= 86 && totalPoints <= 145) {
+      return 146 - totalPoints;
+    } else if (totalPoints >= 146 && totalPoints <= 247) {
+      return 248 - totalPoints;
+    } else if (totalPoints >= 248 && totalPoints <= 420) {
+      return 421 - totalPoints;
+    } else if (totalPoints >= 421 && totalPoints <= 714) {
+      return 715 - totalPoints;
+    } else if (totalPoints >= 715 && totalPoints <= 1214) {
+      return 1215 - totalPoints;
+    } else {
+      return -1;
     }
   }
 }
