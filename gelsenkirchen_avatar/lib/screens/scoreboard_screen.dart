@@ -19,6 +19,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
   int totalPoints;
   int level;
 
+/* Speichert das Level in der Datenbank */
   Future<void> lernKategories() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
         widget.userID.toString();
