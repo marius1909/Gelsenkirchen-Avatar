@@ -243,8 +243,8 @@ class _BodyState extends State<Body> {
         (erreichtePunkte).toString() +
         "&lernortID=" +
         widget.art.lernortID.toString() +
-        "&quizID=" +
-        data['quizID'].toString();
+        "&suchID=" +
+        widget.art.suchID.toString();
     var url = "http://zukunft.sportsocke522.de/save_point.php" + param;
     final response = await http.get(url);
     final jsonData = jsonDecode(response.body);
