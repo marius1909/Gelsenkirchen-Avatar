@@ -19,6 +19,7 @@ Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage
 
 */
 
+import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
@@ -95,6 +96,37 @@ class Avatar {
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {}
 
     return auswaehlbareAvatare;
+  }
+
+  static Future<List<String>> getAlleErrungenschaftenPath(int userid) async {
+    String path = _basePathNeu;
+    List<String> alleErrungenschaften = new List();
+    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
+
+    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
+      for (var j = 0; j < sammelbares.length; j++) {
+        if (sammelbares[j].id == freigeschalteteErrungenschaften[i].sammelID) {
+          if (istBasisAvatar(sammelbares[j])) {
+            path += getBaseAvatar(sammelbares[j].pfadID) + _suffixNeu;
+
+            alleErrungenschaften.add(path);
+          } else {}
+        }
+      }
+    }
+
+    return null;
+  }
+
+  static bool istBasisAvatar(Sammelbares sam) {
+    if (sam.kategorieID == 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<String> getImagePathAlt(int userID) async {

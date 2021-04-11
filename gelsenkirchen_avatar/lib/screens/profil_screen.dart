@@ -48,6 +48,7 @@ class _ProfilState extends State<Profil> {
 
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
   Image avatar;
+  List<Widget> errungenSchaftenKarusell;
 
   @override
   void initState() {
@@ -269,56 +270,6 @@ class _ProfilState extends State<Profil> {
                           child:
                               Image.asset(Avatar(0, 4).imagePath, height: 300),
                         ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 5).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 6).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 7).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(1, 0).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(1, 1).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(1, 2).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(1, 3).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(2, 0).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(2, 1).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(3, 0).imagePath, height: 300),
-                        )
                       ],
 
                       //Slider Eigenschaften
@@ -386,12 +337,10 @@ class _ProfilState extends State<Profil> {
   }
 
   void asyncInitState() async {
+    errungenSchaftenKarusell = new List();
+
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
-
-    setState(() {
-      test = "ddasds";
-    });
   }
 }
 
