@@ -5,8 +5,6 @@ import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 import 'map_screen.dart';
 
@@ -28,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
     aktuellerAvatar =
-        Image.asset(Avatar.getDefaultImagePath(), width: 100, height: 100);
+        Image.asset(Avatar.getDefaultImagePath(0), width: 100, height: 100);
     asyncInitState();
     var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
     freigeschaltetFuture.then((freigeschaltet) {

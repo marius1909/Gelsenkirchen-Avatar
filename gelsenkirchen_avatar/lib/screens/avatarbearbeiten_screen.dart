@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
-import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
@@ -13,41 +12,21 @@ class Avatarbearbeiten extends StatefulWidget {
   _AvatarbearbeitenState createState() => _AvatarbearbeitenState();
 }
 
-//@Lisa
-/* List<List<Avatar>> avatare = loadInfo.loadAlleAvatare();
-
-    for (var i = 0; i < avatare.length; i++) {
-      for (var j = 0; j < avatare[i].length; j++) {
-        print(b[i][j]);
-      }
-    }
-    */
-//Wenn auf Avatar klick => speicher TypID und collectablesausgerüstetID in Datenbank
-
 class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
-  List<Avatar> verfuegbareAvatare;
+  List<String> auswaehlbareAvatare = new List();
 
   @override
   void initState() {
     super.initState();
-
-//Basisavatare
-    verfuegbareAvatare = [
-      Avatar(0, 0),
-      Avatar(1, 0),
-      Avatar(2, 0),
-      Avatar(3, 0)
-    ];
+    asyncInitState();
   }
 
   @override
   Widget build(BuildContext context) {
-    @override
-    void initState() {
-      super.initState();
-
-      //TODO: Verfuebarer Avatare zur liste hinzufügen
-    }
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
 
     return Scaffold(
         appBar: AppBar(
@@ -62,176 +41,26 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
             ),
             Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-              child: CarouselSlider(
-                /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
-                items: [
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        dummyprofil.setAvatar(0, [0]);
-                      });
-                    },
-                    child: Container(
+              child: CarouselSlider.builder(
+                  itemCount: auswaehlbareAvatare.length,
+                  itemBuilder: (context, index) {
+                    print(auswaehlbareAvatare.length);
+                    return Container(
                       margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 0).imagePath, height: 300),
-                    ),
-                  ),
-
-                  //1. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [1]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 1).imagePath, height: 300),
-                    ),
-                  ),
-                  //2. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [2]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 2).imagePath, height: 300),
-                    ),
-                  ),
-                  //3. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [1, 2]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 3).imagePath, height: 300),
-                    ),
-                  ),
-                  //3. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [4]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 4).imagePath, height: 300),
-                    ),
-                  ),
-                  //4. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [1, 4]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 5).imagePath, height: 300),
-                    ),
-                  ),
-                  //5. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [2, 4]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 6).imagePath, height: 300),
-                    ),
-                  ),
-                  //6. Bild im Slider Blau
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(0, [1, 2, 4]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(0, 7).imagePath, height: 300),
-                    ),
-                  ),
-
-                  //1. Bild im Slider Gelb
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(1, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 0).imagePath, height: 300),
-                    ),
-                  ),
-                  //2. Bild im Slider Gelb
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(1, [1]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 1).imagePath, height: 300),
-                    ),
-                  ),
-                  //3. Bild im Slider Gelb
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(1, [2]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 2).imagePath, height: 300),
-                    ),
-                  ),
-                  //3. Bild im Slider Gelb
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(1, [1, 2]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(1, 3).imagePath, height: 300),
-                    ),
-                  ),
-                  //1. Bild im Slider Gruen
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(2, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(2, 0).imagePath, height: 300),
-                    ),
-                  ),
-                  //2. Bild im Slider Gruen
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(2, [1]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(2, 1).imagePath, height: 300),
-                    ),
-                  ),
-                  //1. Bild im Slider Rot
-                  FlatButton(
-                    onPressed: () {
-                      dummyprofil.setAvatar(3, [0]);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(6.0),
-                      child: Image.asset(Avatar(3, 0).imagePath, height: 300),
-                    ),
-                  )
-                ],
-
-                //Slider Eigenschaften
-                options: CarouselOptions(
-                  height: 400,
-                  enlargeCenterPage: true,
-                  autoPlay: false,
-                  aspectRatio: 16 / 9,
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  viewportFraction: 0.6,
-                ),
-              ),
+                      child:
+                          Image.asset(auswaehlbareAvatare[index], height: 300),
+                    );
+                  },
+                  options: CarouselOptions(
+                    height: 100,
+                    enlargeCenterPage: true,
+                    autoPlay: false,
+                    aspectRatio: 16 / 9,
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enableInfiniteScroll: true,
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    viewportFraction: 0.3,
+                  )),
             ),
             ImageButton(
               children: <Widget>[],
@@ -250,14 +79,23 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
               onTap: () {
                 /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
 
-               Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Profil(Benutzer.current.id)),
-                            );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Profil(Benutzer.current.id)),
+                );
               },
             ),
           ],
         ));
+  }
+
+  void asyncInitState() async {
+    List<String> a =
+        await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
+    print("he");
+    setState(() {
+      auswaehlbareAvatare = a;
+    });
   }
 }
