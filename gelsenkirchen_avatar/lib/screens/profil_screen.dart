@@ -36,6 +36,8 @@ class _ProfilState extends State<Profil> {
   TextEditingController namectrl;
   bool isEditable = false;
 
+  List<String> auswaehlbareAvatare = new List();
+
   String test = "iiiiiiiiiiiiiiiiiiii";
 
 //TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
@@ -48,7 +50,6 @@ class _ProfilState extends State<Profil> {
 
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
   Image avatar;
-  List<Widget> errungenSchaftenKarusell;
 
   @override
   void initState() {
@@ -56,7 +57,8 @@ class _ProfilState extends State<Profil> {
     asyncInitState();
 
     namectrl = new TextEditingController();
-    avatar = Image.asset(Avatar.getDefaultImagePath(), width: 250, height: 250);
+    avatar =
+        Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
     List<Freigeschaltet> a = new List();
     Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) async {
       for (var i = 0; i < alleErrungenschaften.length; i++) {
@@ -104,6 +106,7 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -122,6 +125,18 @@ class _ProfilState extends State<Profil> {
           SingleChildScrollView(
               child: Column(
             children: [
+              IconButton(
+                icon: Icon(
+                  FlutterIcons.edit_faw5s,
+                  color: Color(0xff999999).withOpacity(1),
+                  size: 15,
+                ),
+                onPressed: () {
+                  setState(() {
+                    level = 22;
+                  });
+                },
+              ),
               Container(
                 padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
                 child: Column(
@@ -247,43 +262,26 @@ class _ProfilState extends State<Profil> {
               Container(
                 child: Column(
                   children: [
-                    CarouselSlider(
-                      /* TODO: (nicht bis S&T machbar) Muss mit allen freigeschalteten Errungenschaften gefüllt werden (Lisa) */
-                      items: [
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 1).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 2).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 3).imagePath, height: 300),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(6.0),
-                          child:
-                              Image.asset(Avatar(0, 4).imagePath, height: 300),
-                        ),
-                      ],
-
-                      //Slider Eigenschaften
-                      options: CarouselOptions(
-                        height: 100,
-                        enlargeCenterPage: true,
-                        autoPlay: false,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.3,
-                      ),
-                    ),
+                    CarouselSlider.builder(
+                        itemCount: auswaehlbareAvatare.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(6.0),
+                            child: Image.asset(auswaehlbareAvatare[index],
+                                height: 300),
+                          );
+                        },
+                        options: CarouselOptions(
+                          height: 100,
+                          enlargeCenterPage: true,
+                          autoPlay: false,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: 0.3,
+                        ))
 
                     /* FlatButton(
                         color: Colors.blue,
@@ -337,7 +335,10 @@ class _ProfilState extends State<Profil> {
   }
 
   void asyncInitState() async {
-    errungenSchaftenKarusell = new List();
+    auswaehlbareAvatare =
+        await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
+
+    print(auswaehlbareAvatare);
 
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
