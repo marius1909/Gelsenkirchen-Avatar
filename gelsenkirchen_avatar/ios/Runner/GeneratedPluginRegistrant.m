@@ -28,10 +28,22 @@
 @import nfc_in_flutter;
 #endif
 
+#if __has_include(<path_provider/FLTPathProviderPlugin.h>)
+#import <path_provider/FLTPathProviderPlugin.h>
+#else
+@import path_provider;
+#endif
+
 #if __has_include(<qr_code_scanner/FlutterQrPlugin.h>)
 #import <qr_code_scanner/FlutterQrPlugin.h>
 #else
 @import qr_code_scanner;
+#endif
+
+#if __has_include(<shared_preferences/FLTSharedPreferencesPlugin.h>)
+#import <shared_preferences/FLTSharedPreferencesPlugin.h>
+#else
+@import shared_preferences;
 #endif
 
 #if __has_include(<video_player/FLTVideoPlayerPlugin.h>)
@@ -53,7 +65,9 @@
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
   [NfcInFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"NfcInFlutterPlugin"]];
+  [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [FlutterQrPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterQrPlugin"]];
+  [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];
   [WakelockPlugin registerWithRegistrar:[registry registrarForPlugin:@"WakelockPlugin"]];
 }

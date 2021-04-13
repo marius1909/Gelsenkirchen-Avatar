@@ -4,7 +4,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 /* import 'package:http/http.dart' as http;
 import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:imagebutton/imagebutton.dart';
 
+// ignore: must_be_immutable
 class LernortVorschau extends StatefulWidget {
   // final Lernort l;
   int id;
@@ -32,7 +34,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
     //   print('Datensatz nicht gefunden');
     // } else {
     setState(() {
-      setKategorienSymbol(lernort.kategorieID.toString());
+      setKategorienSymbol(lernort.kategorieID);
       setTitelbild(lernort.titelbild);
     });
     // }
@@ -41,9 +43,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
   void setTitelbild(String bildUrl) {
     if (bildUrl.isEmpty) {
       titelbild = Image.asset(
-        'assets/images/lernort.jpg',
-        color: Colors.grey[300],
-        colorBlendMode: BlendMode.darken,
+        'assets/images/lernortPlaceholderTitelbild.jpg',
         fit: BoxFit.cover,
       );
     } else {
@@ -51,76 +51,88 @@ class _LernortVorschauState extends State<LernortVorschau> {
     }
   }
 
-  void setKategorienSymbol(String kategorienID) {
+  void setKategorienSymbol(int kategorienID) {
+    Color symbolcolor = Color(0xff0b3e99);
+    double symbolsize = 20;
     switch (kategorienID) {
-      case "0":
+      case 0:
         {
-          kategorienSymbol = Icon(
-            Icons.category,
-            size: 30,
-          );
+          kategorienSymbol = Icon(FlutterIcons.cube_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "1":
+      case 1:
         {
-          kategorienSymbol = Icon(FlutterIcons.compass_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "2":
+      case 2:
         {
-          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "3":
+      case 3:
         {
-          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "4":
+      case 4:
         {
-          kategorienSymbol = Icon(FlutterIcons.palette_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "5":
+      case 5:
         {
-          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "6":
+      case 6:
         {
-          kategorienSymbol = Icon(FlutterIcons.book_faw5s, size: 30);
+          kategorienSymbol = Icon(FlutterIcons.book_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
-      case "7":
+      case 7:
+        {
+          kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 8:
+        {
+          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+
+      case 9:
+        {
+          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+              size: symbolsize, color: symbolcolor);
+        }
+        break;
+      default:
         {
           kategorienSymbol =
-              Icon(FlutterIcons.hand_holding_heart_faw5s, size: 30);
+              Icon(Icons.category, size: symbolsize, color: symbolcolor);
         }
-        break;
-
-      case "8":
-        {
-          kategorienSymbol = Icon(FlutterIcons.music_faw5s, size: 30);
-        }
-        break;
-
-      case "9":
-        {
-          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s, size: 30);
-        }
-        break;
     }
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     lernortDaten();
   }
@@ -135,91 +147,114 @@ class _LernortVorschauState extends State<LernortVorschau> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
-        //   body: SafeArea(
-        // child:
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              title: Text(lernort.name),
-              expandedHeight: 250,
-              flexibleSpace: FlexibleSpaceBar(
-                background: titelbild,
-              ),
-            ),
-            SliverList(
-                delegate: SliverChildListDelegate([
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                  // Expanded(
-                  //     flex: 1,
-                  //     child: Container(
-                  //       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  //       child: Text("Kategorie:",
-                  //           style: TextStyle(
-                  //               fontWeight: FontWeight.bold, fontSize: 20.0)),
-                  //     )),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
-                        child: kategorienSymbol),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+          appBar: AppBar(
+            title: Text(lernort.name),
+          ),
+          body: SingleChildScrollView(
+              child: Column(children: [
+            /* TITELBILD */
+            Container(child: titelbild),
+            Container(
+                padding: new EdgeInsets.all(15.0),
+                child: Column(children: [
+                  /* KATEGORIE*/
+                  Row(children: [
+                    kategorienSymbol,
+                    SizedBox(width: 10),
+                    Text("Kategorie",
+                        //lernKategorieList[lernort.kategorieID].name,
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* ADRESSE */
+                  Row(children: [
+                    Icon(FlutterIcons.location_arrow_faw5s,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Flexible(
+                      child: Text(
+                          lernort.adresse == ""
+                              ? "Keine Adresse vorhanden"
+                              : lernort.adresse,
+                          style: Theme.of(context).textTheme.headline4),
+                    )
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* ÖFFNUNGSZEITEN */
+                  Row(children: [
+                    Icon(FlutterIcons.clock_faw5s,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
                     Text(
-                      "Beschreibung:",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                    SizedBox(height: 5),
-                    Text(lernort.beschreibung,
-                        style: Theme.of(context).textTheme.subtitle1,
-                        textAlign: TextAlign.justify),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: ButtonTheme(
-                    child: RaisedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                LernortScreen(l: lernort, k: "TODO")));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.blueGrey[900])),
-                  color: Colors.blueGrey[800],
-                  child: Text(
-                    "Weiter zum Lernort",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[100]),
+                        lernort.oeffnungszeiten == ""
+                            ? "Keine Öffnungszeiten vorhanden"
+                            : lernort.oeffnungszeiten,
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* KOSTEN */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.attach_money_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.kosten == "" ? "Keine Angaben" : lernort.kosten,
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* BARRIEREFREIHEIT */
+                  Row(children: [
+                    //Icon(MdiIcons.sword),
+                    Icon(FlutterIcons.accessible_mdi,
+                        size: 20, color: Color(0xff0b3e99)),
+                    SizedBox(width: 10),
+                    Text(
+                        lernort.barrierefrei == 0
+                            ? "nicht barrierefrei"
+                            : "barrierefrei",
+                        style: Theme.of(context).textTheme.headline4),
+                  ]),
+                  SizedBox(height: 20),
+
+                  /* WEBSITE */
+                  Container(child: setWebsite(widget.l)),
+                  SizedBox(height: 20),
+
+                  /*BESCHREIBUNG*/
+                  Text(
+                    lernort.kurzbeschreibung,
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
-                )),
-              )
-            ]))
-          ],
-        ),
-      );
+                  SizedBox(height: 50),
+                  ImageButton(
+                      children: <Widget>[],
+                      /* 302 x 91 sind die Originalmaße der Buttons */
+                      width: 302 / 1.5,
+                      height: 91 / 1.5,
+                      paddingTop: 5,
+                      /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                      pressedImage: Image.asset(
+                        "assets/buttons/Lernort_dunkelblau_groß.png",
+                      ),
+                      unpressedImage: Image.asset(
+                          "assets/buttons/Lernort_dunkelblau_groß.png"),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    LernortScreen(l: lernort, k: "TODO")));
+                      })
+                ]))
+          ])));
     }
   }
 }

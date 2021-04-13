@@ -1,6 +1,5 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
 
 class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
   int benutzerID;
@@ -13,14 +12,21 @@ class Freigeschaltet extends DatenbankObjekt<Freigeschaltet> {
       : super(
             DatabaseURL.getFreigeschaltet.value,
             DatabaseURL.insertIntoFreigeschaltet.value,
-            DatabaseURL.removeFromFreigeschaltet.value);
+            DatabaseURL.removeFromFreigeschaltet.value,
+            '');
 
   @override
   Freigeschaltet objektVonJasonArray(objekt) {
     return Freigeschaltet(
         benutzerID: int.parse(objekt["benutzerID"]),
         sammelID: int.parse(objekt["sammelID"]),
-        ausgeruestet: objekt["ausgeruestet"] as bool);
+        ausgeruestet: int.parse(objekt["ausgeruestet"]) == 0 ? false : true
+        // ausgeruestet: bool.fromEnvironment(objekt["ausgeruestet"])
+        );
+  }
+
+  int getSammelID() {
+    return sammelID;
   }
 
   @override

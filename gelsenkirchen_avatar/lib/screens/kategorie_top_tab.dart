@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen_kategorie.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
 class KategorieTopTab extends StatefulWidget {
   @override
@@ -15,7 +12,6 @@ class KategorieTopTab extends StatefulWidget {
 class _KategorieTopTabState extends State<KategorieTopTab> {
   int _listLength = 0;
   List<LernKategorie> lernKategorieList = List();
-  String s = "ac_unit";
 
   @override
   void initState() {
@@ -23,9 +19,14 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
-        _listLength = lernkategorie.length;
-        lernKategorieList = lernkategorie;
-        print(lernKategorieList);
+        /* Zusätzliche Lernkategorie "Alle Lernorte" zum laden aller Lernorte */
+        LernKategorie alleKategorien =
+            LernKategorie(id: lernkategorie.length, name: "Alle Lernorte");
+        lernKategorieList.add(alleKategorien);
+        /* Alphabetische Sortierung der Liste */
+        lernkategorie.sort((a, b) => a.name.compareTo(b.name));
+        lernKategorieList.addAll(lernkategorie);
+        _listLength = lernKategorieList.length;
       });
     });
   }
@@ -33,13 +34,14 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   /*Diese Methode erstellt die ListViewItems*/
   Widget erstelleListViewitem(BuildContext context, int index) {
     Icon kategorienSymbol;
-    Color symbolcolor = Color(0xff45d6a9);
+    Color symbolcolor = Color(0xff0e53c9);
     double symbolsize = 25;
+    /* Erstellt Kategoriesymbol der jeweiligen Kategorie entsprechend */
     switch (lernKategorieList[index].id) {
       case 0:
         {
-          kategorienSymbol =
-              Icon(Icons.category, size: symbolsize, color: symbolcolor);
+          kategorienSymbol = Icon(FlutterIcons.cube_faw5s,
+              size: symbolsize, color: symbolcolor);
         }
         break;
 
@@ -105,6 +107,11 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
               size: symbolsize, color: symbolcolor);
         }
         break;
+      default:
+        {
+          kategorienSymbol =
+              Icon(Icons.category, size: symbolsize, color: symbolcolor);
+        }
     }
 
     return new Card(
@@ -129,8 +136,8 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
                 lernKategorieList[index].name != null
                     ? lernKategorieList[index].name
                     : 'empty',
-                style:
-                    new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyText1,
+                //new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),

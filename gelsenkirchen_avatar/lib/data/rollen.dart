@@ -10,7 +10,7 @@ class Rollen extends DatenbankObjekt<Rollen> {
 
   Rollen({this.id, this.name, this.beschreibung})
       : super(DatabaseURL.getRollen.value, DatabaseURL.insertIntoRollen.value,
-            DatabaseURL.removeFromRollen.value);
+            DatabaseURL.removeFromRollen.value, '');
 
   @override
   Rollen objektVonJasonArray(objekt) {

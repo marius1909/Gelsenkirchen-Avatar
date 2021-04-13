@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
+import 'freund_screen.dart';
 
 class Freundesliste extends StatefulWidget {
   //loadFreunde
@@ -10,7 +11,7 @@ class Freundesliste extends StatefulWidget {
 }
 
 class _FreundeslisteState extends State<Freundesliste> {
-  List<Benutzer> freunde;
+  List<Benutzer> freunde = new List();
 
   int currentSortStyle = 0;
 
@@ -23,10 +24,8 @@ class _FreundeslisteState extends State<Freundesliste> {
 
   @override
   Widget build(BuildContext context) {
-    if (!initComplete) {
-      loadFriendList();
-      initComplete = true;
-    }
+    loadFriendList();
+    initComplete = true;
 
     return Scaffold(
         drawer: NavDrawer(),
@@ -89,7 +88,15 @@ class _FreundeslisteState extends State<Freundesliste> {
                       itemBuilder: (context, index) {
                         return Card(
                             child: ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+
+                                    //TODO: (nicht bis S&T machbar) Kaputt, navigator pushed random
+                                    builder: (BuildContext context) =>
+                                        Freund(freunde[index].id)));
+                          },
                           title: Text(freunde[index].benutzer,
                               style: TextStyle(
                                   color: Colors.black,
@@ -132,7 +139,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                           onPressed: () {
                             setState(() {
                               showAddFriendTextField = false;
-                              FuegeFreundHinzu(
+                              fuegeFreundHinzu(
                                   freundeHinzufuegenController.text);
                             });
                           },
@@ -148,7 +155,7 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-  //TODO: Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
+  //TODO: (nicht bis S&T machbar) Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
   Future<void> loadFriendList() async {
     List<Benutzer> a = await Benutzer.shared.gibObjekte();
 
@@ -157,8 +164,8 @@ class _FreundeslisteState extends State<Freundesliste> {
     });
   }
 
-  // TODO: Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
-  void FuegeFreundHinzu(String _name) {
+  // TODO: (nicht bis S&T machbar) Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
+  void fuegeFreundHinzu(String _name) {
     print(_name);
   }
 }

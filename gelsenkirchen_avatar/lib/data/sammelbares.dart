@@ -7,15 +7,22 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
   String name;
   String beschreibung;
   String bild;
+  int pfadID;
 
   static Sammelbares get shared => Sammelbares();
 
   Sammelbares(
-      {this.id, this.kategorieID, this.name, this.beschreibung, this.bild})
+      {this.id,
+      this.kategorieID,
+      this.name,
+      this.beschreibung,
+      this.bild,
+      this.pfadID})
       : super(
             DatabaseURL.getSammelbares.value,
             DatabaseURL.insertIntoSammelbares.value,
-            DatabaseURL.removeFromSammelbares.value);
+            DatabaseURL.removeFromSammelbares.value,
+            '');
 
   @override
   Sammelbares objektVonJasonArray(objekt) {
@@ -24,7 +31,9 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
         kategorieID: int.parse(objekt["kategorieID"]),
         name: objekt["name"] as String,
         beschreibung: objekt["beschreibung"] as String,
-        bild: objekt["bild"] as String);
+        bild: objekt["bild"] as String,
+        //int.parse wirft error wenn pfadID NULL ist \Marius
+        pfadID: objekt["pfadID"] == null ? null : int.parse(objekt["pfadID"]));
   }
 
   @override
@@ -34,7 +43,8 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
       "kategorieID": "$kategorieID",
       "name": "$name",
       "beschreibung": "$beschreibung",
-      "bild": "$bild"
+      "bild": "$bild",
+      "pfadID": "$pfadID"
     };
   }
 }

@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/quiz/quizpage.dart';
 import 'package:http/http.dart' as http;
+import 'package:imagebutton/imagebutton.dart';
 
 // ignore: must_be_immutable
 class StartQuiz extends StatefulWidget {
@@ -19,17 +20,6 @@ class StartQuiz extends StatefulWidget {
 class _StartQuizState extends State<StartQuiz> {
   dynamic data;
 
-//  var quiz = new Quiz();
-//  @override
-//  void initState() {
-//    super.initState();
-//    var future = Quiz.shared.getQuiz(widget.l.id);
-//    future.then((data) {
-//      setState(() {
-//        quiz = data;
-//      });
-//    });
-//  }
   void getLernort() async {
     var id = widget.id;
     var url =
@@ -48,7 +38,6 @@ class _StartQuizState extends State<StartQuiz> {
   }
 
   void initState() {
-    // TODO: implement initState
     super.initState();
     getLernort();
   }
@@ -63,147 +52,70 @@ class _StartQuizState extends State<StartQuiz> {
               child: Center(child: CircularProgressIndicator())));
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            //Name von aktuellen Lernort
-            data['name'],
+          appBar: AppBar(
+            backgroundColor: Color(0xffff9f1c),
+            title: Text(
+              //Name von aktuellen Lernort
+              data['name'] + " - Quiz",
+            ),
           ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          child: Column(
-            children: [
-              //Bilder
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Image.network(
-                    'https://storage.needpix.com/rsynced_images/quiz-2074324_1280.png',
-                  ),
-                  height: 100,
-                  width: double.infinity,
-                ),
+          body: SingleChildScrollView(
+              child: Column(children: [
+            /* HEADLINE "QUIZ" */
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+              child: Text(
+                "Quiz",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: "Ccaps",
+                    fontSize: 35.0,
+                    color: Color(0xffff9f1c)),
               ),
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, left: 20, right: 20),
-                    child: ListView(
-                      children: [
-                        Text(
-                          "Ein Spiel besteht aus 10 Fragen mit je 4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist. Für die Beantwortung einer Frage steht ein Zeitfenster von 30 Sekunden zu Verfügung. Zum Auswählen der gewünschten Antwort muss der Teilnehmer auf das jeweilige Antwortfeld klicken. Anschließend werden die Ergebnisse unten links auf dem Bildschirm angezeigt. Je mehr Fragen Sie beantworten, desto schwieriger werden sie. Je schwieriger die Frage ist, desto mehr Punkte erhalten Sie für die richtige Antwort. Wenn Sie eine falsche Antwort geben, werden Ihrem Konto keine Punkte hinzugefügt. Ziel des Spiels ist es, so viele Fragen wie möglich korrekt zu beantworten und die Belohnungen zu gelangen.",
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+            ),
+
+            /* BESCHREIBUNG */
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 40),
+              child: Text(
+                "In diesem klassischen Quiz werden dir spezielle Fragen zum Lernort, an dem du dich gerade befindest gestellt. Für die Beantwortung der Fragen hast du jeweils 30 Sekunden Zeit. Um eine Frage zu beantworten, klicke einfach auf die entsprechende Antwort. Ob deine Antwort richtig oder falsch war, siehst du an den roten oder grünen Symbolen am unteren Bildschirmrand. Ein rotes X bedeutet, dass die Antwort leider falsch war und du dafür keine Punkte bekommst. Ein güner Haken bedeutet, die Antwort war richtig und du bekommst eine gewisse Anzahl an Punkten gutgeschrieben.\nDrücke \"Start\" und erfahre wie viel du schon über den Lernort gelernt hast.",
+                textAlign: TextAlign.justify,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
-              //Belohnungen-Button
-              /*Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
-                child: Container(
-                    width: double.infinity,
-                    //Wrap with Material
-                    child: Material(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)),
-                      clipBehavior: Clip.antiAlias,
-                      child: MaterialButton(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          color: Colors.green[400],
-                          /*minWidth: 10.0,
-                          height: 35,*/
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) =>
-                                  new CupertinoAlertDialog(
-                                title: new Text("Anzeigen der Belohnungen"),
-                                content: new Text("Loading....."),
-                                actions: [
-                                  CupertinoDialogAction(
-                                    child: new Text("Yes"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop(true);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Belohnungen",
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                          )),
-                    )),
-              ),*/
-              //Starten-Button
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
-                child: Container(
-                    width: double.infinity,
-                    child: Material(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)),
-                      clipBehavior: Clip.antiAlias,
-                      child: MaterialButton(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          color: Colors.green[400],
-                          onPressed: () {
-                            if (global.user?.id != null) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => QuizPage(
-                                        quizID: int.parse(data['quizID']),
-                                        benutzerID: global.user.id,
-                                        lernKategorieID:
-                                            int.parse(data['kategorieID']),
-                                        lernortID: int.parse(data['id']),
-                                        title: data['name'],
-                                      )));
-                            } else {
-                              Fluttertoast.showToast(
-                                  msg: "Anmeldung fehlt!",
-                                  toastLength: Toast.LENGTH_SHORT);
-                            }
-                          },
-                          child: Text(
-                            "Starten",
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                          )),
-                    )),
-              ),
-              //Zurück-Button
-              /*Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: MaterialButton(
-                      color: Colors.orangeAccent,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        "Zurück",
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
-                      )),
+            ),
+
+            /* SPIELEN-BUTTON */
+            ImageButton(
+                children: <Widget>[],
+                /* 302 x 91 sind die Originalmaße der Buttons */
+                width: 302 / 1.3,
+                height: 91 / 1.3,
+                paddingTop: 5,
+                /* PressedImage gibt ein Bild für den Button im gedrückten 
+                    Zustand an. Bisher nicht implementiert, muss aber mit dem
+                    Bild im normalen zustand angegeben werden. */
+                pressedImage: Image.asset(
+                  "assets/buttons/Spielen_gelb_groß.png",
                 ),
-              ),*/
-            ],
-          ),
-        ),
-      );
+                unpressedImage:
+                    Image.asset("assets/buttons/Spielen_gelb_groß.png"),
+                onTap: () {
+                  if (Benutzer.current?.id != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => QuizPage(
+                              quizID: int.parse(data['quizID']),
+                              benutzerID: Benutzer.current.id,
+                              lernKategorieID: int.parse(data['kategorieID']),
+                              lernortID: int.parse(data['id']),
+                              title: data['name'],
+                            )));
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "Bitte melde dich an, um dieses Spiel zu spielen.",
+                        toastLength: Toast.LENGTH_SHORT);
+                  }
+                })
+          ])));
     }
   }
 }
-

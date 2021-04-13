@@ -4,7 +4,7 @@ import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 import 'package:gelsenkirchen_avatar/widgets/chewie_list_item.dart';
-
+import 'package:flutter_icons/flutter_icons.dart';
 
 //ToDo Weitere Medien einfügen
 
@@ -47,26 +47,31 @@ Widget getWidgetTitelbild(Lernort l) {
   }
 }
 
+// ignore: missing_return
 Widget getWidgetTabs(Lernort l, BuildContext context) {
   int anzahl = 0;
+  // ignore: unused_local_variable
   bool text = false;
+  // ignore: unused_local_variable
   bool videos = false;
+  // ignore: unused_local_variable
   bool sounds = false;
+  // ignore: unused_local_variable
   bool bilder = false;
 
-  if (!l.beschreibung.isEmpty) {
+  if (l.beschreibung.isNotEmpty) {
     anzahl++;
     text = true;
   }
-  if (!l.videos.isEmpty) {
+  if (l.videos.isNotEmpty) {
     anzahl++;
     videos = true;
   }
-  if (!l.sounds.isEmpty) {
+  if (l.sounds.isNotEmpty) {
     anzahl++;
     sounds = true;
   }
-  if (!l.weitereBilder.isEmpty) {
+  if (l.weitereBilder.isNotEmpty) {
     anzahl++;
     bilder = true;
   }
@@ -82,19 +87,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                   labelColor: Colors.green,
                   unselectedLabelColor: Colors.black,
                   tabs: [
-                    get_TabsTitel(
+                    getTabsTitel(
                       1,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       2,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       3,
                       true,
                     ),
-                    get_TabsTitel(
+                    getTabsTitel(
                       4,
                       true,
                     ),
@@ -136,47 +141,46 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
   }
 }
 
-Widget get_TabsTitel(int i, bool sollRein) {
+Widget getTabsTitel(int i, bool sollRein) {
   //1 = Text  //2= Video   //3 = Sounds    //4= Bilder
   if (sollRein) {
     if (i == 1) {
-      return Tab(text: 'Text', icon: Icon(Icons.list));
+      return Tab(text: 'Texte', icon: Icon(FlutterIcons.text_document_ent));
     } else if (i == 2) {
-      return Tab(text: 'Videos', icon: Icon(Icons.video_label));
+      return Tab(text: 'Videos', icon: Icon(FlutterIcons.video_camera_ent));
     } else if (i == 3) {
-      return Tab(text: 'Sounds', icon: Icon(Icons.voice_chat));
+      return Tab(text: 'Audio', icon: Icon(FlutterIcons.audiotrack_mdi));
     } else if (i == 4) {
-      return Tab(text: 'Bilder', icon: Icon(Icons.image));
+      return Tab(text: 'Bilder', icon: Icon(FlutterIcons.image_faw5s));
     } else if (i == 0) {
-      return Tab(text: 'Fehler', icon: Icon(Icons.error));
+      return Tab(text: 'Fehler', icon: Icon(FlutterIcons.error_mdi));
     }
-  } else {
-    return null;
   }
+  return null;
 }
 
 Widget getWidgetSound(Lernort l, BuildContext context) {
   if (l.sounds.isEmpty) {
     return new Text(
-      'Leider sind keine Sounds Vorhanden',
-      textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      'Derzeit sind leider keine Audiodateien verfügbar.',
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     return new Text(
-      'Leider wird diese Funktion derzeit noch nicht Unterstützt',
-      textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      'Diese Funktion wird derzeit leider noch nicht unterstützt.',
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   }
 }
 
 Widget getWidgetVideos(Lernort l, BuildContext context) {
-  if (l.weitereBilder.isEmpty) {
+  if (l.videos.isEmpty) {
     return new Text(
-      'Leider sind keine Weiteren Bilder Vorhanden',
-      textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      'Derzeit sind leider keine Videos verfügbar.',
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     return ChewieListItem(
@@ -191,15 +195,17 @@ Widget getWidgetVideos(Lernort l, BuildContext context) {
 Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
   if (l.weitereBilder.isEmpty) {
     return new Text(
-      'Leider sind keine Weiteren Bilder Vorhanden',
-      textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 17),
+      'Derzeit sind leider keine weiteren Bilder verfügbar.',
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline3,
     );
   } else {
     var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links
 
+    // ignore: unused_local_variable
     var i = 0;
 
+    // ignore: unused_local_variable
     var ii = 0;
     return new GridView.builder(
       itemCount: arr.length,
@@ -210,7 +216,7 @@ Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
           child: new InkResponse(
             child: Image.network(
               arr[index],
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.cover,
             ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) {

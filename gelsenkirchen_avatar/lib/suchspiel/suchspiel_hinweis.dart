@@ -1,5 +1,5 @@
-import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 
+/// Enthält alle im Spiel vorkommenden Hinweise für ein Suchspiel.
 class SuchspielHinweis {
   int _hinweisAnzahl;
   int _derzeitigerHinweis;
@@ -43,8 +43,8 @@ class SuchspielHinweis {
     return derzeitigeFrage;
   }
 
-  static Map<SuchspielArt, SuchspielHinweis> get alleHinweise {
-    Map<SuchspielArt, SuchspielHinweis> _alleHinweise = Map();
+  static Map<String, SuchspielHinweis> get alleHinweise {
+    Map<String, SuchspielHinweis> _alleHinweise = Map();
 
     SuchspielHinweis edelweissHinweis = SuchspielHinweis("edelweiß");
     edelweissHinweis.hinweisHinzufuegen(
@@ -59,7 +59,7 @@ class SuchspielHinweis {
         "Der botanische Gattungsname Leontopodium leitet sich von den griechischen Wörtern leon für Löwe und podion für Füßchen ab, dies bezieht sich auf die charakteristische dichtfilzige, weiße Behaarung und der Form der Hochblätter. Das Artepitheton nivale bezieht sich auf die alpine Stufe (von lat. nivalis = schneeig).");
     edelweissHinweis.hinweisHinzufuegen(
         "Weitere Trivialnamen sind Wollblume, Bauchwehbleamerl, Irlweiß, Almsterndl, Federweiß, selten auch Silberstern und Wülblume (in der Schweiz). Auf romanisch [vierte schweizerische Landessprache, neben deutsch und italienisch im Kanton Graubünden gesprochen und geschrieben] heißt Leontopodium nivale «Alvetern» (alv = weiß, etern = ewig): das spiegelt die Besonderheit, dass die weißen Blütenstände bis in den Winter hinein überdauern.");
-    _alleHinweise[SuchspielArt.edelweiss] = edelweissHinweis;
+    _alleHinweise["edelweiß"] = edelweissHinweis;
 
     SuchspielHinweis rotbucheHinweis = SuchspielHinweis("rotbuche");
     rotbucheHinweis.hinweisHinzufuegen(
@@ -72,7 +72,7 @@ class SuchspielHinweis {
         "Da die EU ihre Verantwortung zum Schutz der Buchenwälder erkannt hat, wurden in der europäischen FFH-Richtlinie mehrere Lebensraumtypen unter Schutz gestellt, welche den Buchenwald enthalten.");
     rotbucheHinweis.hinweisHinzufuegen(
         "Der Namensteil „Rot“ bezieht sich auf die mitunter leicht rötliche Färbung des Holzes.");
-    _alleHinweise[SuchspielArt.rotbuche] = rotbucheHinweis;
+    _alleHinweise["rotbuche"] = rotbucheHinweis;
 
     SuchspielHinweis korkeicheHinweis = SuchspielHinweis("korkeiche");
     korkeicheHinweis.hinweisHinzufuegen(
@@ -85,7 +85,7 @@ class SuchspielHinweis {
         "Sie wächst als immergrüner Baum, der eine durchschnittliche Wuchshöhe von 10 bis 20 Metern oder in seltenen Fällen bis 25 Meter und Stammdurchmesser (BHD) von 50 bis 90 Zentimeter erreicht. Er bildet eine dichte und asymmetrische, in einer Höhe von zwei bis drei Metern ansetzende Krone, die sich bei freistehenden Bäumen weit ausbreitet.");
     korkeicheHinweis.hinweisHinzufuegen(
         "Sie ist ein immergrüner Laubbaum des westlichen Mittelmeerraums aus der Gattung der Eichen (Quercus).");
-    _alleHinweise[SuchspielArt.korkeiche] = korkeicheHinweis;
+    _alleHinweise["korkeiche"] = korkeicheHinweis;
 
     return _alleHinweise;
   }

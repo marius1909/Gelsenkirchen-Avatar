@@ -1,0 +1,29 @@
+{
+  "name": "nfc_in_flutter",
+  "version": "1.0.0",
+  "summary": "Flutter plugin for reading NFC tags",
+  "description": "Flutter plugin for reading NFC tags",
+  "homepage": "https://github.com/semlette/nfc_in_flutter",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Andi Robin Halgren Semler": "andirobinsemler@gmail.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
+  "dependencies": {
+    "Flutter": [
+
+    ]
+  },
+  "weak_frameworks": [
+    "CoreNFC"
+  ],
+  "platforms": {
+    "ios": "8.0"
+  }
+}

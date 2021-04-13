@@ -1,65 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
-import 'package:gelsenkirchen_avatar/screens/alle_top_tab.dart';
 import 'package:gelsenkirchen_avatar/screens/kategorie_top_tab.dart';
-import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/suchen_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gelsenkirchen_avatar/data/lernort.dart';
-import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 
-class LernortListeScreen extends StatefulWidget {
-  @override
-  _LernortListeScreenState createState() => _LernortListeScreenState();
-}
-
-class _LernortListeScreenState extends State<LernortListeScreen> {
+class LernortListeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-          drawer: NavDrawer(),
-          appBar: AppBar(
-            // backgroundColor: Color(0xff109618),
-            backgroundColor: Colors.blue,
-            title: Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: _CustomAppBar(context),
-            ),
-            bottom: TabBar(
-              isScrollable: true,
-              indicatorColor: Colors.white,
-              indicatorWeight: 6.0,
-              tabs: <Widget>[
-                Tab(
-                  child: Container(
-                    child: Text(
-                      'Alle Lernorte',
-                      style: TextStyle(color: Colors.white, fontSize: 18.0),
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    child: Text(
-                      'Lernkategorien',
-                      style: TextStyle(color: Colors.white, fontSize: 18.0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+    return Scaffold(
+        drawer: NavDrawer(),
+        appBar: AppBar(
+          // backgroundColor: Color(0xff109618),
+          // backgroundColor: Colors.blue,
+          title: Padding(
+            padding: EdgeInsets.only(top: 0),
+            child: _customAppBar(context),
           ),
-          body: TabBarView(
-            children: <Widget>[AlleTopTab(), KategorieTopTab()],
-          )),
-    );
+        ),
+        /* Auflistung der einzelnen Kategorien */
+        body: KategorieTopTab());
   }
 }
 
-Widget _CustomAppBar(BuildContext context) {
+Widget _customAppBar(BuildContext context) {
   return Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,13 +30,14 @@ Widget _CustomAppBar(BuildContext context) {
         Container(
           child: Text(
             'Lernorte',
-            style: TextStyle(color: Colors.white),
+            // style: TextStyle(color: Colors.white),
           ),
         ),
         Container(
           child: IconButton(
               icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
+                /* Nach Klick auf Lupe Lernortsuche */
                 Navigator.push(
                     context,
                     MaterialPageRoute(

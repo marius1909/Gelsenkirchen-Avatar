@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/Lernort_vorschau_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
+import 'package:gelsenkirchen_avatar/data/memorykarte.dart';
+import 'package:gelsenkirchen_avatar/screens/map_info_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 // Für Map-Style
 import 'package:flutter/services.dart' show rootBundle;
-
-/* TODO: Mapmarker_rot.png als Marker einbinden */
 
 class MapScreen extends StatefulWidget {
   @override
@@ -16,14 +16,14 @@ class MapScreen extends StatefulWidget {
 class MapSampleState extends State<MapScreen> {
   Completer<GoogleMapController> _controller = Completer();
   final Set<Marker> _markers = {};
+  Lernort lernort;
 
   /* Inhalt der map_style.txt */
   String _mapStyle;
 
-  /* TODO: Kameraposition beim Starten der App sollte auf dem aktuellen Standort des Benutzers liegen (Lisa) */
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
     target: LatLng(51.5744, 7.0260),
-    zoom: 17,
+    zoom: 12,
   );
 
   // Camera bounds: Bourges, Danzig
@@ -34,7 +34,6 @@ class MapSampleState extends State<MapScreen> {
   void initState() {
     super.initState();
     addMarkersForLernorte();
-
     /* Lädt das map_style.txt File als ein String ein */
     rootBundle.loadString('assets/styles/map_style.txt').then((string) {
       _mapStyle = string;
@@ -44,47 +43,65 @@ class MapSampleState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _whsGelsenkrichen,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+      body: Stack(
+        children: [
+          GoogleMap(
+            mapToolbarEnabled: true,
+            mapType: MapType.normal,
+            initialCameraPosition: _whsGelsenkrichen,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
 
-          /* Style setzen */
-          controller.setMapStyle(_mapStyle);
-        },
-        markers: _markers,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        cameraTargetBounds: CameraTargetBounds(bounds),
-        minMaxZoomPreference: MinMaxZoomPreference(5, 20),
+              /* Style setzen */
+              controller.setMapStyle(_mapStyle);
+            },
+            onTap: (argument) => setState(() => lernort = null),
+            markers: _markers,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            zoomControlsEnabled: false,
+            padding: EdgeInsets.only(top: 120),
+            cameraTargetBounds: CameraTargetBounds(bounds),
+            minMaxZoomPreference: MinMaxZoomPreference(5, 20),
+          ),
+          InfoScreen(
+            lernort: lernort,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          LernortScreen(l: lernort, k: "TODO")));
+            },
+          )
+        ],
       ),
     );
   }
 
-  /* TODO: Hier werden doch komischerweise nicht alle Lernorte angezeigt, oder?! */
   void addMarkersForLernorte() {
-    var lernorte = Lernort.shared.gibObjekte();
-    lernorte.then((value) {
-      value.forEach((element) {
-        final marker = Marker(
-          markerId: MarkerId(element.id.toString()),
-          position: LatLng(element.nord, element.ost),
+    final markerImageFuture = BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 4.0),
+        "assets/icons/Mapmarker_rot@2x.png");
 
-          /* TODO: Bei onTap direkt zur Lernortvorschau ist hier vielleicht nicht sinnvoll. (Lisa)
-          Denke es wäre sinnvoller zunächst das infoWindow anzuzeigen und bei erneutem Tap die LernortVorschau anzuzeigen. */
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        LernortVorschau(l: element)));
-          },
-          infoWindow: InfoWindow(
-              title: element.name, snippet: element.kurzbeschreibung),
-        );
-        setState(() {
-          _markers.add(marker);
+    markerImageFuture.then((markerImage) {
+      var lernorteFuture = Lernort.shared.gibObjekte();
+
+      lernorteFuture.then((lernorte) {
+        lernorte.forEach((lernort) {
+          final marker = Marker(
+            icon: markerImage,
+            markerId: MarkerId(lernort.id.toString()),
+            position: LatLng(lernort.nord, lernort.ost),
+            onTap: () {
+              setState(() {
+                this.lernort = lernort;
+              });
+            },
+          );
+          setState(() {
+            _markers.add(marker);
+          });
         });
       });
     });

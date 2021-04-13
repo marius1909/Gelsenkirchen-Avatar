@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
+import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
+import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 import 'avatarbearbeiten_screen.dart';
 
 class ProfilBearbeiten extends StatefulWidget {
+  final int userID;
+
+  ProfilBearbeiten(this.userID);
+
   @override
   _ProfilBearbeitenState createState() => _ProfilBearbeitenState();
 }
@@ -14,15 +19,32 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
   String nameSchonVergebenTextMessage = "";
   bool nameSchonVergeben = false;
   TextEditingController neuerNameController = new TextEditingController();
-  bool initComplete = false;
+
+//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
+
+  //Typ des Avatars (1= Blau 2 = Gelb usw)
+  int avatarTypID = 2;
+
+  //Collectablesanpassung als ID (zurzeit 0 bis 7)
+  int ausgeruesteteCollectablesID = 0;
+
+  //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
+  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
+
+  @override
+  void initState() {
+    super.initState();
+    Benutzer.shared.gibObjekte().then((alleBenutzer) {
+      setState(() {
+        aktuellerName = LoadInfo.loadName(alleBenutzer, widget.userID);
+        avatar = LoadInfo.loadUserAvatarImage(
+            widget.userID, avatarTypID, ausgeruesteteCollectablesID);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (!initComplete) {
-      loadName();
-      initComplete = true;
-    }
-
     return Scaffold(
         appBar: AppBar(
           title: Text('Profil bearbeiten'),
@@ -92,11 +114,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/profilbild.jpg'),
-                      radius: 50,
-                    ),
+                    avatar,
                     IconButton(
                       icon: Icon(Icons.edit, color: Colors.black),
                       onPressed: () {
@@ -111,7 +129,7 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
                 ),
                 SizedBox(height: 100),
                 FlatButton(
-                  color: Colors.grey[800],
+                  color: Colors.blue[800],
                   textColor: Colors.white,
                   disabledColor: Colors.grey,
                   disabledTextColor: Colors.black,
@@ -127,22 +145,11 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
             )));
   }
 
-/* Lädt namen aus der Datenbank um ihn im Screen anzuzeigen
-*/
-
-  Future<void> loadName() async {
-    var alleBenutzerFuture = await Benutzer.shared.gibObjekte();
-    setState(() {
-      aktuellerName = alleBenutzerFuture[0].benutzer;
-    });
-  }
-
 /*Funktion zum ändern des Benutzernamens
-TODO: Neuen Namen in Datenbank speichern
+TODO: Neuen Namen in Datenbank speichern php
 
 Geht alle Benutzernamen in der DB durch und prüft ob schon vergeben
-Wenn nicht speichert neuen Namen (TODO!)
-
+Wenn schon vergeben wird setState nicht aufgerufen
 */
 
   Future<void> aendereName(String name) async {
@@ -156,7 +163,7 @@ Wenn nicht speichert neuen Namen (TODO!)
     }
 
     if (!nameSchonVergeben) {
-      //Speicher neuen Namen in Datenbank TODO!
+      //Speicher neuen Namen in Datenbank
 
       setState(() {
         aktuellerName = name;

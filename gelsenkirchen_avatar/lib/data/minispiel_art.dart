@@ -12,7 +12,8 @@ class MinispielArt extends DatenbankObjekt<MinispielArt> {
       : super(
             DatabaseURL.getMinispielArt.value,
             DatabaseURL.insertIntoMinispielArt.value,
-            DatabaseURL.removeFromMinispielArt.value);
+            DatabaseURL.removeFromMinispielArt.value,
+            '');
 
   @override
   MinispielArt objektVonJasonArray(objekt) {

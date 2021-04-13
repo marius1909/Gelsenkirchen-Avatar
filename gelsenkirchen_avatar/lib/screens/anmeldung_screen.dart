@@ -4,8 +4,6 @@ import 'package:gelsenkirchen_avatar/data/benutzer_invalid_login_exception.dart'
 import 'package:gelsenkirchen_avatar/screens/registrierung_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
-import 'package:gelsenkirchen_avatar/data/database_url.dart';
-import 'package:gelsenkirchen_avatar/data/global.dart';
 import 'package:imagebutton/imagebutton.dart';
 
 class Anmeldung extends StatefulWidget {
@@ -35,12 +33,8 @@ class _AnmeldungState extends State<Anmeldung> {
     futureBenutzer.catchError(invalidError);
     futureBenutzer.then((benutzer) {
       angemeldeterBenutzer = benutzer;
-      global.user = benutzer;
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  HomeScreen(angemeldeterBenutzer: this.angemeldeterBenutzer)));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
     });
 
     setState(() {
@@ -70,7 +64,6 @@ class _AnmeldungState extends State<Anmeldung> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Anmelden'),
-        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
         backgroundColor: Color(0xff0B3E99),
         /*Entfernt den Zurückbutton*/
         automaticallyImplyLeading: false,
@@ -81,9 +74,6 @@ class _AnmeldungState extends State<Anmeldung> {
         Column(children: [
           Text("Bitte gib deine Anmeldedaten ein:",
               style: Theme.of(context).textTheme.headline3),
-          /* CircleAvatar(
-                backgroundImage: AssetImage('assets/images/wink.png'),
-                radius: 130), */
           Padding(
               padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
               child: Column(children: [
@@ -158,8 +148,8 @@ class _AnmeldungState extends State<Anmeldung> {
                 ),
                 SizedBox(height: 40),
 
-                /* Dieser Button dient nur dazu während der Entwicklung den Anmeldescreen zu überspringen */
-                FlatButton(
+                /* Dieser Button dient nur dazu die App ohne Anmeldung anzusehen. */
+                /* FlatButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                         context,
@@ -167,10 +157,10 @@ class _AnmeldungState extends State<Anmeldung> {
                             builder: (BuildContext context) => HomeScreen()));
                   },
                   child: Text(
-                    "Ich bin Entwickler ;)",
+                    "Ohne Anmeldung fortfahren",
                     textAlign: TextAlign.center,
                   ),
-                ),
+                ), */
               ]))
         ])
       ])),

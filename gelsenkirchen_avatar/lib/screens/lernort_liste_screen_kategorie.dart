@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
@@ -16,15 +18,29 @@ class _LernortListeScreenKategorieState
     extends State<LernortListeScreenKategorie> {
   bool isSearching = false;
   List lernortListGefiltert = List();
+  bool timeout = false;
+  String lkname;
 
   void initState() {
+    lkname = widget.lk.name;
+    Timer(Duration(seconds: 4), () {
+      if (this.mounted) {
+        setState(() {
+          timeout = true;
+        });
+      }
+    });
     var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
-        lernortListGefiltert = lernorte
-            .where((lernort) => lernort.kategorieID == widget.lk.id)
-            .toList();
-        print(lernortListGefiltert);
+        if (lkname != "Alle Lernorte") {
+          lernortListGefiltert = lernorte
+              .where((lernort) => lernort.kategorieID == widget.lk.id)
+              .toList();
+        } else {
+          lernortListGefiltert = lernorte;
+          print(lernortListGefiltert);
+        }
       });
     });
     super.initState();
@@ -34,44 +50,28 @@ class _LernortListeScreenKategorieState
     return new Card(
         child: new Column(
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-        leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-        ),*/
         new ListTile(
+          leading: CircleAvatar(
+            backgroundImage: lernortListGefiltert[index]
+                    .titelbild
+                    .contains("http")
+                ? NetworkImage(lernortListGefiltert[index].titelbild)
+                : NetworkImage(
+                    "https://www.hanse-haus.de/fileadmin/_processed_/7/b/csm_fertighaus-bauen-startseiten-bild_d13e0ec91d.jpg"),
+          ),
           title: new Text(
             /*NAME*/
             lernortListGefiltert[index].name != null
                 ? lernortListGefiltert[index].name
                 : 'empty',
-            style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
-          subtitle: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /*KURZBESCHREIBUNG*/
-                new Text(
-                    lernortListGefiltert[index].kurzbeschreibung != null
-                        ? lernortListGefiltert[index].kurzbeschreibung
-                        : '',
-                    style: new TextStyle(
-                        fontSize: 13.0, fontWeight: FontWeight.normal)),
-                /*KATEGORIE*/
-                /*new Text('Kategorie: ${lernortListGefiltert[index].kategorieId}',
-                  style: new TextStyle(
-                      fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]),
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        LernortScreen(l: lernortListGefiltert[index])));
+                    builder: (context) => LernortScreen(
+                        l: lernortListGefiltert[index], k: "Todo")));
           },
         )
       ],
@@ -90,9 +90,20 @@ class _LernortListeScreenKategorieState
                 itemBuilder: erstelleListViewitem,
                 padding: EdgeInsets.all(0.0),
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
+            : timeout
+                ? Center(
+                    child: Container(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Text(
+                        "Derzeit gibt es leider keine Lernorte in die Kategorie \"" +
+                            lkname +
+                            "\"",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline3),
+                  ))
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
       ),
     );
   }

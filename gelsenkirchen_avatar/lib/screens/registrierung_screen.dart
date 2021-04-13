@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:gelsenkirchen_avatar/screens/willkommen_screen.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 class Registrierung extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _RegistrierungState extends State<Registrierung> {
 
   bool processing = false;
   int rolleID = 1;
+  int erfahrung = 0;
 
   @override
   void initState() {
@@ -38,7 +41,8 @@ class _RegistrierungState extends State<Registrierung> {
       "email": emailctrl.text,
       "benutzer": namectrl.text,
       "passwort": passctrl.text,
-      "rolleID": rolleID.toString()
+      "rolleID": rolleID.toString(),
+      "erfahrung": erfahrung.toString()
     };
 
     var res = await http.post(url, body: data);
@@ -49,11 +53,15 @@ class _RegistrierungState extends State<Registrierung> {
           toastLength: Toast.LENGTH_SHORT);
     } else {
       if (jsonDecode(res.body) == "true") {
+        /*NICHT LÖSCHEN die Variable futureBenutzer wird genutzt um an den aktuellen Benutzer aus der Datenbank zu kommen und in sharedPreferences zwischenzuspeichern */
+        // ignore: unused_local_variable
+        var futureBenutzer =
+            await Benutzer.getBenutzer(emailctrl.text, passctrl.text);
+
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    WeiterleitenZurAnmeldungScreen()));
+                builder: (BuildContext context) => WillkommenScreen()));
       } else {
         Fluttertoast.showToast(
             msg: "Registrierung fehlgeschlagen",

@@ -31,7 +31,8 @@ class _QRViewState extends State<QRCodeReader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scan QR Code"),
+        title: Text("Scan einen QR-Code"),
+        backgroundColor: Color(0xff98ce00),
       ),
       body: Column(
         children: <Widget>[

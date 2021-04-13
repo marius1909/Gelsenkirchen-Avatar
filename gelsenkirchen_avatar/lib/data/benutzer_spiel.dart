@@ -1,8 +1,6 @@
 import 'datenbankObjekt.dart';
 import 'database_url.dart';
 
-import 'database_url.dart';
-
 class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
   int benutzerID;
   int spielID;
@@ -14,7 +12,8 @@ class BenutzerSpiel extends DatenbankObjekt<BenutzerSpiel> {
       : super(
             DatabaseURL.getBenutzerSpiel.value,
             DatabaseURL.insertIntoBenutzerSpiel.value,
-            DatabaseURL.removeFromBenutzerSpiel.value);
+            DatabaseURL.removeFromBenutzerSpiel.value,
+            '');
 
   @override
   BenutzerSpiel objektVonJasonArray(objekt) {

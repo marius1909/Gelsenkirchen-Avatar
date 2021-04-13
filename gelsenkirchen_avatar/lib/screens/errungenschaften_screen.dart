@@ -6,11 +6,6 @@ class ErrungenschaftenScreen extends StatefulWidget {
   _ErrungenschaftenScreen createState() => _ErrungenschaftenScreen();
 }
 
-/* 
-TODO: Bilder hinzufügen für Errungenschaften und Anzeigen
-TODO: Datum wann erreicht?
-*/
-
 class _ErrungenschaftenScreen extends State<ErrungenschaftenScreen> {
   List<Sammelbares> sammelbaresList;
 

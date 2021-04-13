@@ -1,6 +1,8 @@
 import 'database_url.dart';
 import 'datenbankObjekt.dart';
 
+/// Benutzer sammeln in verschiedenen Kategorien Punkte, die mit Hilfe
+/// dieser Klasse dargestellt werden.
 class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
   int benutzerID;
   int lernKategorieID;
@@ -13,7 +15,8 @@ class BenutzerKategorie extends DatenbankObjekt<BenutzerKategorie> {
       : super(
             DatabaseURL.getBenutzerKategorie.value,
             DatabaseURL.insertIntoLernKategorie.value,
-            DatabaseURL.removeFromBenutzerKategorie.value);
+            DatabaseURL.removeFromBenutzerKategorie.value,
+            '');
 
   @override
   BenutzerKategorie objektVonJasonArray(objekt) {

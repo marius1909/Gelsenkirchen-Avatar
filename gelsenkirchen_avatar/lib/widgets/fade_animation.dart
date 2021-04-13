@@ -19,6 +19,7 @@ class _FadeAnimationState extends State<FadeAnimation>
   void initState() {
     super.initState();
     animationController =
+        // ignore: missing_required_param
         AnimationController(duration: widget.duration);
     animationController.addListener(() {
       if (mounted) {
