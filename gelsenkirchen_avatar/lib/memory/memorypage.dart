@@ -8,7 +8,7 @@ import 'package:gelsenkirchen_avatar/widgets/utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_advanced_networkimage/provider.dart';
+// import 'package:flutter_advanced_networkimage/provider.dart';
 
 class MemoryPage extends StatefulWidget {
   final int benutzerID;
@@ -122,19 +122,19 @@ class _MemoryPageState extends State<MemoryPage> {
     });
   }
 
-  Future ladeBilder() async {
-    setState(() {
-      laedt = true;
-    });
+  // Future ladeBilder() async {
+  //   setState(() {
+  //     laedt = true;
+  //   });
 
-    await Future.wait(karten.map((karte) {
-      if (karte.kartentyp == 1) Utils.cacheImage(context, karte.kartenInhalt);
-    }).toList());
+  //   await Future.wait(karten.map((karte) {
+  //     if (karte.kartentyp == 1) Utils.cacheImage(context, karte.kartenInhalt);
+  //   }).toList());
 
-    setState(() {
-      laedt = false;
-    });
-  }
+  //   setState(() {
+  //     laedt = false;
+  //   });
+  // }
 
   @override
   void initState() {

@@ -10,6 +10,7 @@ import 'package:gelsenkirchen_avatar/screens/scoreboard_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_liste_screen.dart';
+import 'package:gelsenkirchen_avatar/screens/freundesliste_screen.dart';
 
 // ignore: must_be_immutable
 class NavDrawer extends StatelessWidget {
@@ -136,8 +137,8 @@ class NavDrawer extends StatelessWidget {
 
           /* FREUNDE */
           /* Auskommentiert für Show & Tell */
-          /* ListTile(
-              //leading: Icon(Icons.people),
+          ListTile(
+              // leading: Icon(Icons.people),
               leading: ConstrainedBox(
                 constraints: BoxConstraints(
                   minWidth: 20,
@@ -154,7 +155,7 @@ class NavDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Freundesliste()));
-              }), */
+              }),
 
           /* SCOREBOARD */
           /* Wurde in Sprint 4 in "Bestelnliste" umbenannt, da verständlicher für User */

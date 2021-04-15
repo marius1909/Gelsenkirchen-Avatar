@@ -31,6 +31,7 @@ class _RegistrierungState extends State<Registrierung> {
     validatepassctrl = new TextEditingController();
   }
 
+  /* Nach Validation, Anlegen des neuen Benutzer mit den angegeben Daten in Datenbank */
   void benutzerRegistrierung() async {
     setState(() {
       processing = true;
@@ -58,6 +59,7 @@ class _RegistrierungState extends State<Registrierung> {
         var futureBenutzer =
             await Benutzer.getBenutzer(emailctrl.text, passctrl.text);
 
+        /* Aufrufen des Willkommenscreens nach erfolgreicher Registrierung */
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -110,6 +112,7 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob Benutzernamen eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib einen Benutzernamen an';
@@ -133,10 +136,13 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob eine Email eingeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib eine gültige Email Adresse an';
                       }
+
+                      /* Prüfen, ob die Email in einen gültigen Format */
                       if (EmailValidator.validate(value)) {
                         return null;
                       }
@@ -162,6 +168,7 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob Passwort eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib ein Passwort an.';
@@ -190,10 +197,12 @@ class _RegistrierungState extends State<Registrierung> {
                       ),
                     ),
                     controller: validatepassctrl,
+                    /* Prüfen, ob 2.Passwort eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib ein Passwort ein.';
                       }
+                      /* Prüfen, ob Passwörter übereinstimmen */
                       if (value != passwortvalue) {
                         return 'Die Passwörter stimmen nicht überein.';
                       }
@@ -217,6 +226,8 @@ class _RegistrierungState extends State<Registrierung> {
                     ),
                     unpressedImage: Image.asset(
                         "assets/buttons/Registrieren_dunkelblau_groß.png"),
+                    /* Prüfen, ob alle Daten korrekt angegeben wurden. 
+                    Falls erfolgreich Benutzerregistrierung durchführen */
                     onTap: () {
                       var valid = _formKey.currentState.validate();
                       if (!valid) {
@@ -226,6 +237,7 @@ class _RegistrierungState extends State<Registrierung> {
                       benutzerRegistrierung();
                     },
                   ),
+                  /* Struktur der Fehleranzeige bei Eingabe ungültiger Daten */
                   FormField(
                     initialValue: false,
                     builder: (FormFieldState formFieldState) {
@@ -249,6 +261,7 @@ class _RegistrierungState extends State<Registrierung> {
               ),
             )
           ])),
+      /* Weiterleiten zur Anmeldung */
       bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         child: FlatButton(

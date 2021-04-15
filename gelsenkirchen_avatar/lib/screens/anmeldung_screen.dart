@@ -24,6 +24,8 @@ class _AnmeldungState extends State<Anmeldung> {
     passctrl = new TextEditingController();
   }
 
+  /* Führt das Login mit den im Textfeld eingebenen Daten durch. Falls Daten 
+  auf Server vorhanden weiter zum Homescreen, falls nicht Anzeigen einer Nachricht */
   void benutzerLogin() async {
     setState(() {
       processing = true;
@@ -42,6 +44,7 @@ class _AnmeldungState extends State<Anmeldung> {
     });
   }
 
+/* Fehlermeldung bei Eingabe fehlerhafter Daten */
   bool invalidError(Object error) {
     final invalidErrorCause = (error as InvalidLoginException).cause;
     switch (invalidErrorCause) {
@@ -147,23 +150,10 @@ class _AnmeldungState extends State<Anmeldung> {
                   },
                 ),
                 SizedBox(height: 40),
-
-                /* Dieser Button dient nur dazu die App ohne Anmeldung anzusehen. */
-                /* FlatButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => HomeScreen()));
-                  },
-                  child: Text(
-                    "Ohne Anmeldung fortfahren",
-                    textAlign: TextAlign.center,
-                  ),
-                ), */
               ]))
         ])
       ])),
+      /* Weiterleiten zur Registrierung */
       bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         child: FlatButton(

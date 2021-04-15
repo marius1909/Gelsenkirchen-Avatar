@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'freund_screen.dart';
+import 'package:gelsenkirchen_avatar/data/freundschaft.dart';
 
 class Freundesliste extends StatefulWidget {
   //loadFreunde
@@ -157,7 +158,8 @@ class _FreundeslisteState extends State<Freundesliste> {
 
   //TODO: (nicht bis S&T machbar) Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
   Future<void> loadFriendList() async {
-    List<Benutzer> a = await Benutzer.shared.gibObjekte();
+    List<Benutzer> a =
+        await Freundschaft.shared.gibFreunde(Benutzer.current.id);
 
     setState(() {
       freunde = a;
@@ -165,7 +167,12 @@ class _FreundeslisteState extends State<Freundesliste> {
   }
 
   // TODO: (nicht bis S&T machbar) Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
-  void fuegeFreundHinzu(String _name) {
-    print(_name);
+  void fuegeFreundHinzu(String _name) async {
+    var neuerFreund = await Freundschaft.shared.neuerFreund(_name);
+
+    Freundschaft neueFreundschaft = Freundschaft(
+        benutzerID_1: Benutzer.current.id, benutzerID_2: neuerFreund.id);
+
+    neueFreundschaft.insertIntoDatabase();
   }
 }
