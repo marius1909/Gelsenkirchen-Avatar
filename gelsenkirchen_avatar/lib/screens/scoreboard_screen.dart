@@ -16,8 +16,6 @@ class ScoreBoard extends StatefulWidget {
 
 class _ScoreBoardState extends State<ScoreBoard> {
   dynamic data;
-  // int totalPoints;
-  // int level;
 
 /* Speichert das Level in der Datenbank */
   Future<void> lernKategories() async {
@@ -29,8 +27,6 @@ class _ScoreBoardState extends State<ScoreBoard> {
     } else {
       setState(() {
         data = jsonDecode(res.body)['data'];
-        // totalPoints = jsonDecode(res.body)['total_point'];
-        // level = jsonDecode(res.body)['level'];
         print(data);
       });
     }

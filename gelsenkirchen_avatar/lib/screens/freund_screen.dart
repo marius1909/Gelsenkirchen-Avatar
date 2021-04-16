@@ -7,16 +7,15 @@ import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 
 class Freund extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  final int id_user;
-  Freund(this.id_user);
+  final Benutzer freund;
+  final int level;
+  Freund(this.freund, this.level);
 
   @override
   _FreundState createState() => _FreundState();
 }
 
 class _FreundState extends State<Freund> {
-  String spielername = "";
-  int level = 0;
   int anzahlErrungenschaften = 0;
 
 //TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
@@ -32,19 +31,19 @@ class _FreundState extends State<Freund> {
   @override
   void initState() {
     super.initState();
-    Benutzer.shared.gibObjekte().then((alleBenutzer) {
-      setState(() {
-        spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
-        // anzahlErrungenschaften =
-        // LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
-        avatar = LoadInfo.loadUserAvatarImage(
-            widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
-      });
-      //BROKEN
-      setState(() async {
-        level = await LoadInfo.loadUserLevel(widget.id_user);
-      });
-    });
+    // Benutzer.shared.gibObjekte().then((alleBenutzer) {
+    //   setState(() {
+    //     spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
+    //     // anzahlErrungenschaften =
+    //     // LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
+    //     avatar = LoadInfo.loadUserAvatarImage(
+    //         widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
+    //   });
+    //   //BROKEN
+    //   setState(() async {
+    //     level = await LoadInfo.loadUserLevel(widget.id_user);
+    //   });
+    // });
   }
 
   @override
@@ -72,7 +71,7 @@ class _FreundState extends State<Freund> {
                         ),
                         SizedBox(height: 10.0),
                         new Text(
-                          spielername,
+                          widget.freund.benutzer,
                           style: TextStyle(
                             letterSpacing: 1.8,
                             fontSize: 28.0,
@@ -91,9 +90,9 @@ class _FreundState extends State<Freund> {
                               TextStyle(color: Colors.grey, letterSpacing: 1.8),
                         ),
                         SizedBox(height: 10.0),
-                        /* TODO: (nicht bis S&T machbar) Level des Spielers anzeigen */
+                        /* Level des Spielers anzeigen */
                         Text(
-                          level.toString(),
+                          widget.level.toString(),
                           style: TextStyle(
                             letterSpacing: 1.8,
                             fontSize: 28.0,
@@ -151,9 +150,5 @@ class _FreundState extends State<Freund> {
                 )
               ],
             )));
-  }
-
-  String getText() {
-    return spielername;
   }
 }

@@ -136,7 +136,6 @@ class NavDrawer extends StatelessWidget {
               }),
 
           /* FREUNDE */
-          /* Auskommentiert für Show & Tell */
           ListTile(
               // leading: Icon(Icons.people),
               leading: ConstrainedBox(
@@ -252,6 +251,7 @@ class NavDrawer extends StatelessWidget {
                       await SharedPreferences.getInstance();
                   sharedPreferences.remove("benutzer");
                 }
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(

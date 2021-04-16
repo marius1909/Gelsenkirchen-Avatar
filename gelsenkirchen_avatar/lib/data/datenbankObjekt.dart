@@ -48,7 +48,7 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   }
 
   // Lädt nur das Objekt für das genannte Kriterium zurück.
-  // //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte oder Memoryspiel. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
+  // //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte, Memoryspiel und Benutzer. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
   ladeObjektNachKriterium(String attribut, var wert) async {
     var body = {"attribut": attribut, "wert": wert.toString(), "suche": "1"};
 

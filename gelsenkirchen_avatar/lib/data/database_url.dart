@@ -47,6 +47,7 @@ enum DatabaseURL {
   removeFromRollen,
   removeFromSammelKategorie,
   removeFromSammelbares,
+  removeFromFreundschaft,
   updateLernort,
   updateBenutzer,
   updateQuizFragen,
@@ -138,6 +139,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "removeFromBenutzerSpiel.php";
       case DatabaseURL.removeFromBenutzer:
         return _baseURL + "removeFromBenutzer.php";
+      case DatabaseURL.removeFromFreundschaft:
+        return _baseURL + "removeFromFreundschaft.php";
       case DatabaseURL.removeFromFreigeschaltet:
         return _baseURL + "removeFromFreigeschaltet.php";
       case DatabaseURL.removeFromLernKategorie:

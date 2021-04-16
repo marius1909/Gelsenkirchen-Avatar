@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'freund_screen.dart';
 import 'package:gelsenkirchen_avatar/data/freundschaft.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Freundesliste extends StatefulWidget {
   //loadFreunde
@@ -15,7 +17,7 @@ class _FreundeslisteState extends State<Freundesliste> {
   List<Benutzer> freunde = new List();
 
   int currentSortStyle = 0;
-
+  bool _disposed = false;
   TextFormField freundHinzufuegenField;
   TextEditingController freundeHinzufuegenController = TextEditingController();
 
@@ -88,24 +90,59 @@ class _FreundeslisteState extends State<Freundesliste> {
                       itemCount: freunde.length,
                       itemBuilder: (context, index) {
                         return Card(
-                            child: ListTile(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-
-                                    //TODO: (nicht bis S&T machbar) Kaputt, navigator pushed random
-                                    builder: (BuildContext context) =>
-                                        Freund(freunde[index].id)));
-                          },
-                          title: Text(freunde[index].benutzer,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  letterSpacing: 1.8,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold)),
-                          leading: Text(freunde[index].id.toString()),
-                        ));
+                          child: ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            Freund(
+                                                freunde[index],
+                                                berechneLevel(freunde[index]
+                                                    .erfahrung))));
+                              },
+                              title: Text(freunde[index].benutzer,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 1.8,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold)),
+                              leading: Text(
+                                  berechneLevel(freunde[index].erfahrung)
+                                      .toString()),
+                              trailing: IconButton(
+                                  icon: Icon(Icons.remove_circle_outlined),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title: Text(
+                                                  "Aus Freundesliste entfernen?"),
+                                              content: Text(
+                                                  "Möchtest du wirklich " +
+                                                      freunde[index].benutzer +
+                                                      " aus deiner Freundesliste entfernen?"),
+                                              actions: [
+                                                FlatButton(
+                                                    onPressed: (() =>
+                                                        Navigator.pop(context)),
+                                                    child: Text("Nein")),
+                                                FlatButton(
+                                                    onPressed: (() async {
+                                                      await Freundschaft.shared
+                                                          .removeFreund(
+                                                              Benutzer
+                                                                  .current.id,
+                                                              freunde[index]
+                                                                  .id);
+                                                      Navigator.pop(context);
+                                                    }),
+                                                    child: Text("Ja"))
+                                              ],
+                                            ),
+                                        barrierDismissible: true);
+                                  })),
+                        );
                       }),
                 ),
               ),
@@ -156,23 +193,55 @@ class _FreundeslisteState extends State<Freundesliste> {
         ));
   }
 
-  //TODO: (nicht bis S&T machbar) Lädt zur zeit alle Benutzer zum testen soll aber auf Freundeslite arbeiten
+  /* Laden der Freundesliste aus der Datenbank und speichern der Daten in der List freunde*/
   Future<void> loadFriendList() async {
     List<Benutzer> a =
         await Freundschaft.shared.gibFreunde(Benutzer.current.id);
 
-    setState(() {
-      freunde = a;
-    });
+    if (!_disposed)
+      setState(() {
+        freunde = a;
+      });
   }
 
-  // TODO: (nicht bis S&T machbar) Placeholder funktion geht später alle user durch und fuegt freund in datenbank ein
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  /* Fügt den eingegebenen Freund der Freundesliste hinzu */
   void fuegeFreundHinzu(String _name) async {
     var neuerFreund = await Freundschaft.shared.neuerFreund(_name);
 
-    Freundschaft neueFreundschaft = Freundschaft(
-        benutzerID_1: Benutzer.current.id, benutzerID_2: neuerFreund.id);
+    if (neuerFreund == null) {
+      Fluttertoast.showToast(
+          msg: "Der angegebene Benutzer existiert nicht",
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      Freundschaft neueFreundschaft = Freundschaft(
+          benutzerID_1: Benutzer.current.id, benutzerID_2: neuerFreund.id);
 
-    neueFreundschaft.insertIntoDatabase();
+      neueFreundschaft.insertIntoDatabase();
+    }
   }
+}
+
+/* Berechnet das Level aus den Erfahrungspunkten des Spielers */
+int berechneLevel(int xp) {
+  int lvl = 0;
+  if (xp < 30) {
+    lvl = 1;
+  } else if (xp < 51) {
+    lvl = 2;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    lvl = 3;
+    while (xp >= minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      lvl++;
+    }
+  }
+  return lvl;
 }
