@@ -3,7 +3,6 @@ import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 
 import 'home_screen.dart';
 
@@ -75,7 +74,8 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                         //1. Bild im Slider Blau
                         FlatButton(
                           onPressed: () {
-                            dummyprofil.setAvatar(0, [1]);
+                            //TODO: Setze Avatar für neuen Benutzer php script fehlt
+                            // dummyprofil.setAvatar(0, [1]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -87,7 +87,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                         //1. Bild im Slider Gelb
                         FlatButton(
                           onPressed: () {
-                            dummyprofil.setAvatar(1, [0]);
+                            //  dummyprofil.setAvatar(1, [0]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -99,7 +99,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                         //1. Bild im Slider Gruen
                         FlatButton(
                           onPressed: () {
-                            dummyprofil.setAvatar(2, [0]);
+                            // dummyprofil.setAvatar(2, [0]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -110,7 +110,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
 
                         FlatButton(
                           onPressed: () {
-                            dummyprofil.setAvatar(3, [0]);
+                            //   dummyprofil.setAvatar(3, [0]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),

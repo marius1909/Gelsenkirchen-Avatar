@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -39,8 +37,6 @@ class _ProfilState extends State<Profil> {
   List<String> auswaehlbareAvatare = new List();
 
   String test = "iiiiiiiiiiiiiiiiiiii";
-
-//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;

@@ -7,15 +7,13 @@ import 'package:http/http.dart' as http;
 import 'freigeschaltet.dart';
 
 class LoadInfo {
-  static String loadName(List<Benutzer> alleBenutzer, int userID) {
+  /*static String loadName(List<Benutzer> alleBenutzer, int userID) {
     String name = alleBenutzer.firstWhere((benutzer) {
       return benutzer.id == userID;
     }).benutzer;
 
     return name;
-  }
-
-//NEUE FUNKTION
+  }*/
 
   static Future<Image> loadUserAvatarImageNeu(int userid) async {
     String imagePath = await Avatar.getImagePath(userid);
@@ -35,30 +33,6 @@ class LoadInfo {
     //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
   }
 
-//TODO:existiert nur temporär um richtige größe für homescreen zu laden
-  static Image loadUserAvatarImage2(
-      int userid, int avatarTypID, int ausgeruesteteCollectableID) {
-    return Image.asset(
-        Avatar(avatarTypID, ausgeruesteteCollectableID).imagePath,
-        width: 100,
-        height: 100);
-
-    //return Image.asset("assets/images/profilbild.jpg", width: 250, height: 250);
-  }
-
-  static Future<int> loadUserLevel(int userID) async {
-    var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
-        userID.toString();
-    var res = await http.get(url);
-    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
-      print('Datensatz nicht gefunden');
-    } else {
-      return jsonDecode(res.body)['level'];
-    }
-
-    return null;
-  }
-
 /* Geht alle Freigeschalteten Errungenschaften durch und gibt eine Liste wieder mit Errungenschaften die vom angegebenen Benutzer freigeschaltet wurden*/
 
   static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
@@ -73,16 +47,5 @@ class LoadInfo {
       }
     }
     return userFreigeschaltet;
-  }
-
-  static List<Avatar> loadAlleAvatare() {
-    List<Avatar> avatare = new List();
-
-    for (var i = 0; i < 4; i++) {
-      for (var j = 0; j < 8; j++) {
-        avatare.add(new Avatar(i, j));
-      }
-    }
-    return avatare;
   }
 }

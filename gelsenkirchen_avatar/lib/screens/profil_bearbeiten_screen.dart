@@ -36,7 +36,8 @@ class _ProfilBearbeitenState extends State<ProfilBearbeiten> {
     super.initState();
     Benutzer.shared.gibObjekte().then((alleBenutzer) {
       setState(() {
-        aktuellerName = LoadInfo.loadName(alleBenutzer, widget.userID);
+        aktuellerName = Benutzer.current.benutzer;
+        //   aktuellerName = LoadInfo.loadName(alleBenutzer, widget.userID);
         avatar = LoadInfo.loadUserAvatarImage(
             widget.userID, avatarTypID, ausgeruesteteCollectablesID);
       });
