@@ -48,4 +48,13 @@ class LoadInfo {
     }
     return userFreigeschaltet;
   }
+
+  static testAvatarAenderung() {
+    int benutzerID = 127;
+    List<int> sammelIDs = new List();
+    sammelIDs.add(3);
+    sammelIDs.add(8);
+    sammelIDs.add(9);
+//php Script  updateBenutzer(127, sammelIDs)
+  }
 }
