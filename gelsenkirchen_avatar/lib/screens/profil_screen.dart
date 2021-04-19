@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'avatarbearbeiten_screen.dart';
@@ -36,8 +37,6 @@ class _ProfilState extends State<Profil> {
 
   List<String> auswaehlbareAvatare = new List();
 
-  String test = "iiiiiiiiiiiiiiiiiiii";
-
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;
 
@@ -47,10 +46,23 @@ class _ProfilState extends State<Profil> {
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
   Image avatar;
 
+//Variable um Ladescreen zu steuern
+  var _asyncResult;
+
   @override
   void initState() {
     super.initState();
-    asyncInitState();
+
+    ladeAsyncDaten().then((result) {
+      setState(() {
+        _asyncResult = result;
+      });
+    });
+
+    print("Hallo" +
+        Benutzer.current.benutzer +
+        " ää " +
+        Benutzer.current.id.toString());
 
     namectrl = new TextEditingController();
     avatar =
@@ -103,183 +115,174 @@ class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
-    return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          title: Text('Profil'),
-        ),
-        body: Stack(children: [
-          /* BILD */
-          Container(
-            //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
-            decoration: new BoxDecoration(
-                image: new DecorationImage(
-                    image:
-                        new AssetImage("assets/images/Profil_Hintergrund.png"),
-                    fit: BoxFit.cover)),
+    if (_asyncResult == null) {
+      return Ladescreen();
+    } else {
+      return Scaffold(
+          drawer: NavDrawer(),
+          appBar: AppBar(
+            title: Text('Profil'),
           ),
-          SingleChildScrollView(
-              child: Column(
-            children: [
-              IconButton(
-                icon: Icon(
-                  FlutterIcons.edit_faw5s,
-                  color: Color(0xff999999).withOpacity(1),
-                  size: 15,
-                ),
-                onPressed: () {
-                  setState(() {
-                    level = 22;
-                  });
-                },
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+          body: Stack(children: [
+            /* BILD */
+            Container(
+              //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
+              decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                      image: new AssetImage(
+                          "assets/images/Profil_Hintergrund.png"),
+                      fit: BoxFit.cover)),
+            ),
+            SingleChildScrollView(
                 child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /* Icon-Button nur da, damit Name zentriert ist */
-                        IconButton(
-                          icon: Icon(
-                            FlutterIcons.edit_faw5s,
-                            color: Color(0xff999999).withOpacity(0),
-                            size: 15,
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /* Icon-Button nur da, damit Name zentriert ist */
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999).withOpacity(0),
+                              size: 15,
+                            ),
+                            onPressed: () {},
                           ),
-                          onPressed: () {},
-                        ),
-                        Flexible(
-                            child: !isEditable
-                                ? Text(
-                                    test,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontFamily: "Ccaps",
-                                        fontSize: 35.0,
-                                        color: Color(0xff0b3e99)),
-                                  )
-                                : TextFormField(
-                                    initialValue: spielername,
-                                    autofocus: true,
-                                    textInputAction: TextInputAction.done,
-                                    onFieldSubmitted: (value) {
-                                      setState(() => {
-                                            isEditable = false,
-                                            spielername = value,
-                                            Benutzer.shared
-                                                .updateDatabaseWithID(
-                                                    "benutzer",
-                                                    value,
-                                                    widget.userID),
-                                            changeSharedPreferences(value)
-                                          });
-                                    })),
-                        IconButton(
-                          icon: Icon(
-                            FlutterIcons.edit_faw5s,
-                            color: Color(0xff999999),
-                            size: 15,
-                          ),
-                          onPressed: () {
-                            setState(() => {
-                                  isEditable = true,
-                                });
-                          },
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Center(
-                      child: Container(
-                        height: 22,
-                        width: 200,
-                        color: Colors.blue[50],
-                        child: Align(
-                            alignment: Alignment(0, 0),
-                            child: LinearPercentIndicator(
-                                width: 200,
-                                lineHeight: 22,
-                                percent: prozent,
-                                backgroundColor: Color(0xff0d4dbb),
-                                progressColor: Color(0xff2d75f0),
-                                center: Text(
-                                  "Level: " + level.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ))),
+                          Flexible(
+                              child: !isEditable
+                                  ? Text(
+                                      Benutzer.current.benutzer,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: "Ccaps",
+                                          fontSize: 35.0,
+                                          color: Color(0xff0b3e99)),
+                                    )
+                                  : TextFormField(
+                                      initialValue: spielername,
+                                      autofocus: true,
+                                      textInputAction: TextInputAction.done,
+                                      onFieldSubmitted: (value) {
+                                        setState(() => {
+                                              isEditable = false,
+                                              spielername = value,
+                                              Benutzer.shared
+                                                  .updateDatabaseWithID(
+                                                      "benutzer",
+                                                      value,
+                                                      widget.userID),
+                                              changeSharedPreferences(value)
+                                            });
+                                      })),
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999),
+                              size: 15,
+                            ),
+                            onPressed: () {
+                              setState(() => {
+                                    isEditable = true,
+                                  });
+                            },
+                          )
+                        ],
                       ),
-                    ),
-                    SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /* Icon-Button nur da, damit Name zentriert ist */
-                        IconButton(
-                          icon: Icon(
-                            FlutterIcons.edit_faw5s,
-                            color: Color(0xff999999).withOpacity(0),
-                            size: 15,
-                          ),
-                          onPressed: () {},
+                      SizedBox(height: 20),
+                      Center(
+                        child: Container(
+                          height: 22,
+                          width: 200,
+                          color: Colors.blue[50],
+                          child: Align(
+                              alignment: Alignment(0, 0),
+                              child: LinearPercentIndicator(
+                                  width: 200,
+                                  lineHeight: 22,
+                                  percent: prozent,
+                                  backgroundColor: Color(0xff0d4dbb),
+                                  progressColor: Color(0xff2d75f0),
+                                  center: Text(
+                                    "Level: " + level.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ))),
                         ),
-                        avatar,
-                        IconButton(
-                          icon: Icon(
-                            FlutterIcons.edit_faw5s,
-                            color: Color(0xff999999),
-                            size: 15,
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /* Icon-Button nur da, damit Name zentriert ist */
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999).withOpacity(0),
+                              size: 15,
+                            ),
+                            onPressed: () {},
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Avatarbearbeiten()),
+                          avatar,
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999),
+                              size: 15,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Avatarbearbeiten()),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 70),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
+                          Text(
+                              "Deine Errungenschaften: " /* +
+                                    (anzahlErrungenschaften + 4).toString() */
+                              ,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline3),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      CarouselSlider.builder(
+                          itemCount: auswaehlbareAvatare.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.all(6.0),
+                              child: Image.asset(auswaehlbareAvatare[index],
+                                  height: 300),
                             );
                           },
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 70),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
-                        Text(
-                            "Deine Errungenschaften: " /* +
-                                    (anzahlErrungenschaften + 4).toString() */
-                            ,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline3),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    CarouselSlider.builder(
-                        itemCount: auswaehlbareAvatare.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(auswaehlbareAvatare[index],
-                                height: 300),
-                          );
-                        },
-                        options: CarouselOptions(
-                          height: 100,
-                          enlargeCenterPage: true,
-                          autoPlay: false,
-                          aspectRatio: 16 / 9,
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enableInfiniteScroll: true,
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 800),
-                          viewportFraction: 0.3,
-                        ))
+                          options: CarouselOptions(
+                            height: 100,
+                            enlargeCenterPage: true,
+                            autoPlay: false,
+                            aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 0.3,
+                          ))
 
-                    /* FlatButton(
+                      /* FlatButton(
                         color: Colors.blue,
                         textColor: Colors.white,
                         disabledColor: Colors.grey,
@@ -318,26 +321,27 @@ class _ProfilState extends State<Profil> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ) */
-                  ],
-                ),
-              )
-            ],
-          ))
-        ]));
+                    ],
+                  ),
+                )
+              ],
+            ))
+          ]));
+    }
   }
 
   String getText() {
     return spielername;
   }
 
-  void asyncInitState() async {
+  Future<Image> ladeAsyncDaten() async {
     auswaehlbareAvatare =
         await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
 
-    print(auswaehlbareAvatare);
-
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
+
+    return avatar;
   }
 }
 

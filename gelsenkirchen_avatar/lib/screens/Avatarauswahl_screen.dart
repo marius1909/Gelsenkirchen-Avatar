@@ -40,6 +40,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
 
   @override
   Widget build(BuildContext context) {
+    print("auswahl");
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(

@@ -13,16 +13,16 @@ class Avatarbearbeiten extends StatefulWidget {
 }
 
 class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
-  var _result;
+  //Variable um Ladescreen zu steuern
+  var _asyncResult;
   List<String> auswaehlbareAvatare = new List();
 
   @override
   void initState() {
     super.initState();
-
-    loadAsyncData().then((result) {
+    ladeAsyncDaten().then((result) {
       setState(() {
-        _result = result;
+        _asyncResult = result;
       });
     });
   }
@@ -33,7 +33,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
-    if (_result == null) {
+    if (_asyncResult == null) {
       return new Container();
     } else {
       return Scaffold(
@@ -99,10 +99,9 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     }
   }
 
-  Future<bool> loadAsyncData() async {
+  Future<bool> ladeAsyncDaten() async {
     List<String> a =
         await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
-    print("he");
     setState(() {
       auswaehlbareAvatare = a;
     });
