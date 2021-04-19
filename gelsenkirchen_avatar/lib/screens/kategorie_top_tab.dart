@@ -16,6 +16,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   @override
   void initState() {
     super.initState();
+    /* Erstellen einer Liste aus den vorhandenen Lernorten */
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {

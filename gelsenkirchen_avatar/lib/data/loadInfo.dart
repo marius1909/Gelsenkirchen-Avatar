@@ -5,6 +5,7 @@ import 'Avatar.dart';
 import 'benutzer.dart';
 import 'package:http/http.dart' as http;
 import 'freigeschaltet.dart';
+import 'package:http/http.dart';
 
 class LoadInfo {
   /*static String loadName(List<Benutzer> alleBenutzer, int userID) {
@@ -49,12 +50,29 @@ class LoadInfo {
     return userFreigeschaltet;
   }
 
-  static testAvatarAenderung() {
+  static Future<Response> testAvatarAenderung() async {
     int benutzerID = 127;
     List<int> sammelIDs = new List();
     sammelIDs.add(3);
     sammelIDs.add(8);
     sammelIDs.add(9);
+
+    int basisID = 3;
+    int collectable1 = 8;
+    int collectable2 = 9;
+
+    String url = "http://zukunft.sportsocke522.de/updateFreigeschaltet.php";
+
+    var data = {
+      "benutzerID": benutzerID.toString(),
+      "basisID": basisID.toString(),
+      "collectable1": collectable1.toString(),
+      "collectable2": collectable2.toString(),
+    };
+    final response = await http.post(url, body: data);
+
+    return response;
+
 //php Script  updateBenutzer(127, sammelIDs)
   }
 }

@@ -31,6 +31,7 @@ class _AnmeldungState extends State<Anmeldung> {
       processing = true;
     });
 
+    /* Laden des Benutzers */
     var futureBenutzer = Benutzer.getBenutzer(emailctrl.text, passctrl.text);
     futureBenutzer.catchError(invalidError);
     futureBenutzer.then((benutzer) {

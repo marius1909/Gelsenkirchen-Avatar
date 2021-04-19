@@ -22,6 +22,7 @@ class _StartMemoryState extends State<StartMemory> {
   dynamic data;
   List<Memoryspiel> memorylist;
 
+/* Lädt Daten für den Lernort aus der Datenbank */
   void getLernort() async {
     var id = widget.id;
     var url =
@@ -42,13 +43,11 @@ class _StartMemoryState extends State<StartMemory> {
   void initState() {
     getLernort();
     var id = widget.id;
+    /* Gibt das Memoryspiel für den Lernort zurück */
     var memoryspielFuture = Memoryspiel.shared.sucheObjekt("lernortID", id);
-    // var memoryspielFuture = Memoryspiel.shared.gibObjekte();
     memoryspielFuture.then((value) {
       setState(() {
         memorylist = value;
-
-        print(memorylist);
       });
     });
     super.initState();
@@ -56,12 +55,14 @@ class _StartMemoryState extends State<StartMemory> {
 
   @override
   Widget build(BuildContext context) {
+    /* Anzeigen, falls Daten noch nicht vollständig geladen */
     if (memorylist == null || data == null) {
       return Scaffold(
           body: new Container(
               margin: EdgeInsets.all(10.0),
               alignment: Alignment.topCenter,
               child: Center(child: CircularProgressIndicator())));
+      /* Anzeigen, falls kein Memoryspiel für den Lernort vorhanden */
     } else if (memorylist.isEmpty) {
       return Scaffold(
           body: Container(
@@ -70,6 +71,7 @@ class _StartMemoryState extends State<StartMemory> {
               child: Center(
                   child: Text(
                       "Kein Memoryspiel für " + data['name'] + " vorhanden"))));
+      /* Anzeigen, falls Memoryspiel erfolgreich geladen */
     } else {
       return Scaffold(
           appBar: AppBar(

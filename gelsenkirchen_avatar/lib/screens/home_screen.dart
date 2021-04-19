@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
+import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Image aktuellerAvatar;
 
   void initState() {
+    LoadInfo.testAvatarAenderung();
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
     aktuellerAvatar =
         Image.asset(Avatar.getDefaultImagePath(0), width: 100, height: 100);

@@ -292,6 +292,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                           /* Falls alle Paare gefunden worden sind, Spiel beenden */
                                           if (_cardFlips
                                               .every((t) => t == false)) {
+                                            _timer.cancel();
                                             if (_summePunkte < 50) {
                                               _summePunkte = 50;
                                             }
@@ -328,7 +329,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                                           // erfahrungspunkte = sumPunkte;
                                                           Navigator.of(context)
                                                               .pop(true);
-                                                          // TODO: Muss noch um Funktion zum Speichern der Punkte ergänzt werden (Alex)
+
                                                           Navigator.of(context)
                                                               .pop();
                                                           await savePoint();

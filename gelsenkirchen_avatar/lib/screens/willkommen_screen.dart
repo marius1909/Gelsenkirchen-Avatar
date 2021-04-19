@@ -79,6 +79,7 @@ class WillkommenScreen extends StatelessWidget {
                   ),
                   unpressedImage: Image.asset(
                       "assets/buttons/LosGehts_dunkelblau_groß.png"),
+                  /* Weiterleiten zur Avatarauswahl */
                   onTap: () {
                     Navigator.push(
                         context,

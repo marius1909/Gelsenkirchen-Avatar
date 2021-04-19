@@ -30,9 +30,11 @@ class _LernortListeScreenKategorieState
         });
       }
     });
+    /* Laden der Lernorte */
     var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
       setState(() {
+        /* Falls nicht "Alle Lernorte" ausgewählt, nur Lernorte der Kategorie anzeigen */
         if (lkname != "Alle Lernorte") {
           lernortListGefiltert = lernorte
               .where((lernort) => lernort.kategorieID == widget.lk.id)
@@ -46,12 +48,14 @@ class _LernortListeScreenKategorieState
     super.initState();
   }
 
+  /*Diese Methode erstellt die ListViewItems*/
   Widget erstelleListViewitem(BuildContext context, int index) {
     return new Card(
         child: new Column(
       children: <Widget>[
         new ListTile(
           leading: CircleAvatar(
+            /* Prüft, ob Bild vorhanden. Falls nicht, Placeholder einfügen */
             backgroundImage: lernortListGefiltert[index]
                     .titelbild
                     .contains("http")
