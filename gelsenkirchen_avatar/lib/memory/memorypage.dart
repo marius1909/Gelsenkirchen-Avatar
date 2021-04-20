@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/memorykarte.dart';
 import 'dart:async';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
-import 'package:gelsenkirchen_avatar/widgets/utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

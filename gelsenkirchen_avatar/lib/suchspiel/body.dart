@@ -112,7 +112,7 @@ class _BodyState extends State<Body> {
                 SizedBox(
                   height: 20,
                 ),
-                /* TODO: Den Abstand der Boxen evtl. ein wenig erhöhen (Lisa) */
+
                 /* ANTWORT - TEXTBOXEN */
 
                 TextBox(
@@ -122,7 +122,7 @@ class _BodyState extends State<Body> {
                       5,
                   onNoEmptyField: (antwort) {
                     if (hinweis.istLoesungswort(antwort)) {
-                      /* TODO: (nicht bis S&T machbar) Punkte vergeben?! (Lisa) */
+                      /* TODO: Punkte vergeben?! */
                       /* Dialog, der angezeigt wir, wenn die richtige Antwort eingegeben wurde */
                       showDialog(
                         context: context,
@@ -263,7 +263,7 @@ class _BodyState extends State<Body> {
         calculateLevel(jsonData['total_point_old'])) {
       String showtext;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
+        /* TODO: Belohnung anzeigen */
         showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
             "\nDeine Belohnung: ...";
       } else {
