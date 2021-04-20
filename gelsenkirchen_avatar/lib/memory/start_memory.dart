@@ -75,7 +75,7 @@ class _StartMemoryState extends State<StartMemory> {
     } else {
       return Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff093582),
+            backgroundColor: Color(0xffe54b4b),
             title: Text(
               //Name von aktuellen Lernort
               data['name'] + " - Memory",
@@ -92,7 +92,7 @@ class _StartMemoryState extends State<StartMemory> {
                 style: TextStyle(
                     fontFamily: "Ccaps",
                     fontSize: 35.0,
-                    color: Color(0xff093582)),
+                    color: Color(0xffe54b4b)),
               ),
             ),
 
@@ -108,12 +108,12 @@ class _StartMemoryState extends State<StartMemory> {
             Container(
               padding: EdgeInsets.fromLTRB(15, 40, 15, 20),
               child: Text(
-                "Aufgabe Memory " + data['name'],
+                "Aufgabe: ",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: "Ccaps",
                     fontSize: 20.0,
-                    color: Color(0xff093582)),
+                    color: Color(0xffe54b4b)),
               ),
             ),
 
@@ -138,10 +138,10 @@ class _StartMemoryState extends State<StartMemory> {
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
                 pressedImage: Image.asset(
-                  "assets/buttons/Spielen_dunkelblau_groß.png",
+                  "assets/buttons/Spielen_rot_groß.png",
                 ),
                 unpressedImage:
-                    Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
+                    Image.asset("assets/buttons/Spielen_rot_groß.png"),
                 onTap: () {
                   if (Benutzer.current?.id != null) {
                     Navigator.of(context).push(MaterialPageRoute(

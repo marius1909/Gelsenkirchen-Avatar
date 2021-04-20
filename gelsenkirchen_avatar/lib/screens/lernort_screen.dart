@@ -355,7 +355,7 @@ class _LernortScreenState extends State<LernortScreen>
                             children: <Widget>[
                               ListTile(
                                 leading: Image.asset(
-                                    "assets/icons/Scoreboard_dunkelblau_Icon.png"),
+                                    "assets/icons/Memory_rot_Icon.png"),
                                 title: Text('Memory',
                                     style: TextStyle(fontSize: 16)),
                                 subtitle: Text(
@@ -368,7 +368,7 @@ class _LernortScreenState extends State<LernortScreen>
                                 FlatButton(
                                   child: Text('Spielen',
                                       style: TextStyle(
-                                          color: Color(0xff093582),
+                                          color: Color(0xffe54b4b),
                                           fontWeight: FontWeight.bold)),
                                   onPressed: () {
                                     Navigator.push(

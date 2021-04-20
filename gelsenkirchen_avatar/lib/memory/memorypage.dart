@@ -8,6 +8,7 @@ import 'package:gelsenkirchen_avatar/widgets/utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_icons/flutter_icons.dart';
 // import 'package:flutter_advanced_networkimage/provider.dart';
 
 class MemoryPage extends StatefulWidget {
@@ -55,12 +56,12 @@ class _MemoryPageState extends State<MemoryPage> {
     String kartenInhalt = karten[index].kartenInhalt;
     return Container(
         decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: Colors.grey[200],
             boxShadow: [
               BoxShadow(
-                color: Colors.black45,
-                blurRadius: 3,
-                spreadRadius: 0.8,
+                color: Colors.black12,
+                blurRadius: 0.5,
+                spreadRadius: 0.3,
                 offset: Offset(2.0, 1),
               )
             ],
@@ -217,13 +218,55 @@ class _MemoryPageState extends State<MemoryPage> {
           : Scaffold(
               appBar: AppBar(
                 title: Text(widget.title + " - Memory"),
-                backgroundColor: Color(0xff093582),
+                backgroundColor: Color(0xffe54b4b),
               ),
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Text(widget.aufgabe,
+                      Container(
+                          padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                Icon(FlutterIcons.feedback_mdi,
+                                    size: 20, color: Color(0xffe54b4b)),
+                                SizedBox(width: 10),
+                                Flexible(
+                                    child: Text(widget.aufgabe,
+                                        textAlign: TextAlign.justify,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3)),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Container(
+                                //padding: const EdgeInsets.all(16.0),
+                                child: _time > 0
+                                    ? Text(
+                                        '$_time',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3,
+                                      )
+                                    : Row(
+                                        children: [
+                                          Icon(
+                                            FlutterIcons.apps_mdi,
+                                            color: Color(0xffe54b4b),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text("Paare Übrig: $_paareUebrig",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline3),
+                                        ],
+                                      )),
+                          ])),
+                      SizedBox(height: 20),
+                      /* Text(widget.aufgabe,
                           style: Theme.of(context).textTheme.headline1),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -236,7 +279,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                 'Paare Übrig: $_paareUebrig',
                                 style: Theme.of(context).textTheme.headline3,
                               ),
-                      ),
+                      ), */
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: GridView.builder(
@@ -357,22 +400,25 @@ class _MemoryPageState extends State<MemoryPage> {
                                   direction: FlipDirection.HORIZONTAL,
                                   front: Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.grey,
+                                        color: Color(0xffe54b4b),
                                         borderRadius: BorderRadius.circular(5),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black45,
-                                            blurRadius: 3,
-                                            spreadRadius: 0.8,
+                                            color: Colors.black12,
+                                            blurRadius: 0.5,
+                                            spreadRadius: 0.3,
                                             offset: Offset(2.0, 1),
                                           )
                                         ]),
                                     margin: EdgeInsets.all(4.0),
                                     child: Padding(
                                       padding: const EdgeInsets.all(1.0),
-                                      child: Image.asset(
+                                      child: Icon(FlutterIcons.help_outline_mdi,
+                                          size: 35, color: Color(0xffffffff)),
+
+                                      /* Image.asset(
                                           "assets/icons/Quiz_gelb_Icon.png",
-                                          fit: BoxFit.fill),
+                                          fit: BoxFit.fill), */
                                     ),
                                   ),
                                   back: getItem(index))
