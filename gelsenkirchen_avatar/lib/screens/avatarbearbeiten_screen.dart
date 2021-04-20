@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
+import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
@@ -20,22 +22,24 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   @override
   void initState() {
     super.initState();
+
     ladeAsyncDaten().then((result) {
       setState(() {
+        print(_asyncResult.toString() + "wopaifrhqa0ifgbwaofbg");
         _asyncResult = result;
+        print(_asyncResult.toString() + "wopaifrhqa0ifgbwaofbg");
+        print(auswaehlbareAvatare.toString() + "wopaifrhqa0ifgbwaofbg");
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
-    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
-    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
-    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
     if (_asyncResult == null) {
-      return new Container();
+      print("drin" + auswaehlbareAvatare.toString());
+      return Ladescreen();
     } else {
+      print("raus" + auswaehlbareAvatare.toString());
       return Scaffold(
           appBar: AppBar(
             title: Text('Avatar auswählen'),
@@ -100,11 +104,15 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   }
 
   Future<bool> ladeAsyncDaten() async {
-    List<String> a =
-        await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
-    setState(() {
-      auswaehlbareAvatare = a;
-    });
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
+
+    // Test  auswaehlbareAvatare.addAll(await Avatar.getAuswaehlbareAvatarePath(127));
+    auswaehlbareAvatare
+        .addAll(await Avatar.getAuswaehlbareAvatarePath(Benutzer.current.id));
+
     return true;
   }
 }

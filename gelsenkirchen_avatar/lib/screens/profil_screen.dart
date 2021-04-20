@@ -323,14 +323,14 @@ class _ProfilState extends State<Profil> {
     return spielername;
   }
 
-  Future<Image> ladeAsyncDaten() async {
+  Future<bool> ladeAsyncDaten() async {
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
 
     alleFreigeschaltetenErrungenschaften =
         await Avatar.getAlleErrungenschaftenPath(Benutzer.current.id);
     anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
-    return avatar;
+    return true;
   }
 }
 

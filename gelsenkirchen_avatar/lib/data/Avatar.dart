@@ -121,7 +121,7 @@ class Avatar {
           Blau[0].pfadID.toString() +
           _suffixNeu);
     } else if (Blau.length == 2) {
-      print(Blau[0].pfadID.toString() + _suffixNeu);
+      //  print(Blau[0].pfadID.toString() + _suffixNeu);
       auswaehlbareAvatare.add(_basePathNeu +
           getBaseAvatar(0) +
           Blau[0].pfadID.toString() +
@@ -293,7 +293,7 @@ class Avatar {
           _suffixNeu);
     }
 
-    print(auswaehlbareAvatare);
+    //print(auswaehlbareAvatare);
     return auswaehlbareAvatare;
   }
 
@@ -325,8 +325,93 @@ class Avatar {
         }
       }
     }
-    print(alleErrungenschaften);
+    // print(alleErrungenschaften);
     return alleErrungenschaften;
+  }
+
+  static Future<List<String>> getAuswaehlbareAvatarePath(int userid) async {
+    print("hello");
+    List<String> alleKombinationen = new List();
+    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
+
+    List<Sammelbares> Blau = new List();
+    List<Sammelbares> Gelb = new List();
+    List<Sammelbares> Gruen = new List();
+    List<Sammelbares> Rot = new List();
+
+    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
+      for (var j = 0; j < sammelbares.length; j++) {
+        if (sammelbares[j].id == freigeschalteteErrungenschaften[i].sammelID) {
+          if (!istBasisAvatar(sammelbares[j])) {
+            if (sammelbares[j].basisID == 0) {
+              Blau.add(sammelbares[j]);
+            } else if (sammelbares[j].basisID == 1) {
+              Gelb.add(sammelbares[j]);
+            } else if (sammelbares[j].basisID == 2) {
+              Gruen.add(sammelbares[j]);
+            } else if (sammelbares[j].basisID == 3) {
+              Rot.add(sammelbares[j]);
+            }
+          }
+        }
+      }
+    }
+
+    List<List<Sammelbares>> list = new List();
+    list.add(Blau);
+    list.add(Gelb);
+    list.add(Gruen);
+    list.add(Rot);
+    String path = "";
+    for (var i = 0; i < list.length; i++) {
+      path = _basePathNeu + getBaseAvatar(i);
+      ;
+
+      if (list[i].length == 1) {
+        alleKombinationen.add(path + list[i][0].pfadID.toString());
+
+        //3 Kombinationsmöglichkeiten
+      } else if (list[i].length == 2) {
+        alleKombinationen.add(path + list[i][0].pfadID.toString());
+        alleKombinationen.add(path + list[i][1].pfadID.toString());
+        alleKombinationen
+            .add(path + (list[i][0].pfadID + list[i][1].pfadID).toString());
+
+        //7 Kombinationsmöglichkeiten
+        /*
+        001 0
+        010 1
+        011 10
+        100 2
+        101 20
+        110 21
+        111 210
+        */
+      } else if (list[i].length == 3) {
+        alleKombinationen.add(path + list[i][0].pfadID.toString());
+        alleKombinationen.add(path + list[i][1].pfadID.toString());
+        alleKombinationen
+            .add(path + (list[i][0].pfadID + list[i][1].pfadID).toString());
+        alleKombinationen.add(path + list[i][2].pfadID.toString());
+        alleKombinationen
+            .add(path + (list[i][2].pfadID + list[i][0].pfadID).toString());
+        alleKombinationen
+            .add(path + (list[i][2].pfadID + list[i][1].pfadID).toString());
+        alleKombinationen.add(path +
+            (list[i][2].pfadID + list[i][1].pfadID + list[i][0].pfadID)
+                .toString());
+      }
+    }
+
+    for (var i = 0; i < alleKombinationen.length; i++) {
+      alleKombinationen[i] += _suffixNeu;
+    }
+
+    // print(alleKombinationen);
+
+    return alleKombinationen;
   }
 
   static bool istBasisAvatar(Sammelbares sam) {
