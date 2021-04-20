@@ -25,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Image aktuellerAvatar;
 
   void initState() {
-    LoadInfo.testAvatarAenderung();
+    //LoadInfo.testAvatarAenderung();
+
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
     aktuellerAvatar =
         Image.asset(Avatar.getDefaultImagePath(0), width: 100, height: 100);
@@ -38,10 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 freigeschaltet.benutzerID == Benutzer.current.id &&
                 freigeschaltet.ausgeruestet)
             .toList();
-        // print("Hallo");
-        // var sammelID = freigeschaltetList[0].getSammelID();
-        // print(freigeschaltetList);
-        // print(sammelID);
       });
     });
     super.initState();

@@ -301,7 +301,7 @@ class Avatar {
 --------------------------------------------------*/
 
   static Future<List<String>> getAlleErrungenschaftenPath(int userid) async {
-    String path = _basePathNeu;
+    String path;
     List<String> alleErrungenschaften = new List();
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
 
@@ -310,17 +310,23 @@ class Avatar {
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
       for (var j = 0; j < sammelbares.length; j++) {
+        path = _basePathNeu;
         if (sammelbares[j].id == freigeschalteteErrungenschaften[i].sammelID) {
           if (istBasisAvatar(sammelbares[j])) {
-            path += getBaseAvatar(sammelbares[j].pfadID) + _suffixNeu;
+            path += getBaseAvatar(sammelbares[j].pfadID) + "0" + _suffixNeu;
 
             alleErrungenschaften.add(path);
-          } else {}
+          } else {
+            path += getBaseAvatar(sammelbares[j].basisID) +
+                sammelbares[j].pfadID.toString() +
+                _suffixNeu;
+            alleErrungenschaften.add(path);
+          }
         }
       }
     }
-
-    return null;
+    print(alleErrungenschaften);
+    return alleErrungenschaften;
   }
 
   static bool istBasisAvatar(Sammelbares sam) {

@@ -31,11 +31,11 @@ class _ProfilState extends State<Profil> {
   int xp = 0;
   double prozent = 0;
   int level = 0;
-  int anzahlErrungenschaften = 0;
+  int anzahlErrungenschaften;
   TextEditingController namectrl;
   bool isEditable = false;
 
-  List<String> auswaehlbareAvatare = new List();
+  List<String> alleFreigeschaltetenErrungenschaften = new List();
 
   //Typ des Avatars (1= Blau 2 = Gelb usw)
   int avatarTypID = 0;
@@ -59,11 +59,6 @@ class _ProfilState extends State<Profil> {
       });
     });
 
-    print("Hallo" +
-        Benutzer.current.benutzer +
-        " ää " +
-        Benutzer.current.id.toString());
-
     namectrl = new TextEditingController();
     avatar =
         Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
@@ -80,12 +75,6 @@ class _ProfilState extends State<Profil> {
       level = 0;
     });
     Benutzer.shared.gibObjekte().then((alleBenutzer) async {
-      setState(() {
-        //spielername = LoadInfo.loadName(alleBenutzer, widget.userID); Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
-        spielername = Benutzer.current.benutzer;
-        anzahlErrungenschaften = a.length;
-      });
-
       //int levelTemp = await LoadInfo.loadUserLevel(widget.userID);Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
       int xp = Benutzer.current.erfahrung;
       //BROKEN
@@ -114,7 +103,7 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
-    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
+    alleFreigeschaltetenErrungenschaften.add(Avatar.getDefaultImagePath(0));
     if (_asyncResult == null) {
       return Ladescreen();
     } else {
@@ -246,11 +235,9 @@ class _ProfilState extends State<Profil> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          /* "AnzahlErrungenschaften + 4", weil jeder ja von Beginn an 4 zur Auswahl hat */
                           Text(
-                              "Deine Errungenschaften: " /* +
-                                    (anzahlErrungenschaften + 4).toString() */
-                              ,
+                              "Deine Errungenschaften: " +
+                                  (anzahlErrungenschaften).toString(),
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.headline3),
                         ],
@@ -262,11 +249,13 @@ class _ProfilState extends State<Profil> {
                   child: Column(
                     children: [
                       CarouselSlider.builder(
-                          itemCount: auswaehlbareAvatare.length,
+                          itemCount:
+                              alleFreigeschaltetenErrungenschaften.length,
                           itemBuilder: (context, index) {
                             return Container(
                               margin: EdgeInsets.all(6.0),
-                              child: Image.asset(auswaehlbareAvatare[index],
+                              child: Image.asset(
+                                  alleFreigeschaltetenErrungenschaften[index],
                                   height: 300),
                             );
                           },
@@ -335,12 +324,12 @@ class _ProfilState extends State<Profil> {
   }
 
   Future<Image> ladeAsyncDaten() async {
-    auswaehlbareAvatare =
-        await Avatar.getAuswaehlbareAvatareList(Benutzer.current.id);
-
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
 
+    alleFreigeschaltetenErrungenschaften =
+        await Avatar.getAlleErrungenschaftenPath(Benutzer.current.id);
+    anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
     return avatar;
   }
 }
