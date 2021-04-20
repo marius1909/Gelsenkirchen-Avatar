@@ -16,8 +16,9 @@ class ScoreBoard extends StatefulWidget {
 
 class _ScoreBoardState extends State<ScoreBoard> {
   dynamic data;
+  int totalPoints;
+  int level;
 
-/* Speichert das Level in der Datenbank */
   Future<void> lernKategories() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
         widget.userID.toString();
@@ -27,6 +28,8 @@ class _ScoreBoardState extends State<ScoreBoard> {
     } else {
       setState(() {
         data = jsonDecode(res.body)['data'];
+        totalPoints = jsonDecode(res.body)['total_point'];
+        level = jsonDecode(res.body)['level'];
         print(data);
       });
     }
@@ -76,9 +79,9 @@ class _ScoreBoardState extends State<ScoreBoard> {
                   SizedBox(height: 10),
                   Text(
                       "Du hast Level " +
-                          berechneLevel(Benutzer.current.erfahrung).toString() +
+                          level.toString() +
                           " erreicht, mit insgesamt " +
-                          Benutzer.current.erfahrung.toString() +
+                          totalPoints.toString() +
                           " Erfahrungspunkten.",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline3)
@@ -223,20 +226,3 @@ class _ScoreBoardState extends State<ScoreBoard> {
   }
 }
 
-int berechneLevel(int xp) {
-  int lvl = 0;
-  if (xp < 30) {
-    lvl = 1;
-  } else if (xp < 51) {
-    lvl = 2;
-  } else {
-    int minxp = 51;
-    minxp = (minxp.toDouble() * 1.7).toInt();
-    lvl = 3;
-    while (xp >= minxp) {
-      minxp = (minxp.toDouble() * 1.7).toInt();
-      lvl++;
-    }
-  }
-  return lvl;
-}
