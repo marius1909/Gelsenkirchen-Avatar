@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 import 'home_screen.dart';
 
@@ -35,6 +36,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
 
   @override
   void initState() {
+    print(Benutzer.current.id);
     super.initState();
   }
 

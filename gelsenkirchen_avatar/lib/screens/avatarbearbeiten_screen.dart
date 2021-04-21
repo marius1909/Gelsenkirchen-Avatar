@@ -18,6 +18,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   //Variable um Ladescreen zu steuern
   var _asyncResult;
   List<String> auswaehlbareAvatare = new List();
+  List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
   @override
   void initState() {
@@ -25,10 +26,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
 
     ladeAsyncDaten().then((result) {
       setState(() {
-        print(_asyncResult.toString() + "wopaifrhqa0ifgbwaofbg");
         _asyncResult = result;
-        print(_asyncResult.toString() + "wopaifrhqa0ifgbwaofbg");
-        print(auswaehlbareAvatare.toString() + "wopaifrhqa0ifgbwaofbg");
       });
     });
   }
@@ -36,10 +34,8 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   @override
   Widget build(BuildContext context) {
     if (_asyncResult == null) {
-      print("drin" + auswaehlbareAvatare.toString());
       return Ladescreen();
     } else {
-      print("raus" + auswaehlbareAvatare.toString());
       return Scaffold(
           appBar: AppBar(
             title: Text('Avatar auswählen'),
@@ -56,11 +52,16 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 child: CarouselSlider.builder(
                     itemCount: auswaehlbareAvatare.length,
                     itemBuilder: (context, index) {
-                      print(auswaehlbareAvatare.length);
-                      return Container(
-                        margin: EdgeInsets.all(6.0),
-                        child: Image.asset(auswaehlbareAvatare[index],
-                            height: 300),
+                      return FlatButton(
+                        onPressed: () {
+                          Avatar.setAvatarFromPathIDs(Benutzer.current.id,
+                              auswaehlbareAvatarePathIDs[index]);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(auswaehlbareAvatare[index],
+                              height: 300),
+                        ),
                       );
                     },
                     options: CarouselOptions(
@@ -108,10 +109,15 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
+    auswaehlbareAvatarePathIDs.add([0]);
+    auswaehlbareAvatarePathIDs.add([1]);
+    auswaehlbareAvatarePathIDs.add([2]);
+    auswaehlbareAvatarePathIDs.add([3]);
 
-    // Test  auswaehlbareAvatare.addAll(await Avatar.getAuswaehlbareAvatarePath(127));
     auswaehlbareAvatare
         .addAll(await Avatar.getAuswaehlbareAvatarePath(Benutzer.current.id));
+    auswaehlbareAvatarePathIDs.addAll(
+        await Avatar.getAuswaehlbareAvatarePathIDs(Benutzer.current.id));
 
     return true;
   }

@@ -51,6 +51,7 @@ enum DatabaseURL {
   updateLernort,
   updateBenutzer,
   updateQuizFragen,
+  updateFreigeschaltet,
 }
 
 extension DatabaseURLExtension on DatabaseURL {
@@ -163,6 +164,8 @@ extension DatabaseURLExtension on DatabaseURL {
         return _baseURL + "updateBenutzer.php";
       case DatabaseURL.updateQuizFragen:
         return _baseURL + "updateQuizFragen.php";
+      case DatabaseURL.updateFreigeschaltet:
+        return _baseURL + "updateFreigeschaltet.php";
       default:
         return null;
     }

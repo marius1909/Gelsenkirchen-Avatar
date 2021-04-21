@@ -1,8 +1,6 @@
 // ignore: camel_case_types
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'Avatar.dart';
-import 'benutzer.dart';
 import 'package:http/http.dart' as http;
 import 'freigeschaltet.dart';
 import 'package:http/http.dart';
@@ -51,28 +49,22 @@ class LoadInfo {
   }
 
   static Future<Response> testAvatarAenderung() async {
-    int benutzerID = 127;
+    int benutzerID = 131;
     List<int> sammelIDs = new List();
     sammelIDs.add(3);
     sammelIDs.add(8);
     sammelIDs.add(9);
 
-    int basisID = 3;
-    int collectable1 = 8;
-    int collectable2 = 9;
+    int basisID = 5;
 
     String url = "http://zukunft.sportsocke522.de/updateFreigeschaltet.php";
 
     var data = {
       "benutzerID": benutzerID.toString(),
-      "basisID": basisID.toString(),
-      "collectable1": collectable1.toString(),
-      "collectable2": collectable2.toString(),
+      "basisID": basisID.toString()
     };
     final response = await http.post(url, body: data);
 
     return response;
-
-//php Script  updateBenutzer(127, sammelIDs)
   }
 }

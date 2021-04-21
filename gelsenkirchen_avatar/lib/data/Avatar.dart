@@ -21,6 +21,8 @@ Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class Avatar {
   int avatarTypID;
@@ -84,222 +86,6 @@ class Avatar {
     return _basePathNeu + baseAvatar + pfadID.toString() + _suffixNeu;
   }
 
-/* ACHTUNG SPAGHETTI CODE MUSS UNBEDING GEÄNDERT WERDEN-----------------------
---------------------------------------------------*/
-  static Future<List<String>> getAuswaehlbareAvatareList(int userid) async {
-    List<String> auswaehlbareAvatare = new List();
-    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
-
-    List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
-
-    List<Sammelbares> Blau = new List();
-    List<Sammelbares> Gelb = new List();
-    List<Sammelbares> Gruen = new List();
-    List<Sammelbares> Rot = new List();
-
-    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
-      for (var j = 0; j < sammelbares.length; j++) {
-        //getsammelbaresForFrei
-        if (freigeschalteteErrungenschaften[i].sammelID == sammelbares[j].id) {
-          if (sammelbares[j].beschreibung.contains("blauen Avatar")) {
-            Blau.add(sammelbares[j]);
-          } else if (sammelbares[j].beschreibung.contains("gelben Avatar")) {
-            Gelb.add(sammelbares[j]);
-          } else if (sammelbares[j].beschreibung.contains("grünen Avatar")) {
-            Gruen.add(sammelbares[j]);
-          } else if (sammelbares[j].beschreibung.contains("roten Avatar")) {
-            Rot.add(sammelbares[j]);
-          }
-        }
-      }
-    }
-
-    if (Blau.length == 1) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          Blau[0].pfadID.toString() +
-          _suffixNeu);
-    } else if (Blau.length == 2) {
-      //  print(Blau[0].pfadID.toString() + _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          Blau[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          (Blau[0].pfadID + Blau[1].pfadID).toString() +
-          _suffixNeu);
-    } else if (Blau.length == 3) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          Blau[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          Blau[1].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          (Blau[1].pfadID + Blau[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          Blau[2].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          (Blau[2].pfadID + Blau[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          (Blau[2].pfadID + Blau[1].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(0) +
-          (Blau[2].pfadID + Blau[1].pfadID + Blau[0].pfadID).toString() +
-          _suffixNeu);
-    }
-    if (Gelb.length == 1) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          Gelb[0].pfadID.toString() +
-          _suffixNeu);
-    } else if (Gelb.length == 2) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          Gelb[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          (Gelb[0].pfadID + Gelb[1].pfadID).toString() +
-          _suffixNeu);
-    } else if (Gelb.length == 3) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          Gelb[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          Gelb[1].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          (Gelb[1].pfadID + Gelb[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          Gelb[2].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          (Gelb[2].pfadID + Gelb[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          (Gelb[2].pfadID + Gelb[1].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(1) +
-          (Gelb[2].pfadID + Gelb[1].pfadID + Gelb[0].pfadID).toString() +
-          _suffixNeu);
-    }
-    if (Gruen.length == 1) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          Gruen[0].pfadID.toString() +
-          _suffixNeu);
-    } else if (Gruen.length == 2) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          Gruen[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          (Gruen[0].pfadID + Gruen[1].pfadID).toString() +
-          _suffixNeu);
-    } else if (Gruen.length == 3) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          Gruen[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          Gruen[1].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          (Gruen[1].pfadID + Gruen[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          Gruen[2].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          (Gruen[2].pfadID + Gruen[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          (Gruen[2].pfadID + Gruen[1].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(2) +
-          (Gruen[2].pfadID + Gruen[1].pfadID + Gruen[0].pfadID).toString() +
-          _suffixNeu);
-    }
-    if (Rot.length == 1) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          Rot[0].pfadID.toString() +
-          _suffixNeu);
-    } else if (Rot.length == 2) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          Rot[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          (Rot[0].pfadID + Rot[1].pfadID).toString() +
-          _suffixNeu);
-    } else if (Rot.length == 3) {
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          Rot[0].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          Rot[1].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          (Rot[1].pfadID + Rot[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          Rot[2].pfadID.toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          (Rot[2].pfadID + Rot[0].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          (Rot[2].pfadID + Rot[1].pfadID).toString() +
-          _suffixNeu);
-      auswaehlbareAvatare.add(_basePathNeu +
-          getBaseAvatar(3) +
-          (Rot[2].pfadID + Rot[1].pfadID + Rot[0].pfadID).toString() +
-          _suffixNeu);
-    }
-
-    //print(auswaehlbareAvatare);
-    return auswaehlbareAvatare;
-  }
-
-  /* ACHTUNG SPAGHETTI OBEN CODE MUSS UNBEDING GEÄNDERT WERDEN-----------------------
---------------------------------------------------*/
-
   static Future<List<String>> getAlleErrungenschaftenPath(int userid) async {
     String path;
     List<String> alleErrungenschaften = new List();
@@ -329,9 +115,7 @@ class Avatar {
     return alleErrungenschaften;
   }
 
-  static Future<List<String>> getAuswaehlbareAvatarePath(int userid) async {
-    print("hello");
-    List<String> alleKombinationen = new List();
+  static Future<Map> getAuswaehlbareAvatare(int userid) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await LoadInfo.getFreigeschalteteErrungenschaften(userid);
@@ -365,19 +149,28 @@ class Avatar {
     list.add(Gruen);
     list.add(Rot);
     String path = "";
+
+    List<String> alleKombinationen = new List();
+    List<List<int>> pathIDs = new List();
     for (var i = 0; i < list.length; i++) {
       path = _basePathNeu + getBaseAvatar(i);
-      ;
 
+//1 Kombinationsmöglichkeit
       if (list[i].length == 1) {
         alleKombinationen.add(path + list[i][0].pfadID.toString());
+        pathIDs.add([i, list[i][0].pfadID]);
 
         //3 Kombinationsmöglichkeiten
       } else if (list[i].length == 2) {
         alleKombinationen.add(path + list[i][0].pfadID.toString());
+        pathIDs.add([i, list[i][0].pfadID]);
+
         alleKombinationen.add(path + list[i][1].pfadID.toString());
+        pathIDs.add([i, list[i][1].pfadID]);
+
         alleKombinationen
             .add(path + (list[i][0].pfadID + list[i][1].pfadID).toString());
+        pathIDs.add([i, list[i][0].pfadID, list[i][1].pfadID]);
 
         //7 Kombinationsmöglichkeiten
         /*
@@ -391,17 +184,31 @@ class Avatar {
         */
       } else if (list[i].length == 3) {
         alleKombinationen.add(path + list[i][0].pfadID.toString());
+        pathIDs.add([i, list[i][0].pfadID]);
+
         alleKombinationen.add(path + list[i][1].pfadID.toString());
+        pathIDs.add([i, list[i][1].pfadID]);
+
         alleKombinationen
             .add(path + (list[i][0].pfadID + list[i][1].pfadID).toString());
+        pathIDs.add([i, list[i][0].pfadID, list[i][1].pfadID]);
+
         alleKombinationen.add(path + list[i][2].pfadID.toString());
+        pathIDs.add([i, list[i][2].pfadID]);
+
         alleKombinationen
             .add(path + (list[i][2].pfadID + list[i][0].pfadID).toString());
+        pathIDs.add([i, list[i][2].pfadID, list[i][0].pfadID]);
+
         alleKombinationen
             .add(path + (list[i][2].pfadID + list[i][1].pfadID).toString());
+        pathIDs.add([i, list[i][2].pfadID, list[i][1].pfadID]);
+
         alleKombinationen.add(path +
             (list[i][2].pfadID + list[i][1].pfadID + list[i][0].pfadID)
                 .toString());
+        pathIDs
+            .add([i, list[i][2].pfadID, list[i][1].pfadID, list[i][0].pfadID]);
       }
     }
 
@@ -410,8 +217,24 @@ class Avatar {
     }
 
     // print(alleKombinationen);
+    Map map = new Map.fromIterables(alleKombinationen, pathIDs);
 
-    return alleKombinationen;
+    return map;
+  }
+
+  static Future<List<String>> getAuswaehlbareAvatarePath(int userid) async {
+    List<String> pathStrings = new List();
+    Map map = await getAuswaehlbareAvatare(userid);
+    map.keys.forEach((k) => pathStrings.add(k));
+    return pathStrings;
+  }
+
+  static Future<List<List<int>>> getAuswaehlbareAvatarePathIDs(
+      int userid) async {
+    List<List<int>> pathIDs = new List();
+    Map map = await getAuswaehlbareAvatare(userid);
+    map.values.forEach((k) => pathIDs.add(k));
+    return pathIDs;
   }
 
   static bool istBasisAvatar(Sammelbares sam) {
@@ -455,6 +278,69 @@ class Avatar {
     }
 
     return _basePath + baseAvatar + pfadID.toString() + _suffix;
+  }
+
+  static Future<Response> setAvatarFromPathIDs(
+      int benutzerID, List<int> pathIDs) async {
+    int basisID = pathIDs[0];
+
+    //DATENBANK UREGELMÄßIGKEIT
+    if (basisID == 0) {
+      basisID = 4;
+    } else if (basisID == 1) {
+      basisID = 3;
+    } else if (basisID == 2) {
+      basisID = 6;
+    } else if (basisID == 3) {
+      basisID = 5;
+    }
+
+/*Wenn weniger als 3 Collectables erzeugt nachfolgener code Nullwerte für das phpScript
+*/
+    List<int> collectables = new List();
+    int collectable1;
+    int collectable2;
+    int collectable3;
+    collectables.add(collectable1);
+    collectables.add(collectable2);
+    collectables.add(collectable3);
+
+    for (var i = 1; i < pathIDs.length; i++) {
+      collectables[i] = pathIDs[i];
+    }
+
+//Consolenprints zum Testen
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await LoadInfo.getFreigeschalteteErrungenschaften(benutzerID);
+    print("\n");
+    print("_______________");
+    print("\n");
+
+    print("Errungenschaften vor DatenbankUpdate\n" +
+        freigeschalteteErrungenschaften.toString());
+
+    print("Für den Benutzer(ID) " +
+        benutzerID.toString() +
+        " sollen folgende sammelIDs ausgerüstet werden: \nBasisID:" +
+        basisID.toString() +
+        "\nCollectables:" +
+        collectables.toString());
+    print("\nUm zu überprüfen -> nochmal Avatar auswählen");
+
+//Datenbank zugriff
+
+    String url = "http://zukunft.sportsocke522.de/updateFreigeschaltet.php";
+
+    var data = {
+      "benutzerID": benutzerID.toString(),
+      "basisID": basisID.toString(),
+      "collectable1": collectables[0].toString(),
+      "collectable2": collectables[1].toString(),
+      "collectable3": collectables[2].toString(),
+    };
+    final response = await http.post(url, body: data);
+
+    return response;
   }
 
   // ignore: missing_return
