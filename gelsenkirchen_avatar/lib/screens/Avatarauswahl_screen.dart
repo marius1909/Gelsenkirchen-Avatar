@@ -23,17 +23,6 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüstete Collectables aus Datenbank laden
-
-  //Typ des Avatars (1= Blau 2 = Gelb usw)
-  int avatarTypID = 0;
-
-  //Collectablesanpassung als ID (zurzeit 0 bis 7)
-  int ausgeruesteteCollectablesID = 0;
-
-//Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
-
   @override
   void initState() {
     print(Benutzer.current.id);
@@ -62,23 +51,21 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
               child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
-                  child: Flexible(
+                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),               
                     child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline3),
-                  )),
+                  ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
                 child: Column(
                   children: [
                     CarouselSlider(
                       items: [
-                        //1. Bild im Slider Blau
                         FlatButton(
                           onPressed: () {
-                            //TODO: Setze Avatar für neuen Benutzer php script fehlt
-                            // dummyprofil.setAvatar(0, [1]);
+                            Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, [0]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -86,11 +73,10 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                                 height: 300),
                           ),
                         ),
-
-                        //1. Bild im Slider Gelb
                         FlatButton(
                           onPressed: () {
-                            //  dummyprofil.setAvatar(1, [0]);
+                            Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, [1]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -98,11 +84,10 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                                 height: 300),
                           ),
                         ),
-
-                        //1. Bild im Slider Gruen
                         FlatButton(
                           onPressed: () {
-                            // dummyprofil.setAvatar(2, [0]);
+                            Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, [2]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
@@ -110,10 +95,10 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                                 height: 300),
                           ),
                         ),
-
                         FlatButton(
                           onPressed: () {
-                            //   dummyprofil.setAvatar(3, [0]);
+                            Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, [3]);
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),

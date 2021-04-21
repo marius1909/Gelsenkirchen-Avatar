@@ -284,7 +284,7 @@ class Avatar {
       int benutzerID, List<int> pathIDs) async {
     int basisID = pathIDs[0];
 
-    //DATENBANK UREGELMÄßIGKEIT
+    //DATENBANK UNREGELMÄßIGKEIT
     if (basisID == 0) {
       basisID = 4;
     } else if (basisID == 1) {
