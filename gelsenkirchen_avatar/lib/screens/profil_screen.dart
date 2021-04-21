@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
+import 'package:gelsenkirchen_avatar/data/freundschaft.dart';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -54,8 +54,6 @@ class _ProfilState extends State<Profil> {
   void initState() {
     super.initState();
 
-    //LoadInfo.testAvatarAenderung();
-    //Avatar.getImagePath(127);
     ladeAsyncDaten().then((result) {
       setState(() {
         _asyncResult = result;
@@ -333,6 +331,7 @@ class _ProfilState extends State<Profil> {
     alleFreigeschaltetenErrungenschaften =
         await Avatar.getAlleErrungenschaftenPath(Benutzer.current.id);
     anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
+
     return true;
   }
 }
