@@ -1,25 +1,7 @@
 /* 
 Klasse Avatar
-
-Erstellt einen Avatar mit angebenen Typ und angebenen Collectable
-
-avatarTypId: Der (Farb)Typ des Avatars. Blau = 0, Gruen = 1, Gelb = 2, Rot = 3
-collectableId: Das ausgerüstete Collectable das angezeigt werden soll
-
-Assetpaths: Erstellt den Dateipfad zum richtigem Avatarbild
-
-Um einen neuen Avatar zu implementieren muss eine weiteres "else if" unter "AvatarTypen" eingefügt:
-
- else if (avatarTypID == "i") {
-      _avatar = "TYP/";
-    }
-
-AvatarImage kann über Image.asset(Avatar(i,j).imagePath) geladen werden
-Um einen Avatar für einen bestimmen Benutzer zu laden bitte die loadAvatarImage in loadInfo.dart benutzen.
-
 */
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -40,13 +22,6 @@ class Avatar {
     avatarTypID = _avatarTypID;
   }
 
-  String get imagePath {
-    return _basePath +
-        getBaseAvatarAlt(avatarTypID) +
-        collectableID.toString() +
-        _suffix;
-  }
-
   static String getDefaultImagePath(int baseID) {
     return _basePathNeu + getBaseAvatar(baseID) + "0" + _suffixNeu;
   }
@@ -57,7 +32,7 @@ class Avatar {
     String baseAvatar = "";
 
     List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(userID);
+        await getFreigeschalteteErrungenschaften(userID);
 
     // print(userID);
     //  print(freigeschalteteErrungenschaften);
@@ -83,6 +58,13 @@ class Avatar {
       pfadID += ausgeruesteteErrungenschaften[i].pfadID;
     }
 
+    //Falls BaseAvatar nicht korrekt Aus datenbank geladen wird
+    if (baseAvatar == "") {
+      baseAvatar = getBaseAvatar(0);
+    }
+
+    print(baseAvatar);
+
     return _basePathNeu + baseAvatar + pfadID.toString() + _suffixNeu;
   }
 
@@ -92,7 +74,7 @@ class Avatar {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
 
     List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
+        await getFreigeschalteteErrungenschaften(userid);
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
       for (var j = 0; j < sammelbares.length; j++) {
@@ -111,14 +93,22 @@ class Avatar {
         }
       }
     }
-    // print(alleErrungenschaften);
+
+    //Wenn Datensatz nicht oder nicht richtig geladen wird, Standardavatare füllen
+    if (alleErrungenschaften.isEmpty) {
+      alleErrungenschaften.add(getDefaultImagePath(0));
+      alleErrungenschaften.add(getDefaultImagePath(1));
+      alleErrungenschaften.add(getDefaultImagePath(2));
+      alleErrungenschaften.add(getDefaultImagePath(3));
+    }
+
     return alleErrungenschaften;
   }
 
   static Future<Map> getAuswaehlbareAvatare(int userid) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
     List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(userid);
+        await getFreigeschalteteErrungenschaften(userid);
 
     List<Sammelbares> Blau = new List();
     List<Sammelbares> Gelb = new List();
@@ -245,41 +235,6 @@ class Avatar {
     }
   }
 
-  Future<String> getImagePathAlt(int userID) async {
-    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
-
-    String baseAvatar = "";
-
-    List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(userID);
-
-    // print(userID);
-    //print(freigeschalteteErrungenschaften);
-
-    List<Sammelbares> ausgeruesteteErrungenschaften = new List();
-    int pfadID = 0;
-
-    for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
-      if (freigeschalteteErrungenschaften[i].ausgeruestet) {
-        for (var j = 0; j < sammelbares.length; j++) {
-          if (sammelbares[j].id ==
-              freigeschalteteErrungenschaften[i].sammelID) {
-            if (sammelbares[j].kategorieID == 2) {
-              baseAvatar = getBaseAvatarAlt(sammelbares[j].pfadID);
-            } else {
-              ausgeruesteteErrungenschaften.add(sammelbares[j]);
-            }
-          }
-        }
-      }
-    }
-    for (var i = 0; i < ausgeruesteteErrungenschaften.length; i++) {
-      pfadID += ausgeruesteteErrungenschaften[i].pfadID;
-    }
-
-    return _basePath + baseAvatar + pfadID.toString() + _suffix;
-  }
-
   static Future<Response> setAvatarFromPathIDs(
       int benutzerID, List<int> pathIDs) async {
     int basisID = pathIDs[0];
@@ -311,7 +266,7 @@ class Avatar {
 
 //Consolenprints zum Testen
     List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await LoadInfo.getFreigeschalteteErrungenschaften(benutzerID);
+        await getFreigeschalteteErrungenschaften(benutzerID);
     print("\n");
     print("_______________");
     print("\n");
@@ -343,23 +298,18 @@ class Avatar {
     return response;
   }
 
-  // ignore: missing_return
-  String getBaseAvatarAlt(baseID) {
-    if (baseID == 0) {
-      return "DerBlaue/";
+  static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
+      int userID) async {
+    List<Freigeschaltet> userFreigeschaltet = new List();
+    List<Freigeschaltet> freigeschaltet =
+        await Freigeschaltet.shared.gibObjekte();
+
+    for (var i = 0; i < freigeschaltet.length; i++) {
+      if (freigeschaltet[i].benutzerID == userID) {
+        userFreigeschaltet.add(freigeschaltet[i]);
+      }
     }
-    //Gelb
-    else if (baseID == 1) {
-      return "DerGelbe/";
-    }
-    //Gruen
-    else if (baseID == 2) {
-      return "DerGruene/";
-    }
-    //Rot
-    else if (baseID == 3) {
-      return "DerRote/";
-    }
+    return userFreigeschaltet;
   }
 
   static String getBaseAvatar(baseID) {

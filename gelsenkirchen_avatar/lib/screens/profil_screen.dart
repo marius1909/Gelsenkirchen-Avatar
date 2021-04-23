@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
-import 'package:gelsenkirchen_avatar/data/freundschaft.dart';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -12,17 +10,12 @@ import 'avatarbearbeiten_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-/*
-  TODO: (nicht bis S&T machbar) Anzahl an Errungenschaften laden
-*/
+import 'package:http/http.dart' as http;
 
 class Profil extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final int userID;
-
   Profil(this.userID);
-
   @override
   _ProfilState createState() => _ProfilState();
 }
@@ -32,7 +25,7 @@ class _ProfilState extends State<Profil> {
   int xp = 0;
   double prozent = 0;
   int level = 0;
-  int anzahlErrungenschaften;
+  int anzahlErrungenschaften = 0;
   TextEditingController namectrl;
   bool isEditable = false;
 
@@ -42,7 +35,7 @@ class _ProfilState extends State<Profil> {
   Image avatar =
       Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
 
-//Variable um Ladescreen zu steuern
+//Steuerungsvariable für den Ladescreen
   var _asyncResult;
 
   @override
@@ -55,26 +48,6 @@ class _ProfilState extends State<Profil> {
     });
 
     namectrl = new TextEditingController();
-
-    int xp = Benutzer.current.erfahrung;
-    level = berechneLevel(xp);
-    prozent = berechnelvlProzent(xp);
-  }
-
-  /* Ändern des Namens im Zwischenspeicher */
-  void changeSharedPreferences(String name) async {
-    Map<String, dynamic> storedBenutzer = Map<String, dynamic>();
-
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-
-    storedBenutzer = jsonDecode(sharedPreferences.getString("benutzer"));
-
-    storedBenutzer["benutzer"] = name;
-
-    sharedPreferences.setString("benutzer", jsonEncode(storedBenutzer));
-
-    Benutzer.shared.setCurrent(storedBenutzer);
   }
 
   @override
@@ -246,46 +219,6 @@ class _ProfilState extends State<Profil> {
                                 Duration(milliseconds: 800),
                             viewportFraction: 0.3,
                           ))
-
-                      /* FlatButton(
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        disabledColor: Colors.grey,
-                        disabledTextColor: Colors.black,
-                        padding: EdgeInsets.all(8.0),
-                        splashColor: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ProfilBearbeiten(widget.id_user)),
-                          );
-                        },
-                        child: Text(
-                          "Profil bearbeiten",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      ),
-                      FlatButton(
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        disabledColor: Colors.grey,
-                        disabledTextColor: Colors.black,
-                        padding: EdgeInsets.all(8.0),
-                        splashColor: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ErrungenschaftenScreen()),
-                          );
-                        },
-                        child: Text(
-                          "Errungenschaften",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      ) */
                     ],
                   ),
                 )
@@ -299,39 +232,51 @@ class _ProfilState extends State<Profil> {
     return spielername;
   }
 
+//Lädt asynchron mehrere Daten aus der Datenbank. Returned true für die Steuerungsvariable _asyncResult.
   Future<bool> ladeAsyncDaten() async {
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
-
-    List<String> hhh = await Avatar.getAlleErrungenschaftenPath(90);
-    print(hhh.toString());
-
     alleFreigeschaltetenErrungenschaften =
         await Avatar.getAlleErrungenschaftenPath(Benutzer.current.id);
     anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
-
-    print("in async: " + Benutzer.current.erfahrung.toString());
-
+    level = await ladeBenutzerLevel();
     return true;
   }
-}
 
-int berechneLevel(int xp) {
-  int lvl = 0;
-  if (xp < 30) {
-    lvl = 1;
-  } else if (xp < 51) {
-    lvl = 2;
-  } else {
-    int minxp = 51;
-    minxp = (minxp.toDouble() * 1.7).toInt();
-    lvl = 3;
-    while (xp >= minxp) {
-      minxp = (minxp.toDouble() * 1.7).toInt();
-      lvl++;
+  Future<int> ladeBenutzerLevel() async {
+    var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
+        Benutzer.current.id.toString();
+    var res = await http.get(url);
+    if (jsonDecode(res.body) == "Datensatz existiert nicht") {
+      print('Datensatz nicht gefunden');
+    } else {
+      setState(() {
+        level = jsonDecode(res.body)['level'];
+        xp = jsonDecode(res.body)['total_point'];
+        prozent = berechnelvlProzent(xp);
+        print(xp);
+        print(level);
+        print(prozent);
+      });
     }
+    return level;
   }
-  return lvl;
+
+  /* Ändern des Namens im Zwischenspeicher */
+  void changeSharedPreferences(String name) async {
+    Map<String, dynamic> storedBenutzer = Map<String, dynamic>();
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    storedBenutzer = jsonDecode(sharedPreferences.getString("benutzer"));
+
+    storedBenutzer["benutzer"] = name;
+
+    sharedPreferences.setString("benutzer", jsonEncode(storedBenutzer));
+
+    Benutzer.shared.setCurrent(storedBenutzer);
+  }
 }
 
 double berechnelvlProzent(int xp) {

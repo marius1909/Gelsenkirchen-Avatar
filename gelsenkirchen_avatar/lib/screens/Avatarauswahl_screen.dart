@@ -51,11 +51,11 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
               child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),               
-                    child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline3),
-                  ),
+                padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
+                child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline3),
+              ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
                 child: Column(
@@ -69,7 +69,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(0, 1).imagePath,
+                            child: Image.asset(Avatar.getDefaultImagePath(0),
                                 height: 300),
                           ),
                         ),
@@ -80,7 +80,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(1, 0).imagePath,
+                            child: Image.asset(Avatar.getDefaultImagePath(1),
                                 height: 300),
                           ),
                         ),
@@ -91,7 +91,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(2, 0).imagePath,
+                            child: Image.asset(Avatar.getDefaultImagePath(2),
                                 height: 300),
                           ),
                         ),
@@ -102,7 +102,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                           },
                           child: Container(
                             margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(3, 0).imagePath,
+                            child: Image.asset(Avatar.getDefaultImagePath(3),
                                 height: 300),
                           ),
                         )
