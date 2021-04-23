@@ -38,14 +38,9 @@ class _ProfilState extends State<Profil> {
 
   List<String> alleFreigeschaltetenErrungenschaften = new List();
 
-  //Typ des Avatars (1= Blau 2 = Gelb usw)
-  int avatarTypID = 0;
-
-  //Collectablesanpassung als ID (zurzeit 0 bis 7)
-  int ausgeruesteteCollectablesID = 0;
-
 //Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar;
+  Image avatar =
+      Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
 
 //Variable um Ladescreen zu steuern
   var _asyncResult;
@@ -53,7 +48,6 @@ class _ProfilState extends State<Profil> {
   @override
   void initState() {
     super.initState();
-
     ladeAsyncDaten().then((result) {
       setState(() {
         _asyncResult = result;
@@ -61,29 +55,10 @@ class _ProfilState extends State<Profil> {
     });
 
     namectrl = new TextEditingController();
-    avatar =
-        Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
-    List<Freigeschaltet> a = new List();
-    Freigeschaltet.shared.gibObjekte().then((alleErrungenschaften) async {
-      for (var i = 0; i < alleErrungenschaften.length; i++) {
-        if (alleErrungenschaften[i].benutzerID == 9) {
-          a.add(alleErrungenschaften[i]);
-        }
-      }
-    });
 
-    setState(() {
-      level = 0;
-    });
-    Benutzer.shared.gibObjekte().then((alleBenutzer) async {
-      //int levelTemp = await LoadInfo.loadUserLevel(widget.userID);Rausgenommen um durch den Benutzer auszutauschen der schon runtergeladen ist
-      int xp = Benutzer.current.erfahrung;
-      //BROKEN
-      setState(() {
-        level = berechneLevel(xp);
-        prozent = berechnelvlProzent(xp);
-      });
-    });
+    int xp = Benutzer.current.erfahrung;
+    level = berechneLevel(xp);
+    prozent = berechnelvlProzent(xp);
   }
 
   /* Ändern des Namens im Zwischenspeicher */
@@ -328,9 +303,14 @@ class _ProfilState extends State<Profil> {
     avatar = Image.asset(await Avatar.getImagePath(Benutzer.current.id),
         width: 250, height: 250);
 
+    List<String> hhh = await Avatar.getAlleErrungenschaftenPath(90);
+    print(hhh.toString());
+
     alleFreigeschaltetenErrungenschaften =
         await Avatar.getAlleErrungenschaftenPath(Benutzer.current.id);
     anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
+
+    print("in async: " + Benutzer.current.erfahrung.toString());
 
     return true;
   }

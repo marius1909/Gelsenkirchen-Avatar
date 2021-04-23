@@ -1,9 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/screens/errungenschaften_screen.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
-import 'package:gelsenkirchen_avatar/data/loadInfo.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Freund extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -16,139 +18,175 @@ class Freund extends StatefulWidget {
 }
 
 class _FreundState extends State<Freund> {
-  int anzahlErrungenschaften = 0;
-
-//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüsteteCollectables aus Datenbank laden
-  //Typ des Avatars (1= Blau 2 = Gelb usw)
-  int avatarTypID = 2;
-
-  //Collectablesanpassung als ID (zurzeit 0 bis 7)
-  int ausgeruesteteCollectablesID = 0;
-
-//DefaultAvatar wird zurerst geladen damit kein error wenn Profil das erste mal aufgerufen wird
-  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
+  int anzahlErrungenschaften;
+  var _asyncResult;
+  List<String> alleFreigeschaltetenErrungenschaften = new List();
+  Image avatar;
 
   @override
   void initState() {
     super.initState();
-    // Benutzer.shared.gibObjekte().then((alleBenutzer) {
-    //   setState(() {
-    //     spielername = LoadInfo.loadName(alleBenutzer, widget.id_user);
-    //     // anzahlErrungenschaften =
-    //     // LoadInfo.getFreigeschalteteErrungenschaften(widget.id_user).length;
-    //     avatar = LoadInfo.loadUserAvatarImage(
-    //         widget.id_user, avatarTypID, ausgeruesteteCollectablesID);
-    //   });
-    //   //BROKEN
-    //   setState(() async {
-    //     level = await LoadInfo.loadUserLevel(widget.id_user);
-    //   });
-    // });
+    ladeAsyncDaten().then((result) {
+      setState(() {
+        _asyncResult = result;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          title: Text("Freund"),
-          //centerTitle: true,
-          elevation: 0.0,
-        ),
-        body: Padding(
-            padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Name',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
-                        ),
-                        SizedBox(height: 10.0),
-                        new Text(
-                          widget.freund.benutzer,
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
+    if (_asyncResult == null) {
+      return Ladescreen();
+    } else {
+      return Scaffold(
+          drawer: NavDrawer(),
+          appBar: AppBar(
+            title: Text('Freund'),
+          ),
+          body: Stack(children: [
+            /* BILD */
+            Container(
+              //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
+              decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                      image: new AssetImage(
+                          "assets/images/Profil_Hintergrund.png"),
+                      fit: BoxFit.cover)),
+            ),
+            SingleChildScrollView(
+                child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /* Icon-Button nur da, damit Name zentriert ist */
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999).withOpacity(0),
+                              size: 15,
+                            ),
+                            onPressed: () {},
                           ),
+                          Flexible(
+                              child: Text(
+                            widget.freund.benutzer,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: "Ccaps",
+                                fontSize: 35.0,
+                                color: Color(0xff0b3e99)),
+                          )),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Center(
+                        child: Container(
+                          height: 22,
+                          width: 200,
+                          color: Colors.blue[50],
+                          child: Align(
+                              alignment: Alignment(0, 0),
+                              child: LinearPercentIndicator(
+                                  width: 200,
+                                  lineHeight: 22,
+                                  percent: 1,
+                                  backgroundColor: Color(0xff0d4dbb),
+                                  progressColor: Color(0xff2d75f0),
+                                  center: Text(
+                                    "Level: " + widget.level.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ))),
                         ),
-                      ],
-                    ),
-                    SizedBox(width: 40.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Level',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
-                        ),
-                        SizedBox(height: 10.0),
-                        /* Level des Spielers anzeigen */
-                        Text(
-                          widget.level.toString(),
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          /* Icon-Button nur da, damit Name zentriert ist */
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999).withOpacity(0),
+                              size: 15,
+                            ),
+                            onPressed: () {},
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 40.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Errungenschaften',
-                          style:
-                              TextStyle(color: Colors.grey, letterSpacing: 1.8),
-                        ),
-                        SizedBox(height: 10.0),
-                        new Text(
-                          anzahlErrungenschaften.toString(),
-                          style: TextStyle(
-                            letterSpacing: 1.8,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                          avatar,
+                          IconButton(
+                            icon: Icon(
+                              FlutterIcons.edit_faw5s,
+                              color: Color(0xff999999).withOpacity(0),
+                              size: 15,
+                            ),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 70),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                              "Errungenschaften von " +
+                                  widget.freund.benutzer +
+                                  ": " +
+                                  (anzahlErrungenschaften).toString(),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline3),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Divider(
-                  height: 50.0,
-                  color: Colors.grey[800],
-                ),
-                avatar,
-                SizedBox(height: 10),
-                FlatButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  disabledColor: Colors.grey,
-                  disabledTextColor: Colors.black,
-                  padding: EdgeInsets.all(8.0),
-                  splashColor: Colors.blueAccent,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ErrungenschaftenScreen()),
-                    );
-                  },
-                  child: Text(
-                    "Errungenschaften",
-                    style: TextStyle(fontSize: 20.0),
+                Container(
+                  child: Column(
+                    children: [
+                      CarouselSlider.builder(
+                          itemCount:
+                              alleFreigeschaltetenErrungenschaften.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.all(6.0),
+                              child: Image.asset(
+                                  alleFreigeschaltetenErrungenschaften[index],
+                                  height: 300),
+                            );
+                          },
+                          options: CarouselOptions(
+                            height: 100,
+                            enlargeCenterPage: true,
+                            autoPlay: false,
+                            aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 0.3,
+                          ))
+                    ],
                   ),
                 )
               ],
-            )));
+            ))
+          ]));
+      ;
+    }
+  }
+
+  Future<bool> ladeAsyncDaten() async {
+    print(widget.freund.id);
+    avatar = Image.asset(await Avatar.getImagePath(widget.freund.id),
+        width: 250, height: 250);
+
+    alleFreigeschaltetenErrungenschaften =
+        await Avatar.getAlleErrungenschaftenPath(widget.freund.id);
+    anzahlErrungenschaften = alleFreigeschaltetenErrungenschaften.length;
+
+    return true;
   }
 }

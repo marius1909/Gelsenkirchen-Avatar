@@ -225,8 +225,8 @@ class _FreundeslisteState extends State<Freundesliste> {
 
   Future<bool> ladeAsyncDaten() async {
     // freunde = await Freundschaft.shared.gibFreunde(Benutzer.current.id);
+    // TODO: durch Benutzer.current.id ersetzen
     freunde = await Freundschaft.shared.gibFreunde(128);
-
     return true;
   }
 }
