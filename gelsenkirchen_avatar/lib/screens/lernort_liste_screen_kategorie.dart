@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 
 class LernortListeScreenKategorie extends StatefulWidget {
   final LernKategorie lk;
@@ -16,20 +17,16 @@ class LernortListeScreenKategorie extends StatefulWidget {
 
 class _LernortListeScreenKategorieState
     extends State<LernortListeScreenKategorie> {
-  bool isSearching = false;
-  List lernortListGefiltert = List();
-  bool timeout = false;
+  List<Lernort> lernortListGefiltert;
   String lkname;
 
   void initState() {
     lkname = widget.lk.name;
-    Timer(Duration(seconds: 4), () {
-      if (this.mounted) {
-        setState(() {
-          timeout = true;
-        });
-      }
-    });
+
+    if (this.mounted) {
+      setState(() {});
+    }
+
     /* Laden der Lernorte */
     var lernorteFuture = Lernort.shared.gibObjekte();
     lernorteFuture.then((lernorte) {
@@ -39,6 +36,7 @@ class _LernortListeScreenKategorieState
           lernortListGefiltert = lernorte
               .where((lernort) => lernort.kategorieID == widget.lk.id)
               .toList();
+          print(lernortListGefiltert);
         } else {
           lernortListGefiltert = lernorte;
           print(lernortListGefiltert);
@@ -84,31 +82,36 @@ class _LernortListeScreenKategorieState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.lk.name)),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: lernortListGefiltert.length > 0
-            ? ListView.builder(
-                itemCount: lernortListGefiltert.length,
-                itemBuilder: erstelleListViewitem,
-                padding: EdgeInsets.all(0.0),
-              )
-            : timeout
-                ? Center(
-                    child: Container(
-                    padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Text(
-                        "Derzeit gibt es leider keine Lernorte in die Kategorie \"" +
-                            lkname +
-                            "\"",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline3),
-                  ))
-                : Center(
-                    child: CircularProgressIndicator(),
-                  ),
-      ),
-    );
+    /* Falls Daten aus Datenbank abgerufen werden, Ladescreen anzeigen */
+    if (lernortListGefiltert == null) {
+      return Scaffold(body: Ladescreen());
+      /* Falls keine Daten zu der Kategorie vorhanden, Text anzeigen, dass keine Lernorte vorhanden sind */
+    } else if (lernortListGefiltert.isEmpty) {
+      return Scaffold(
+          appBar: AppBar(title: Text(widget.lk.name)),
+          body: Container(
+              child: Center(
+                  child: Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Text(
+                "Derzeit gibt es leider keine Lernorte in die Kategorie \"" +
+                    lkname +
+                    "\"",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline3),
+          ))));
+      /* Falls Daten vorhanden, Liste erstellen */
+    } else {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.lk.name)),
+        body: Container(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: ListView.builder(
+              itemCount: lernortListGefiltert.length,
+              itemBuilder: erstelleListViewitem,
+              padding: EdgeInsets.all(0.0),
+            )),
+      );
+    }
   }
 }

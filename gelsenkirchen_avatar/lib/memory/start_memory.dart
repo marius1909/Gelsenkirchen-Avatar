@@ -100,7 +100,7 @@ class _StartMemoryState extends State<StartMemory> {
             Container(
               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
               child: Text(
-                "In diesem Minispiel musst du die passenden Paare finden. Am Anfang des Spiels hast du die Möglichkeit dir möglichst viele Paare zu merken. Sobald die Zeit abgelauften ist, versuchst du die zugehörigen Karten zu finden. Durch das Klicken auf eine Karte, wird diese aufgedeckt. Falls du ein Paar gefunden hast, bleiben die Karten aufgedeckt, falls nicht werden die entsprechenden Karten wieder umgedreht. Das Spiel endet sobald alle Paare gefunden worden sind. Je schneller du dabei warst, desto mehr Punkte erhälst du!",
+                "In diesem Minispiel musst du die passenden Paare finden. Am Anfang des Spiels hast du die Möglichkeit dir möglichst viele Paare zu merken. Sobald die Zeit abgelaufen ist, versuchst du die zugehörigen Karten zu finden. Durch das Klicken auf eine Karte, wird diese aufgedeckt. Falls du ein Paar gefunden hast, bleiben die Karten aufgedeckt, falls nicht werden die entsprechenden Karten wieder umgedreht. Das Spiel endet sobald alle Paare gefunden worden sind. Je schneller du dabei warst, desto mehr Punkte erhälst du!",
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyText1,
               ),

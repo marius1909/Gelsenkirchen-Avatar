@@ -251,8 +251,8 @@ class NavDrawer extends StatelessWidget {
                       await SharedPreferences.getInstance();
                   sharedPreferences.remove("benutzer");
                 }
-                Navigator.of(context).pop();
-                Navigator.push(
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => Anmeldung()));

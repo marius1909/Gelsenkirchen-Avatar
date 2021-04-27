@@ -64,35 +64,37 @@ class _AnmeldungState extends State<Anmeldung> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: Text('Anmelden'),
-        backgroundColor: Color(0xff0B3E99),
-        /*Entfernt den Zurückbutton*/
-        automaticallyImplyLeading: false,
-      ),
-      body: SafeArea(
-          child: ListView(children: [
-        Padding(padding: EdgeInsets.fromLTRB(30, 50, 30, 0)),
-        Column(children: [
-          Text("Bitte gib deine Anmeldedaten ein:",
-              style: Theme.of(context).textTheme.headline3),
-          Padding(
-              padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
-              child: Column(children: [
-                /*EMAIL*/
-                TextFormField(
-                  decoration: new InputDecoration(
-                    /*Prompt*/
-                    labelText: "Email",
-                    fillColor: Colors.white,
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(25.0),
-                      borderSide: new BorderSide(),
-                    ),
-                  ),
-                  /* validator: (value) {
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: Colors.grey[100],
+          appBar: AppBar(
+            title: Text('Anmelden'),
+            backgroundColor: Color(0xff0B3E99),
+            /*Entfernt den Zurückbutton*/
+            automaticallyImplyLeading: false,
+          ),
+          body: SafeArea(
+              child: ListView(children: [
+            Padding(padding: EdgeInsets.fromLTRB(30, 50, 30, 0)),
+            Column(children: [
+              Text("Bitte gib deine Anmeldedaten ein:",
+                  style: Theme.of(context).textTheme.headline3),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
+                  child: Column(children: [
+                    /*EMAIL*/
+                    TextFormField(
+                      decoration: new InputDecoration(
+                        /*Prompt*/
+                        labelText: "Email",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
+                      /* validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib eine gültige Email Adresse an';
                       }
@@ -101,25 +103,25 @@ class _AnmeldungState extends State<Anmeldung> {
                       }
 
                       //Die Textzeile ist zu lang um angezeigt zu werden.*/
-                  //return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
-                  //}, */
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailctrl,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: new InputDecoration(
-                    /*Prompt*/
-                    labelText: "Passwort",
-                    fillColor: Colors.white,
-                    border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(25.0),
-                      borderSide: new BorderSide(),
+                      //return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
+                      //}, */
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailctrl,
                     ),
-                  ),
-                  /* validator: (value) {
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      decoration: new InputDecoration(
+                        /*Prompt*/
+                        labelText: "Passwort",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
+                      /* validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib ein Passwort an.';
                       }
@@ -128,49 +130,49 @@ class _AnmeldungState extends State<Anmeldung> {
 
                       return null;
                     }, */
-                  controller: passctrl,
-                  obscureText: true,
-                ),
-                SizedBox(height: 40),
-                ImageButton(
-                  children: <Widget>[],
-                  /* 302 x 91 sind die Originalmaße der Buttons */
-                  width: 302 / 1.3,
-                  height: 91 / 1.3,
-                  paddingTop: 5,
-                  /* PressedImage gibt ein Bild für den Button im gedrückten 
+                      controller: passctrl,
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 40),
+                    ImageButton(
+                      children: <Widget>[],
+                      /* 302 x 91 sind die Originalmaße der Buttons */
+                      width: 302 / 1.3,
+                      height: 91 / 1.3,
+                      paddingTop: 5,
+                      /* PressedImage gibt ein Bild für den Button im gedrückten 
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
-                  pressedImage: Image.asset(
-                    "assets/buttons/Anmelden_dunkelblau_groß.png",
-                  ),
-                  unpressedImage: Image.asset(
-                      "assets/buttons/Anmelden_dunkelblau_groß.png"),
-                  onTap: () {
-                    benutzerLogin();
-                  },
-                ),
-                SizedBox(height: 40),
-              ]))
-        ])
-      ])),
-      /* Weiterleiten zur Registrierung */
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.transparent,
-        child: FlatButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => Registrierung()));
-          },
-          child: Text(
-            "Du hast noch keinen Account? \n Hier geht's zur Registrierung.",
-            textAlign: TextAlign.center,
+                      pressedImage: Image.asset(
+                        "assets/buttons/Anmelden_dunkelblau_groß.png",
+                      ),
+                      unpressedImage: Image.asset(
+                          "assets/buttons/Anmelden_dunkelblau_groß.png"),
+                      onTap: () {
+                        benutzerLogin();
+                      },
+                    ),
+                    SizedBox(height: 40),
+                  ]))
+            ])
+          ])),
+          /* Weiterleiten zur Registrierung */
+          bottomNavigationBar: BottomAppBar(
+            color: Colors.transparent,
+            child: FlatButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Registrierung()));
+              },
+              child: Text(
+                "Du hast noch keinen Account? \n Hier geht's zur Registrierung.",
+                textAlign: TextAlign.center,
+              ),
+            ),
+            elevation: 0,
           ),
-        ),
-        elevation: 0,
-      ),
-    );
+        ));
   }
 }
