@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
-import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
@@ -90,8 +89,6 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 unpressedImage:
                     Image.asset("assets/buttons/Speichern_dunkelblau_groß.png"),
                 onTap: () {
-                  /* TODO: (nicht bis S&T machbar) Ausgewählten Avatar in DB Speichern (Lisa) */
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(

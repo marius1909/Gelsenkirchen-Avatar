@@ -108,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 /* AVATAR */
                 Container(
                     padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
                     child: aktuellerAvatar),
               ],
             ),
@@ -186,5 +185,6 @@ double berechnelvlProzent(int xp) {
 }
 
 void benutzerUpdaten(String name, String passwort) {
+  // ignore: unused_local_variable
   int a = 0;
 }

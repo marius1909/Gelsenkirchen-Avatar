@@ -174,7 +174,6 @@ class _FreundState extends State<Freund> {
               ],
             ))
           ]));
-      ;
     }
   }
 

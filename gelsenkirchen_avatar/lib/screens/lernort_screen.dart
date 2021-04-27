@@ -345,7 +345,6 @@ class _LernortScreenState extends State<LernortScreen>
                               ])
                             ]))),
                 /* SPIEL 3 - Memory */
-                //TODO: Bisher nur Placeholder. Muss noch angepasst werden (Alex)
                 Container(
                     child: Card(
                         elevation: 1,

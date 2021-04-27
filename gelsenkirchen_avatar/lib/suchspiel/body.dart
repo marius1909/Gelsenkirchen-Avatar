@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_hinweis.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/text_box.dart';
@@ -122,7 +121,6 @@ class _BodyState extends State<Body> {
                       5,
                   onNoEmptyField: (antwort) {
                     if (hinweis.istLoesungswort(antwort)) {
-                      /* TODO: Punkte vergeben?! */
                       /* Dialog, der angezeigt wir, wenn die richtige Antwort eingegeben wurde */
                       showDialog(
                         context: context,
@@ -148,7 +146,8 @@ class _BodyState extends State<Body> {
                               new FlatButton(
                                 child: new Text("Beenden"),
                                 onPressed: () {
-                                  erreichtePunkte = erreichtePunkte ~/ hinweis.derzeitigerHinweis;
+                                  erreichtePunkte = erreichtePunkte ~/
+                                      hinweis.derzeitigerHinweis;
                                   savePoint();
                                   Navigator.pushReplacement(
                                       context,

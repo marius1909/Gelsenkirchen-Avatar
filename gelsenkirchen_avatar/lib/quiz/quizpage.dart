@@ -393,7 +393,7 @@ class _QuizPageState extends State<QuizPage> {
         calculateLevel(jsonData['total_point_old'])) {
       String showtext;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
+        /* TODO: Belohnung anzeigen */
         showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
             "\nDeine Belohnung: ...";
       } else {

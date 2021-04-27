@@ -350,7 +350,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                                     title: Text("Glückwunsch!",
                                                         style: TextStyle(
                                                             color: Color(
-                                                                0xffff9f1c))),
+                                                                0xffe54b4b))),
                                                     content: Text(
                                                         "Du hast alle Paare richtig zugeordnet.\nDeine Punktzahl: $_summePunkte"),
                                                     actions: <Widget>[
@@ -463,8 +463,8 @@ class _MemoryPageState extends State<MemoryPage> {
         calculateLevel(jsonData['total_point_old'])) {
       String showtext;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
-        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
+        /* TODO: Belohnung anzeigen */
+        showtext = "Glückwunsch!\nDu hast das höchste Level erreicht" +
             "\nDeine Belohnung: ...";
       } else {
         showtext =
@@ -477,7 +477,7 @@ class _MemoryPageState extends State<MemoryPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+                Text("Level Up!", style: TextStyle(color: Color(0xffe54b4b))),
             content: Text(showtext),
             actions: <Widget>[
               new FlatButton(
