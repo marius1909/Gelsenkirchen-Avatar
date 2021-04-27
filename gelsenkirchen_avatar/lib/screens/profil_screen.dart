@@ -52,7 +52,7 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
-    alleFreigeschaltetenErrungenschaften.add(Avatar.getDefaultImagePath(0));
+    //alleFreigeschaltetenErrungenschaften.add(Avatar.getDefaultImagePath(0));
     if (_asyncResult == null) {
       return Ladescreen();
     } else {

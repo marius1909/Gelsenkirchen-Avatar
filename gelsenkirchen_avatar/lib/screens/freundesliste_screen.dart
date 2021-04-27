@@ -221,12 +221,13 @@ class _FreundeslisteState extends State<Freundesliste> {
 
       neueFreundschaft.insertIntoDatabase();
     }
+
+    setState(() {});
   }
 
   Future<bool> ladeAsyncDaten() async {
-    // freunde = await Freundschaft.shared.gibFreunde(Benutzer.current.id);
-    // TODO: durch Benutzer.current.id ersetzen
-    freunde = await Freundschaft.shared.gibFreunde(128);
+    freunde = await Freundschaft.shared.gibFreunde(Benutzer.current.id);
+
     return true;
   }
 }
