@@ -264,7 +264,6 @@ class _BodyState extends State<Body> {
       String showtext2;
       int belohnungsid;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: Belohnung anzeigen */
         showtext1 = "Glückwunsch!\nDu hast das Höchstlevel erreicht" +
             "\nDeine Belohnung: ...";
       } else {
@@ -283,7 +282,7 @@ class _BodyState extends State<Body> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+                Text("Level Up!", style: TextStyle(color: Color(0xff98ce00))),
             content: Container(
               child: SingleChildScrollView(
                 child: Column(
@@ -293,7 +292,7 @@ class _BodyState extends State<Body> {
                       height: 20,
                     ),
                     Image.asset(
-                      "assets/avatar/nachIDs/${belohnungsid}.png",
+                      "assets/avatar/nachIDs/$belohnungsid.png",
                       width: 200,
                       height: 100,
                     ),
@@ -415,5 +414,6 @@ void freischalten(int belohungsid, int benutzer) async {
       "&sammelID=" +
       belohungsid.toString();
   var url = "http://zukunft.sportsocke522.de/freischaltungenSetzen.php" + param;
+  // ignore: unused_local_variable
   final response = await http.get(url);
 }

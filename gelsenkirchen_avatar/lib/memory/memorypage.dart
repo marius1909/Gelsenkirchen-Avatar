@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
+//import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 // import 'package:flutter_advanced_networkimage/provider.dart';
 
 class MemoryPage extends StatefulWidget {
@@ -46,6 +47,8 @@ class _MemoryPageState extends State<MemoryPage> {
   int _erfahrungspunkte;
   int _summePunkte;
   bool laedt = true;
+  //int _timerstart = 31;
+  //CountDownController _timercontroller = CountDownController();
 
   List<bool> _cardFlips;
   List<GlobalKey<FlipCardState>> _cardStateKeys;
@@ -243,7 +246,43 @@ class _MemoryPageState extends State<MemoryPage> {
                             Container(
                                 //padding: const EdgeInsets.all(16.0),
                                 child: _time > 0
-                                    ? Text(
+                                    ? /* TIMER */
+                                    /* CircularCountDownTimer(
+                                        duration: _timerstart,
+                                        initialDuration: 0,
+                                        controller: _timercontroller,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                4,
+                                        ringColor: Colors.grey[300],
+                                        ringGradient: null,
+                                        fillColor: Color(0xffffae3c),
+                                        fillGradient: null,
+                                        backgroundColor: Color(0xffee8b00),
+                                        backgroundGradient: null,
+                                        strokeWidth: 10.0,
+                                        strokeCap: StrokeCap.round,
+                                        textStyle: TextStyle(
+                                            fontSize: 33.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                        textFormat: CountdownTextFormat.S,
+                                        isReverse: true,
+                                        isReverseAnimation: false,
+                                        isTimerTextShown: true,
+                                        autoStart: true,
+                                        onStart: () {
+                                          print('Countdown Started');
+                                        },
+                                        onComplete: () {
+                                          print('Countdown Ended');
+                                        },
+                                      ) */
+
+                                    Text(
                                         '$_time',
                                         style: Theme.of(context)
                                             .textTheme
@@ -465,7 +504,6 @@ class _MemoryPageState extends State<MemoryPage> {
       String showtext2;
       int belohnungsid;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: Belohnung anzeigen */
         showtext1 = "Glückwunsch!\nDu hast das Höchstlevel erreicht" +
             "\nDeine Belohnung: ...";
       } else {
@@ -484,7 +522,7 @@ class _MemoryPageState extends State<MemoryPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+                Text("Level Up!", style: TextStyle(color: Color(0xffe54b4b))),
             content: Container(
               child: SingleChildScrollView(
                 child: Column(
@@ -494,7 +532,7 @@ class _MemoryPageState extends State<MemoryPage> {
                       height: 20,
                     ),
                     Image.asset(
-                      "assets/avatar/nachIDs/${belohnungsid}.png",
+                      "assets/avatar/nachIDs/$belohnungsid.png",
                       width: 200,
                       height: 100,
                     ),
@@ -599,5 +637,6 @@ void freischalten(int belohungsid, int benutzer) async {
       "&sammelID=" +
       belohungsid.toString();
   var url = "http://zukunft.sportsocke522.de/freischaltungenSetzen.php" + param;
+  // ignore: unused_local_variable
   final response = await http.get(url);
 }

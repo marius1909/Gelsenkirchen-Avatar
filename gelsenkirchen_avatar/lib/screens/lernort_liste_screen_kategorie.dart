@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
