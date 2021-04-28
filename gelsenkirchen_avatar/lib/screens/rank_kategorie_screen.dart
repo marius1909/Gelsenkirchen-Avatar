@@ -127,12 +127,18 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
 
                             /* BENUTZERNAME */
                             DataCell(Container(
-                                width: double.infinity,
-                                child: Text(lernCategories[index]['username'] ==
-                                            null ||
-                                        lernCategories[index]['username'] == ""
-                                    ? lernCategories[index]['email']
-                                    : lernCategories[index]['username']))),
+                                width: 120,
+                                //width: double.infinity,
+                                child: Text(
+                                  lernCategories[index]['username'] == null ||
+                                          lernCategories[index]['username'] ==
+                                              ""
+                                      ? lernCategories[index]['email']
+                                      : lernCategories[index]['username'],
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                ))),
 
                             /* ERFAHRUNGSPUNKTE */
                             DataCell(Container(

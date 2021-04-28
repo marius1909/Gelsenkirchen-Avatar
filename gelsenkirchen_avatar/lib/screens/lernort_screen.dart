@@ -185,7 +185,6 @@ class _LernortScreenState extends State<LernortScreen>
                     Row(children: [
                       kategorienSymbol,
                       SizedBox(width: 10),
-                      /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                       Flexible(
                         child: Text(
                             lernKategorieList[lernort.kategorieID - 1].name,
