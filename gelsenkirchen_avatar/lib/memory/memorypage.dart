@@ -461,14 +461,21 @@ class _MemoryPageState extends State<MemoryPage> {
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
     if (calculateLevel(jsonData['total_point_new']) >
         calculateLevel(jsonData['total_point_old'])) {
-      String showtext;
+      String showtext1;
+      String showtext2;
+      int belohnungsid;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
         /* TODO: Belohnung anzeigen */
-        showtext = "Glückwunsch!\nDu hast das höchste Level erreicht" +
+        showtext1 = "Glückwunsch!\nDu hast das Höchstlevel erreicht" +
             "\nDeine Belohnung: ...";
       } else {
-        showtext =
-            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+        showtext1 =
+            "Glückwunsch! Du Hast Level ${calculateLevel(jsonData['total_point_new'])} erreicht! \nDeine Belohnung:";
+        showtext2 =
+            "\nDu benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+
+        belohnungsid = belohnung(
+            calculateLevel(jsonData['total_point_new']), widget.benutzerID);
       }
 
       /* Dialog für Levelaufstieg */
@@ -477,8 +484,26 @@ class _MemoryPageState extends State<MemoryPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                Text("Level Up!", style: TextStyle(color: Color(0xffe54b4b))),
-            content: Text(showtext),
+                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
+            content: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Text(showtext1),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Image.asset(
+                      "assets/avatar/nachIDs/${belohnungsid}.png",
+                      width: 200,
+                      height: 100,
+                    ),
+                    Text(showtext2),
+                  ],
+                ),
+              ),
+              height: 250,
+            ),
             actions: <Widget>[
               new FlatButton(
                 child: new Text("OK"),
@@ -488,6 +513,7 @@ class _MemoryPageState extends State<MemoryPage> {
                 },
               ),
             ],
+            scrollable: true,
           );
         },
       );
@@ -542,4 +568,36 @@ class _MemoryPageState extends State<MemoryPage> {
       return -1;
     }
   }
+}
+
+int belohnung(int lvl, int benutzer) {
+  int belohungsid = 0;
+  if (lvl == 2) {
+    belohungsid = 7;
+  } else if (lvl == 3) {
+    belohungsid = 8;
+  } else if (lvl == 4) {
+    belohungsid = 9;
+  } else if (lvl == 5) {
+    belohungsid = 10;
+  } else if (lvl == 6) {
+    belohungsid = 11;
+  } else if (lvl == 7) {
+    belohungsid = 12;
+  } else if (lvl == 8) {
+    belohungsid = 13;
+  } else if (lvl == 9) {
+    belohungsid = 14;
+  }
+  freischalten(belohungsid, benutzer);
+  return belohungsid;
+}
+
+void freischalten(int belohungsid, int benutzer) async {
+  var param = "?benutzerID=" +
+      benutzer.toString() +
+      "&sammelID=" +
+      belohungsid.toString();
+  var url = "http://zukunft.sportsocke522.de/freischaltungenSetzen.php" + param;
+  final response = await http.get(url);
 }
