@@ -4,6 +4,7 @@ import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int userID;
@@ -18,6 +19,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
   dynamic data;
   int totalPoints;
   int level;
+  final int erfahrung = Benutzer.current.erfahrung;
 
   Future<void> lernKategories() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
@@ -58,7 +60,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+              padding: EdgeInsets.fromLTRB(15, 40, 15, 20),
               child: Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -84,7 +86,28 @@ class _ScoreBoardState extends State<ScoreBoard> {
                           totalPoints.toString() +
                           " Erfahrungspunkten.",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline3)
+                      style: Theme.of(context).textTheme.headline3),
+                  SizedBox(height: 20),
+                  Center(
+                    child: Container(
+                      height: 22,
+                      width: 200,
+                      child: Align(
+                        alignment: Alignment(0, 0),
+                        child: LinearPercentIndicator(
+                          width: 200,
+                          lineHeight: 22,
+                          percent: berechnelvlProzent(erfahrung),
+                          backgroundColor: Color(0xff0d4dbb),
+                          progressColor: Color(0xff2d75f0),
+                          center: Text(
+                            "Level " + berechneLevel(erfahrung).toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -233,4 +256,41 @@ class _ScoreBoardState extends State<ScoreBoard> {
       ],
     ));
   }
+}
+
+int berechneLevel(int xp) {
+  int lvl = 0;
+  if (xp < 30) {
+    lvl = 1;
+  } else if (xp < 51) {
+    lvl = 2;
+  } else {
+    int minxp = 51;
+    minxp = (minxp.toDouble() * 1.7).toInt();
+    lvl = 3;
+    while (xp >= minxp) {
+      minxp = (minxp.toDouble() * 1.7).toInt();
+      lvl++;
+    }
+  }
+  return lvl;
+}
+
+double berechnelvlProzent(int xp) {
+  double prozent = 0.0;
+  if (xp < 30) {
+    prozent = xp / 30;
+  } else if (xp < 51) {
+    prozent = (xp - 30) / (51 - 30);
+  } else {
+    int minxp = 51;
+    int maxxp = (minxp.toDouble() * 1.7).toInt();
+    prozent = (xp - minxp) / (maxxp - minxp);
+    while (xp >= maxxp) {
+      minxp = maxxp;
+      maxxp = (minxp.toDouble() * 1.7).toInt();
+      prozent = (xp - minxp) / (maxxp - minxp);
+    }
+  }
+  return prozent;
 }

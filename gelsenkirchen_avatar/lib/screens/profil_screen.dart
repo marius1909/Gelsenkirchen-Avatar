@@ -135,7 +135,6 @@ class _ProfilState extends State<Profil> {
                         child: Container(
                           height: 22,
                           width: 200,
-                          color: Colors.blue[50],
                           child: Align(
                               alignment: Alignment(0, 0),
                               child: LinearPercentIndicator(
