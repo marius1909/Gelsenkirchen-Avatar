@@ -20,10 +20,10 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Benutzer.current.id == null) {
       status = "Anmelden";
-      icon = "assets/icons/Anmelden_blau_Icon.png";
+      icon = "assets/icons/Anmelden_rot_Icon.png";
     } else {
       status = "Abmelden";
-      icon = "assets/icons/Abmelden_blau_Icon.png";
+      icon = "assets/icons/Abmelden_rot_Icon.png";
     }
     return Drawer(
       child: ListView(
@@ -41,7 +41,7 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/Menubild.png'))),
           ),
 
-          /* HOME (heißt in der App jetzt Karte, weil es den Menüpunkt für den Bentuzer treffender bezeichnet) */
+          /* HOME (heißt in der App jetzt Karte, weil es den Menüpunkt für den Benutzer treffender bezeichnet) */
           ListTile(
               //leading: Icon(Icons.home),
               leading: ConstrainedBox(
@@ -102,7 +102,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Lernort_gelb_Icon.png"),
+                child: Image.asset("assets/icons/Lernort_rot_Icon.png"),
               ),
               title: Text('Lernorte'),
               onTap: () {
@@ -124,7 +124,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/QR_rot_Icon.png"),
+                child: Image.asset("assets/icons/QR_gelb_Icon.png"),
               ),
               title: Text('QR-Suchspiel'),
               onTap: () {
@@ -167,7 +167,8 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child: Image.asset("assets/icons/Scoreboard_gruen_Icon.png"),
+                child:
+                    Image.asset("assets/icons/Scoreboard_dunkelblau_Icon.png"),
               ),
               title: Text('Bestenliste'),
               onTap: () {
@@ -219,8 +220,7 @@ class NavDrawer extends StatelessWidget {
                   maxWidth: 30,
                   maxHeight: 30,
                 ),
-                child:
-                    Image.asset("assets/icons/Impressum_dunkelblau_Icon.png"),
+                child: Image.asset("assets/icons/Impressum_blau_Icon.png"),
               ),
               title: Text('Impressum'),
               onTap: () {
