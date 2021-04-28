@@ -8,8 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
-//import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-// import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class MemoryPage extends StatefulWidget {
   final int benutzerID;
@@ -40,15 +39,14 @@ class _MemoryPageState extends State<MemoryPage> {
   bool _disposed = false;
   bool _wait = false;
   Timer _timer;
-  int _time = 8;
+  int _timerstart = 8;
   int _paareUebrig;
   bool _isFinished;
   List<Memorykarte> karten;
   int _erfahrungspunkte;
   int _summePunkte;
   bool laedt = true;
-  //int _timerstart = 31;
-  //CountDownController _timercontroller = CountDownController();
+  CountDownController _controller = CountDownController();
 
   List<bool> _cardFlips;
   List<GlobalKey<FlipCardState>> _cardStateKeys;
@@ -70,15 +68,7 @@ class _MemoryPageState extends State<MemoryPage> {
             borderRadius: BorderRadius.circular(5)),
         margin: EdgeInsets.all(4.0),
         child: karten[index].kartentyp == 1
-            ?
-            // CachedNetworkImage(
-            //     imageUrl: kartenInhalt,
-            //     placeholder: (context, kartenInhalt) => Ladescreen(),
-            //     errorWidget: (context, kartenInhalt, error) =>
-            //         new Icon(Icons.error),
-            //   )
-            Image.network(kartenInhalt, fit: BoxFit.fill)
-            // AdvancedNetworkImage(kartenInhalt, useDiskCache: true)
+            ? Image.network(kartenInhalt, fit: BoxFit.fill)
             : Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -87,13 +77,50 @@ class _MemoryPageState extends State<MemoryPage> {
                 )));
   }
 
-  /* Starten des Timers */
-  startTimer() {
+  /* Starten des Timers bis zum Start des Spiels */
+  Widget countDownTimer() {
+    return CircularCountDownTimer(
+      duration: _timerstart,
+      initialDuration: 0,
+      controller: _controller,
+      width: MediaQuery.of(context).size.width / 6,
+      height: MediaQuery.of(context).size.height / 6,
+      ringColor: Colors.grey[300],
+      ringGradient: null,
+      fillColor: Color(0xff98ce00),
+      fillGradient: null,
+      backgroundColor: Color(0xff7fad00),
+      backgroundGradient: null,
+      strokeWidth: 10.0,
+      strokeCap: StrokeCap.round,
+      textStyle: TextStyle(
+          fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+      textFormat: CountdownTextFormat.S,
+      isReverse: true,
+      isReverseAnimation: false,
+      isTimerTextShown: true,
+      autoStart: true,
+      onStart: () {
+        print('Countdown Started');
+      },
+      onComplete: () {
+        print('Countdown Ended');
+        startPunkteTimer();
+        if (!_disposed)
+          setState(() {
+            _start = true;
+            // _timer.cancel();
+          });
+      },
+    );
+  }
+
+  /* Starten des Timers für die Punkteberechnung */
+  startPunkteTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (t) {
       if (!_disposed)
         setState(() {
-          _time = _time - 1;
-          _summePunkte = _summePunkte - 5;
+          _summePunkte = _summePunkte - 10;
         });
     });
   }
@@ -107,37 +134,13 @@ class _MemoryPageState extends State<MemoryPage> {
 
   /* Wird ausgeführt beim Replay */
   void restart() {
-    startTimer();
     karten.shuffle();
     _cardFlips = getInitialItemState();
     _cardStateKeys = getCardStateKeys();
-    _time = 8;
     _paareUebrig = (karten.length ~/ 2);
 
     _isFinished = false;
-    /* Zeit bis zum Umdrehen der Karten */
-    Future.delayed(const Duration(seconds: 8), () {
-      if (!_disposed)
-        setState(() {
-          _start = true;
-          // _timer.cancel();
-        });
-    });
   }
-
-  // Future ladeBilder() async {
-  //   setState(() {
-  //     laedt = true;
-  //   });
-
-  //   await Future.wait(karten.map((karte) {
-  //     if (karte.kartentyp == 1) Utils.cacheImage(context, karte.kartenInhalt);
-  //   }).toList());
-
-  //   setState(() {
-  //     laedt = false;
-  //   });
-  // }
 
   @override
   void initState() {
@@ -148,8 +151,6 @@ class _MemoryPageState extends State<MemoryPage> {
       if (!_disposed)
         setState(() {
           karten = memory;
-          // ladeBilder();
-
           restart();
         });
     });
@@ -245,49 +246,8 @@ class _MemoryPageState extends State<MemoryPage> {
                             SizedBox(height: 20),
                             Container(
                                 //padding: const EdgeInsets.all(16.0),
-                                child: _time > 0
-                                    ? /* TIMER */
-                                    /* CircularCountDownTimer(
-                                        duration: _timerstart,
-                                        initialDuration: 0,
-                                        controller: _timercontroller,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                4,
-                                        ringColor: Colors.grey[300],
-                                        ringGradient: null,
-                                        fillColor: Color(0xffffae3c),
-                                        fillGradient: null,
-                                        backgroundColor: Color(0xffee8b00),
-                                        backgroundGradient: null,
-                                        strokeWidth: 10.0,
-                                        strokeCap: StrokeCap.round,
-                                        textStyle: TextStyle(
-                                            fontSize: 33.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                        textFormat: CountdownTextFormat.S,
-                                        isReverse: true,
-                                        isReverseAnimation: false,
-                                        isTimerTextShown: true,
-                                        autoStart: true,
-                                        onStart: () {
-                                          print('Countdown Started');
-                                        },
-                                        onComplete: () {
-                                          print('Countdown Ended');
-                                        },
-                                      ) */
-
-                                    Text(
-                                        '$_time',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3,
-                                      )
+                                child: !_start
+                                    ? countDownTimer()
                                     : Row(
                                         children: [
                                           Icon(
@@ -420,11 +380,6 @@ class _MemoryPageState extends State<MemoryPage> {
                                                   );
                                                 },
                                               );
-
-                                              // setState(() {
-                                              //   _isFinished = true;
-                                              //   _start = false;
-                                              // });
                                             });
                                           }
                                         }

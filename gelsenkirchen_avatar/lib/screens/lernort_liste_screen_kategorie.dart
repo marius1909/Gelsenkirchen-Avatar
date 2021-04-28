@@ -34,10 +34,8 @@ class _LernortListeScreenKategorieState
           lernortListGefiltert = lernorte
               .where((lernort) => lernort.kategorieID == widget.lk.id)
               .toList();
-          print(lernortListGefiltert);
         } else {
           lernortListGefiltert = lernorte;
-          print(lernortListGefiltert);
         }
       });
     });
