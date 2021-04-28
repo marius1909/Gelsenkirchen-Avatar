@@ -5,6 +5,7 @@ import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 
 import 'map_screen.dart';
 
@@ -57,53 +58,63 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               children: [
                 /* HALBTRANSPARENTE BOX OBEN */
-                Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.7),
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          blurRadius: 20,
-                          offset: Offset.zero,
-                          color: Colors.grey.withOpacity(0.5))
-                    ],
-                  ),
-                  margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
-                  //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      /* SPIELERNAME */
-                      Container(
-                        //padding: EdgeInsets.fromLTRB(130, 5, 0, 0),
-                        child: Text(
-                          spielername,
-                          style: Theme.of(context).textTheme.headline1,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      /* LEVELANZEIGE */
-                      Container(
-                        padding: EdgeInsets.fromLTRB(135, 0, 0,
-                            0), //Unschön, könnte zu Problemen führe. Weiß nur keine andere Lösung
-                        child: LinearPercentIndicator(
-                          width: 200,
-                          lineHeight: 22,
-                          percent: berechnelvlProzent(erfahrung),
-                          backgroundColor: Color(0xff0d4dbb),
-                          progressColor: Color(0xff2d75f0),
-                          center: Text(
-                            "Level " + berechneLevel(erfahrung).toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      )
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    if (Benutzer.current?.id != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Profil(Benutzer.current.id)));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "Bitte melde dich an!",
+                          toastLength: Toast.LENGTH_SHORT);
+                    }
+                  },
+                  /* HALBTRANSPARENTE BOX OBEN */
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.7),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            blurRadius: 20,
+                            offset: Offset.zero,
+                            color: Colors.grey.withOpacity(0.5))
+                      ],
+                    ),
+                    margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
                   ),
                 ),
+
+                /* SPIELERNAME */
+                Container(
+                  margin: EdgeInsets.fromLTRB(130.0, 50.0, 10.0, 0.0),
+                  child: Text(
+                    spielername,
+                    style: Theme.of(context).textTheme.headline1,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                /* LEVELANZEIGE */
+                Container(
+                    height: 22,
+                    width: 200,
+                    margin: EdgeInsets.fromLTRB(130.0, 80.0, 10.0, 0.0),
+                    child: LinearPercentIndicator(
+                        width: 200,
+                        lineHeight: 22,
+                        percent: berechnelvlProzent(erfahrung),
+                        backgroundColor: Color(0xff0d4dbb),
+                        progressColor: Color(0xff2d75f0),
+                        center: Text(
+                          "Level " + berechneLevel(erfahrung).toString(),
+                          style: TextStyle(color: Colors.white),
+                        ))),
 
                 /* AVATAR */
                 Container(
