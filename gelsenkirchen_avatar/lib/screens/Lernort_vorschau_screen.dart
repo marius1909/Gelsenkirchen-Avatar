@@ -62,34 +62,39 @@ class _LernortVorschauState extends State<LernortVorschau> {
         }
         break;
 
+      // Kategorie: Abenteuer
       case 1:
         {
-          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.explore_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Natur
       case 2:
         {
-          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.local_florist_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Sport
       case 3:
         {
-          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.directions_bike_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Kunst
       case 4:
         {
-          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.color_lens_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Klima
       case 5:
         {
           kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
@@ -97,6 +102,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
         }
         break;
 
+      // Kategorie: Geschichte
       case 6:
         {
           kategorienSymbol = Icon(FlutterIcons.book_faw5s,
@@ -104,6 +110,7 @@ class _LernortVorschauState extends State<LernortVorschau> {
         }
         break;
 
+      // Kategorie: Soziales Miteinander
       case 7:
         {
           kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
@@ -111,16 +118,18 @@ class _LernortVorschauState extends State<LernortVorschau> {
         }
         break;
 
+      // Kategorie: Musik
       case 8:
         {
-          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.music_note_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Technik
       case 9:
         {
-          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.computer_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
