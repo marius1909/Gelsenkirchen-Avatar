@@ -19,6 +19,8 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   List<String> auswaehlbareAvatare = new List();
   List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
+  List<int> ausgewahlterAvatarPathIDs = [0];
+
   @override
   void initState() {
     super.initState();
@@ -53,8 +55,8 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                     itemBuilder: (context, index) {
                       return FlatButton(
                         onPressed: () {
-                          Avatar.setAvatarFromPathIDs(Benutzer.current.id,
-                              auswaehlbareAvatarePathIDs[index]);
+                          ausgewahlterAvatarPathIDs =
+                              auswaehlbareAvatarePathIDs[index];
                         },
                         child: Container(
                           margin: EdgeInsets.all(6.0),
@@ -89,11 +91,14 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 unpressedImage:
                     Image.asset("assets/buttons/Speichern_dunkelblau_groß.png"),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Profil(Benutzer.current.id)),
-                  );
+                  Avatar.setAvatarFromPathIDs(
+                      Benutzer.current.id, ausgewahlterAvatarPathIDs);
+
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profil(Benutzer.current.id)),
+                      (Route<dynamic> route) => false);
                 },
               ),
             ],
@@ -110,6 +115,8 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     auswaehlbareAvatarePathIDs.add([1]);
     auswaehlbareAvatarePathIDs.add([2]);
     auswaehlbareAvatarePathIDs.add([3]);
+
+    print(await Benutzer.shared.gibObjekte());
 
     auswaehlbareAvatare
         .addAll(await Avatar.getAuswaehlbareAvatarePath(Benutzer.current.id));
