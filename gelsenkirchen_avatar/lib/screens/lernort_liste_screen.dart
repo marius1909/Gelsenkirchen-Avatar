@@ -3,6 +3,7 @@ import 'package:gelsenkirchen_avatar/screens/kategorie_top_tab.dart';
 import 'package:gelsenkirchen_avatar/screens/suchen_screen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class LernortListeScreen extends StatelessWidget {
   @override
@@ -30,12 +31,11 @@ Widget _customAppBar(BuildContext context) {
         Container(
           child: Text(
             'Lernorte',
-            // style: TextStyle(color: Colors.white),
           ),
         ),
         Container(
           child: IconButton(
-              icon: Icon(Icons.search, color: Colors.white),
+              icon: Icon(FlutterIcons.search_mdi, color: Colors.white),
               onPressed: () {
                 /* Nach Klick auf Lupe Lernortsuche */
                 Navigator.push(
