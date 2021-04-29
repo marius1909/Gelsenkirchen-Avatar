@@ -39,7 +39,7 @@ class _FreundState extends State<Freund> {
       return Ladescreen();
     } else {
       return Scaffold(
-          drawer: NavDrawer(),
+          //drawer: NavDrawer(),
           appBar: AppBar(
             title: Text('Freund'),
           ),
@@ -63,15 +63,6 @@ class _FreundState extends State<Freund> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          /* Icon-Button nur da, damit Name zentriert ist */
-                          IconButton(
-                            icon: Icon(
-                              FlutterIcons.edit_faw5s,
-                              color: Color(0xff999999).withOpacity(0),
-                              size: 15,
-                            ),
-                            onPressed: () {},
-                          ),
                           Flexible(
                               child: Text(
                             widget.freund.benutzer,
