@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/screens/rank_kategorie_screen.dart';
+import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 
 class ScoreBoard extends StatefulWidget {
   final int userID;
@@ -46,13 +48,10 @@ class _ScoreBoardState extends State<ScoreBoard> {
   @override
   Widget build(BuildContext context) {
     if (data == null) {
-      return Scaffold(
-          body: new Container(
-              margin: EdgeInsets.all(10.0),
-              alignment: Alignment.topCenter,
-              child: Center(child: CircularProgressIndicator())));
+      return Ladescreen();
     } else {
       return Scaffold(
+        drawer: NavDrawer(),
         appBar: AppBar(
           /*NAME*/
           title: Text("Bestenliste"),
