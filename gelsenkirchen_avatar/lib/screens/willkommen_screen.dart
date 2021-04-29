@@ -61,7 +61,7 @@ class WillkommenScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
                 child: Text(
-                    'Hier kannst du jede Menge interessante Lernorte in ganz Gelsenkirchen entdecken und erkunden und dabei viele spannende Sachen über Naturwissenschaften, Geschichte, Kultur und vieles mehr lernen. Dein neu erlangtes Wissen kannst du anschließend in spaßigen Minispielen wie den Quiz und dem interaktiven QR-Suchspiel auf die Probe stellen. Mit jedem neuen Level, dass du durchs Spielen freischalten kannst, erhälst du coole Items, mit denen du deinen Avatar aufhübschen und individualisieren kannst.',
+                    'Hier kannst du jede Menge interessante Lernorte in ganz Gelsenkirchen entdecken und erkunden und dabei viele spannende Sachen über Naturwissenschaften, Geschichte, Kultur und vieles mehr lernen. Dein neu erlangtes Wissen kannst du anschließend in spaßigen Minispielen wie einem Quiz, einem Memoryspiel und einem interaktiven QR-Suchspiel auf die Probe stellen. Mit jedem neuen Level, dass du durchs Spielen freischalten kannst, erhälst du coole Items, mit denen du deinen Avatar aufhübschen und individualisieren kannst.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1),
               ),
