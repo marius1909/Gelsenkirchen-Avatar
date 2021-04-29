@@ -117,6 +117,9 @@ class _RegistrierungState extends State<Registrierung> {
                       if (value.isEmpty) {
                         return 'Bitte gib einen Benutzernamen an';
                       }
+                      if (value.length > 15) {
+                        return 'Dein Benutzername darf max. 15 Zeichen lang sein';
+                      }
                       return null;
                     },
                     controller: namectrl,
