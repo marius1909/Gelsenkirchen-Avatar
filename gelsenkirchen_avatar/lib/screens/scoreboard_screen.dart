@@ -214,10 +214,10 @@ class _ScoreBoardState extends State<ScoreBoard> {
         }
     }
 
-    return new Card(
-        child: new Column(
+    return Card(
+        child: Column(
       children: <Widget>[
-        new ListTile(
+        ListTile(
           title: Row(
             children: [
               kategorienSymbol,
