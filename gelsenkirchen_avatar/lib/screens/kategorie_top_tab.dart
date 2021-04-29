@@ -22,7 +22,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
       setState(() {
         /* Zusätzliche Lernkategorie "Alle Lernorte" zum laden aller Lernorte */
         LernKategorie alleKategorien =
-            LernKategorie(id: lernkategorie.length, name: "Alle Lernorte");
+            LernKategorie(id: lernkategorie.length + 1, name: "Alle Lernorte");
         lernKategorieList.add(alleKategorien);
         /* Alphabetische Sortierung der Liste */
         lernkategorie.sort((a, b) => a.name.compareTo(b.name));
