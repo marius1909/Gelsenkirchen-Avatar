@@ -23,7 +23,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  Timer timer;
   SuchspielHinweis hinweis;
   int derzeitigerHinweis;
   int maxHinweise;
@@ -121,6 +120,10 @@ class _BodyState extends State<Body> {
                       5,
                   onNoEmptyField: (antwort) {
                     if (hinweis.istLoesungswort(antwort)) {
+                      _controller.pause();
+                      erreichtePunkte =
+                          erreichtePunkte ~/ hinweis.derzeitigerHinweis;
+
                       /* Dialog, der angezeigt wir, wenn die richtige Antwort eingegeben wurde */
                       showDialog(
                         context: context,
@@ -133,26 +136,21 @@ class _BodyState extends State<Body> {
                               new FlatButton(
                                 child: new Text("Weiterspielen"),
                                 onPressed: () {
-                                  erreichtePunkte = (erreichtePunkte /
-                                      hinweis.derzeitigerHinweis) as int;
-
-                                  savePoint();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ScanScreen()));
+                                  savePoint().then((value) => {
+                                        Navigator.of(context).pop(),
+                                        Navigator.of(context).pop()
+                                      });
                                 },
                               ),
                               new FlatButton(
                                 child: new Text("Beenden"),
                                 onPressed: () {
-                                  erreichtePunkte = erreichtePunkte ~/
-                                      hinweis.derzeitigerHinweis;
-                                  savePoint();
-                                  Navigator.pushReplacement(
+                                  savePoint().then((value) => {
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomeScreen()));
+                                          builder: (context) => HomeScreen()))
+                                  });
                                 },
                               ),
 
@@ -277,7 +275,7 @@ class _BodyState extends State<Body> {
       }
 
       /* Dialog für Levelaufstieg */
-      showDialog(
+      await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -306,7 +304,6 @@ class _BodyState extends State<Body> {
               new FlatButton(
                 child: new Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop(true);
                   Navigator.of(context).pop();
                 },
               ),
@@ -315,8 +312,6 @@ class _BodyState extends State<Body> {
           );
         },
       );
-    } else {
-      Navigator.of(context).pop();
     }
   }
 
