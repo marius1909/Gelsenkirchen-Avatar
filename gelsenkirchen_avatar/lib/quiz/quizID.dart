@@ -13,7 +13,7 @@ class Quiz {
   static Quiz _quizVonJson(dynamic json) {
     return new Quiz(quizID: int.parse(json["quizID"]));
   }
-
+  /* Lädt Daten für Quiz aus der Datenbank */
   Future<Quiz> getQuiz(int id) async {
     final response =
         await http.get(DatabaseURL.getQuizID.value + id.toString());
