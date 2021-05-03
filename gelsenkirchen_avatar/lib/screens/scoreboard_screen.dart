@@ -23,6 +23,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
   int level;
   final int erfahrung = Benutzer.current.erfahrung;
 
+  /* Lädt Daten für Level und Punktzahl von Nutzer aus der Datenbank */
   Future<void> lernKategories() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
         widget.userID.toString();
@@ -45,6 +46,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
     lernKategories();
   }
 
+  /* HEADLINE "Bestenliste" */
   @override
   Widget build(BuildContext context) {
     if (data == null) {
@@ -68,6 +70,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                       color: Color(0xffe54b4b),
                     ),
                     SizedBox(width: 10),
+                    /*Name, Punktzahl und Level von Nutzer werden informiert */
                     Text(
                         "Glückwunsch," +
                             " ${Benutzer.current.benutzer == null || Benutzer.current.benutzer == "" ? Benutzer.current.email : Benutzer.current.benutzer}! ",
@@ -122,11 +125,12 @@ class _ScoreBoardState extends State<ScoreBoard> {
     }
   }
 
-  /*Diese Methode erstellt die ListViewItems*/
+  /*Diese Methode erstellt die ListViewItems für alle Lernkategorien*/
   Widget erstelleListViewitem(BuildContext context, int index) {
     Icon kategorienSymbol;
     Color symbolcolor = Color(0xff0b3e99);
     double symbolsize = 25;
+    /*Icons für jede Lernkategorie*/
     switch (int.parse(data[index]['id'])) {
       case 0:
         {
@@ -212,7 +216,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
               Icon(Icons.category, size: symbolsize, color: symbolcolor);
         }
     }
-
+    /*Lernkategorie-Name und Punktzahl für jede Lernkategorie*/
     return Card(
         child: Column(
       children: <Widget>[
@@ -257,6 +261,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
   }
 }
 
+/*Levelberechnung*/
 int berechneLevel(int xp) {
   int lvl = 0;
   if (xp < 30) {
@@ -275,6 +280,7 @@ int berechneLevel(int xp) {
   return lvl;
 }
 
+/*Prozent von Punktzahl auf dem aktuellen Level */
 double berechnelvlProzent(int xp) {
   double prozent = 0.0;
   if (xp < 30) {
@@ -293,3 +299,4 @@ double berechnelvlProzent(int xp) {
   }
   return prozent;
 }
+
