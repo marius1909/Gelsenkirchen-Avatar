@@ -37,7 +37,8 @@ class _QuizPageState extends State<QuizPage> {
   List fragenList;
   int erfahrungspunkte;
   int level;
-
+  
+  /* Lädt Daten für Quiz aus der Datenbank */
   void quizFragen() async {
     var quizid = widget.quizID;
     var url = "http://zukunft.sportsocke522.de/quiz.php";
@@ -139,7 +140,7 @@ class _QuizPageState extends State<QuizPage> {
                   )
                 ])),
 
-            /* ZEIT */
+            /* TIMER */
             CircularCountDownTimer(
               duration: _start,
               initialDuration: 0,
@@ -315,7 +316,7 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  //prüfen ob Antwort richtig oder falsch war
+  //prüfen ob Antwort richtig oder falsch war. Wenn richtig -> Punkte bekommen
   void checkAnswer(String value) {
     if (data[positionFragen]['antwort'][4] == value) {
       punkteBehalten.add(Icon(Icons.check, color: Colors.green));
@@ -329,6 +330,7 @@ class _QuizPageState extends State<QuizPage> {
     //wenn keine Frage mehr...
     if (positionFragen == data.length) {
       /* Dialog für Beendigung des Quizes */
+      /*Punktzahl zeigen und Spieler können Punktzahl speichern, wenn sie wollen*/ 
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -363,7 +365,7 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  //Punkte speichern
+  //Punkte speichern in der Datenbank 
   Future<void> savePoint() async {
     var param = "?benutzerID=" +
         widget.benutzerID.toString() +
@@ -389,6 +391,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
+    /*Level und Belohnungen anzeigen*/ 
     if (calculateLevel(jsonData['total_point_new']) >
         calculateLevel(jsonData['total_point_old'])) {
       String showtext1;
@@ -522,6 +525,7 @@ int belohnung(int lvl, int benutzer) {
   return belohungsid;
 }
 
+/* Lädt Daten für die Belohnung aus der Datenbank */
 void freischalten(int belohungsid, int benutzer) async {
   var param = "?benutzerID=" +
       benutzer.toString() +
