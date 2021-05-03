@@ -131,6 +131,7 @@ class _ProfilState extends State<Profil> {
                         ],
                       ),
                       SizedBox(height: 20),
+                      /* LEVELANZEIGEN */
                       Center(
                         child: Container(
                           height: 22,
@@ -162,6 +163,7 @@ class _ProfilState extends State<Profil> {
                             ),
                             onPressed: () {},
                           ),
+                          /* AVATAR */
                           avatar,
                           IconButton(
                             icon: Icon(
@@ -193,6 +195,7 @@ class _ProfilState extends State<Profil> {
                     ],
                   ),
                 ),
+                /* SLIDER MIT ERRUNGENSCHAFTEN */
                 Container(
                   child: Column(
                     children: [
@@ -207,6 +210,7 @@ class _ProfilState extends State<Profil> {
                                   height: 300),
                             );
                           },
+                          /* Slider-Eigenschaften */
                           options: CarouselOptions(
                             height: 100,
                             enlargeCenterPage: true,

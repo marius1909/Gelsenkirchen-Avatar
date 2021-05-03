@@ -53,7 +53,6 @@ class _ScoreBoardState extends State<ScoreBoard> {
       return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          /*NAME*/
           title: Text("Bestenliste"),
         ),
         body: Column(
@@ -87,6 +86,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline3),
                   SizedBox(height: 20),
+                  /* LEVELANZEIGE */
                   Center(
                     child: Container(
                       height: 22,

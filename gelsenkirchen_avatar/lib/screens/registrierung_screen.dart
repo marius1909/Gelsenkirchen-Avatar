@@ -99,7 +99,6 @@ class _RegistrierungState extends State<Registrierung> {
                   ),
 
                   /*BENUTZERNAME*/
-
                   TextFormField(
                     decoration: new InputDecoration(
                       /*Prompt*/
@@ -213,6 +212,8 @@ class _RegistrierungState extends State<Registrierung> {
                     obscureText: true,
                   ),
                   SizedBox(height: 40),
+
+                  /* REGISTRIEREN-BUTTON */
                   ImageButton(
                     children: <Widget>[],
                     /* 302 x 91 sind die Originalmaße der Buttons */
