@@ -20,6 +20,7 @@ class StartQuiz extends StatefulWidget {
 class _StartQuizState extends State<StartQuiz> {
   dynamic data;
 
+  /* Lädt Daten für den Lernort aus der Datenbank */
   void getLernort() async {
     var id = widget.id;
     var url =
@@ -119,3 +120,4 @@ class _StartQuizState extends State<StartQuiz> {
     }
   }
 }
+
