@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
-import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Freund extends StatefulWidget {
@@ -39,14 +38,12 @@ class _FreundState extends State<Freund> {
       return Ladescreen();
     } else {
       return Scaffold(
-          //drawer: NavDrawer(),
           appBar: AppBar(
             title: Text('Freund'),
           ),
           body: Stack(children: [
-            /* BILD */
+            /* PROFIL-HINTERGRUND */
             Container(
-              //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
               decoration: new BoxDecoration(
                   image: new DecorationImage(
                       image: new AssetImage(
@@ -63,6 +60,7 @@ class _FreundState extends State<Freund> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          /* BENUTZERNAME */
                           Flexible(
                               child: Text(
                             widget.freund.benutzer,
@@ -75,6 +73,7 @@ class _FreundState extends State<Freund> {
                         ],
                       ),
                       SizedBox(height: 20),
+                      /* LEVELANZEIGE */
                       Center(
                         child: Container(
                           height: 22,
@@ -107,6 +106,7 @@ class _FreundState extends State<Freund> {
                             ),
                             onPressed: () {},
                           ),
+                          /* AVATAR */
                           avatar,
                           IconButton(
                             icon: Icon(
@@ -134,6 +134,7 @@ class _FreundState extends State<Freund> {
                     ],
                   ),
                 ),
+                /* SLIDER MIT ERRUNGENSCHAFTEN */
                 Container(
                   child: Column(
                     children: [
@@ -148,6 +149,7 @@ class _FreundState extends State<Freund> {
                                   height: 300),
                             );
                           },
+                          /* Slider-Eigenschaften */
                           options: CarouselOptions(
                             height: 100,
                             enlargeCenterPage: true,

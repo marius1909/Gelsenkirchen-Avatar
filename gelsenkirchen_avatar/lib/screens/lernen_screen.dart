@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 import 'package:gelsenkirchen_avatar/widgets/chewie_list_item.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
-//ToDo Weitere Medien einfügen
 
 class Lernen extends StatelessWidget {
   final Lernort l;
@@ -14,7 +11,6 @@ class Lernen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        //drawer: NavDrawer(),
         appBar: AppBar(
           title: Text(l.name),
         ),
@@ -27,12 +23,6 @@ class Lernen extends StatelessWidget {
             Container(
               child: getWidgetTabs(l, context),
             ),
-
-            /*Videos
-            Container(
-              child: getWidgetVideos(l, context),
-              height: 400,
-            ),*/
           ]),
         ));
   }
@@ -77,7 +67,7 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
   }
   if (anzahl > 0) {
     return DefaultTabController(
-        length: 4, // length of tabs
+        length: 4,
         initialIndex: 0,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,7 +97,7 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                 ),
               ),
               Container(
-                  height: 400, //height of TabBarView
+                  height: 400,
                   decoration: BoxDecoration(
                       border: Border(
                           top: BorderSide(color: Colors.grey, width: 0.5))),
@@ -200,7 +190,8 @@ Widget getWidgetWeitereBilder(Lernort l, BuildContext context) {
       style: Theme.of(context).textTheme.headline3,
     );
   } else {
-    var arr = l.weitereBilder.split('; '); //Trennzeichen für Die links
+    /* Trennzeichen für die Links */
+    var arr = l.weitereBilder.split('; ');
 
     // ignore: unused_local_variable
     var i = 0;

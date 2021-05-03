@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -64,6 +63,7 @@ class _RegistrierungState extends State<Registrierung> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) => WillkommenScreen()));
+        /* Meldung bei nicht erfolgreicher Registrierung */
       } else {
         Fluttertoast.showToast(
             msg: "Registrierung fehlgeschlagen",
@@ -80,10 +80,8 @@ class _RegistrierungState extends State<Registrierung> {
     String passwortvalue;
 
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Registrieren'),
-        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
         backgroundColor: Color(0xff0B3E99),
       ),
       body: Form(

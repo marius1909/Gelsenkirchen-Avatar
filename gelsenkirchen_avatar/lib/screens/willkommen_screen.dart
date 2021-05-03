@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'Avatarauswahl_screen.dart';
+import 'avatarauswahl_screen.dart';
 
 class WillkommenScreen extends StatelessWidget {
   final String spielername = Benutzer.current.benutzer;

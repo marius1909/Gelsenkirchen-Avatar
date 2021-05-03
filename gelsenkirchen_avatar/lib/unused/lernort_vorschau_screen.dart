@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-/* import 'package:http/http.dart' as http;
-import 'dart:convert'; */
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:imagebutton/imagebutton.dart';
 
 // ignore: must_be_immutable
 class LernortVorschau extends StatefulWidget {
-  // final Lernort l;
   int id;
   Lernort l;
 
@@ -25,19 +22,10 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
   void lernortDaten() async {
     lernort = widget.l;
-    // var url = "http://zukunft.sportsocke522.de/lernortVorschau.php";
-    // var body = {"id": lernortID.toString()};
-
-    // var res = await http.post(url, body: body);
-
-    // if (jsonDecode(res.body) == "Datensatz existiert nicht") {
-    //   print('Datensatz nicht gefunden');
-    // } else {
     setState(() {
       setKategorienSymbol(lernort.kategorieID);
       setTitelbild(lernort.titelbild);
     });
-    // }
   }
 
   void setTitelbild(String bildUrl) {
@@ -171,7 +159,6 @@ class _LernortVorschauState extends State<LernortVorschau> {
                     kategorienSymbol,
                     SizedBox(width: 10),
                     Text("Kategorie",
-                        //lernKategorieList[lernort.kategorieID].name,
                         style: Theme.of(context).textTheme.headline4),
                   ]),
                   SizedBox(height: 20),
@@ -206,7 +193,6 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
                   /* KOSTEN */
                   Row(children: [
-                    //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.attach_money_mdi,
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),
@@ -218,7 +204,6 @@ class _LernortVorschauState extends State<LernortVorschau> {
 
                   /* BARRIEREFREIHEIT */
                   Row(children: [
-                    //Icon(MdiIcons.sword),
                     Icon(FlutterIcons.accessible_mdi,
                         size: 20, color: Color(0xff0b3e99)),
                     SizedBox(width: 10),

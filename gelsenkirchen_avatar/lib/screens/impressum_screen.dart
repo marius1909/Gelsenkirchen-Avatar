@@ -12,9 +12,8 @@ class ImpressumScreen extends StatelessWidget {
           title: Text('Impressum'),
         ),
         body: Stack(children: [
-          /* BILD */
+          /* IMPRESSUMHINTERGRUND */
           Container(
-            //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
             decoration: new BoxDecoration(
                 image: new DecorationImage(
                     image: new AssetImage(
@@ -24,9 +23,9 @@ class ImpressumScreen extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 25),
+                /* GElernt!-Logo */
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Image.asset('assets/images/Gesamtlogo_xxhdpi.png',
@@ -58,10 +57,12 @@ class ImpressumScreen extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(width: 50),
+                    /* WHS-Logo */
                     Container(
                       child:
                           Image.asset('assets/images/whs_Logo.png', width: 100),
                     ),
+                    /* Gelsenkirchen-Logo */
                     Container(
                       margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: Image.asset('assets/images/gelsenkirchen_Logo.png',

@@ -3,7 +3,7 @@ import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:gelsenkirchen_avatar/memory/start_memory.dart';
-import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
+import 'package:gelsenkirchen_avatar/widgets/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
@@ -147,10 +147,11 @@ class _LernortScreenState extends State<LernortScreen>
     } else {
       return Scaffold(
         appBar: AppBar(
-          /*NAME*/
+          /* LERNORTNAME */
           title: Text(widget.l.name),
           bottom: ColoredTabBar(
               Color(0xff0e53c9),
+              /* TABS */
               TabBar(
                 unselectedLabelColor: Colors.white,
                 tabs: [
@@ -210,7 +211,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* ÖFFNUNGSZEITEN */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.access_time_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -226,7 +226,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* KOSTEN */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.attach_money_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -242,7 +241,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* BARRIEREFREIHEIT */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.accessible_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -287,36 +285,33 @@ class _LernortScreenState extends State<LernortScreen>
                 Container(
                     child: Card(
                         elevation: 1,
-                        child: Column(
-                            //mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ListTile(
-                                leading: Image.asset(
-                                    "assets/icons/Quiz_gelb_Icon.png"),
-                                title: Text('Quiz',
-                                    style: TextStyle(fontSize: 16)),
-                                subtitle: Text(
-                                  'Teste dein Wissen in einem klassischen Quiz',
-                                ),
-                                /* damit der subtitle in die Zeile passt */
-                                dense: true,
-                              ),
-                              ButtonBar(children: <Widget>[
-                                FlatButton(
-                                  child: Text('Spielen',
-                                      style: TextStyle(
-                                          color: Color(0xffff9f1c),
-                                          fontWeight: FontWeight.bold)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                StartQuiz(widget.l.id)));
-                                  },
-                                )
-                              ])
-                            ]))),
+                        child: Column(children: <Widget>[
+                          ListTile(
+                            leading:
+                                Image.asset("assets/icons/Quiz_gelb_Icon.png"),
+                            title: Text('Quiz', style: TextStyle(fontSize: 16)),
+                            subtitle: Text(
+                              'Teste dein Wissen in einem klassischen Quiz',
+                            ),
+                            /* damit der subtitle in die Zeile passt */
+                            dense: true,
+                          ),
+                          ButtonBar(children: <Widget>[
+                            FlatButton(
+                              child: Text('Spielen',
+                                  style: TextStyle(
+                                      color: Color(0xffff9f1c),
+                                      fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            StartQuiz(widget.l.id)));
+                              },
+                            )
+                          ])
+                        ]))),
 
                 /* SPIEL 2 - QR-SPIEL */
                 Container(
@@ -356,36 +351,34 @@ class _LernortScreenState extends State<LernortScreen>
                 Container(
                     child: Card(
                         elevation: 1,
-                        child: Column(
-                            //mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ListTile(
-                                leading: Image.asset(
-                                    "assets/icons/Memory_rot_Icon.png"),
-                                title: Text('Memory',
-                                    style: TextStyle(fontSize: 16)),
-                                subtitle: Text(
-                                  'Finde die richtigen Paare',
-                                ),
-                                /* damit der subtitle in die Zeile passt */
-                                dense: true,
-                              ),
-                              ButtonBar(children: <Widget>[
-                                FlatButton(
-                                  child: Text('Spielen',
-                                      style: TextStyle(
-                                          color: Color(0xffe54b4b),
-                                          fontWeight: FontWeight.bold)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                StartMemory(widget.l.id)));
-                                  },
-                                )
-                              ])
-                            ]))),
+                        child: Column(children: <Widget>[
+                          ListTile(
+                            leading:
+                                Image.asset("assets/icons/Memory_rot_Icon.png"),
+                            title:
+                                Text('Memory', style: TextStyle(fontSize: 16)),
+                            subtitle: Text(
+                              'Finde die richtigen Paare',
+                            ),
+                            /* damit der subtitle in die Zeile passt */
+                            dense: true,
+                          ),
+                          ButtonBar(children: <Widget>[
+                            FlatButton(
+                              child: Text('Spielen',
+                                  style: TextStyle(
+                                      color: Color(0xffe54b4b),
+                                      fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            StartMemory(widget.l.id)));
+                              },
+                            )
+                          ])
+                        ]))),
               ],
             ))
           ],
@@ -396,6 +389,7 @@ class _LernortScreenState extends State<LernortScreen>
   }
 }
 
+/* WEBSITE-WIDGET */
 Widget setWebsite(Lernort l) {
   if (l.website == "") {
     return null;
@@ -416,6 +410,7 @@ Widget setWebsite(Lernort l) {
   }
 }
 
+/* TITELBILD-WIDGET */
 Widget setTitelbild(Lernort l) {
   if (l.titelbild.isEmpty) {
     return new Image.asset('assets/images/lernortPlaceholderTitelbild.jpg',
@@ -499,16 +494,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                         ),
                       ),
                     )),
+                    /* TAB: VIDEOS */
                     Container(
                       child: Center(
                         child: getWidgetVideos(l, context),
                       ),
                     ),
+                    /* TAB: AUDIO */
                     Container(
                       child: Center(
                         child: getWidgetSound(l, context),
                       ),
                     ),
+                    /* TAB: BILDER */
                     Container(
                         child: Center(
                           child: getWidgetWeitereBilder(l, context),

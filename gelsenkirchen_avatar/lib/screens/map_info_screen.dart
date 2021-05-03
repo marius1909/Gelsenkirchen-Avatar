@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
+/* Info-Screen mit Infos zu Lernort, der bei Klick auf Marker auf Karte erscheint */
 class InfoScreen extends StatefulWidget {
   final Lernort lernort;
   final void Function() onTap;
@@ -41,12 +42,11 @@ class InfoScreenState extends State<InfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      width: 90,
-                      height: 100,
-                      margin: EdgeInsets.only(left: 0),
-                      child: Image.network(widget.lernort.titelbild,
-                              fit: BoxFit.fill)
-                    ),
+                        width: 90,
+                        height: 100,
+                        margin: EdgeInsets.only(left: 0),
+                        child: Image.network(widget.lernort.titelbild,
+                            fit: BoxFit.fill)),
                     Container(
                       margin: EdgeInsets.only(left: 20.0, right: 20.0),
                       child: Column(
@@ -59,11 +59,13 @@ class InfoScreenState extends State<InfoScreen> {
                                 widget.lernort.name,
                                 style: TextStyle(fontSize: 14),
                               )),
+                          /* ADRESSE */
                           Container(
                               width: 220,
                               child: Text('${widget.lernort.adresse}',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.grey))),
+                          /* ÖFFNUNGSZEITEN */
                           Container(
                             width: 220,
                             child: Text('${widget.lernort.oeffnungszeiten}',

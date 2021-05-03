@@ -48,6 +48,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 child: Text("Wähle deinen Avatar",
                     style: Theme.of(context).textTheme.headline3),
               ),
+              /* SLIDER MIT AUSWÄHLBAREN AVATAREN */
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
                 child: CarouselSlider.builder(
@@ -65,6 +66,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                         ),
                       );
                     },
+                    /* Slider-Eigenschaften */
                     options: CarouselOptions(
                       height: 100,
                       enlargeCenterPage: true,
@@ -76,6 +78,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                       viewportFraction: 0.3,
                     )),
               ),
+              /* SPEICHERN-BUTTON */
               ImageButton(
                 children: <Widget>[],
                 /* 302 x 91 sind die Originalmaße der Buttons */

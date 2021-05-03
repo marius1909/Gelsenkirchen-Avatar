@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: Alignment.topCenter,
             child: Stack(
               children: [
-                /* HALBTRANSPARENTE BOX OBEN */
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
@@ -141,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (backButton) {
       backbuttonpressedTime = currentTime;
       Fluttertoast.showToast(
-          msg: "Doppelt drücken zum Schlißen",
+          msg: "Doppelt drücken zum Schließen",
           backgroundColor: Colors.black,
           textColor: Colors.white);
       return false;

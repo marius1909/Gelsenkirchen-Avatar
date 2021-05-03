@@ -11,8 +11,6 @@ class LernortListeScreen extends StatelessWidget {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          // backgroundColor: Color(0xff109618),
-          // backgroundColor: Colors.blue,
           title: Padding(
             padding: EdgeInsets.only(top: 0),
             child: _customAppBar(context),

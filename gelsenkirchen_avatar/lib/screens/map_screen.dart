@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 import 'package:gelsenkirchen_avatar/screens/map_info_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/lernort_screen.dart';
-// Für Map-Style
+/* Für Map-Style */
 import 'package:flutter/services.dart' show rootBundle;
 
 class MapScreen extends StatefulWidget {
@@ -17,7 +17,6 @@ class MapSampleState extends State<MapScreen> {
   final Set<Marker> _markers = {};
   Lernort lernort;
 
-  /* Inhalt der map_style.txt */
   String _mapStyle;
 
   static final CameraPosition _whsGelsenkrichen = CameraPosition(
@@ -25,7 +24,6 @@ class MapSampleState extends State<MapScreen> {
     zoom: 12,
   );
 
-  // Camera bounds: Bourges, Danzig
   LatLngBounds bounds = LatLngBounds(
       southwest: LatLng(47.0810, 2.3988), northeast: LatLng(54.3520, 18.6466));
 
@@ -51,7 +49,7 @@ class MapSampleState extends State<MapScreen> {
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
 
-              /* Style setzen */
+              /* Map-Style setzen */
               controller.setMapStyle(_mapStyle);
             },
             onTap: (argument) => setState(() => lernort = null),
@@ -63,6 +61,7 @@ class MapSampleState extends State<MapScreen> {
             cameraTargetBounds: CameraTargetBounds(bounds),
             minMaxZoomPreference: MinMaxZoomPreference(5, 20),
           ),
+          /* LERNORT-VORSCHAU */
           InfoScreen(
             lernort: lernort,
             onTap: () {

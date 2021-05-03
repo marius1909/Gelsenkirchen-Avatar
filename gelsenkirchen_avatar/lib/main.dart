@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
           : angemeldeterBenutzer == null
               ? Anmeldung()
               : HomeScreen(),
-      theme: GElerntTheme.lightTheme,
+      theme: GElerntTheme.defaultTheme,
     );
   }
 }

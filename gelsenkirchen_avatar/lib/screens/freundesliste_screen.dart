@@ -52,7 +52,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                     "Freunde",
                   ),
                 ),
-                /* Alphabetisch sortieren */
+                /* Liste alphabetisch sortieren */
                 Container(
                   child: IconButton(
                       icon: Icon(FlutterIcons.sort_by_alpha_mdi,
@@ -79,6 +79,7 @@ class _FreundeslisteState extends State<Freundesliste> {
           body: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
               child: Column(children: [
+                /* LISTENKÖPFE */
                 Row(
                   children: [
                     SizedBox(width: 5),
@@ -91,6 +92,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                     ),
                   ],
                 ),
+                /* FREUNDESLISTE */
                 Expanded(
                   child: ListView.builder(
                     itemCount: freunde.length,
@@ -102,7 +104,9 @@ class _FreundeslisteState extends State<Freundesliste> {
                 Container(
                     //width: 200,
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: TextFormField(
+                    child:
+                        /* BENUTZERNAME EINES ANDERES BENUTZERS */
+                        TextFormField(
                       decoration: new InputDecoration(
                         /*Prompt*/
                         labelText: "Name",
@@ -116,6 +120,7 @@ class _FreundeslisteState extends State<Freundesliste> {
                       controller: freundeHinzufuegenController,
                     )),
                 SizedBox(height: 20),
+                /* FREUND-HINZUFÜGEN-BUTTON */
                 ImageButton(
                   children: <Widget>[],
                   /* 302 x 91 sind die Originalmaße der Buttons */
@@ -140,19 +145,6 @@ class _FreundeslisteState extends State<Freundesliste> {
 
   /* Fügt den eingegebenen Freund der Freundesliste hinzu */
   void fuegeFreundHinzu(String _name) async {
-    /* TODO: Refresh Screen beim hinzufügen */
-
-    /* Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => super.widget)); */
-
-    /* Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => Freundesliste())); */
-
-    /* Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (BuildContext context) => super.widget),
-        (Route<dynamic> route) => false); */
-
     var neuerFreund = await Freundschaft.shared.neuerFreund(_name);
 
     if (neuerFreund == null) {
@@ -194,40 +186,46 @@ class _FreundeslisteState extends State<Freundesliste> {
                   color: Colors.black,
                 )),
             leading: Text(berechneLevel(freunde[index].erfahrung).toString()),
-            trailing: IconButton(
-                icon: Icon(FlutterIcons.delete_mdi, color: Color(0xffe54b4b)),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text("Aus Freundesliste entfernen?",
-                                style: TextStyle(color: Color(0xff0b3e99))),
-                            content: Text("Möchtest du " +
-                                freunde[index].benutzer +
-                                " wirklich aus deiner Freundesliste entfernen?"),
-                            actions: [
-                              FlatButton(
-                                  onPressed: (() async {
-                                    await Freundschaft.shared.removeFreund(
-                                        Benutzer.current.id, freunde[index].id);
-                                    setState(() {});
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                super.widget));
-                                  }),
-                                  child: Text("Ja")),
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop();
-                                  },
-                                  child: Text("Nein"))
-                            ],
-                          ),
-                      barrierDismissible: true);
-                }))
+            trailing:
+                /* FREUND-LÖSCHEN-BUTTON */
+                IconButton(
+                    icon:
+                        Icon(FlutterIcons.delete_mdi, color: Color(0xffe54b4b)),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: Text("Aus Freundesliste entfernen?",
+                                    style: TextStyle(color: Color(0xff0b3e99))),
+                                content: Text("Möchtest du " +
+                                    freunde[index].benutzer +
+                                    " wirklich aus deiner Freundesliste entfernen?"),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: (() async {
+                                        await Freundschaft.shared.removeFreund(
+                                            Benutzer.current.id,
+                                            freunde[index].id);
+                                        setState(() {});
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        super.widget));
+                                      }),
+                                      child: Text("Ja")),
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
+                                      },
+                                      child: Text("Nein"))
+                                ],
+                              ),
+                          barrierDismissible: true);
+                    }))
       ]),
     );
   }

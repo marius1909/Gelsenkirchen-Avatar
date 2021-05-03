@@ -40,7 +40,6 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
         body: Stack(children: [
           /* BILD */
           Container(
-            //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
             decoration: new BoxDecoration(
                 image: new DecorationImage(
                     image:
@@ -56,6 +55,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline3),
               ),
+              /* SLIDER MIT BASISAVATAREN */
               Container(
                 padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
                 child: Column(
@@ -108,7 +108,7 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                         )
                       ],
 
-                      //Slider Eigenschaften
+                      /* Slider-Eigenschaften */
                       options: CarouselOptions(
                         height: 300,
                         enlargeCenterPage: true,
@@ -128,8 +128,8 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                       height: 91 / 1.3,
                       paddingTop: 5,
                       /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
+                      Zustand an. Bisher nicht implementiert, muss aber mit dem
+                      Bild im normalen zustand angegeben werden. */
                       pressedImage: Image.asset(
                         "assets/buttons/Speichern_dunkelblau_groß.png",
                       ),

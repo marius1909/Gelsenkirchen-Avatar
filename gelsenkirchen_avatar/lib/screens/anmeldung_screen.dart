@@ -67,7 +67,6 @@ class _AnmeldungState extends State<Anmeldung> {
     return new WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          backgroundColor: Colors.grey[100],
           appBar: AppBar(
             title: Text('Anmelden'),
             backgroundColor: Color(0xff0B3E99),
@@ -83,10 +82,10 @@ class _AnmeldungState extends State<Anmeldung> {
               Padding(
                   padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
                   child: Column(children: [
-                    /*EMAIL*/
+                    /* EMAIL */
                     TextFormField(
                       decoration: new InputDecoration(
-                        /*Prompt*/
+                        /* Prompt */
                         labelText: "Email",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
@@ -94,23 +93,13 @@ class _AnmeldungState extends State<Anmeldung> {
                           borderSide: new BorderSide(),
                         ),
                       ),
-                      /* validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Bitte gib eine gültige Email Adresse an';
-                      }
-                      if (EmailValidator.validate(value)) {
-                        return null;
-                      }
-
-                      //TODO: Die Textzeile ist zu lang um angezeigt zu werden.*/
-                      //return 'Bitte gib eine Email-Adresse im Format sample@example.com. ein';
-                      //}, */
                       keyboardType: TextInputType.emailAddress,
                       controller: emailctrl,
                     ),
                     SizedBox(
                       height: 20,
                     ),
+                    /* PASSWORT */
                     TextFormField(
                       decoration: new InputDecoration(
                         /*Prompt*/
@@ -121,19 +110,11 @@ class _AnmeldungState extends State<Anmeldung> {
                           borderSide: new BorderSide(),
                         ),
                       ),
-                      /* validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Bitte gib ein Passwort an.';
-                      }
-
-                      passwortvalue = value;
-
-                      return null;
-                    }, */
                       controller: passctrl,
                       obscureText: true,
                     ),
                     SizedBox(height: 40),
+                    /* ANMELDE-BUTTON */
                     ImageButton(
                       children: <Widget>[],
                       /* 302 x 91 sind die Originalmaße der Buttons */
@@ -142,7 +123,7 @@ class _AnmeldungState extends State<Anmeldung> {
                       paddingTop: 5,
                       /* PressedImage gibt ein Bild für den Button im gedrückten 
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
+                    Bild im normalen Zustand angegeben werden. */
                       pressedImage: Image.asset(
                         "assets/buttons/Anmelden_dunkelblau_groß.png",
                       ),

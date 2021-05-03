@@ -31,7 +31,7 @@ class _ProfilState extends State<Profil> {
 
   List<String> alleFreigeschaltetenErrungenschaften = new List();
 
-//Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
+//Default-Avatar wird zurerst geladen damit kein error wenn Profil aufgerufen wird
   Image avatar =
       Image.asset(Avatar.getDefaultImagePath(0), width: 250, height: 250);
 
@@ -62,9 +62,8 @@ class _ProfilState extends State<Profil> {
             title: Text('Profil'),
           ),
           body: Stack(children: [
-            /* BILD */
+            /* PROFILHINTERGRUND */
             Container(
-              //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
               decoration: new BoxDecoration(
                   image: new DecorationImage(
                       image: new AssetImage(
@@ -116,6 +115,7 @@ class _ProfilState extends State<Profil> {
                                               changeSharedPreferences(value)
                                             });
                                       })),
+                          /* BENUTZERNAME-BEARBEITEN-BUTTON */
                           IconButton(
                             icon: Icon(
                               FlutterIcons.edit_faw5s,

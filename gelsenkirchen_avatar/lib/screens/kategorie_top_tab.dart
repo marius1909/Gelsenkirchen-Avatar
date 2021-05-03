@@ -124,16 +124,10 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
     }
 
+    /* LIStVIEW-ITEM */
     return new Card(
         child: new Column(
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-        leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-        ),*/
         new ListTile(
           title: Row(
             children: [
@@ -142,17 +136,16 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
                 width: 25,
               ),
               new Text(
-                /*NAME*/
+                /* LERNORTKATEGORIE */
                 lernKategorieList[index].name != null
                     ? lernKategorieList[index].name
                     : 'empty',
                 style: Theme.of(context).textTheme.bodyText1,
-                //new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
+            /* Bei Klick auf Kategorie Weiterleitung zur entsprechenden Liste */
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -165,6 +158,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   }
 
   Widget build(BuildContext context) {
+    /* LISTVIEW MIT KATEGORIEN */
     return ListView.builder(
       itemCount: _listLength,
       itemBuilder: erstelleListViewitem,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GElerntTheme {
-  static ThemeData get lightTheme {
+  static ThemeData get defaultTheme {
     //1
     return ThemeData(
         /* Alle App-Farben, damit man sie nicht immer abschreiben muss ;)
