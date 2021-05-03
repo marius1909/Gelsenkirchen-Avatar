@@ -17,7 +17,7 @@ class RankKategorieScreen extends StatefulWidget {
 class _RankKategorieScreenState extends State<RankKategorieScreen> {
   int limit = 10;
   dynamic data;
-
+  /* Lädt Daten für UserID, LernkategorieID und Limit aus der Datenbank */
   Future<void> rankCategories() async {
     var url = "http://zukunft.sportsocke522.de/rank_categories.php?" +
         "id_user=" +
@@ -45,6 +45,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /* HEADLINE: Name von LernKategorie */
     if (data == null) {
       return Scaffold(
           body: new Container(
