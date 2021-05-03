@@ -63,8 +63,6 @@ class Avatar {
       baseAvatar = getBaseAvatar(0);
     }
 
-    print(baseAvatar);
-
     return _basePathNeu + baseAvatar + pfadID.toString() + _suffixNeu;
   }
 
@@ -239,17 +237,6 @@ class Avatar {
       int benutzerID, List<int> pathIDs) async {
     int basisID = pathIDs[0];
 
-    //DATENBANK UNREGELMÄßIGKEIT
-    if (basisID == 0) {
-      basisID = 4;
-    } else if (basisID == 1) {
-      basisID = 3;
-    } else if (basisID == 2) {
-      basisID = 6;
-    } else if (basisID == 3) {
-      basisID = 5;
-    }
-
 /*Wenn weniger als 3 Collectables erzeugt nachfolgener code Nullwerte für das phpScript
 */
     List<int> collectables = new List();
@@ -259,12 +246,16 @@ class Avatar {
     collectables.add(collectable1);
     collectables.add(collectable2);
     collectables.add(collectable3);
-
     for (var i = 1; i < pathIDs.length; i++) {
       collectables[i] = pathIDs[i];
     }
+    //
 
-//Consolenprints zum Testen
+    //colletables umrechnen
+    collectables =
+        await collectablesUmrechnenInSammelIDs(basisID, collectables);
+
+    //Consolenprints zum Testen
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(benutzerID);
     print("\n");
@@ -282,7 +273,18 @@ class Avatar {
         collectables.toString());
     print("\nUm zu überprüfen -> nochmal Avatar auswählen");
 
-//Datenbank zugriff
+    //Datenbank zugriff
+
+    //DATENBANK UNREGELMÄßIGKEIT in Testdatenbank
+    if (basisID == 0) {
+      basisID = 4;
+    } else if (basisID == 1) {
+      basisID = 3;
+    } else if (basisID == 2) {
+      basisID = 6;
+    } else if (basisID == 3) {
+      basisID = 5;
+    }
 
     String url = "http://zukunft.sportsocke522.de/updateFreigeschaltet.php";
 
@@ -328,5 +330,29 @@ class Avatar {
     else if (baseID == 3) {
       return "DerRote/";
     }
+  }
+
+  static Future<List<int>> collectablesUmrechnenInSammelIDs(
+      int basisID, List<int> collectableIDs) async {
+    List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
+
+    List<int> gruppe = new List();
+
+    for (var j = 0; j < collectableIDs.length; j++) {
+      {
+        if (collectableIDs[j] == null) {
+          gruppe.add(null);
+        } else {
+          for (var i = 0; i < sammelbares.length; i++) {
+            if (sammelbares[i].basisID == basisID) {
+              if (sammelbares[i].pfadID == collectableIDs[j]) {
+                gruppe.add(sammelbares[i].id);
+              }
+            }
+          }
+        }
+      }
+    }
+    return gruppe;
   }
 }
