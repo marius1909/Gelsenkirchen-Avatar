@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,14 +24,19 @@ class _HomeScreenState extends State<HomeScreen> {
   List freigeschaltetList = List();
   Image aktuellerAvatar;
 
+  //Steuerungsvariable für den Ladescreen
+  var _asyncResult;
+
   void initState() {
     //LoadInfo.testAvatarAenderung();
 
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
-    aktuellerAvatar =
-        Image.asset(Avatar.getDefaultImagePath(0), width: 100, height: 100);
-    asyncInitState();
-    var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
+    ladeAsyncDaten().then((result) {
+      setState(() {
+        _asyncResult = result;
+      });
+    });
+    /* unnütz? var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
     freigeschaltetFuture.then((freigeschaltet) {
       setState(() {
         freigeschaltetList = freigeschaltet
@@ -41,92 +46,97 @@ class _HomeScreenState extends State<HomeScreen> {
             .toList();
       });
     });
+    */
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          title: Text('GElernt!'),
-        ),
-        body: Stack(children: <Widget>[
-          MapScreen(),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    if (Benutzer.current?.id != null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  Profil(Benutzer.current.id)));
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: "Bitte melde dich an!",
-                          toastLength: Toast.LENGTH_SHORT);
-                    }
-                  },
-                  /* HALBTRANSPARENTE BOX OBEN */
-                  child: Container(
-                    width: double.infinity,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            blurRadius: 20,
-                            offset: Offset.zero,
-                            color: Colors.grey.withOpacity(0.5))
-                      ],
-                    ),
-                    margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
-                  ),
-                ),
-
-                /* SPIELERNAME */
-                Container(
-                  margin: EdgeInsets.fromLTRB(130.0, 50.0, 10.0, 0.0),
-                  child: Text(
-                    spielername,
-                    style: Theme.of(context).textTheme.headline1,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                /* LEVELANZEIGE */
-                Container(
-                    height: 22,
-                    width: 200,
-                    margin: EdgeInsets.fromLTRB(130.0, 80.0, 10.0, 0.0),
-                    child: LinearPercentIndicator(
-                        width: 200,
-                        lineHeight: 22,
-                        percent: berechnelvlProzent(erfahrung),
-                        backgroundColor: Color(0xff0d4dbb),
-                        progressColor: Color(0xff2d75f0),
-                        center: Text(
-                          "Level " + berechneLevel(erfahrung).toString(),
-                          style: TextStyle(color: Colors.white),
-                        ))),
-
-                /* AVATAR */
-                Container(
-                    padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    child: aktuellerAvatar),
-              ],
-            ),
+    if (_asyncResult == null) {
+      return Ladescreen();
+    } else {
+      return Scaffold(
+          drawer: NavDrawer(),
+          appBar: AppBar(
+            title: Text('GElernt!'),
           ),
-          WillPopScope(
-            onWillPop: onWillPop,
-            child: Text(""),
-          )
-        ]));
+          body: Stack(children: <Widget>[
+            MapScreen(),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      if (Benutzer.current?.id != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    Profil(Benutzer.current.id)));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: "Bitte melde dich an!",
+                            toastLength: Toast.LENGTH_SHORT);
+                      }
+                    },
+                    /* HALBTRANSPARENTE BOX OBEN */
+                    child: Container(
+                      width: double.infinity,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              blurRadius: 20,
+                              offset: Offset.zero,
+                              color: Colors.grey.withOpacity(0.5))
+                        ],
+                      ),
+                      margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
+                    ),
+                  ),
+
+                  /* SPIELERNAME */
+                  Container(
+                    margin: EdgeInsets.fromLTRB(130.0, 50.0, 10.0, 0.0),
+                    child: Text(
+                      spielername,
+                      style: Theme.of(context).textTheme.headline1,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  /* LEVELANZEIGE */
+                  Container(
+                      height: 22,
+                      width: 200,
+                      margin: EdgeInsets.fromLTRB(130.0, 80.0, 10.0, 0.0),
+                      child: LinearPercentIndicator(
+                          width: 200,
+                          lineHeight: 22,
+                          percent: berechnelvlProzent(erfahrung),
+                          backgroundColor: Color(0xff0d4dbb),
+                          progressColor: Color(0xff2d75f0),
+                          center: Text(
+                            "Level " + berechneLevel(erfahrung).toString(),
+                            style: TextStyle(color: Colors.white),
+                          ))),
+
+                  /* AVATAR */
+                  Container(
+                      padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      child: aktuellerAvatar),
+                ],
+              ),
+            ),
+            WillPopScope(
+              onWillPop: onWillPop,
+              child: Text(""),
+            )
+          ]));
+    }
   }
 
   Future<bool> onWillPop() async {
@@ -149,11 +159,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //Lädt den aktuell ausgerüsteten Avatar des derzeitigen Benutzers
-  void asyncInitState() async {
+  Future<bool> ladeAsyncDaten() async {
     aktuellerAvatar = Image.asset(
         await Avatar.getImagePath(Benutzer.current.id),
         width: 100,
         height: 100);
+    return true;
   }
 }
 
