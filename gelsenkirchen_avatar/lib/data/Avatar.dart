@@ -1,6 +1,8 @@
 /* 
 Klasse Avatar
 */
+import 'dart:convert';
+
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
 import 'package:http/http.dart' as http;
@@ -233,7 +235,7 @@ class Avatar {
     }
   }
 
-  static Future<Response> setAvatarFromPathIDs(
+  static Future<bool> setAvatarFromPathIDs(
       int benutzerID, List<int> pathIDs) async {
     int basisID = pathIDs[0];
 
@@ -296,8 +298,11 @@ class Avatar {
       "collectable3": collectables[2].toString(),
     };
     final response = await http.post(url, body: data);
+    final nachricht = jsonDecode(response.body);
+    bool antwortErhalten = await nachricht == "Avatar erfolgreich geaendert";
+    print("Fertig geladen");
 
-    return response;
+    return antwortErhalten;
   }
 
   static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(

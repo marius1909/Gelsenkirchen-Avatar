@@ -145,22 +145,24 @@ class _FreundeslisteState extends State<Freundesliste> {
 
   /* Fügt den eingegebenen Freund der Freundesliste hinzu */
   void fuegeFreundHinzu(String _name) async {
-    var neuerFreund = await Freundschaft.shared.neuerFreund(_name);
+    if (_name != Benutzer.current.benutzer) {
+      var neuerFreund = await Freundschaft.shared.neuerFreund(_name);
 
-    if (neuerFreund == null) {
-      Fluttertoast.showToast(
-          msg: "Der angegebene Benutzer existiert nicht",
-          toastLength: Toast.LENGTH_SHORT);
-    } else {
-      Freundschaft neueFreundschaft = Freundschaft(
-          benutzerID_1: Benutzer.current.id, benutzerID_2: neuerFreund.id);
+      if (neuerFreund == null) {
+        Fluttertoast.showToast(
+            msg: "Der angegebene Benutzer existiert nicht",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        Freundschaft neueFreundschaft = Freundschaft(
+            benutzerID_1: Benutzer.current.id, benutzerID_2: neuerFreund.id);
 
-      neueFreundschaft.insertIntoDatabase();
+        neueFreundschaft.insertIntoDatabase();
+      }
+
+      setState(() {});
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => super.widget));
     }
-
-    setState(() {});
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => super.widget));
   }
 
   Future<bool> ladeAsyncDaten() async {

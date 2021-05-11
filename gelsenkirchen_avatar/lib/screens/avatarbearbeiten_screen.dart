@@ -20,6 +20,7 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
   List<int> ausgewahlterAvatarPathIDs = [0];
+  bool antwortErhalten = false;
 
   @override
   void initState() {
@@ -93,15 +94,27 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                 ),
                 unpressedImage:
                     Image.asset("assets/buttons/Speichern_dunkelblau_groß.png"),
-                onTap: () {
+                onTap: () async {
                   Avatar.setAvatarFromPathIDs(
-                      Benutzer.current.id, ausgewahlterAvatarPathIDs);
+                          Benutzer.current.id, ausgewahlterAvatarPathIDs)
+                      .then((bool result) {
+                    setState(() {
+                      print(result);
+                      antwortErhalten = result;
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Profil(Benutzer.current.id)),
+                          (Route<dynamic> route) => false);
+                    });
+                  });
 
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Profil(Benutzer.current.id)),
-                      (Route<dynamic> route) => false);
+                  // Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => Profil(Benutzer.current.id)),
+                  //     (Route<dynamic> route) => false);
                 },
               ),
             ],

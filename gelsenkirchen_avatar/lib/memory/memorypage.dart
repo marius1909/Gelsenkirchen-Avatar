@@ -187,6 +187,7 @@ class _MemoryPageState extends State<MemoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    /* Falls Daten aus Datenbank vorhanden, Memorykarten laden, sonst Ladescreen */
     if (karten == [] || karten == null) {
       return Scaffold(body: Ladescreen());
     } else {
@@ -230,6 +231,7 @@ class _MemoryPageState extends State<MemoryPage> {
                       Container(
                           padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
                           child: Column(children: [
+                            /* Aufgabe des Memoryspiels */
                             Row(
                               children: [
                                 Icon(FlutterIcons.feedback_mdi,
@@ -245,7 +247,8 @@ class _MemoryPageState extends State<MemoryPage> {
                             ),
                             SizedBox(height: 20),
                             Container(
-                                //padding: const EdgeInsets.all(16.0),
+                                /* Falls Starttimer noch nicht abgelaufen, 
+                                CountDownTimer anzeigen sonst übrige Paare anzeigen */
                                 child: !_start
                                     ? countDownTimer()
                                     : Row(
@@ -264,20 +267,6 @@ class _MemoryPageState extends State<MemoryPage> {
                                       )),
                           ])),
                       SizedBox(height: 20),
-                      /* Text(widget.aufgabe,
-                          style: Theme.of(context).textTheme.headline1),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: _time > 0
-                            ? Text(
-                                '$_time',
-                                style: Theme.of(context).textTheme.headline3,
-                              )
-                            : Text(
-                                'Paare Übrig: $_paareUebrig',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                      ), */
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: GridView.builder(
@@ -287,6 +276,7 @@ class _MemoryPageState extends State<MemoryPage> {
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                           ),
+                          /* Memorykarten */
                           itemBuilder: (context, index) => _start
                               ? FlipCard(
                                   key: _cardStateKeys[index],
@@ -344,6 +334,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                               showDialog(
                                                 context: context,
                                                 builder:
+                                                    // Dialog nach Beenden des Spiels
                                                     (BuildContext context) {
                                                   return AlertDialog(
                                                     title: Text("Glückwunsch!",
@@ -391,6 +382,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                   flipOnTouch:
                                       _wait ? false : _cardFlips[index],
                                   direction: FlipDirection.HORIZONTAL,
+                                  /* Umgedrehte Karte */
                                   front: Container(
                                     decoration: BoxDecoration(
                                         color: Color(0xffe54b4b),
@@ -414,6 +406,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                           fit: BoxFit.fill), */
                                     ),
                                   ),
+                                  /* Aufgedeckte Karte */
                                   back: getItem(index))
                               : getItem(index),
                           itemCount: karten.length,
