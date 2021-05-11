@@ -13,9 +13,6 @@ class Avatar {
   int collectableID;
 
 //Assetpaths
-  String _basePath = "assets/avatar/500px/";
-  String _suffix = ".png";
-
   static String _basePathNeu = "assets/avatar/500px/";
   static String _suffixNeu = ".png";
 
@@ -249,7 +246,7 @@ class Avatar {
     collectables.add(collectable2);
     collectables.add(collectable3);
     for (var i = 1; i < pathIDs.length; i++) {
-      collectables[i] = pathIDs[i];
+      collectables[i - 1] = pathIDs[i];
     }
     //
 
@@ -257,23 +254,8 @@ class Avatar {
     collectables =
         await collectablesUmrechnenInSammelIDs(basisID, collectables);
 
-    //Consolenprints zum Testen
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(benutzerID);
-    print("\n");
-    print("_______________");
-    print("\n");
-
-    print("Errungenschaften vor DatenbankUpdate\n" +
-        freigeschalteteErrungenschaften.toString());
-
-    print("Für den Benutzer(ID) " +
-        benutzerID.toString() +
-        " sollen folgende sammelIDs ausgerüstet werden: \nBasisID:" +
-        basisID.toString() +
-        "\nCollectables:" +
-        collectables.toString());
-    print("\nUm zu überprüfen -> nochmal Avatar auswählen");
 
     //Datenbank zugriff
 
