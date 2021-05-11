@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:imagebutton/imagebutton.dart';
@@ -16,6 +17,7 @@ class Avatarbearbeiten extends StatefulWidget {
 class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   //Variable um Ladescreen zu steuern
   var _asyncResult;
+
   List<String> auswaehlbareAvatare = new List();
   List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
@@ -51,20 +53,14 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
               ),
               /* SLIDER MIT AUSWÄHLBAREN AVATAREN */
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: CarouselSlider.builder(
                     itemCount: auswaehlbareAvatare.length,
                     itemBuilder: (context, index) {
-                      return FlatButton(
-                        onPressed: () {
-                          ausgewahlterAvatarPathIDs =
-                              auswaehlbareAvatarePathIDs[index];
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(6.0),
-                          child: Image.asset(auswaehlbareAvatare[index],
-                              height: 300),
-                        ),
+                      return Container(
+                        margin: EdgeInsets.all(6.0),
+                        child: Image.asset(auswaehlbareAvatare[index],
+                            height: 300),
                       );
                     },
                     /* Slider-Eigenschaften */
@@ -84,43 +80,46 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                           });
                         })),
               ),
+              Icon(
+                FlutterIcons.arrow_upward_mdi,
+                size: 40,
+                color: Color(0xff0d4dbb),
+              ),
+              //Indikator
               /* SPEICHERN-BUTTON */
-              ImageButton(
-                children: <Widget>[],
-                /* 302 x 91 sind die Originalmaße der Buttons */
-                width: 302 / 1.3,
-                height: 91 / 1.3,
-                paddingTop: 0,
-                /* PressedImage gibt ein Bild für den Button im gedrückten 
-                        Zustand an. Bisher nicht implementiert, muss aber mit dem
-                        Bild im normalen zustand angegeben werden. */
-                pressedImage: Image.asset(
-                  "assets/buttons/Speichern_dunkelblau_groß.png",
-                ),
-                unpressedImage:
-                    Image.asset("assets/buttons/Speichern_dunkelblau_groß.png"),
-                onTap: () async {
-                  Avatar.setAvatarFromPathIDs(
-                          Benutzer.current.id, ausgewahlterAvatarPathIDs)
-                      .then((bool result) {
-                    setState(() {
-                      print(result);
-                      antwortErhalten = result;
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Profil(Benutzer.current.id)),
-                          (Route<dynamic> route) => false);
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: ImageButton(
+                  children: <Widget>[],
+                  /* 302 x 91 sind die Originalmaße der Buttons */
+                  width: 302 / 1.3,
+                  height: 91 / 1.3,
+                  paddingTop: 0,
+                  /* PressedImage gibt ein Bild für den Button im gedrückten 
+                          Zustand an. Bisher nicht implementiert, muss aber mit dem
+                          Bild im normalen zustand angegeben werden. */
+                  pressedImage: Image.asset(
+                    "assets/buttons/Speichern_dunkelblau_groß.png",
+                  ),
+                  unpressedImage: Image.asset(
+                      "assets/buttons/Speichern_dunkelblau_groß.png"),
+                  onTap: () async {
+                    Avatar.setAvatarFromPathIDs(
+                            Benutzer.current.id, ausgewahlterAvatarPathIDs)
+                        .then((bool result) {
+                      setState(() {
+                        print(result);
+                        antwortErhalten = result;
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Profil(Benutzer.current.id)),
+                            (Route<dynamic> route) => false);
+                      });
                     });
-                  });
-
-                  // Navigator.pushAndRemoveUntil(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Profil(Benutzer.current.id)),
-                  //     (Route<dynamic> route) => false);
-                },
+                  },
+                ),
               ),
             ],
           ));
