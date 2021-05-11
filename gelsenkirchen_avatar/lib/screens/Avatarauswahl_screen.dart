@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
@@ -23,15 +25,29 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
+  List<String> auswaehlbareAvatare = new List();
+  List<List<int>> auswaehlbareAvatarePathIDs = new List();
+
+  List<int> ausgewahlterAvatarPathIDs = [0];
+  bool antwortErhalten = false;
+
   @override
   void initState() {
-    print(Benutzer.current.id);
     super.initState();
+
+    //Basisavatare laden
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
+    auswaehlbareAvatarePathIDs.add([0]);
+    auswaehlbareAvatarePathIDs.add([1]);
+    auswaehlbareAvatarePathIDs.add([2]);
+    auswaehlbareAvatarePathIDs.add([3]);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("auswahl");
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -57,68 +73,41 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
               ),
               /* SLIDER MIT BASISAVATAREN */
               Container(
-                padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Column(
                   children: [
-                    CarouselSlider(
-                      items: [
-                        FlatButton(
-                          onPressed: () {
-                            Avatar.setAvatarFromPathIDs(
-                                Benutzer.current.id, [0]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar.getDefaultImagePath(0),
-                                height: 300),
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Avatar.setAvatarFromPathIDs(
-                                Benutzer.current.id, [1]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar.getDefaultImagePath(1),
-                                height: 300),
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Avatar.setAvatarFromPathIDs(
-                                Benutzer.current.id, [2]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar.getDefaultImagePath(2),
-                                height: 300),
-                          ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Avatar.setAvatarFromPathIDs(
-                                Benutzer.current.id, [3]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar.getDefaultImagePath(3),
-                                height: 300),
-                          ),
-                        )
-                      ],
-
+                    CarouselSlider.builder(
+                      itemCount: auswaehlbareAvatare.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(auswaehlbareAvatare[index],
+                              height: 300),
+                        );
+                      },
                       /* Slider-Eigenschaften */
                       options: CarouselOptions(
-                        height: 300,
-                        enlargeCenterPage: true,
-                        autoPlay: false,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.6,
-                      ),
+                          height: 250,
+                          enlargeCenterPage: true,
+                          autoPlay: false,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: 0.6,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              ausgewahlterAvatarPathIDs =
+                                  auswaehlbareAvatarePathIDs[index];
+                            });
+                          }),
+                    ),
+                    SizedBox(height: 10),
+                    Icon(
+                      FlutterIcons.arrow_upward_mdi,
+                      size: 60,
+                      color: Color(0xff0d4dbb),
                     ),
                     SizedBox(height: 50),
                     ImageButton(
@@ -135,12 +124,20 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                       ),
                       unpressedImage: Image.asset(
                           "assets/buttons/Speichern_dunkelblau_groß.png"),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    HomeScreen()));
+                      onTap: () async {
+                        Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, ausgewahlterAvatarPathIDs)
+                            .then((bool result) {
+                          setState(() {
+                            print(result);
+                            antwortErhalten = result;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        HomeScreen()));
+                          });
+                        });
                       },
                     ),
                   ],
@@ -149,5 +146,9 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
             ],
           ))
         ]));
+  }
+
+  Future<bool> ladeAsyncDaten() async {
+    return true;
   }
 }
