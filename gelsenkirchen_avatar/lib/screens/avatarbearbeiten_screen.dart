@@ -69,15 +69,20 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
                     },
                     /* Slider-Eigenschaften */
                     options: CarouselOptions(
-                      height: 100,
-                      enlargeCenterPage: true,
-                      autoPlay: false,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      viewportFraction: 0.3,
-                    )),
+                        height: 100,
+                        enlargeCenterPage: true,
+                        autoPlay: false,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        viewportFraction: 0.3,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            ausgewahlterAvatarPathIDs =
+                                auswaehlbareAvatarePathIDs[index];
+                          });
+                        })),
               ),
               /* SPEICHERN-BUTTON */
               ImageButton(
