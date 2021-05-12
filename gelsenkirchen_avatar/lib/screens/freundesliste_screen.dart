@@ -79,19 +79,30 @@ class _FreundeslisteState extends State<Freundesliste> {
           body: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
               child: Column(children: [
-                /* LISTENKÖPFE */
-                Row(
-                  children: [
-                    SizedBox(width: 5),
-                    Text(
-                      "Level",
-                    ),
-                    SizedBox(width: 25),
-                    Text(
-                      "Name",
-                    ),
-                  ],
-                ),
+                freunde.isNotEmpty == true
+                    ?
+                    /* LISTENKÖPFE */
+                    Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Text(
+                            "Level",
+                          ),
+                          SizedBox(width: 25),
+                          Text(
+                            "Name",
+                          ),
+                        ],
+                      )
+                    : new Container(
+                        child: Center(
+                            child: Container(
+                        padding: EdgeInsets.fromLTRB(15, 50, 15, 0),
+                        child: Text(
+                            "Du hast noch keine Freunde. Füg' doch einfach einen über das Textfeld unten hinzu.",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline3),
+                      ))),
                 /* FREUNDESLISTE */
                 Expanded(
                   child: ListView.builder(
