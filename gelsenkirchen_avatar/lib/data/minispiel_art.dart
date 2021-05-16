@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt die Minispielart als Datenbankobjekt dar
 class MinispielArt extends DatenbankObjekt<MinispielArt> {
   int id;
   String name;

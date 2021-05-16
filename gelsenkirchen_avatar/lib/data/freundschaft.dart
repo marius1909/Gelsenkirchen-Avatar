@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
+/* Stellt die Freundschaft zwischen 2 Benutzern in der Datenbank dar */
 class Freundschaft extends DatenbankObjekt<Freundschaft> {
   int benutzerID_1;
   int benutzerID_2;

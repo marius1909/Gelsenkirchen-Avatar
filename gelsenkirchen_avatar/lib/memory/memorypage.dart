@@ -109,7 +109,6 @@ class _MemoryPageState extends State<MemoryPage> {
         if (!_disposed)
           setState(() {
             _start = true;
-            // _timer.cancel();
           });
       },
     );
@@ -128,7 +127,6 @@ class _MemoryPageState extends State<MemoryPage> {
   /* Erstellt eine Liste der verfügbaren Memorykarten für den Lernort */
   Future<List<Memorykarte>> getMemorykarten() async {
     var memoryID = widget.memoryID;
-    // return Memorykarte.shared.gibObjekte();
     return Memorykarte.shared.sucheObjekt("memoryID", memoryID);
   }
 
@@ -400,10 +398,6 @@ class _MemoryPageState extends State<MemoryPage> {
                                       padding: const EdgeInsets.all(1.0),
                                       child: Icon(FlutterIcons.help_outline_mdi,
                                           size: 35, color: Color(0xffffffff)),
-
-                                      /* Image.asset(
-                                          "assets/icons/Quiz_gelb_Icon.png",
-                                          fit: BoxFit.fill), */
                                     ),
                                   ),
                                   /* Aufgedeckte Karte */

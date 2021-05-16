@@ -32,9 +32,6 @@ class Avatar {
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(userID);
 
-    // print(userID);
-    //  print(freigeschalteteErrungenschaften);
-
     List<Sammelbares> ausgeruesteteErrungenschaften = new List();
     int pfadID = 0;
 
@@ -106,23 +103,23 @@ class Avatar {
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(userid);
 
-    List<Sammelbares> blau = new List();
-    List<Sammelbares> gelb = new List();
-    List<Sammelbares> gruen = new List();
-    List<Sammelbares> rot = new List();
+    List<Sammelbares> Blau = new List();
+    List<Sammelbares> Gelb = new List();
+    List<Sammelbares> Gruen = new List();
+    List<Sammelbares> Rot = new List();
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
       for (var j = 0; j < sammelbares.length; j++) {
         if (sammelbares[j].id == freigeschalteteErrungenschaften[i].sammelID) {
           if (!istBasisAvatar(sammelbares[j])) {
             if (sammelbares[j].basisID == 0) {
-              blau.add(sammelbares[j]);
+              Blau.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 1) {
-              gelb.add(sammelbares[j]);
+              Gelb.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 2) {
-              gruen.add(sammelbares[j]);
+              Gruen.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 3) {
-              rot.add(sammelbares[j]);
+              Rot.add(sammelbares[j]);
             }
           }
         }
@@ -130,10 +127,10 @@ class Avatar {
     }
 
     List<List<Sammelbares>> list = new List();
-    list.add(blau);
-    list.add(gelb);
-    list.add(gruen);
-    list.add(rot);
+    list.add(Blau);
+    list.add(Gelb);
+    list.add(Gruen);
+    list.add(Rot);
     String path = "";
 
     List<String> alleKombinationen = new List();
@@ -253,8 +250,8 @@ class Avatar {
     collectables =
         await collectablesUmrechnenInSammelIDs(basisID, collectables);
 
-    // List<Freigeschaltet> freigeschalteteErrungenschaften =
-    //     await getFreigeschalteteErrungenschaften(benutzerID);
+    List<Freigeschaltet> freigeschalteteErrungenschaften =
+        await getFreigeschalteteErrungenschaften(benutzerID);
 
     //Datenbank zugriff
 
@@ -316,8 +313,6 @@ class Avatar {
     else if (baseID == 3) {
       return "DerRote/";
     }
-
-    return "DerBlaue/";
   }
 
   static Future<List<int>> collectablesUmrechnenInSammelIDs(

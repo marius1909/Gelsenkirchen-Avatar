@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt die sammelbaren Collectables als Datenbankobjekt dar
 class Sammelbares extends DatenbankObjekt<Sammelbares> {
   int id;
   int kategorieID;

@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt die Lernkatenkategorie als Datenbankobjekt dar
 class LernKategorie extends DatenbankObjekt<LernKategorie> {
   int id;
   String name;

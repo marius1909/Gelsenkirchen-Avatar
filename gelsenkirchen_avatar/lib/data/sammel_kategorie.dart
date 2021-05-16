@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt die Sammelkategorie als Datenbankobjekt dar
 class SammelKategorie extends DatenbankObjekt<SammelKategorie> {
   int id;
   String beschreibung;

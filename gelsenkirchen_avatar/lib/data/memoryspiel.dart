@@ -1,7 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
-
+// Stellt als Memoryspiel als Datenbankobjekt dar
 class Memoryspiel extends DatenbankObjekt<Memoryspiel> {
   int id;
   int lernortID;
