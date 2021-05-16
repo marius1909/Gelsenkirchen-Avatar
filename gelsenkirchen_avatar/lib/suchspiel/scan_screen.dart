@@ -38,13 +38,7 @@ class ScanScreen extends StatelessWidget {
                   image: AssetImage('assets/images/hand_phone.png'),
                   width: 150,
                 ),
-                /* Altes Bild */
-                /* ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image(
-                    image: AssetImage('assets/images/hand_phone.png'),
-                  ),
-                ), */
+                
                 SizedBox(
                   height: 40,
                 ),
@@ -61,9 +55,8 @@ class ScanScreen extends StatelessWidget {
                 scanButton("Scanne QR-Code, um das Spiel zu starten.",
                     QRCodeReader(
                   onQRCodeScanned: (code) {
-                    print(code);
                     SuchspielArt art = SuchspielArt.fromQRCode(code);
-                    
+
                     if (art != null) {
                       onScanned(art);
                     } else {
@@ -102,36 +95,25 @@ class ScanScreen extends StatelessWidget {
   Widget scanButton(String text, Widget widget, BuildContext context) {
     return /* SPIELEN-BUTTON */
         ImageButton(
-            children: <Widget>[],
-            /* 302 x 91 sind die Originalmaße der Buttons */
-            width: 302 / 1.3,
-            height: 91 / 1.3,
-            paddingTop: 5,
-            /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen Zustand angegeben werden. */
-            pressedImage: Image.asset(
-              "assets/buttons/Spielen_gruen_groß.png",
-            ),
-            unpressedImage:
-                Image.asset("assets/buttons/Spielen_gruen_groß.png"),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => widget));
-            });
-    /* Alter Spiel-Starten-Button */
-    /* return FlatButton(
-      onPressed: () {
+      children: <Widget>[],
+      /* 302 x 91 sind die Originalmaße der Buttons */
+      width: 302 / 1.3,
+      height: 91 / 1.3,
+      paddingTop: 5,
+
+      /* 
+      PressedImage gibt ein Bild für den Button im gedrückten 
+      Zustand an. Bisher nicht implementiert, muss aber mit dem
+      Bild im normalen Zustand angegeben werden.
+      */
+      pressedImage: Image.asset(
+        "assets/buttons/Spielen_gruen_groß.png",
+      ),
+      unpressedImage: Image.asset("assets/buttons/Spielen_gruen_groß.png"),
+      onTap: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => widget));
       },
-      child: Text(
-        "Scanne QR-Code, um das Spiel zu starten.",
-        style: TextStyle(fontSize: 20),
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-          side: BorderSide(color: Colors.blue)),
-    ); */
+    );
   }
 }

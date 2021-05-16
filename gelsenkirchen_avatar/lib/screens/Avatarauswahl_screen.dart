@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
-import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';

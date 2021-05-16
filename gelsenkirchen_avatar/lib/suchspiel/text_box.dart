@@ -8,9 +8,18 @@ class TextBox extends StatefulWidget {
       this.onNoEmptyField,
       this.onTextIsEmpty});
 
+  // Anzahl an `Character`, die eine `TextBox` "halten" kann.
   final int length;
+
+  // Größe einer einzelnen Box, welche einen `Character` hält.
   final double boxSize;
+
+  // Funktion, die ausgeführt wird, wenn jede Box gefüllt ist.
   final Function(String) onNoEmptyField;
+
+  // Funktion, die ausgeführt wird, wenn eine Änderung stattgefunden hat
+  // zum Beispiel durch löschen oder hinzufügen eines `Character`s,
+  // allerdings nur, wenn mindestens eine Box keinen `Character` enthält.
   final Function() onTextIsEmpty;
 
   @override

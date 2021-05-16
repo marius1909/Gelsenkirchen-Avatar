@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class Avatar {
   int avatarTypID;
@@ -107,23 +106,23 @@ class Avatar {
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(userid);
 
-    List<Sammelbares> Blau = new List();
-    List<Sammelbares> Gelb = new List();
-    List<Sammelbares> Gruen = new List();
-    List<Sammelbares> Rot = new List();
+    List<Sammelbares> blau = new List();
+    List<Sammelbares> gelb = new List();
+    List<Sammelbares> gruen = new List();
+    List<Sammelbares> rot = new List();
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
       for (var j = 0; j < sammelbares.length; j++) {
         if (sammelbares[j].id == freigeschalteteErrungenschaften[i].sammelID) {
           if (!istBasisAvatar(sammelbares[j])) {
             if (sammelbares[j].basisID == 0) {
-              Blau.add(sammelbares[j]);
+              blau.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 1) {
-              Gelb.add(sammelbares[j]);
+              gelb.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 2) {
-              Gruen.add(sammelbares[j]);
+              gruen.add(sammelbares[j]);
             } else if (sammelbares[j].basisID == 3) {
-              Rot.add(sammelbares[j]);
+              rot.add(sammelbares[j]);
             }
           }
         }
@@ -131,10 +130,10 @@ class Avatar {
     }
 
     List<List<Sammelbares>> list = new List();
-    list.add(Blau);
-    list.add(Gelb);
-    list.add(Gruen);
-    list.add(Rot);
+    list.add(blau);
+    list.add(gelb);
+    list.add(gruen);
+    list.add(rot);
     String path = "";
 
     List<String> alleKombinationen = new List();
@@ -254,8 +253,8 @@ class Avatar {
     collectables =
         await collectablesUmrechnenInSammelIDs(basisID, collectables);
 
-    List<Freigeschaltet> freigeschalteteErrungenschaften =
-        await getFreigeschalteteErrungenschaften(benutzerID);
+    // List<Freigeschaltet> freigeschalteteErrungenschaften =
+    //     await getFreigeschalteteErrungenschaften(benutzerID);
 
     //Datenbank zugriff
 
@@ -317,6 +316,8 @@ class Avatar {
     else if (baseID == 3) {
       return "DerRote/";
     }
+
+    return "DerBlaue/";
   }
 
   static Future<List<int>> collectablesUmrechnenInSammelIDs(

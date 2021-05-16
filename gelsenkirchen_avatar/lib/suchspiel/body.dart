@@ -216,11 +216,7 @@ class _BodyState extends State<Body> {
       isReverseAnimation: false,
       isTimerTextShown: true,
       autoStart: true,
-      onStart: () {
-        print('Countdown Started');
-      },
       onComplete: () {
-        print('Countdown Ended');
         String neuerHinweis = hinweis.naechsterHinweis();
         if (neuerHinweis != null) {
           setState(() {
@@ -379,7 +375,6 @@ class _BodyState extends State<Body> {
     } else {
       setState(() {
         data = jsonDecode(res.body);
-        print(data);
       });
     }
   }

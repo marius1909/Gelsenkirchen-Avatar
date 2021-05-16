@@ -47,12 +47,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     pruefeAufLogin();
     super.initState();
-
-    Lernort.shared.gibObjekte().then((value) => value.forEach((element) {
-          print(element.id);
-          print(element.kategorieID);
-          print(element.name);
-        }));
+    Lernort.shared.gibObjekte();
   }
 
   @override
