@@ -67,7 +67,9 @@ class _FreundeslisteState extends State<Freundesliste> {
                           });
                         } else if (currentSortStyle == 1) {
                           setState(() {
-                            freunde.sort((a, b) => a.id.compareTo(b.id));
+                            freunde.sort((a, b) => b.benutzer
+                                .toLowerCase()
+                                .compareTo(a.benutzer.toLowerCase()));
                             currentSortStyle = 0;
                           });
                         }
