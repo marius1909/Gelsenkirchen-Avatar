@@ -61,7 +61,6 @@ class NavDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext context) => HomeScreen()),
                     (Route<dynamic> route) => false);
-                //Error @Simon HomeScreen(angemeldeterBenutzer: global.user)));
               }),
 
           /* PROFIL */
@@ -157,7 +156,6 @@ class NavDrawer extends StatelessWidget {
               }),
 
           /* SCOREBOARD */
-          /* Wurde in Sprint 4 in "Bestelnliste" umbenannt, da verständlicher für User */
           ListTile(
               //leading: Icon(Icons.score),
               leading: ConstrainedBox(

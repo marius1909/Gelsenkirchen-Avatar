@@ -229,21 +229,14 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          //title: Text(l.name),
-          ),
+      appBar: AppBar(),
       body: GestureDetector(
         child: Center(
             child: Hero(
                 tag: 'imageHero',
                 child: PhotoView(
                   imageProvider: NetworkImage(url),
-                )
-                /*child: Image.network(
-                  url,
-                  fit: BoxFit.cover,
-                )*/
-                )),
+                ))),
         onTap: () {
           Navigator.pop(context);
         },

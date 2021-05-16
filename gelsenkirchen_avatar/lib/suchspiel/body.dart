@@ -90,12 +90,6 @@ class _BodyState extends State<Body> {
               ),
             ),
 
-            /* Alter Hinweis-Text */
-            /* Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(aktuellerHinweistext, textScaleFactor: 1.25),
-            ), */
-
             /* ANTOWRT */
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

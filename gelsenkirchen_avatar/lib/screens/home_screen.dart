@@ -28,25 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
   var _asyncResult;
 
   void initState() {
-    //LoadInfo.testAvatarAenderung();
-
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
     ladeAsyncDaten().then((result) {
       setState(() {
         _asyncResult = result;
       });
     });
-    /* unnütz? var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
-    freigeschaltetFuture.then((freigeschaltet) {
-      setState(() {
-        freigeschaltetList = freigeschaltet
-            .where((freigeschaltet) =>
-                freigeschaltet.benutzerID == Benutzer.current.id &&
-                freigeschaltet.ausgeruestet)
-            .toList();
-      });
-    });
-    */
     super.initState();
   }
 

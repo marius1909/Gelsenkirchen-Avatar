@@ -39,7 +39,7 @@ class _MemoryPageState extends State<MemoryPage> {
   bool _disposed = false;
   bool _wait = false;
   Timer _timer;
-  int _timerstart = 8;
+  int _timerstart = 15;
   int _paareUebrig;
   bool _isFinished;
   List<Memorykarte> karten;

@@ -65,6 +65,13 @@ class _StartMemoryState extends State<StartMemory> {
       /* Anzeigen, falls kein Memoryspiel für den Lernort vorhanden */
     } else if (memorylist.isEmpty) {
       return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xffe54b4b),
+            title: Text(
+              //Name von aktuellen Lernort
+              data['name'] + " - Memory",
+            ),
+          ),
           body: Container(
               margin: EdgeInsets.all(10.0),
               alignment: Alignment.topCenter,

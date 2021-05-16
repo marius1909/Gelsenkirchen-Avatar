@@ -19,11 +19,11 @@ class _SuchenScreenState extends State<SuchenScreen> {
     lernorteFuture.then((lernorte) {
       setState(() {
         lernortList = lernorte;
-        print(lernortList);
       });
     });
   }
 
+  // Listet die Lernorte abhängig der Sucheingabe auf
   void sucheLernort(value) {
     setState(() {
       lernortListGefiltert = lernortList
@@ -50,7 +50,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => LernortScreen(
-                        l: lernortListGefiltert[index], k: "TODO")));
+                        l: lernortListGefiltert[index], k: "Kategorie")));
           },
         )
       ],

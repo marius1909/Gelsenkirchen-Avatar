@@ -43,8 +43,6 @@ class _LernortScreenState extends State<LernortScreen>
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
         lernKategorieList = List();
-        /* Alphabetische Sortierung der Liste */
-        // lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
         _listLength = lernKategorieList.length;
       });

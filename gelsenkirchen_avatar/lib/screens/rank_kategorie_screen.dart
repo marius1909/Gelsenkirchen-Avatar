@@ -32,7 +32,6 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
     } else {
       setState(() {
         data = jsonDecode(res.body);
-        print(data);
       });
     }
   }
