@@ -9,9 +9,10 @@ import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_art.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_hinweis.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/text_box.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:gelsenkirchen_avatar/suchspiel/scan_screen.dart';
 import 'package:gelsenkirchen_avatar/screens/home_screen.dart';
 import 'package:http/http.dart' as http;
+
+import 'suchspiel_screen.dart';
 
 class Body extends StatefulWidget {
   Body({this.art});
@@ -23,7 +24,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  Timer timer;
   SuchspielHinweis hinweis;
   int derzeitigerHinweis;
   int maxHinweise;
@@ -115,6 +115,7 @@ class _BodyState extends State<Body> {
                       5,
                   onNoEmptyField: (antwort) {
                     if (hinweis.istLoesungswort(antwort)) {
+                      _controller.pause();
                       /* Dialog, der angezeigt wir, wenn die richtige Antwort eingegeben wurde */
                       showDialog(
                         context: context,
@@ -127,14 +128,17 @@ class _BodyState extends State<Body> {
                               new FlatButton(
                                 child: new Text("Weiterspielen"),
                                 onPressed: () {
-                                  erreichtePunkte = (erreichtePunkte /
-                                      hinweis.derzeitigerHinweis) as int;
-
-                                  savePoint();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ScanScreen()));
+                                  erreichtePunkte = erreichtePunkte ~/
+                                      hinweis.derzeitigerHinweis;
+                                  savePoint().then((value) => {
+                                        Navigator.of(context).pop(),
+                                        Navigator.of(context).pop(),
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Suchspiel()))
+                                      });
                                 },
                               ),
                               new FlatButton(
@@ -142,38 +146,19 @@ class _BodyState extends State<Body> {
                                 onPressed: () {
                                   erreichtePunkte = erreichtePunkte ~/
                                       hinweis.derzeitigerHinweis;
-                                  savePoint();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeScreen()));
+                                  savePoint().then((value) => {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen()))
+                                      });
                                 },
                               ),
-
-                              /* Folgende Buttons für das Speichern der Punkte */
-                              /* new FlatButton(
-                                child: new Text("Ohne Speichern beenden"),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Suchspiel()));
-                                },
-                              ),
-                              new FlatButton(
-                                child: new Text("Speichern und beenden"),
-                                onPressed: () {},
-                              ), */
                             ],
                           );
                         },
                       );
-
-                      /* ALTER ScoreScreen */
-                      /* Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => ScoreScreen()),
-                      ); */
                     }
                   },
                 ),
@@ -267,7 +252,8 @@ class _BodyState extends State<Body> {
       }
 
       /* Dialog für Levelaufstieg */
-      showDialog(
+      await showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -296,7 +282,6 @@ class _BodyState extends State<Body> {
               new FlatButton(
                 child: new Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop(true);
                   Navigator.of(context).pop();
                 },
               ),
@@ -305,8 +290,6 @@ class _BodyState extends State<Body> {
           );
         },
       );
-    } else {
-      Navigator.of(context).pop();
     }
   }
 
