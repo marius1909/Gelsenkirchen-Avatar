@@ -245,6 +245,7 @@ class _ProfilState extends State<Profil> {
     return true;
   }
 
+/* Berechnet das Level eines Benutzers */
   Future<int> ladeBenutzerLevel() async {
     var url = "http://zukunft.sportsocke522.de/user_score_level.php?id=" +
         Benutzer.current.id.toString();

@@ -18,7 +18,10 @@ class Freund extends StatefulWidget {
 
 class _FreundState extends State<Freund> {
   int anzahlErrungenschaften;
+
+//Steuerungsvariable für den Ladescreen
   var _asyncResult;
+
   List<String> alleFreigeschaltetenErrungenschaften = new List();
   Image avatar;
 
@@ -170,6 +173,7 @@ class _FreundState extends State<Freund> {
     }
   }
 
+//Lädt alle Daten für den Freund aus der Datenbank
   Future<bool> ladeAsyncDaten() async {
     print(widget.freund.id);
     avatar = Image.asset(await Avatar.getImagePath(widget.freund.id),

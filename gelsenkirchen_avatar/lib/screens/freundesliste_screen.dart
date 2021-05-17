@@ -23,6 +23,8 @@ class _FreundeslisteState extends State<Freundesliste> {
   TextEditingController freundeHinzufuegenController = TextEditingController();
 
   var showAddFriendTextField = false;
+
+  //Steuerungsvariable für den Ladescreen
   var _asyncResult;
   @override
   void initState() {
@@ -178,6 +180,9 @@ class _FreundeslisteState extends State<Freundesliste> {
     }
   }
 
+/*Lädt die Freunde aus der Datenbank
+  Returned True sobald fertig, um den Ladescreen zu steuern
+*/
   Future<bool> ladeAsyncDaten() async {
     freunde = await Freundschaft.shared.gibFreunde(Benutzer.current.id);
 

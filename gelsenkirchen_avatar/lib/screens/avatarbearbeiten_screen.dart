@@ -18,6 +18,8 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
   //Variable um Ladescreen zu steuern
   var _asyncResult;
 
+/*auswaehlbareAvatare enthält nach dem initialisieren alle Dateipfade zu den Avataren die ausgewählt werden können
+auswaehlbareAvatarePathIDs enthält die PfadID die nötig ist den gewaehlten Avatar in der Datenbank zu speichern*/
   List<String> auswaehlbareAvatare = new List();
   List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
@@ -126,6 +128,10 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     }
   }
 
+/*Lädt beim initialisieren die Daten über Avatar.dart
+Jedes Profil besitzt die Grundavatare, diese werden nicht explizit geladen also müssen sie vorher hinzugefügt werden 
+Returned TRUE um die LadeScreenVariable zu steuern*/
+
   Future<bool> ladeAsyncDaten() async {
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
     auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
@@ -135,8 +141,6 @@ class _AvatarbearbeitenState extends State<Avatarbearbeiten> {
     auswaehlbareAvatarePathIDs.add([1]);
     auswaehlbareAvatarePathIDs.add([2]);
     auswaehlbareAvatarePathIDs.add([3]);
-
-    print(await Benutzer.shared.gibObjekte());
 
     auswaehlbareAvatare
         .addAll(await Avatar.getAuswaehlbareAvatarePath(Benutzer.current.id));

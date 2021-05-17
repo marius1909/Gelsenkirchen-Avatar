@@ -1,8 +1,21 @@
 /* 
 Klasse Avatar
+Diese Klasse ist für das Laden und Speichern des Avatars aus/in der Datenbank zuständig
+Avatare befinden im Ordner /assets/avatar/500px/"Basisavatar"/"PfadID"
+Um einen Avatar zu laden muss zuerst der ausgewählte Basisavatar geprüft werden um den richtigen Unterordner dem Pfad hinzuzufügen
+Danach muss die richtige pfadID angegeben werden. Manchmal muss diese berechnet werden.
+
+Es werden die Datenbank Tabellen Sammelbares und Freigeschaltet benutzt.
+Die Tabelle Sammelbares enthält alle Information über ein bestimmtes Collectable und dessen pfadID(!) zuwie zu wessem Basisavatar es gehört.
+Die Tabelle Freigeschaltet sagt aus ob ein Benutzer ein Sammelbares Objekt freigeschaltet und ausgerüstet hat
+Durch die Tabelle Sammelbares wird oft iteriert und mit der Freigeschaltet Tabelle verglichen.
+
+Jeder Avatar hat 3 Collectables, die einzeln oder auch alle ausgerüstet werden können. Somit bestehen 7 (+1 Basisavatar) Möglichkeiten einen Avatar darzustellen
+
+
+
 */
 import 'dart:convert';
-
 import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
 import 'package:gelsenkirchen_avatar/data/sammelbares.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +24,7 @@ class Avatar {
   int avatarTypID;
   int collectableID;
 
-//Assetpaths
+//Assetpfade
   static String _basePathNeu = "assets/avatar/500px/";
   static String _suffixNeu = ".png";
 
@@ -20,10 +33,12 @@ class Avatar {
     avatarTypID = _avatarTypID;
   }
 
+/*Gibt den StandardAvatar eines BasisAvatars zurück */
   static String getDefaultImagePath(int baseID) {
     return _basePathNeu + getBaseAvatar(baseID) + "0" + _suffixNeu;
   }
 
+/* Gibt den Datei-Pfad für den aktuell Ausgerüsteten Avatar eines Benutzers wieder*/
   static Future<String> getImagePath(int userID) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
 
@@ -61,6 +76,7 @@ class Avatar {
     return _basePathNeu + baseAvatar + pfadID.toString() + _suffixNeu;
   }
 
+/* Gibt alle Errungenschaften eines Benutzers zurück */
   static Future<List<String>> getAlleErrungenschaftenPath(int userid) async {
     String path;
     List<String> alleErrungenschaften = new List();
@@ -98,6 +114,7 @@ class Avatar {
     return alleErrungenschaften;
   }
 
+/* Gibt alle Auswählbaren Avatare für einen Benutzer wieder */
   static Future<Map> getAuswaehlbareAvatare(int userid) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
     List<Freigeschaltet> freigeschalteteErrungenschaften =
@@ -205,6 +222,7 @@ class Avatar {
     return map;
   }
 
+/* Gibt alle auswahlbarenAvatare als Dateipfad zurück*/
   static Future<List<String>> getAuswaehlbareAvatarePath(int userid) async {
     List<String> pathStrings = new List();
     Map map = await getAuswaehlbareAvatare(userid);
@@ -212,6 +230,7 @@ class Avatar {
     return pathStrings;
   }
 
+/* Gibt alle auswaehlbaren Avatare als PfadIDs zurück */
   static Future<List<List<int>>> getAuswaehlbareAvatarePathIDs(
       int userid) async {
     List<List<int>> pathIDs = new List();
@@ -220,6 +239,7 @@ class Avatar {
     return pathIDs;
   }
 
+/* Prüft ob ein SammelbaresObjekt ein basisAvatar ist */
   static bool istBasisAvatar(Sammelbares sam) {
     if (sam.kategorieID == 2) {
       return true;
@@ -228,6 +248,8 @@ class Avatar {
     }
   }
 
+/* Speichert eine Avatarauswahl für einen Benutzer in die Datenbank
+*/
   static Future<bool> setAvatarFromPathIDs(
       int benutzerID, List<int> pathIDs) async {
     int basisID = pathIDs[0];
@@ -283,6 +305,7 @@ class Avatar {
     return antwortErhalten;
   }
 
+/* Gibt für einen bestimmten Benutzer alle Freigeschalteten Errungenschaften wieder*/
   static Future<List<Freigeschaltet>> getFreigeschalteteErrungenschaften(
       int userID) async {
     List<Freigeschaltet> userFreigeschaltet = new List();
@@ -297,6 +320,8 @@ class Avatar {
     return userFreigeschaltet;
   }
 
+/* Gibt den richtigen pfad für den Basisavatar wieder*/
+  // ignore: missing_return
   static String getBaseAvatar(baseID) {
     if (baseID == 0) {
       return "DerBlaue/";
@@ -315,6 +340,7 @@ class Avatar {
     }
   }
 
+/* Rechnet übergebene SammelIDs mithilfe der übergebenen BasisID in die für die Datenbank lesbare PfadID um*/
   static Future<List<int>> collectablesUmrechnenInSammelIDs(
       int basisID, List<int> collectableIDs) async {
     List<Sammelbares> sammelbares = await Sammelbares.shared.gibObjekte();
