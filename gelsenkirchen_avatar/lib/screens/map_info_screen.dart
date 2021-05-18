@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
 
-class InfoScreen extends StatefulWidget {
+/* Info-Screen mit Infos zu Lernort, der bei Klick auf Marker auf Karte erscheint */
+class InfoScreen extends StatelessWidget {
   final Lernort lernort;
   final void Function() onTap;
 
   InfoScreen({this.lernort, this.onTap});
 
   @override
-  State<StatefulWidget> createState() => InfoScreenState();
-}
-
-class InfoScreenState extends State<InfoScreen> {
-  @override
   Widget build(BuildContext context) {
-    if (widget.lernort != null) {
+    if (lernort != null) {
       return GestureDetector(
-        onTap: widget.onTap,
+        onTap: onTap,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Row(
@@ -41,12 +37,11 @@ class InfoScreenState extends State<InfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      width: 90,
-                      height: 100,
-                      margin: EdgeInsets.only(left: 0),
-                      child: Image.network(widget.lernort.titelbild,
-                              fit: BoxFit.fill)
-                    ),
+                        width: 90,
+                        height: 100,
+                        margin: EdgeInsets.only(left: 0),
+                        child: Image.network(lernort.titelbild,
+                            fit: BoxFit.fill)),
                     Container(
                       margin: EdgeInsets.only(left: 20.0, right: 20.0),
                       child: Column(
@@ -56,17 +51,19 @@ class InfoScreenState extends State<InfoScreen> {
                           Container(
                               width: 220,
                               child: Text(
-                                widget.lernort.name,
+                                lernort.name,
                                 style: TextStyle(fontSize: 14),
                               )),
+                          /* ADRESSE */
                           Container(
                               width: 220,
-                              child: Text('${widget.lernort.adresse}',
+                              child: Text('${lernort.adresse}',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.grey))),
+                          /* ÖFFNUNGSZEITEN */
                           Container(
                             width: 220,
-                            child: Text('${widget.lernort.oeffnungszeiten}',
+                            child: Text('${lernort.oeffnungszeiten}',
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.grey)),
                           )

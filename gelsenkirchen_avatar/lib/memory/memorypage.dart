@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/memorykarte.dart';
 import 'dart:async';
 import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
-import 'package:gelsenkirchen_avatar/widgets/utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class MemoryPage extends StatefulWidget {
   final int benutzerID;
@@ -39,13 +39,14 @@ class _MemoryPageState extends State<MemoryPage> {
   bool _disposed = false;
   bool _wait = false;
   Timer _timer;
-  int _time = 8;
+  int _timerstart = 15;
   int _paareUebrig;
   bool _isFinished;
   List<Memorykarte> karten;
   int _erfahrungspunkte;
   int _summePunkte;
   bool laedt = true;
+  CountDownController _controller = CountDownController();
 
   List<bool> _cardFlips;
   List<GlobalKey<FlipCardState>> _cardStateKeys;
@@ -55,27 +56,19 @@ class _MemoryPageState extends State<MemoryPage> {
     String kartenInhalt = karten[index].kartenInhalt;
     return Container(
         decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: Colors.grey[200],
             boxShadow: [
               BoxShadow(
-                color: Colors.black45,
-                blurRadius: 3,
-                spreadRadius: 0.8,
+                color: Colors.black12,
+                blurRadius: 0.5,
+                spreadRadius: 0.3,
                 offset: Offset(2.0, 1),
               )
             ],
             borderRadius: BorderRadius.circular(5)),
         margin: EdgeInsets.all(4.0),
         child: karten[index].kartentyp == 1
-            ?
-            // CachedNetworkImage(
-            //     imageUrl: kartenInhalt,
-            //     placeholder: (context, kartenInhalt) => Ladescreen(),
-            //     errorWidget: (context, kartenInhalt, error) =>
-            //         new Icon(Icons.error),
-            //   )
-            Image.network(kartenInhalt, fit: BoxFit.fill)
-            // AdvancedNetworkImage(kartenInhalt, useDiskCache: true)
+            ? Image.network(kartenInhalt, fit: BoxFit.fill)
             : Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -84,13 +77,49 @@ class _MemoryPageState extends State<MemoryPage> {
                 )));
   }
 
-  /* Starten des Timers */
-  startTimer() {
+  /* Starten des Timers bis zum Start des Spiels */
+  Widget countDownTimer() {
+    return CircularCountDownTimer(
+      duration: _timerstart,
+      initialDuration: 0,
+      controller: _controller,
+      width: MediaQuery.of(context).size.width / 6,
+      height: MediaQuery.of(context).size.height / 6,
+      ringColor: Colors.grey[300],
+      ringGradient: null,
+      fillColor: Color(0xffe54b4b),
+      fillGradient: null,
+      backgroundColor: Color(0xffbb1b1b),
+      backgroundGradient: null,
+      strokeWidth: 10.0,
+      strokeCap: StrokeCap.round,
+      textStyle: TextStyle(
+          fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+      textFormat: CountdownTextFormat.S,
+      isReverse: true,
+      isReverseAnimation: false,
+      isTimerTextShown: true,
+      autoStart: true,
+      onStart: () {
+        print('Countdown Started');
+      },
+      onComplete: () {
+        print('Countdown Ended');
+        startPunkteTimer();
+        if (!_disposed)
+          setState(() {
+            _start = true;
+          });
+      },
+    );
+  }
+
+  /* Starten des Timers für die Punkteberechnung */
+  startPunkteTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (t) {
       if (!_disposed)
         setState(() {
-          _time = _time - 1;
-          _summePunkte = _summePunkte - 5;
+          _summePunkte = _summePunkte - 10;
         });
     });
   }
@@ -98,42 +127,17 @@ class _MemoryPageState extends State<MemoryPage> {
   /* Erstellt eine Liste der verfügbaren Memorykarten für den Lernort */
   Future<List<Memorykarte>> getMemorykarten() async {
     var memoryID = widget.memoryID;
-    // return Memorykarte.shared.gibObjekte();
     return Memorykarte.shared.sucheObjekt("memoryID", memoryID);
   }
 
   /* Wird ausgeführt beim Replay */
   void restart() {
-    startTimer();
     karten.shuffle();
     _cardFlips = getInitialItemState();
     _cardStateKeys = getCardStateKeys();
-    _time = 8;
     _paareUebrig = (karten.length ~/ 2);
 
     _isFinished = false;
-    /* Zeit bis zum Umdrehen der Karten */
-    Future.delayed(const Duration(seconds: 8), () {
-      if (!_disposed)
-        setState(() {
-          _start = true;
-          // _timer.cancel();
-        });
-    });
-  }
-
-  Future ladeBilder() async {
-    setState(() {
-      laedt = true;
-    });
-
-    await Future.wait(karten.map((karte) {
-      if (karte.kartentyp == 1) Utils.cacheImage(context, karte.kartenInhalt);
-    }).toList());
-
-    setState(() {
-      laedt = false;
-    });
   }
 
   @override
@@ -145,8 +149,6 @@ class _MemoryPageState extends State<MemoryPage> {
       if (!_disposed)
         setState(() {
           karten = memory;
-          // ladeBilder();
-
           restart();
         });
     });
@@ -183,6 +185,7 @@ class _MemoryPageState extends State<MemoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    /* Falls Daten aus Datenbank vorhanden, Memorykarten laden, sonst Ladescreen */
     if (karten == [] || karten == null) {
       return Scaffold(body: Ladescreen());
     } else {
@@ -217,26 +220,51 @@ class _MemoryPageState extends State<MemoryPage> {
           : Scaffold(
               appBar: AppBar(
                 title: Text(widget.title + " - Memory"),
-                backgroundColor: Color(0xff093582),
+                backgroundColor: Color(0xffe54b4b),
               ),
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Text(widget.aufgabe,
-                          style: Theme.of(context).textTheme.headline1),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: _time > 0
-                            ? Text(
-                                '$_time',
-                                style: Theme.of(context).textTheme.headline3,
-                              )
-                            : Text(
-                                'Paare Übrig: $_paareUebrig',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                      ),
+                      Container(
+                          padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+                          child: Column(children: [
+                            /* Aufgabe des Memoryspiels */
+                            Row(
+                              children: [
+                                Icon(FlutterIcons.feedback_mdi,
+                                    size: 20, color: Color(0xffe54b4b)),
+                                SizedBox(width: 10),
+                                Flexible(
+                                    child: Text(widget.aufgabe,
+                                        textAlign: TextAlign.justify,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3)),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Container(
+                                /* Falls Starttimer noch nicht abgelaufen, 
+                                CountDownTimer anzeigen sonst übrige Paare anzeigen */
+                                child: !_start
+                                    ? countDownTimer()
+                                    : Row(
+                                        children: [
+                                          Icon(
+                                            FlutterIcons.apps_mdi,
+                                            color: Color(0xffe54b4b),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text("Paare Übrig: $_paareUebrig",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline3),
+                                        ],
+                                      )),
+                          ])),
+                      SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: GridView.builder(
@@ -246,6 +274,7 @@ class _MemoryPageState extends State<MemoryPage> {
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                           ),
+                          /* Memorykarten */
                           itemBuilder: (context, index) => _start
                               ? FlipCard(
                                   key: _cardStateKeys[index],
@@ -292,6 +321,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                           /* Falls alle Paare gefunden worden sind, Spiel beenden */
                                           if (_cardFlips
                                               .every((t) => t == false)) {
+                                            _timer.cancel();
                                             if (_summePunkte < 50) {
                                               _summePunkte = 50;
                                             }
@@ -302,12 +332,13 @@ class _MemoryPageState extends State<MemoryPage> {
                                               showDialog(
                                                 context: context,
                                                 builder:
+                                                    // Dialog nach Beenden des Spiels
                                                     (BuildContext context) {
                                                   return AlertDialog(
                                                     title: Text("Glückwunsch!",
                                                         style: TextStyle(
                                                             color: Color(
-                                                                0xffff9f1c))),
+                                                                0xffe54b4b))),
                                                     content: Text(
                                                         "Du hast alle Paare richtig zugeordnet.\nDeine Punktzahl: $_summePunkte"),
                                                     actions: <Widget>[
@@ -328,7 +359,7 @@ class _MemoryPageState extends State<MemoryPage> {
                                                           // erfahrungspunkte = sumPunkte;
                                                           Navigator.of(context)
                                                               .pop(true);
-                                                          // TODO: Muss noch um Funktion zum Speichern der Punkte ergänzt werden (Alex)
+
                                                           Navigator.of(context)
                                                               .pop();
                                                           await savePoint();
@@ -338,11 +369,6 @@ class _MemoryPageState extends State<MemoryPage> {
                                                   );
                                                 },
                                               );
-
-                                              // setState(() {
-                                              //   _isFinished = true;
-                                              //   _start = false;
-                                              // });
                                             });
                                           }
                                         }
@@ -354,26 +380,27 @@ class _MemoryPageState extends State<MemoryPage> {
                                   flipOnTouch:
                                       _wait ? false : _cardFlips[index],
                                   direction: FlipDirection.HORIZONTAL,
+                                  /* Umgedrehte Karte */
                                   front: Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.grey,
+                                        color: Color(0xffe54b4b),
                                         borderRadius: BorderRadius.circular(5),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black45,
-                                            blurRadius: 3,
-                                            spreadRadius: 0.8,
+                                            color: Colors.black12,
+                                            blurRadius: 0.5,
+                                            spreadRadius: 0.3,
                                             offset: Offset(2.0, 1),
                                           )
                                         ]),
                                     margin: EdgeInsets.all(4.0),
                                     child: Padding(
                                       padding: const EdgeInsets.all(1.0),
-                                      child: Image.asset(
-                                          "assets/icons/Quiz_gelb_Icon.png",
-                                          fit: BoxFit.fill),
+                                      child: Icon(FlutterIcons.help_outline_mdi,
+                                          size: 35, color: Color(0xffffffff)),
                                     ),
                                   ),
+                                  /* Aufgedeckte Karte */
                                   back: getItem(index))
                               : getItem(index),
                           itemCount: karten.length,
@@ -415,14 +442,20 @@ class _MemoryPageState extends State<MemoryPage> {
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
     if (calculateLevel(jsonData['total_point_new']) >
         calculateLevel(jsonData['total_point_old'])) {
-      String showtext;
+      String showtext1;
+      String showtext2;
+      int belohnungsid;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
-        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
+        showtext1 = "Glückwunsch!\nDu hast das Höchstlevel erreicht" +
             "\nDeine Belohnung: ...";
       } else {
-        showtext =
-            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+        showtext1 =
+            "Glückwunsch! Du Hast Level ${calculateLevel(jsonData['total_point_new'])} erreicht! \nDeine Belohnung:";
+        showtext2 =
+            "\nDu benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+
+        belohnungsid = belohnung(
+            calculateLevel(jsonData['total_point_new']), widget.benutzerID);
       }
 
       /* Dialog für Levelaufstieg */
@@ -431,8 +464,26 @@ class _MemoryPageState extends State<MemoryPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
-            content: Text(showtext),
+                Text("Level Up!", style: TextStyle(color: Color(0xffe54b4b))),
+            content: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Text(showtext1),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Image.asset(
+                      "assets/avatar/nachIDs/$belohnungsid.png",
+                      width: 200,
+                      height: 100,
+                    ),
+                    Text(showtext2),
+                  ],
+                ),
+              ),
+              height: 250,
+            ),
             actions: <Widget>[
               new FlatButton(
                 child: new Text("OK"),
@@ -442,6 +493,7 @@ class _MemoryPageState extends State<MemoryPage> {
                 },
               ),
             ],
+            scrollable: true,
           );
         },
       );
@@ -496,4 +548,37 @@ class _MemoryPageState extends State<MemoryPage> {
       return -1;
     }
   }
+}
+
+int belohnung(int lvl, int benutzer) {
+  int belohungsid = 0;
+  if (lvl == 2) {
+    belohungsid = 7;
+  } else if (lvl == 3) {
+    belohungsid = 8;
+  } else if (lvl == 4) {
+    belohungsid = 9;
+  } else if (lvl == 5) {
+    belohungsid = 10;
+  } else if (lvl == 6) {
+    belohungsid = 11;
+  } else if (lvl == 7) {
+    belohungsid = 12;
+  } else if (lvl == 8) {
+    belohungsid = 13;
+  } else if (lvl == 9) {
+    belohungsid = 14;
+  }
+  freischalten(belohungsid, benutzer);
+  return belohungsid;
+}
+
+void freischalten(int belohungsid, int benutzer) async {
+  var param = "?benutzerID=" +
+      benutzer.toString() +
+      "&sammelID=" +
+      belohungsid.toString();
+  var url = "http://zukunft.sportsocke522.de/freischaltungenSetzen.php" + param;
+  // ignore: unused_local_variable
+  final response = await http.get(url);
 }

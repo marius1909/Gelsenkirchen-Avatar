@@ -22,6 +22,7 @@ class _StartMemoryState extends State<StartMemory> {
   dynamic data;
   List<Memoryspiel> memorylist;
 
+/* Lädt Daten für den Lernort aus der Datenbank */
   void getLernort() async {
     var id = widget.id;
     var url =
@@ -42,13 +43,11 @@ class _StartMemoryState extends State<StartMemory> {
   void initState() {
     getLernort();
     var id = widget.id;
+    /* Gibt das Memoryspiel für den Lernort zurück */
     var memoryspielFuture = Memoryspiel.shared.sucheObjekt("lernortID", id);
-    // var memoryspielFuture = Memoryspiel.shared.gibObjekte();
     memoryspielFuture.then((value) {
       setState(() {
         memorylist = value;
-
-        print(memorylist);
       });
     });
     super.initState();
@@ -56,24 +55,34 @@ class _StartMemoryState extends State<StartMemory> {
 
   @override
   Widget build(BuildContext context) {
+    /* Anzeigen, falls Daten noch nicht vollständig geladen */
     if (memorylist == null || data == null) {
       return Scaffold(
           body: new Container(
               margin: EdgeInsets.all(10.0),
               alignment: Alignment.topCenter,
               child: Center(child: CircularProgressIndicator())));
+      /* Anzeigen, falls kein Memoryspiel für den Lernort vorhanden */
     } else if (memorylist.isEmpty) {
       return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xffe54b4b),
+            title: Text(
+              //Name von aktuellen Lernort
+              data['name'] + " - Memory",
+            ),
+          ),
           body: Container(
               margin: EdgeInsets.all(10.0),
               alignment: Alignment.topCenter,
               child: Center(
                   child: Text(
                       "Kein Memoryspiel für " + data['name'] + " vorhanden"))));
+      /* Anzeigen, falls Memoryspiel erfolgreich geladen */
     } else {
       return Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff093582),
+            backgroundColor: Color(0xffe54b4b),
             title: Text(
               //Name von aktuellen Lernort
               data['name'] + " - Memory",
@@ -90,7 +99,7 @@ class _StartMemoryState extends State<StartMemory> {
                 style: TextStyle(
                     fontFamily: "Ccaps",
                     fontSize: 35.0,
-                    color: Color(0xff093582)),
+                    color: Color(0xffe54b4b)),
               ),
             ),
 
@@ -98,7 +107,7 @@ class _StartMemoryState extends State<StartMemory> {
             Container(
               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
               child: Text(
-                "In diesem Minispiel musst du die passenden Paare finden. Am Anfang des Spiels hast du die Möglichkeit dir möglichst viele Paare zu merken. Sobald die Zeit abgelauften ist, versuchst du die zugehörigen Karten zu finden. Durch das Klicken auf eine Karte, wird diese aufgedeckt. Falls du ein Paar gefunden hast, bleiben die Karten aufgedeckt, falls nicht werden die entsprechenden Karten wieder umgedreht. Das Spiel endet sobald alle Paare gefunden worden sind. Je schneller du dabei warst, desto mehr Punkte erhälst du!",
+                "In diesem Minispiel musst du die passenden Paare finden. Am Anfang des Spiels hast du die Möglichkeit dir möglichst viele Paare zu merken. Sobald die Zeit abgelaufen ist, versuchst du die zugehörigen Karten zu finden. Durch das Klicken auf eine Karte, wird diese aufgedeckt. Falls du ein Paar gefunden hast, bleiben die Karten aufgedeckt, falls nicht werden die entsprechenden Karten wieder umgedreht. Das Spiel endet sobald alle Paare gefunden worden sind. Je schneller du dabei warst, desto mehr Punkte erhälst du!",
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
@@ -106,12 +115,12 @@ class _StartMemoryState extends State<StartMemory> {
             Container(
               padding: EdgeInsets.fromLTRB(15, 40, 15, 20),
               child: Text(
-                "Aufgabe Memory " + data['name'],
+                "Aufgabe: ",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: "Ccaps",
                     fontSize: 20.0,
-                    color: Color(0xff093582)),
+                    color: Color(0xffe54b4b)),
               ),
             ),
 
@@ -136,10 +145,10 @@ class _StartMemoryState extends State<StartMemory> {
                     Zustand an. Bisher nicht implementiert, muss aber mit dem
                     Bild im normalen zustand angegeben werden. */
                 pressedImage: Image.asset(
-                  "assets/buttons/Spielen_dunkelblau_groß.png",
+                  "assets/buttons/Spielen_rot_groß.png",
                 ),
                 unpressedImage:
-                    Image.asset("assets/buttons/Spielen_dunkelblau_groß.png"),
+                    Image.asset("assets/buttons/Spielen_rot_groß.png"),
                 onTap: () {
                   if (Benutzer.current?.id != null) {
                     Navigator.of(context).push(MaterialPageRoute(

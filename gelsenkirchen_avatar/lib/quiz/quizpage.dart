@@ -37,7 +37,8 @@ class _QuizPageState extends State<QuizPage> {
   List fragenList;
   int erfahrungspunkte;
   int level;
-
+  
+  /* Lädt Daten für Quiz aus der Datenbank */
   void quizFragen() async {
     var quizid = widget.quizID;
     var url = "http://zukunft.sportsocke522.de/quiz.php";
@@ -139,7 +140,7 @@ class _QuizPageState extends State<QuizPage> {
                   )
                 ])),
 
-            /* ZEIT */
+            /* TIMER */
             CircularCountDownTimer(
               duration: _start,
               initialDuration: 0,
@@ -315,7 +316,7 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  //prüfen ob Antwort richtig oder falsch war
+  //prüfen ob Antwort richtig oder falsch war. Wenn richtig -> Punkte bekommen
   void checkAnswer(String value) {
     if (data[positionFragen]['antwort'][4] == value) {
       punkteBehalten.add(Icon(Icons.check, color: Colors.green));
@@ -329,6 +330,7 @@ class _QuizPageState extends State<QuizPage> {
     //wenn keine Frage mehr...
     if (positionFragen == data.length) {
       /* Dialog für Beendigung des Quizes */
+      /*Punktzahl zeigen und Spieler können Punktzahl speichern, wenn sie wollen*/ 
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -363,7 +365,7 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  //Punkte speichern
+  //Punkte speichern in der Datenbank 
   Future<void> savePoint() async {
     var param = "?benutzerID=" +
         widget.benutzerID.toString() +
@@ -389,16 +391,23 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //Benachrichtigung werden angezeigt, wenn Level von Spieler aufgestiegen wird
+    /*Level und Belohnungen anzeigen*/ 
     if (calculateLevel(jsonData['total_point_new']) >
         calculateLevel(jsonData['total_point_old'])) {
-      String showtext;
+      String showtext1;
+      String showtext2;
+      int belohnungsid;
       if (pointsNeededForNextLevel(jsonData['total_point_new']) == -1) {
-        /* TODO: (nicht bis S&T machbar) Belohnung anzeigen */
-        showtext = "Glückwunsch!\nDu hast höchstes Level erreicht" +
+        showtext1 = "Glückwunsch!\nDu hast das Höchstlevel erreicht" +
             "\nDeine Belohnung: ...";
       } else {
-        showtext =
-            "Du benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+        showtext1 =
+            "Glückwunsch! Du Hast Level ${calculateLevel(jsonData['total_point_new'])} erreicht! \nDeine Belohnung:";
+        showtext2 =
+            "\nDu benötigst noch ${pointsNeededForNextLevel(jsonData['total_point_new'])} Punkte für Level ${calculateLevel(jsonData['total_point_new']) + 1}";
+
+        belohnungsid = belohnung(
+            calculateLevel(jsonData['total_point_new']), widget.benutzerID);
       }
 
       /* Dialog für Levelaufstieg */
@@ -408,7 +417,25 @@ class _QuizPageState extends State<QuizPage> {
           return AlertDialog(
             title:
                 Text("Level Up!", style: TextStyle(color: Color(0xffff9f1c))),
-            content: Text(showtext),
+            content: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Text(showtext1),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Image.asset(
+                      "assets/avatar/nachIDs/$belohnungsid.png",
+                      width: 200,
+                      height: 100,
+                    ),
+                    Text(showtext2),
+                  ],
+                ),
+              ),
+              height: 250,
+            ),
             actions: <Widget>[
               new FlatButton(
                 child: new Text("OK"),
@@ -418,6 +445,7 @@ class _QuizPageState extends State<QuizPage> {
                 },
               ),
             ],
+            scrollable: true,
           );
         },
       );
@@ -472,4 +500,38 @@ class _QuizPageState extends State<QuizPage> {
       return -1;
     }
   }
+}
+
+int belohnung(int lvl, int benutzer) {
+  int belohungsid = 0;
+  if (lvl == 2) {
+    belohungsid = 7;
+  } else if (lvl == 3) {
+    belohungsid = 8;
+  } else if (lvl == 4) {
+    belohungsid = 9;
+  } else if (lvl == 5) {
+    belohungsid = 10;
+  } else if (lvl == 6) {
+    belohungsid = 11;
+  } else if (lvl == 7) {
+    belohungsid = 12;
+  } else if (lvl == 8) {
+    belohungsid = 13;
+  } else if (lvl == 9) {
+    belohungsid = 14;
+  }
+  freischalten(belohungsid, benutzer);
+  return belohungsid;
+}
+
+/* Lädt Daten für die Belohnung aus der Datenbank */
+void freischalten(int belohungsid, int benutzer) async {
+  var param = "?benutzerID=" +
+      benutzer.toString() +
+      "&sammelID=" +
+      belohungsid.toString();
+  var url = "http://zukunft.sportsocke522.de/freischaltungenSetzen.php" + param;
+  // ignore: unused_local_variable
+  final response = await http.get(url);
 }

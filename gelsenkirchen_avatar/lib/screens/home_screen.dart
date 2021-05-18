@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
-import 'package:gelsenkirchen_avatar/data/freigeschaltet.dart';
+import 'package:gelsenkirchen_avatar/widgets/ladescreen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gelsenkirchen_avatar/screens/profil_screen.dart';
 
 import 'map_screen.dart';
 
@@ -23,23 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
   List freigeschaltetList = List();
   Image aktuellerAvatar;
 
+  //Steuerungsvariable für den Ladescreen
+  var _asyncResult;
+
   void initState() {
     /* Bis der richtige Avatar geladen ist, wird der Defautl Avatar angezeigt */
-    aktuellerAvatar =
-        Image.asset(Avatar.getDefaultImagePath(0), width: 100, height: 100);
-    asyncInitState();
-    var freigeschaltetFuture = Freigeschaltet.shared.gibObjekte();
-    freigeschaltetFuture.then((freigeschaltet) {
+    ladeAsyncDaten().then((result) {
       setState(() {
-        freigeschaltetList = freigeschaltet
-            .where((freigeschaltet) =>
-                freigeschaltet.benutzerID == Benutzer.current.id &&
-                freigeschaltet.ausgeruestet)
-            .toList();
-        // print("Hallo");
-        // var sammelID = freigeschaltetList[0].getSammelID();
-        // print(freigeschaltetList);
-        // print(sammelID);
+        _asyncResult = result;
       });
     });
     super.initState();
@@ -47,51 +39,68 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          title: Text('GElernt!'),
-        ),
-        body: Stack(children: <Widget>[
-          MapScreen(),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Stack(
-              children: [
-                /* HALBTRANSPARENTE BOX OBEN */
-                Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.7),
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          blurRadius: 20,
-                          offset: Offset.zero,
-                          color: Colors.grey.withOpacity(0.5))
-                    ],
-                  ),
-                  margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
-                  //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      /* SPIELERNAME */
-                      Container(
-                        //padding: EdgeInsets.fromLTRB(130, 5, 0, 0),
-                        child: Text(
-                          spielername,
-                          style: Theme.of(context).textTheme.headline1,
-                        ),
+    if (_asyncResult == null) {
+      return Ladescreen();
+    } else {
+      return Scaffold(
+          drawer: NavDrawer(),
+          appBar: AppBar(
+            title: Text('GElernt!'),
+          ),
+          body: Stack(children: <Widget>[
+            MapScreen(),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      if (Benutzer.current?.id != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    Profil(Benutzer.current.id)));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: "Bitte melde dich an!",
+                            toastLength: Toast.LENGTH_SHORT);
+                      }
+                    },
+                    /* HALBTRANSPARENTE BOX OBEN */
+                    child: Container(
+                      width: double.infinity,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.7),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              blurRadius: 20,
+                              offset: Offset.zero,
+                              color: Colors.grey.withOpacity(0.5))
+                        ],
                       ),
-                      SizedBox(height: 5),
-                      /* LEVELANZEIGE */
-                      Container(
-                        padding: EdgeInsets.fromLTRB(135, 0, 0,
-                            0), //Unschön, könnte zu Problemen führe. Weiß nur keine andere Lösung
-                        child: LinearPercentIndicator(
+                      margin: EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 0.0),
+                    ),
+                  ),
+
+                  /* SPIELERNAME */
+                  Container(
+                    margin: EdgeInsets.fromLTRB(130.0, 50.0, 10.0, 0.0),
+                    child: Text(
+                      spielername,
+                      style: Theme.of(context).textTheme.headline1,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  /* LEVELANZEIGE */
+                  Container(
+                      height: 22,
+                      width: 200,
+                      margin: EdgeInsets.fromLTRB(130.0, 80.0, 10.0, 0.0),
+                      child: LinearPercentIndicator(
                           width: 200,
                           lineHeight: 22,
                           percent: berechnelvlProzent(erfahrung),
@@ -100,26 +109,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           center: Text(
                             "Level " + berechneLevel(erfahrung).toString(),
                             style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                          ))),
 
-                /* AVATAR */
-                Container(
-                    padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    /* TODO: Auf dem Homescreen richtigen Avatar anzeigen, der dem Profil zugeordnet ist (Lisa) */
-                    child: aktuellerAvatar),
-              ],
+                  /* AVATAR */
+                  Container(
+                      padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      child: aktuellerAvatar),
+                ],
+              ),
             ),
-          ),
-          WillPopScope(
-            onWillPop: onWillPop,
-            child: Text(""),
-          )
-        ]));
+            WillPopScope(
+              onWillPop: onWillPop,
+              child: Text(""),
+            )
+          ]));
+    }
   }
 
   Future<bool> onWillPop() async {
@@ -133,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (backButton) {
       backbuttonpressedTime = currentTime;
       Fluttertoast.showToast(
-          msg: "Doppelt drücken zum Schlißen",
+          msg: "Doppelt drücken zum Schließen",
           backgroundColor: Colors.black,
           textColor: Colors.white);
       return false;
@@ -142,11 +146,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //Lädt den aktuell ausgerüsteten Avatar des derzeitigen Benutzers
-  void asyncInitState() async {
+  Future<bool> ladeAsyncDaten() async {
     aktuellerAvatar = Image.asset(
         await Avatar.getImagePath(Benutzer.current.id),
         width: 100,
         height: 100);
+    return true;
   }
 }
 
@@ -188,5 +193,6 @@ double berechnelvlProzent(int xp) {
 }
 
 void benutzerUpdaten(String name, String passwort) {
+  // ignore: unused_local_variable
   int a = 0;
 }

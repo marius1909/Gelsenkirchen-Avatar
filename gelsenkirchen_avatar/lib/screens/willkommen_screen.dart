@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'Avatarauswahl_screen.dart';
+import 'avatarauswahl_screen.dart';
 
 class WillkommenScreen extends StatelessWidget {
   final String spielername = Benutzer.current.benutzer;
@@ -61,7 +61,7 @@ class WillkommenScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
                 child: Text(
-                    'Hier kannst du jede Menge interessante Lernorte in ganz Gelsenkirchen entdecken und erkunden und dabei viele spannende Sachen über Naturwissenschaften, Geschichte, Kultur und vieles mehr lernen. Dein neu erlangtes Wissen kannst du anschließend in spaßigen Minispielen wie den Quiz und dem interaktiven QR-Suchspiel auf die Probe stellen. Mit jedem neuen Level, dass du durchs Spielen freischalten kannst, erhälst du coole Items, mit denen du deinen Avatar aufhübschen und individualisieren kannst.',
+                    'Hier kannst du jede Menge interessante Lernorte in ganz Gelsenkirchen entdecken und erkunden und dabei viele spannende Sachen über Naturwissenschaften, Geschichte, Kultur und vieles mehr lernen. Dein neu erlangtes Wissen kannst du anschließend in spaßigen Minispielen wie einem Quiz, einem Memoryspiel und einem interaktiven QR-Suchspiel auf die Probe stellen. Mit jedem neuen Level, dass du durchs Spielen freischalten kannst, erhälst du coole Items, mit denen du deinen Avatar aufhübschen und individualisieren kannst.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText1),
               ),
@@ -79,6 +79,7 @@ class WillkommenScreen extends StatelessWidget {
                   ),
                   unpressedImage: Image.asset(
                       "assets/buttons/LosGehts_dunkelblau_groß.png"),
+                  /* Weiterleiten zur Avatarauswahl */
                   onTap: () {
                     Navigator.push(
                         context,

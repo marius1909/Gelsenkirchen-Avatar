@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt das Quiz als Datenbankobjekt dar
 class Quiz extends DatenbankObjekt<Quiz> {
   int id;
   int lernortID;

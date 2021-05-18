@@ -1,6 +1,7 @@
 import 'database_url.dart';
 import 'datenbankObjekt.dart';
 
+// Stellt die Benutzerrolle als Datenbankobjekt dar
 class Rollen extends DatenbankObjekt<Rollen> {
   int id;
   String name;

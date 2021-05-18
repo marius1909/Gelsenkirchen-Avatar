@@ -1,6 +1,7 @@
 import 'package:gelsenkirchen_avatar/data/database_url.dart';
 import 'package:gelsenkirchen_avatar/data/datenbankObjekt.dart';
 
+// Stellt die sammelbaren Collectables als Datenbankobjekt dar
 class Sammelbares extends DatenbankObjekt<Sammelbares> {
   int id;
   int kategorieID;
@@ -8,6 +9,7 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
   String beschreibung;
   String bild;
   int pfadID;
+  int basisID;
 
   static Sammelbares get shared => Sammelbares();
 
@@ -17,7 +19,8 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
       this.name,
       this.beschreibung,
       this.bild,
-      this.pfadID})
+      this.pfadID,
+      this.basisID})
       : super(
             DatabaseURL.getSammelbares.value,
             DatabaseURL.insertIntoSammelbares.value,
@@ -33,7 +36,9 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
         beschreibung: objekt["beschreibung"] as String,
         bild: objekt["bild"] as String,
         //int.parse wirft error wenn pfadID NULL ist \Marius
-        pfadID: objekt["pfadID"] == null ? null : int.parse(objekt["pfadID"]));
+        pfadID: objekt["pfadID"] == null ? null : int.parse(objekt["pfadID"]),
+        basisID:
+            objekt["basisID"] == null ? null : int.parse(objekt["basisID"]));
   }
 
   @override
@@ -44,7 +49,8 @@ class Sammelbares extends DatenbankObjekt<Sammelbares> {
       "name": "$name",
       "beschreibung": "$beschreibung",
       "bild": "$bild",
-      "pfadID": "$pfadID"
+      "pfadID": "$pfadID",
+      "basisID": "$basisID"
     };
   }
 }

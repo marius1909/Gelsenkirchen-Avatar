@@ -31,7 +31,6 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   }
 
   //Gibt nur das Objekt für das Attribut und den genannten Wert zurück.
-  //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte oder Memoryspiel. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
   Future<List<D>> sucheObjekt(String attribut, var wert) async {
     if (_datenbankObjektList.isEmpty) {
       await ladeObjektNachKriterium(attribut, wert);
@@ -48,7 +47,6 @@ abstract class DatenbankObjekt<D extends DatenbankObjekt<D>> {
   }
 
   // Lädt nur das Objekt für das genannte Kriterium zurück.
-  // //TODO: Funktioniert bisher nur für Objekte vom Typ Memorykarte oder Memoryspiel. PHP Skripte anderer Objekte müssen entsprechend angepasst werden (Alex)
   ladeObjektNachKriterium(String attribut, var wert) async {
     var body = {"attribut": attribut, "wert": wert.toString(), "suche": "1"};
 

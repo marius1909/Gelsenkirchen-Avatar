@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
 import 'package:gelsenkirchen_avatar/screens/anmeldung_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,6 +30,7 @@ class _RegistrierungState extends State<Registrierung> {
     validatepassctrl = new TextEditingController();
   }
 
+  /* Nach Validation, Anlegen des neuen Benutzer mit den angegeben Daten in Datenbank */
   void benutzerRegistrierung() async {
     setState(() {
       processing = true;
@@ -58,10 +58,12 @@ class _RegistrierungState extends State<Registrierung> {
         var futureBenutzer =
             await Benutzer.getBenutzer(emailctrl.text, passctrl.text);
 
+        /* Aufrufen des Willkommenscreens nach erfolgreicher Registrierung */
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) => WillkommenScreen()));
+        /* Meldung bei nicht erfolgreicher Registrierung */
       } else {
         Fluttertoast.showToast(
             msg: "Registrierung fehlgeschlagen",
@@ -78,10 +80,8 @@ class _RegistrierungState extends State<Registrierung> {
     String passwortvalue;
 
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Registrieren'),
-        /*Farbcode in Hexadezimal: Vor dem Hexadezimalcode "0xff" schreiben*/
         backgroundColor: Color(0xff0B3E99),
       ),
       body: Form(
@@ -99,7 +99,6 @@ class _RegistrierungState extends State<Registrierung> {
                   ),
 
                   /*BENUTZERNAME*/
-
                   TextFormField(
                     decoration: new InputDecoration(
                       /*Prompt*/
@@ -110,9 +109,13 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob Benutzernamen eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib einen Benutzernamen an';
+                      }
+                      if (value.length > 15) {
+                        return 'Dein Benutzername darf max. 15 Zeichen lang sein';
                       }
                       return null;
                     },
@@ -133,10 +136,13 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob eine Email eingeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib eine gültige Email Adresse an';
                       }
+
+                      /* Prüfen, ob die Email in einen gültigen Format */
                       if (EmailValidator.validate(value)) {
                         return null;
                       }
@@ -162,6 +168,7 @@ class _RegistrierungState extends State<Registrierung> {
                         borderSide: new BorderSide(),
                       ),
                     ),
+                    /* Prüfen, ob Passwort eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib ein Passwort an.';
@@ -190,10 +197,12 @@ class _RegistrierungState extends State<Registrierung> {
                       ),
                     ),
                     controller: validatepassctrl,
+                    /* Prüfen, ob 2.Passwort eingegeben wurde */
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Bitte gib ein Passwort ein.';
                       }
+                      /* Prüfen, ob Passwörter übereinstimmen */
                       if (value != passwortvalue) {
                         return 'Die Passwörter stimmen nicht überein.';
                       }
@@ -203,6 +212,8 @@ class _RegistrierungState extends State<Registrierung> {
                     obscureText: true,
                   ),
                   SizedBox(height: 40),
+
+                  /* REGISTRIEREN-BUTTON */
                   ImageButton(
                     children: <Widget>[],
                     /* 302 x 91 sind die Originalmaße der Buttons */
@@ -217,6 +228,8 @@ class _RegistrierungState extends State<Registrierung> {
                     ),
                     unpressedImage: Image.asset(
                         "assets/buttons/Registrieren_dunkelblau_groß.png"),
+                    /* Prüfen, ob alle Daten korrekt angegeben wurden. 
+                    Falls erfolgreich Benutzerregistrierung durchführen */
                     onTap: () {
                       var valid = _formKey.currentState.validate();
                       if (!valid) {
@@ -226,6 +239,7 @@ class _RegistrierungState extends State<Registrierung> {
                       benutzerRegistrierung();
                     },
                   ),
+                  /* Struktur der Fehleranzeige bei Eingabe ungültiger Daten */
                   FormField(
                     initialValue: false,
                     builder: (FormFieldState formFieldState) {
@@ -249,6 +263,7 @@ class _RegistrierungState extends State<Registrierung> {
               ),
             )
           ])),
+      /* Weiterleiten zur Anmeldung */
       bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         child: FlatButton(
@@ -266,66 +281,5 @@ class _RegistrierungState extends State<Registrierung> {
         elevation: 0,
       ),
     );
-  }
-}
-
-class WeiterleitenZurAnmeldungScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          children: [
-            Container(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                child: Text(
-                  "Super!",
-                  style: TextStyle(fontSize: 40, color: Colors.grey[800]),
-                  textAlign: TextAlign.center,
-                )),
-            Container(
-              // color: Colors.red,
-              child: Text(
-                "Dein Account wurde erfolgreich angelegt",
-                style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: 30),
-            Container(
-              // color: Colors.blue,
-              padding: EdgeInsets.all(100),
-              child: Image(
-                width: 150,
-                height: 150,
-                image: AssetImage('assets/images/success.png'),
-              ),
-            ),
-            Container(
-              // color: Colors.grey,
-              padding: EdgeInsets.fromLTRB(40, 80, 40, 80),
-              child: RaisedButton(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Anmeldung()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                  color: Color(0xff45d6a9),
-                  child: Text(
-                    "Zur Anmeldung",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
-            ),
-          ],
-        ),
-      ),
-    ));
   }
 }

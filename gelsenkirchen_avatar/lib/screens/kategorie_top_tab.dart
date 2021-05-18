@@ -16,12 +16,13 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   @override
   void initState() {
     super.initState();
+    /* Erstellen einer Liste aus den vorhandenen Lernorten */
     var lernKategorieFuture = LernKategorie.shared.gibObjekte();
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
         /* Zusätzliche Lernkategorie "Alle Lernorte" zum laden aller Lernorte */
         LernKategorie alleKategorien =
-            LernKategorie(id: lernkategorie.length, name: "Alle Lernorte");
+            LernKategorie(id: lernkategorie.length + 1, name: "Alle Lernorte");
         lernKategorieList.add(alleKategorien);
         /* Alphabetische Sortierung der Liste */
         lernkategorie.sort((a, b) => a.name.compareTo(b.name));
@@ -45,34 +46,39 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
         break;
 
+      // Kategorie: Abenteuer
       case 1:
         {
-          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.explore_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Natur
       case 2:
         {
-          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.local_florist_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Sport
       case 3:
         {
-          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.directions_bike_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Kunst
       case 4:
         {
-          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.color_lens_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Klima
       case 5:
         {
           kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
@@ -80,6 +86,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
         break;
 
+      // Kategorie: Geschichte
       case 6:
         {
           kategorienSymbol = Icon(FlutterIcons.book_faw5s,
@@ -87,6 +94,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
         break;
 
+      // Kategorie: Soziales Miteinander
       case 7:
         {
           kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
@@ -94,16 +102,18 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
         break;
 
+      // Kategorie: Musik
       case 8:
         {
-          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.music_note_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Technik
       case 9:
         {
-          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.computer_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
@@ -114,16 +124,10 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
         }
     }
 
+    /* LIStVIEW-ITEM */
     return new Card(
         child: new Column(
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-        leading: new Image.asset(
-          "assets/" + _allCities[index].image,
-          fit: BoxFit.cover,
-          width: 100.0,
-        ),*/
         new ListTile(
           title: Row(
             children: [
@@ -132,17 +136,16 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
                 width: 25,
               ),
               new Text(
-                /*NAME*/
+                /* LERNORTKATEGORIE */
                 lernKategorieList[index].name != null
                     ? lernKategorieList[index].name
                     : 'empty',
                 style: Theme.of(context).textTheme.bodyText1,
-                //new TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
+            /* Bei Klick auf Kategorie Weiterleitung zur entsprechenden Liste */
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -155,6 +158,7 @@ class _KategorieTopTabState extends State<KategorieTopTab> {
   }
 
   Widget build(BuildContext context) {
+    /* LISTVIEW MIT KATEGORIEN */
     return ListView.builder(
       itemCount: _listLength,
       itemBuilder: erstelleListViewitem,

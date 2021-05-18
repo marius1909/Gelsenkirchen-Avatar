@@ -19,11 +19,11 @@ class _SuchenScreenState extends State<SuchenScreen> {
     lernorteFuture.then((lernorte) {
       setState(() {
         lernortList = lernorte;
-        print(lernortList);
       });
     });
   }
 
+  // Listet die Lernorte abhängig der Sucheingabe auf
   void sucheLernort(value) {
     setState(() {
       lernortListGefiltert = lernortList
@@ -37,13 +37,6 @@ class _SuchenScreenState extends State<SuchenScreen> {
   Widget erstelleListViewitem(BuildContext context, int index) {
     return new Column(
       children: <Widget>[
-        /*BILD*/
-        /*new ListTile(
-    leading: new Image.asset(
-      "assets/" + _allCities[index].image,
-      fit: BoxFit.cover,
-      width: 100.0,
-    ),*/
         new ListTile(
           title: new Text(
             /*NAME*/
@@ -52,29 +45,12 @@ class _SuchenScreenState extends State<SuchenScreen> {
                 : 'empty',
             style: Theme.of(context).textTheme.bodyText1,
           ),
-          /* subtitle: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /*KURZBESCHREIBUNG*/
-                new Text(
-                    lernortListGefiltert[index].kurzbeschreibung != null
-                        ? lernortListGefiltert[index].kurzbeschreibung
-                        : '',
-                    style: new TextStyle(
-                        fontSize: 13.0, fontWeight: FontWeight.normal)),
-                /*KATEGORIE*/
-                /*new Text('Kategorie: ${lernortListGefiltert[index].kategorieId}',
-              style: new TextStyle(
-                  fontSize: 11.0, fontWeight: FontWeight.normal)),*/
-              ]), */
           onTap: () {
-            /*Hier kommt Aktion beim Klick auf Lernort hin*/
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => LernortScreen(
-                        l: lernortListGefiltert[index], k: "TODO")));
+                        l: lernortListGefiltert[index], k: "Kategorie")));
           },
         )
       ],

@@ -17,7 +17,7 @@ class RankKategorieScreen extends StatefulWidget {
 class _RankKategorieScreenState extends State<RankKategorieScreen> {
   int limit = 10;
   dynamic data;
-
+  /* Lädt Daten für UserID, LernkategorieID und Limit aus der Datenbank */
   Future<void> rankCategories() async {
     var url = "http://zukunft.sportsocke522.de/rank_categories.php?" +
         "id_user=" +
@@ -32,7 +32,6 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
     } else {
       setState(() {
         data = jsonDecode(res.body);
-        print(data);
       });
     }
   }
@@ -45,8 +44,8 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /* HEADLINE: Name von LernKategorie */
     if (data == null) {
-      /* Hier wäre ne Info für den Benutzer super ;) */
       return Scaffold(
           body: new Container(
               margin: EdgeInsets.all(10.0),
@@ -64,6 +63,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
               Container(
                   padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
                   child: Column(children: [
+                    /* PLATZIERUNG */
                     Row(
                       children: [
                         Icon(FlutterIcons.arrow_up_faw5s,
@@ -75,6 +75,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
                       ],
                     ),
                     SizedBox(height: 20),
+                    /* ERFAHRUNGSPUNKTE */
                     Row(
                       children: [
                         Icon(
@@ -127,12 +128,18 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
 
                             /* BENUTZERNAME */
                             DataCell(Container(
-                                width: double.infinity,
-                                child: Text(lernCategories[index]['username'] ==
-                                            null ||
-                                        lernCategories[index]['username'] == ""
-                                    ? lernCategories[index]['email']
-                                    : lernCategories[index]['username']))),
+                                width: 120,
+                                //width: double.infinity,
+                                child: Text(
+                                  lernCategories[index]['username'] == null ||
+                                          lernCategories[index]['username'] ==
+                                              ""
+                                      ? lernCategories[index]['email']
+                                      : lernCategories[index]['username'],
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                ))),
 
                             /* ERFAHRUNGSPUNKTE */
                             DataCell(Container(
@@ -150,6 +157,7 @@ class _RankKategorieScreenState extends State<RankKategorieScreen> {
           ),
         );
       } else {
+        /* INFO, wenn es keine Bestenliste für diese Kategorie gibt */
         return Scaffold(
             appBar: AppBar(
               title: Text(widget.nameLernCategory),

@@ -7,6 +7,8 @@ $dataTmp = [];
 while ($row = mysqli_fetch_assoc($res)) {
     $dataTmp[] = $row;
 }
+
+/*Summe von Erfahrungspunkte nach jede Kategorie*/
 $data = [];
 foreach ($dataTmp as $key => $item) {
     $query = "select SUM(erfahrungspunkte) as erfahrungspunkte from BenutzerKategorie where benutzerID = $id_user AND lernKategorieID = " . $item['id'];
@@ -16,11 +18,15 @@ foreach ($dataTmp as $key => $item) {
     }
     $data['data'][] = $item;
 }
+
+/*get Summe von Erfahrungspunkte aller Katergotien jeder User*/
 $query = "select SUM(erfahrungspunkte) as erfahrungspunkte from BenutzerKategorie where benutzerID = $id_user";
 $res = mysqli_query($con,$query);
 while ($row = mysqli_fetch_assoc($res)) {
     $data['total_point'] = $row['erfahrungspunkte'] != null ? intval($row['erfahrungspunkte']) : 0;
 }
+
+/*Level berechnen*/
 if($data['total_point'] >= 0 && $data['total_point'] <= 29){
     $data['level'] = 1;
 }else if($data['total_point'] >= 30 && $data['total_point'] <= 50){

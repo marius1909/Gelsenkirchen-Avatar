@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gelsenkirchen_avatar/data/lernort.dart';
-import 'package:gelsenkirchen_avatar/data/memoryspiel.dart';
 import 'package:gelsenkirchen_avatar/data/lern_kategorie.dart';
 import 'package:gelsenkirchen_avatar/quiz/start_quiz.dart';
 import 'package:gelsenkirchen_avatar/memory/start_memory.dart';
-import 'package:gelsenkirchen_avatar/screens/colored_tabbar.dart';
+import 'package:gelsenkirchen_avatar/widgets/colored_tabbar.dart';
 import 'package:gelsenkirchen_avatar/screens/lernen_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/suchspiel/suchspiel_screen.dart';
@@ -44,8 +43,6 @@ class _LernortScreenState extends State<LernortScreen>
     lernKategorieFuture.then((lernkategorie) {
       setState(() {
         lernKategorieList = List();
-        /* Alphabetische Sortierung der Liste */
-        // lernkategorie.sort((a, b) => a.name.compareTo(b.name));
         lernKategorieList.addAll(lernkategorie);
         _listLength = lernKategorieList.length;
       });
@@ -63,34 +60,39 @@ class _LernortScreenState extends State<LernortScreen>
         }
         break;
 
+      // Kategorie: Abenteuer
       case 1:
         {
-          kategorienSymbol = Icon(FlutterIcons.compass_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.explore_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Natur
       case 2:
         {
-          kategorienSymbol = Icon(FlutterIcons.seedling_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.local_florist_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Sport
       case 3:
         {
-          kategorienSymbol = Icon(FlutterIcons.futbol_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.directions_bike_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Kunst
       case 4:
         {
-          kategorienSymbol = Icon(FlutterIcons.palette_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.color_lens_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Klima
       case 5:
         {
           kategorienSymbol = Icon(FlutterIcons.temperature_low_faw5s,
@@ -98,6 +100,7 @@ class _LernortScreenState extends State<LernortScreen>
         }
         break;
 
+      // Kategorie: Geschichte
       case 6:
         {
           kategorienSymbol = Icon(FlutterIcons.book_faw5s,
@@ -105,6 +108,7 @@ class _LernortScreenState extends State<LernortScreen>
         }
         break;
 
+      // Kategorie: Soziales Miteinander
       case 7:
         {
           kategorienSymbol = Icon(FlutterIcons.hand_holding_heart_faw5s,
@@ -112,16 +116,18 @@ class _LernortScreenState extends State<LernortScreen>
         }
         break;
 
+      // Kategorie: Musik
       case 8:
         {
-          kategorienSymbol = Icon(FlutterIcons.music_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.music_note_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
 
+      // Kategorie: Technik
       case 9:
         {
-          kategorienSymbol = Icon(FlutterIcons.laptop_code_faw5s,
+          kategorienSymbol = Icon(FlutterIcons.computer_mdi,
               size: symbolsize, color: symbolcolor);
         }
         break;
@@ -139,10 +145,11 @@ class _LernortScreenState extends State<LernortScreen>
     } else {
       return Scaffold(
         appBar: AppBar(
-          /*NAME*/
+          /* LERNORTNAME */
           title: Text(widget.l.name),
           bottom: ColoredTabBar(
               Color(0xff0e53c9),
+              /* TABS */
               TabBar(
                 unselectedLabelColor: Colors.white,
                 tabs: [
@@ -177,7 +184,6 @@ class _LernortScreenState extends State<LernortScreen>
                     Row(children: [
                       kategorienSymbol,
                       SizedBox(width: 10),
-                      /* "lernKategorieList[lernort.kategorieID].name" zeigt zwar richtige Kategorie an, verursacht aber einen Fehler, von dem ich nicht weiß, wie ich ihn beheben soll. Deshalb auch auskommentiert. (Lisa) */
                       Flexible(
                         child: Text(
                             lernKategorieList[lernort.kategorieID - 1].name,
@@ -203,7 +209,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* ÖFFNUNGSZEITEN */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.access_time_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -219,7 +224,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* KOSTEN */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.attach_money_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -235,7 +239,6 @@ class _LernortScreenState extends State<LernortScreen>
 
                     /* BARRIEREFREIHEIT */
                     Row(children: [
-                      //Icon(MdiIcons.sword),
                       Icon(FlutterIcons.accessible_mdi,
                           size: 20, color: Color(0xff0e53c9)),
                       SizedBox(width: 10),
@@ -280,36 +283,33 @@ class _LernortScreenState extends State<LernortScreen>
                 Container(
                     child: Card(
                         elevation: 1,
-                        child: Column(
-                            //mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ListTile(
-                                leading: Image.asset(
-                                    "assets/icons/Quiz_gelb_Icon.png"),
-                                title: Text('Quiz',
-                                    style: TextStyle(fontSize: 16)),
-                                subtitle: Text(
-                                  'Teste dein Wissen in einem klassischen Quiz',
-                                ),
-                                /* damit der subtitle in die Zeile passt */
-                                dense: true,
-                              ),
-                              ButtonBar(children: <Widget>[
-                                FlatButton(
-                                  child: Text('Spielen',
-                                      style: TextStyle(
-                                          color: Color(0xffff9f1c),
-                                          fontWeight: FontWeight.bold)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                StartQuiz(widget.l.id)));
-                                  },
-                                )
-                              ])
-                            ]))),
+                        child: Column(children: <Widget>[
+                          ListTile(
+                            leading:
+                                Image.asset("assets/icons/Quiz_gelb_Icon.png"),
+                            title: Text('Quiz', style: TextStyle(fontSize: 16)),
+                            subtitle: Text(
+                              'Teste dein Wissen in einem klassischen Quiz',
+                            ),
+                            /* damit der subtitle in die Zeile passt */
+                            dense: true,
+                          ),
+                          ButtonBar(children: <Widget>[
+                            FlatButton(
+                              child: Text('Spielen',
+                                  style: TextStyle(
+                                      color: Color(0xffff9f1c),
+                                      fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            StartQuiz(widget.l.id)));
+                              },
+                            )
+                          ])
+                        ]))),
 
                 /* SPIEL 2 - QR-SPIEL */
                 Container(
@@ -346,40 +346,37 @@ class _LernortScreenState extends State<LernortScreen>
                               ])
                             ]))),
                 /* SPIEL 3 - Memory */
-                //TODO: Bisher nur Placeholder. Muss noch angepasst werden (Alex)
                 Container(
                     child: Card(
                         elevation: 1,
-                        child: Column(
-                            //mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ListTile(
-                                leading: Image.asset(
-                                    "assets/icons/Scoreboard_dunkelblau_Icon.png"),
-                                title: Text('Memory',
-                                    style: TextStyle(fontSize: 16)),
-                                subtitle: Text(
-                                  'Finde die richtigen Paare',
-                                ),
-                                /* damit der subtitle in die Zeile passt */
-                                dense: true,
-                              ),
-                              ButtonBar(children: <Widget>[
-                                FlatButton(
-                                  child: Text('Spielen',
-                                      style: TextStyle(
-                                          color: Color(0xff093582),
-                                          fontWeight: FontWeight.bold)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                StartMemory(widget.l.id)));
-                                  },
-                                )
-                              ])
-                            ]))),
+                        child: Column(children: <Widget>[
+                          ListTile(
+                            leading:
+                                Image.asset("assets/icons/Memory_rot_Icon.png"),
+                            title:
+                                Text('Memory', style: TextStyle(fontSize: 16)),
+                            subtitle: Text(
+                              'Finde die richtigen Paare',
+                            ),
+                            /* damit der subtitle in die Zeile passt */
+                            dense: true,
+                          ),
+                          ButtonBar(children: <Widget>[
+                            FlatButton(
+                              child: Text('Spielen',
+                                  style: TextStyle(
+                                      color: Color(0xffe54b4b),
+                                      fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            StartMemory(widget.l.id)));
+                              },
+                            )
+                          ])
+                        ]))),
               ],
             ))
           ],
@@ -390,6 +387,7 @@ class _LernortScreenState extends State<LernortScreen>
   }
 }
 
+/* WEBSITE-WIDGET */
 Widget setWebsite(Lernort l) {
   if (l.website == "") {
     return null;
@@ -410,6 +408,7 @@ Widget setWebsite(Lernort l) {
   }
 }
 
+/* TITELBILD-WIDGET */
 Widget setTitelbild(Lernort l) {
   if (l.titelbild.isEmpty) {
     return new Image.asset('assets/images/lernortPlaceholderTitelbild.jpg',
@@ -493,16 +492,19 @@ Widget getWidgetTabs(Lernort l, BuildContext context) {
                         ),
                       ),
                     )),
+                    /* TAB: VIDEOS */
                     Container(
                       child: Center(
                         child: getWidgetVideos(l, context),
                       ),
                     ),
+                    /* TAB: AUDIO */
                     Container(
                       child: Center(
                         child: getWidgetSound(l, context),
                       ),
                     ),
+                    /* TAB: BILDER */
                     Container(
                         child: Center(
                           child: getWidgetWeitereBilder(l, context),

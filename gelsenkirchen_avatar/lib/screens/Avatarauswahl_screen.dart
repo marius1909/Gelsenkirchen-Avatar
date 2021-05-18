@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gelsenkirchen_avatar/data/Avatar.dart';
 import 'package:gelsenkirchen_avatar/widgets/nav-drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'package:gelsenkirchen_avatar/data/dummyprofil.dart';
+import 'package:gelsenkirchen_avatar/data/benutzer.dart';
 
 import 'home_screen.dart';
 
@@ -23,20 +24,25 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
   int level = 0;
   int anzahlErrungenschaften = 0;
 
-//TODO: (nicht bis S&T machbar) avatarTyp und ausgerüstete Collectables aus Datenbank laden
+  List<String> auswaehlbareAvatare = new List();
+  List<List<int>> auswaehlbareAvatarePathIDs = new List();
 
-  //Typ des Avatars (1= Blau 2 = Gelb usw)
-  int avatarTypID = 0;
-
-  //Collectablesanpassung als ID (zurzeit 0 bis 7)
-  int ausgeruesteteCollectablesID = 0;
-
-//Default wird zurerst geladen damit kein error wenn Profil aufgerufen wird
-  Image avatar = Image.asset(Avatar(0, 0).imagePath, width: 250, height: 250);
+  List<int> ausgewahlterAvatarPathIDs = [0];
+  bool antwortErhalten = false;
 
   @override
   void initState() {
     super.initState();
+
+    //Basisavatare laden
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(0));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(1));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(2));
+    auswaehlbareAvatare.add(Avatar.getDefaultImagePath(3));
+    auswaehlbareAvatarePathIDs.add([0]);
+    auswaehlbareAvatarePathIDs.add([1]);
+    auswaehlbareAvatarePathIDs.add([2]);
+    auswaehlbareAvatarePathIDs.add([3]);
   }
 
   @override
@@ -49,7 +55,6 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
         body: Stack(children: [
           /* BILD */
           Container(
-            //padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
             decoration: new BoxDecoration(
                 image: new DecorationImage(
                     image:
@@ -60,77 +65,48 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
               child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
-                  child: Flexible(
-                    child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline3),
-                  )),
+                padding: EdgeInsets.fromLTRB(30, 50, 30, 0),
+                child: Text("Zu Beginn, wähle bitte deinen Avatar aus:",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline3),
+              ),
+              /* SLIDER MIT BASISAVATAREN */
               Container(
-                padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Column(
                   children: [
-                    CarouselSlider(
-                      items: [
-                        //1. Bild im Slider Blau
-                        FlatButton(
-                          onPressed: () {
-                            dummyprofil.setAvatar(0, [1]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(0, 1).imagePath,
-                                height: 300),
-                          ),
-                        ),
-
-                        //1. Bild im Slider Gelb
-                        FlatButton(
-                          onPressed: () {
-                            dummyprofil.setAvatar(1, [0]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(1, 0).imagePath,
-                                height: 300),
-                          ),
-                        ),
-
-                        //1. Bild im Slider Gruen
-                        FlatButton(
-                          onPressed: () {
-                            dummyprofil.setAvatar(2, [0]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(2, 0).imagePath,
-                                height: 300),
-                          ),
-                        ),
-
-                        FlatButton(
-                          onPressed: () {
-                            dummyprofil.setAvatar(3, [0]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6.0),
-                            child: Image.asset(Avatar(3, 0).imagePath,
-                                height: 300),
-                          ),
-                        )
-                      ],
-
-                      //Slider Eigenschaften
+                    CarouselSlider.builder(
+                      itemCount: auswaehlbareAvatare.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.all(6.0),
+                          child: Image.asset(auswaehlbareAvatare[index],
+                              height: 300),
+                        );
+                      },
+                      /* Slider-Eigenschaften */
                       options: CarouselOptions(
-                        height: 300,
-                        enlargeCenterPage: true,
-                        autoPlay: false,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.6,
-                      ),
+                          height: 250,
+                          enlargeCenterPage: true,
+                          autoPlay: false,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: 0.6,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              ausgewahlterAvatarPathIDs =
+                                  auswaehlbareAvatarePathIDs[index];
+                            });
+                          }),
+                    ),
+                    SizedBox(height: 10),
+                    Icon(
+                      FlutterIcons.arrow_upward_mdi,
+                      size: 60,
+                      color: Color(0xff0d4dbb),
                     ),
                     SizedBox(height: 50),
                     ImageButton(
@@ -140,19 +116,27 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
                       height: 91 / 1.3,
                       paddingTop: 5,
                       /* PressedImage gibt ein Bild für den Button im gedrückten 
-                    Zustand an. Bisher nicht implementiert, muss aber mit dem
-                    Bild im normalen zustand angegeben werden. */
+                      Zustand an. Bisher nicht implementiert, muss aber mit dem
+                      Bild im normalen zustand angegeben werden. */
                       pressedImage: Image.asset(
                         "assets/buttons/Speichern_dunkelblau_groß.png",
                       ),
                       unpressedImage: Image.asset(
                           "assets/buttons/Speichern_dunkelblau_groß.png"),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    HomeScreen()));
+                      onTap: () async {
+                        Avatar.setAvatarFromPathIDs(
+                                Benutzer.current.id, ausgewahlterAvatarPathIDs)
+                            .then((bool result) {
+                          setState(() {
+                            print(result);
+                            antwortErhalten = result;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        HomeScreen()));
+                          });
+                        });
                       },
                     ),
                   ],
@@ -161,5 +145,9 @@ class _AvatarauswahlState extends State<Avatarauswahl> {
             ],
           ))
         ]));
+  }
+
+  Future<bool> ladeAsyncDaten() async {
+    return true;
   }
 }
