@@ -120,9 +120,13 @@ class Avatar {
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(userid);
 
+    // ignore: non_constant_identifier_names
     List<Sammelbares> Blau = new List();
+    // ignore: non_constant_identifier_names
     List<Sammelbares> Gelb = new List();
+    // ignore: non_constant_identifier_names
     List<Sammelbares> Gruen = new List();
+    // ignore: non_constant_identifier_names
     List<Sammelbares> Rot = new List();
 
     for (var i = 0; i < freigeschalteteErrungenschaften.length; i++) {
@@ -272,6 +276,7 @@ class Avatar {
     collectables =
         await collectablesUmrechnenInSammelIDs(basisID, collectables);
 
+    // ignore: unused_local_variable
     List<Freigeschaltet> freigeschalteteErrungenschaften =
         await getFreigeschalteteErrungenschaften(benutzerID);
 
